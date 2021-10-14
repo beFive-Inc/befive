@@ -1,0 +1,157 @@
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,400;1,600&display=swap);
+@font-face {
+    font-family: "Bourgeois";
+    src: url(/fonts/Bourgeois-Bold.otf?1b981a28389097dd172fe44da1bbb282) format("otf");
+}
+
+
+html {
+    font-size: 16px;
+    color: white;
+    background: #22272F;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+html, html * {
+    box-sizing: border-box;
+}
+main{
+    margin-top: 5rem;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+.pseudo{
+    margin-bottom: 1rem;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+a.btn{
+    padding: 5px 8px;
+    border: 1px white solid ;
+    border-radius: 3px;
+}
+
+.btn:hover{
+    color: black;
+    background-color: white;
+}
+
+.list__post{
+    display: flex;
+    flex-direction: column;
+
+    width: 450px;
+    margin: 0 auto;
+}
+
+.post__card{
+    margin: 1.5rem 0 ;
+    border: 1px solid white;
+    padding:1rem 1rem 0;
+
+}
+.post__author{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.post__author h4{
+    font-weight: bolder;
+}
+.post__message p{
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+}
+.post__action__button ul{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.2rem;
+}
+.post__action__button ul li{
+    padding: 0.5rem 1rem;
+    border: 1px solid white;
+}
+.comment-form{
+    padding:1rem;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    margin: 2rem auto;
+}
+.comment-form .author{
+    margin-bottom: 1rem;
+    display: flex;
+}
+.comment-form .author h3{
+    align-self: center;
+    margin-left: 0.5rem;
+}
+.comment-form ul{
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
+.comment-form ul li:first-child{
+    margin-left: auto;
+    margin-right: 1rem;
+}
+.comment-form textarea{
+    border-radius: 3px;
+    border: 1px solid #42505b;
+    width: 100%;
+    resize: none;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.8rem;
+    font-family: 'Bourgeois', sans-serif;
+    color: darkgrey;
+    background-color: transparent;
+}
+.comment-form button{
+    padding: 0.5rem 1rem;
+    border:none;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin-left: 1rem;
+}
+.comment-form div:last-child{
+    display: flex;
+    margin-left: auto;
+}
+
+#searchPlayer{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+}
+#searchPlayer li{
+    margin-bottom: 0.5rem;
+}
+

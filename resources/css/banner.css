@@ -1,0 +1,112 @@
+
+.profile{
+    max-width: 65vw;
+    margin: 0 auto;
+}
+.profile .user__banner{
+    position: initial;
+    width: 100%;
+    min-height: min-content;
+    padding: 2rem 5rem;
+}
+.profile .user__banner .user__banner__information{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+ .user__banner__information div {
+     width: 25%;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+ }
+.user__banner__information div ul {
+    display: flex;
+    width: 75%;
+    justify-content: space-between;
+}
+.user__banner__information h2{
+    width: 100%;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1rem;
+    background-image: linear-gradient(to left, #FC8B00, #DB1D00);
+
+}
+
+
+.user__banner {
+    position: fixed;
+    top: 5rem;
+    left: 4.375rem;
+    padding: 1.5rem 1.25rem;
+    min-width: 18.1875rem;
+    background: #191D23;
+}
+
+.banner__profile {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.banner__profile img {
+    margin-right: 1rem;
+}
+
+.banner__profile h2 {
+    font-family: 'Bourgeois', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+}
+
+.banner__profile span {
+    font-family: 'Open Sans', sans-serif;
+    font-size: .8rem;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.banner__xp {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.banner__xp progress {
+    display: block;
+    flex: 1;
+    height: .6rem;
+    min-width: 100%;
+    margin-top: 0.3rem;
+    background: white;
+    clip-path: polygon(.5rem 0, 100% 0%, calc(100% - .5rem) 100%, 0% 100%);
+}
+
+.banner__xp progress[value] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    border: none;
+}
+
+.banner__xp progress[value]::-webkit-progress-bar {
+    clip-path: polygon(.5rem 0, 100% 0%, calc(100% - .5rem) 100%, 0% 100%);
+}
+
+.banner__xp progress[value]::-webkit-progress-value {
+    clip-path: polygon(.5rem 0, 100% 0%, calc(100% - .5rem) 100%, 0% 100%);
+    background-image: linear-gradient(to left, #FC8B00, #DB1D00);
+}
+
+.banner__xp p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: .8rem;
+    text-transform: uppercase;
+}

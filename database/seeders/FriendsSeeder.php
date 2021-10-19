@@ -31,14 +31,6 @@ class FriendsSeeder extends Seeder
         ]);
         Friend::create([
             'user_id_from' => 2,
-            'user_id_to' => 1,
-            'isAccepted' => true,
-
-            'created_at' => now(),
-            'updated_at' => null
-        ]);
-        Friend::create([
-            'user_id_from' => 2,
             'user_id_to' => 3,
             'isAccepted' => true,
 

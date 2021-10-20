@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get( '/', function (){
-    return 'yeah';
-})->name('home.page');
+Route::get( '/', [\App\Http\Controllers\HomeController::class, 'index'])
+    ->name('homepage');
 
-Route::get('/test', function () {
-    return \App\Models\User::with('friendsTo')->get();
-});

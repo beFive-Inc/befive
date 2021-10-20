@@ -46,20 +46,24 @@ class User extends Authenticatable
     ];
 
 
-    public function friendsFrom()
+    public function friends()
     {
+        // All friends
         return $this->belongsToMany(User::class, "friends", "user_id_from", "user_id_to", 'id', 'id', User::class)
             ->where("isAccepted", true);
     }
 
-    public function friendsTo()
+    public function friendsFrom() :BelongsToMany
     {
-        return $this->belongsToMany(User::class, "friends", "user_id_to", "user_id_from", 'id', 'id', User::class)
-        ->where("isAccepted", true);
+        // Friends that I have invited
+        return $this->belongsToMany(User::class, "friends", "user_id_from", "user_id_to", 'id', 'id', User::class)
+            ->where("isAccepted", true);
     }
 
-    public function showData(Request $request, $id){
-        $value= $request->session()->get('key', 'default');
-        dd($value);
+    public function friendsTo() : BelongsToMany
+    {
+        // Friends that invite me
+        return $this->belongsToMany(User::class, "friends", "user_id_to", "user_id_from", 'id', 'id', User::class)
+                ->where("isAccepted", true);
     }
 }

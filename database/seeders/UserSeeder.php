@@ -19,9 +19,9 @@ class UserSeeder extends Seeder
     {
         User::create([
             'pseudo' => 'Thebester',
-            'url' => 'thebester',
+            'slug' => 'thebester',
             'name' => 'Hoens Anthony',
-            'tag' => 1000,
+            'hashtag' => 1000,
             'email' => 'anthony-hoens@hotmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('Anthonio97'),
@@ -30,9 +30,9 @@ class UserSeeder extends Seeder
 
         User::create([
             'pseudo' => 'Nthn',
-            'url' => 'nthn',
+            'slug' => 'nthn',
             'name' => 'Minsart Anthony',
-            'tag' => 1426,
+            'hashtag' => 1426,
             'email' => 'minsartanthony@hotmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('belgique123'),
@@ -41,9 +41,9 @@ class UserSeeder extends Seeder
 
         User::create([
             'pseudo' => 'Khonix',
-            'url' => 'khonix',
+            'slug' => 'khonix',
             'name' => 'Gilson Nicolas',
-            'tag' => 1007,
+            'hashtag' => 1007,
             'email' => 'gilsnic@hotmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('p@ssw0rd'),

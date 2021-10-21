@@ -4,13 +4,53 @@ var __webpack_exports__ = {};
   !*** ./resources/js/formcheck.js ***!
   \***********************************/
 var formCheck = {
-  form: document.querySelectorAll('form'),
-  el: null,
+  form: document.querySelector('#check'),
+  child: document.querySelectorAll('#check input, #check textarea'),
+  el: [],
+  btn: document.querySelector('#check button'),
   init: function init() {
-    this.form.forEach(function (element) {});
-    console.log(this.form);
+    var _this = this;
+
+    this.child.forEach(function (child, index) {
+      child.index = index;
+
+      if (child.type == 'hidden') {
+        _this.el.push([child, true]);
+      } else {
+        _this.el.push([child, false]);
+      }
+    });
+    this.listener();
   },
-  check: function check() {}
+  changeEl: function changeEl(child) {
+    if (child.value === '') {
+      this.el[child.index][1] = false;
+    } else {
+      this.el[child.index][1] = true;
+    }
+
+    this.check();
+  },
+  check: function check() {
+    this.allChecked = this.el.find(function (el) {
+      return el[1] === false;
+    });
+
+    if (this.allChecked) {
+      this.btn.disabled = true;
+    } else {
+      this.btn.disabled = false;
+    }
+  },
+  listener: function listener() {
+    var _this2 = this;
+
+    this.child.forEach(function (child) {
+      child.addEventListener('keyup', function () {
+        _this2.changeEl(child);
+      });
+    });
+  }
 };
 formCheck.init();
 /******/ })()

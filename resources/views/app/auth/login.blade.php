@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        {{ __('Connexion à BeFive') }}
+        {{ __('Connexion à Be Five') }}
     </x-slot>
 
 
@@ -12,7 +12,7 @@
 
 
     <x-slot name="content">
-        <form action="{{ route('login') }}" method="post">
+        <form action="{{ route('login') }}" method="post" id="check">
             @csrf
 
             <div>

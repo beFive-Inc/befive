@@ -23,7 +23,6 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'pseudo' => ['required', 'string', 'max:255'],
-            'name' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
@@ -38,7 +37,6 @@ class CreateNewUser implements CreatesNewUsers
             'pseudo' => $input['pseudo'],
             'slug' => Str::slug($input['pseudo']),
             'hashtag' => '3333',
-            'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);

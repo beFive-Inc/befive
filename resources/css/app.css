@@ -1,10 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,400;1,600&display=swap');
-
-@font-face {
-    font-family: "Bourgeois";
-    src: url("../../public/font/Bourgeois-Bold.otf") format("otf");
-}
-
 
 html {
     font-size: 16px;

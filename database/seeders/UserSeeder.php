@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'url' => 'nthn',
             'name' => 'Minsart Anthony',
             'tag' => 1426,
-            'email' => 'minsartanthony@hotmaail.com',
+            'email' => 'minsartanthony@hotmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('belgique123'),
             'remember_token' => Str::random(10),
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::factory()
-            ->times(15)
+            ->times(40)
             ->create();
     }
 }

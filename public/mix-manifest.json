@@ -1,7 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
+    "/js/formcheck.js": "/js/formcheck.js",
     "/css/friendlist.css": "/css/friendlist.css",
     "/css/banner.css": "/css/banner.css",
-    "/css/header.css": "/css/header.css"
+    "/css/header.css": "/css/header.css",
+    "/css/app.css": "/css/app.css"
 }

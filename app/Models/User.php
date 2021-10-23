@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Multicaret\Acquaintances\Traits\Friendable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Friendable;
 
     /**
      * The attributes that are mass assignable.
@@ -50,8 +52,7 @@ class User extends Authenticatable
     public function friends()
     {
         // All friends
-        return $this->belongsToMany(User::class, "friends", "user_id_from", "user_id_to", 'id', 'id', User::class)
-            ->where("isAccepted", true);
+        return $this->belongsToMany(User::class, "friendships", "sender_id", "recipient_id", 'id', 'id', User::class);
     }
 
     public function friendsFrom() :BelongsToMany
@@ -66,5 +67,10 @@ class User extends Authenticatable
         // Friends that invite me
         return $this->belongsToMany(User::class, "friends", "user_id_to", "user_id_from", 'id', 'id', User::class)
                 ->where("isAccepted", true);
+    }
+
+    public function posts() : HasMany
+    {
+        return $this->hasMany(Post::class);
     }
 }

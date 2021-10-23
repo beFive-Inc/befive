@@ -15,10 +15,9 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('content')->nullable();
+            $table->text('content')->nullable();
             $table->foreignId('user_id')->constrained();
-            // Todo: add this column car il y created_at de l'utilisateur qui casse les couilles
-            //$table->dateTime('post_at')->default(now(new DateTimeZone('Europe/Brussels')));
+            $table->softDeletes();
             $table->timestamps();
         });
     }

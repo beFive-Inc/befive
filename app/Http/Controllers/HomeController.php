@@ -13,13 +13,14 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $users = User::all();
 
         $friendsList = $user->getAcceptedFriendships();
-        $friends = $friendsList->map(function ($friend) use ($user) {
+        $friends = $friendsList->map(function ($friend) use ($user, $users) {
             if ($friend->sender_id === $user->id) {
-                return User::find($friend->recipient_id);
+                return $users->find($friend->recipient_id);
             } elseif($friend->recipient_id === $user->id) {
-                return User::find($friend->sender_id);
+                return $users->find($friend->sender_id);
             } else {
                 return false;
             }

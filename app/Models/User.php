@@ -9,11 +9,22 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
+use Multicaret\Acquaintances\Traits\CanBeFollowed;
+use Multicaret\Acquaintances\Traits\CanBeLiked;
+use Multicaret\Acquaintances\Traits\CanBeRated;
+use Multicaret\Acquaintances\Traits\CanFollow;
+use Multicaret\Acquaintances\Traits\CanLike;
+use Multicaret\Acquaintances\Traits\CanRate;
 use Multicaret\Acquaintances\Traits\Friendable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, Friendable;
+    use HasFactory, Notifiable;
+    use Friendable;
+    use CanFollow, CanBeFollowed;
+    use CanLike, CanBeLiked;
+    use CanRate, CanBeRated;
 
     /**
      * The attributes that are mass assignable.
@@ -48,25 +59,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function friends()
+    public function isOnline()
     {
-        // All friends
-        return $this->belongsToMany(User::class, "friendships", "sender_id", "recipient_id", 'id', 'id', User::class);
-    }
-
-    public function friendsFrom() :BelongsToMany
-    {
-        // Friends that I have invited
-        return $this->belongsToMany(User::class, "friends", "user_id_from", "user_id_to", 'id', 'id', User::class)
-            ->where("isAccepted", true);
-    }
-
-    public function friendsTo() : BelongsToMany
-    {
-        // Friends that invite me
-        return $this->belongsToMany(User::class, "friends", "user_id_to", "user_id_from", 'id', 'id', User::class)
-                ->where("isAccepted", true);
+        return Cache::has('user-is-online-' . $this->id);
     }
 
     public function posts() : HasMany

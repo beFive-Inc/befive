@@ -12,7 +12,7 @@
 
 
     <x-slot name="content">
-
+        <x-friend-list :friends="$friends"></x-friend-list>
     </x-slot>
 
 

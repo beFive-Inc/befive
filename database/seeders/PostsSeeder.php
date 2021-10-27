@@ -15,16 +15,13 @@ class PostsSeeder extends Seeder
     public function run()
     {
         Post::create([
-            'content'=>'je suis un post de test pour thebester',
-            'user_id'=>1,
+            'body'=>'je suis un post de test pour thebester',
         ]);
         Post::create([
-            'content'=>'je suis un post de test pour nthn',
-            'user_id'=>2
+            'body'=>'je suis un post de test pour nthn',
         ]);
         Post::create([
-            'content'=>'je suis un post de test pour Nico',
-            'user_id'=>3,
+            'body'=>'je suis un post de test pour Nico',
         ]);
     }
 }

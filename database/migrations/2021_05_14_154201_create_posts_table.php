@@ -15,8 +15,9 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->text('content')->nullable();
-            $table->foreignId('user_id')->constrained();
+            $table->morphs('creator');
+            $table->text('body')->nullable();
+            $table->string('status')->default('public')->comment('public/private/friends');
             $table->softDeletes();
             $table->timestamps();
         });

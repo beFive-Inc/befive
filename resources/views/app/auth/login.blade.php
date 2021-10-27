@@ -17,7 +17,7 @@
 
             <div>
                 <label for="email" title="{{ __('Veuillez inscrire votre adresse e-mail') }}">{{ __('Adresse e-mail') }}</label>
-                <input type="email" id="email" name="email" placeholder="john.doe@gmail.com">
+                <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="john.doe@gmail.com">
 
                 @error('email')
                     <span aria-errormessage="{{ $message }}">{{ $message }}</span>

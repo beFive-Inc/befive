@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Postable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -21,6 +22,7 @@ use Multicaret\Acquaintances\Traits\Friendable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    Use Postable;
     use Friendable;
     use CanFollow, CanBeFollowed;
     use CanLike, CanBeLiked;
@@ -64,8 +66,8 @@ class User extends Authenticatable
         return Cache::has('user-is-online-' . $this->id);
     }
 
-    public function posts() : HasMany
+    public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->morphMany(Post::class, 'creator');
     }
 }

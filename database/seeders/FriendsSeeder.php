@@ -17,7 +17,7 @@ class FriendsSeeder extends Seeder
         $users = User::all();
 
         foreach ($users as $user) {
-            for ($i = 0; $i <= 10; $i++) {
+            for ($i = 0; $i < 4; $i++) {
                 $randUser = $users->except($user->id)->shuffle()->first();
                 while ($user->isFriendWith($randUser)) {
                     $randUser = $users->except($user->id)->shuffle()->first();

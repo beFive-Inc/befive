@@ -30,11 +30,7 @@ const formCheck = {
             return el[1] === false
         });
 
-        if (this.allChecked) {
-            this.btn.disabled = true
-        } else {
-            this.btn.disabled = false
-        }
+        this.btn.disabled = !!this.allChecked;
     },
 
     listener() {
@@ -46,4 +42,6 @@ const formCheck = {
     }
 }
 
-formCheck.init();
+if(formCheck.form) {
+    formCheck.init();
+}

@@ -6,13 +6,53 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
-    public function author() : BelongsTo
+    const PUBLIC = 'public';
+    const PRIVATE = 'private';
+    const FRIENDS = 'friends';
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $fillable = ['creator_type', 'creator_id', 'body', 'status'];
+
+
+    public function creator()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->morphTo('creator');
+    }
+
+    public function fillCreator($creator)
+    {
+        return $this->fill([
+            'creator_id' => $creator->getKey(),
+            'creator_type' => $creator->getMorphClass()
+        ]);
+    }
+
+    public function isPublicAttributes()
+    {
+        return $this->where('status', self::PUBLIC)->get();
+    }
+
+    public function isPrivateAttributes()
+    {
+        return $this->where('status', self::PRIVATE)->get();
+    }
+
+    public function isFriendsAttributes()
+    {
+        return $this->where('status', self::FRIENDS)->get();
+    }
+
+    public function scopeWhereCreator($query, $model)
+    {
+        return $query->where('creator_id', $model->getKey())
+            ->where('creator_type', $model->getMorphClass());
     }
 }

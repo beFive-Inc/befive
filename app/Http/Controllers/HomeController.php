@@ -12,7 +12,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $friends = Auth::user()->getFriends();
+        $user = Auth::user();
+
+        $friends = $user->getFriends();
 
         return view('app.home.index', compact('friends'));
     }

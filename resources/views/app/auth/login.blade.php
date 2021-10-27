@@ -1,4 +1,4 @@
-<x-layout>
+<x-auth-layout>
     <x-slot name="title">
         {{ __('Connexion à Be Five') }}
     </x-slot>
@@ -45,4 +45,4 @@
     <x-slot name="script">
         <script src="{{ asset('js/formcheck.js') }}"></script>
     </x-slot>
-</x-layout>
+</x-auth-layout>

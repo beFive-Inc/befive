@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 trait Postable
 {
@@ -12,6 +13,7 @@ trait Postable
         $friendship = (new Post())->fill([
             'body' => $body,
             'status' => Post::PUBLIC,
+            'uuid' => Str::uuid()->toString(),
         ]);
 
         $this->posts()->save($friendship);
@@ -22,8 +24,8 @@ trait Postable
     public function updatePost(Model $post, $content = [])
     {
         return $post->update([
-           'body' => isset($content['body']) ? $content['body'] : $post->body,
-           'status' => isset($content['status']) ? $content['status'] : $post->status,
+            'body' => $content['body'] ?? $post->body,
+            'status' => $content['status'] ?? $post->status,
         ]);
     }
 

@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->morphs('creator');
             $table->text('body')->nullable();
+            $table->uuid('uuid')->unique();
             $table->string('status')->default('public')->comment('public/private/friends');
             $table->softDeletes();
             $table->timestamps();

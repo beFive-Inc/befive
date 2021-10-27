@@ -19,7 +19,7 @@ class Post extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    protected $fillable = ['creator_type', 'creator_id', 'body', 'status'];
+    protected $fillable = ['creator_type', 'creator_id', 'body', 'status', 'uuid'];
 
 
     public function creator()

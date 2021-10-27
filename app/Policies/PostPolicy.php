@@ -56,7 +56,7 @@ class PostPolicy
     {
         return $user->id === $post->creator_id
             ? Response::allow()
-            : Response::deny('You do not own this post.');
+            : Response::deny('Vous ne pouvez pas mettre à jour ce post car il ne vous appartient pas.');
     }
 
     /**

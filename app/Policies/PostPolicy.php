@@ -56,7 +56,7 @@ class PostPolicy
     {
         return $user->id === $post->creator_id
             ? Response::allow()
-            : Response::deny('Vous ne pouvez pas mettre à jour ce post car il ne vous appartient pas.');
+            : Response::deny('You cannot update this post because you don\'t own it.');
     }
 
     /**
@@ -68,7 +68,9 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        //
+        return $user->id === $post->creator_id
+            ? Response::allow()
+            : Response::deny('You cannot archive this post because you don\'t own it.');
     }
 
     /**
@@ -80,7 +82,9 @@ class PostPolicy
      */
     public function restore(User $user, Post $post)
     {
-        //
+        return $user->id === $post->creator_id
+            ? Response::allow()
+            : Response::deny('You cannot restore this post because you don\'t own it.');
     }
 
     /**
@@ -92,6 +96,8 @@ class PostPolicy
      */
     public function forceDelete(User $user, Post $post)
     {
-        //
+        return $user->id === $post->creator_id
+            ? Response::allow()
+            : Response::deny('You cannot delete this post because you don\'t own it.');
     }
 }

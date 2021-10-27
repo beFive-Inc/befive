@@ -8,11 +8,11 @@ use Illuminate\Support\Str;
 
 trait Postable
 {
-    public function createPost($body)
+    public function createPost($content = [])
     {
         $friendship = (new Post())->fill([
-            'body' => $body,
-            'status' => Post::PUBLIC,
+            'body' => $content['body'] ?? '',
+            'status' => $content['status'] ?? Post::PUBLIC,
             'uuid' => Str::uuid()->toString(),
         ]);
 

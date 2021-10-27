@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +15,7 @@ class PostController extends Controller
 
     public function index()
     {
-
+        //
     }
 
     public function show()
@@ -34,9 +33,14 @@ class PostController extends Controller
         return redirect()->route('homepage');
     }
 
+    public function create()
+    {
+        //
+    }
+
     public function edit(Post $post)
     {
-        dd($post);
+        return view('', compact('post'));
     }
 
     public function update(Request $request, Post $post)
@@ -49,18 +53,24 @@ class PostController extends Controller
         return redirect()->route('homepage');
     }
 
-    public function delete()
+    public function delete(Post $post)
     {
+        $this->authorize('delete', $post);
 
+        Auth::user()->softDeletePost($post);
     }
 
-    public function forceDelete()
+    public function forceDelete(Post $post)
     {
+        $this->authorize('forceDelete', $post);
 
+        Auth::user()->hardDeletePost($post);
     }
 
-    public function restore()
+    public function restore(Post $post)
     {
+        $this->authorize('restore', $post);
 
+        Auth::user()->restorePost($post);
     }
 }

@@ -35,19 +35,19 @@ class Post extends Model
         ]);
     }
 
-    public function isPublicAttributes()
+    public function getIsPublicAttribute()
     {
-        return $this->where('status', self::PUBLIC)->get();
+        return $this->status === self::PUBLIC;
     }
 
-    public function isPrivateAttributes()
+    public function getIsPrivateAttribute()
     {
-        return $this->where('status', self::PRIVATE)->get();
+        return $this->status === self::PRIVATE;
     }
 
-    public function isFriendsAttributes()
+    public function getIsFriendsAttribute()
     {
-        return $this->where('status', self::FRIENDS)->get();
+        return $this->status === self::FRIENDS;
     }
 
     public function scopeWhereCreator($query, $model)

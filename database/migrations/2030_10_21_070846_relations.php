@@ -13,9 +13,11 @@ class Relations extends Migration
      */
     public function up()
     {
+        /*
         Schema::table('teams', function (Blueprint $table){
             $table->foreignId('admin_id')->after('id')->constrained();
         });
+        */
     }
 
     /**

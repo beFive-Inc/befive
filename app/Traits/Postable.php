@@ -3,25 +3,26 @@
 namespace App\Traits;
 
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 trait Postable
 {
-    public function createPost($content = [])
+    public function createPost($content = []): Post
     {
-        $friendship = (new Post())->fill([
+        $newPost = (new Post())->fill([
             'body' => $content['body'] ?? '',
             'status' => $content['status'] ?? Post::PUBLIC,
             'uuid' => Str::uuid()->toString(),
         ]);
 
-        $this->posts()->save($friendship);
+        $this->posts()->save($newPost);
 
-        return $friendship;
+        return $newPost;
     }
 
-    public function updatePost(Model $post, $content = [])
+    public function updatePost(Post $post, $content = []): ?bool
     {
         return $post->update([
             'body' => $content['body'] ?? $post->body,
@@ -29,17 +30,17 @@ trait Postable
         ]);
     }
 
-    public function softDeletePost(Model $post)
+    public function softDeletePost(Post $post): ?bool
     {
         return $post->delete();
     }
 
-    public function restorePost(Model $post)
+    public function restorePost(Post $post): ?bool
     {
         return $post->restore();
     }
 
-    public function hardDeletePost(Model $post)
+    public function hardDeletePost(Post $post): ?bool
     {
         return $post->forceDelete();
     }
@@ -49,8 +50,29 @@ trait Postable
 
     }
 
-    public function showPosts()
+    public function showPosts(): Collection
     {
         return $this->posts()->get();
+    }
+
+    public function showPublicStatusPosts(): Collection
+    {
+        return $this->posts()->get()->filter(function ($post) {
+            return $post->isPublic;
+        });
+    }
+
+    public function showPrivateStatusPosts(): Collection
+    {
+        return $this->posts()->get()->filter(function ($post) {
+            return $post->isPrivate;
+        });
+    }
+
+    public function showFriendsStatusPosts(): Collection
+    {
+        return $this->posts()->get()->filter(function ($post) {
+            return $post->isFriends;
+        });
     }
 }

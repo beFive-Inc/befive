@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class PostsSeeder extends Seeder
@@ -14,14 +15,13 @@ class PostsSeeder extends Seeder
      */
     public function run()
     {
-        Post::create([
-            'body'=>'je suis un post de test pour thebester',
-        ]);
-        Post::create([
-            'body'=>'je suis un post de test pour nthn',
-        ]);
-        Post::create([
-            'body'=>'je suis un post de test pour Nico',
-        ]);
+        $users = User::all();
+
+        foreach ($users as $user) {
+            $user->createPost([
+                'body' => 'Un post de ' . $user->pseudo,
+                'status' => Post::PUBLIC,
+            ]);
+        }
     }
 }

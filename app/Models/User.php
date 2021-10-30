@@ -23,6 +23,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
     Use Postable;
+    use \App\Traits\Friendable;
     use Friendable;
     use CanFollow, CanBeFollowed;
     use CanLike, CanBeLiked;

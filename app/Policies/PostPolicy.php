@@ -66,7 +66,7 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Post $post)
+    public function archive(User $user, Post $post)
     {
         return $user->id === $post->creator_id
             ? Response::allow()

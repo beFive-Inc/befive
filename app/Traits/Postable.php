@@ -30,7 +30,7 @@ trait Postable
         ]);
     }
 
-    public function softDeletePost(Post $post): ?bool
+    public function archivePost(Post $post): ?bool
     {
         return $post->delete();
     }
@@ -40,7 +40,7 @@ trait Postable
         return $post->restore();
     }
 
-    public function hardDeletePost(Post $post): ?bool
+    public function deletePost(Post $post): ?bool
     {
         return $post->forceDelete();
     }

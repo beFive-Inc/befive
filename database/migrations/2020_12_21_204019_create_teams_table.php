@@ -15,10 +15,11 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
+            $table->integer('admin_id')->unsigned();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->string('url')->nullable();
-            $table->string('url_name')->nullable();
+            $table->string('site')->nullable();
+            $table->string('site_name')->nullable();
             $table->longText('description');
             $table->softDeletes();
             $table->timestamps();

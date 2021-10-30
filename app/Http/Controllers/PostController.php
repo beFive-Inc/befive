@@ -53,18 +53,18 @@ class PostController extends Controller
         return redirect()->route('homepage');
     }
 
-    public function delete(Post $post)
+    public function archive(Post $post)
     {
-        $this->authorize('delete', $post);
+        $this->authorize('archive', $post);
 
-        Auth::user()->softDeletePost($post);
+        Auth::user()->archivePost($post);
     }
 
     public function forceDelete(Post $post)
     {
         $this->authorize('forceDelete', $post);
 
-        Auth::user()->hardDeletePost($post);
+        Auth::user()->deletePost($post);
     }
 
     public function restore(Post $post)

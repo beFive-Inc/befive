@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGamesTable extends Migration
+class CreateGameLinkedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('games', function (Blueprint $table) {
+        Schema::create('game_linked', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('igbd_id')->nullable()->unique();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->string('summary')->default('');
-            $table->dateTimeTz('first_released_at');
+            $table->integer('game_id');
+            $table->morphs('linked');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +29,6 @@ class CreateGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('game_linked');
     }
 }

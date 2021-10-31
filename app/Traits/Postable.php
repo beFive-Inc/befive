@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -50,26 +51,38 @@ trait Postable
 
     }
 
-    public function showPosts(): Collection
+    public function getPosts(): Collection
     {
         return $this->posts()->get();
     }
 
-    public function showPublicStatusPosts(): Collection
+    public function getPostsForMe($howMany)
+    {
+        $posts = Post::all()->load('creator')->shuffle()->take($howMany);
+
+        return $posts->map(function ($post) {
+            return collect(
+                $post,
+                $post->creator
+            );
+        });
+    }
+
+    public function getPublicStatusPosts(): Collection
     {
         return $this->posts()->get()->filter(function ($post) {
             return $post->isPublic;
         });
     }
 
-    public function showPrivateStatusPosts(): Collection
+    public function getPrivateStatusPosts(): Collection
     {
         return $this->posts()->get()->filter(function ($post) {
             return $post->isPrivate;
         });
     }
 
-    public function showFriendsStatusPosts(): Collection
+    public function getFriendsStatusPosts(): Collection
     {
         return $this->posts()->get()->filter(function ($post) {
             return $post->isFriends;

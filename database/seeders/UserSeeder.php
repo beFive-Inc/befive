@@ -17,33 +17,36 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $hashtag = 1000;
         User::create([
-            'pseudo' => 'Thebester',
-            'slug' => 'thebester',
+            'pseudo' => $pseudo = 'Thebester',
+            'slug' => Str::slug($pseudo) . '.' . $hashtag,
             'name' => 'Hoens Anthony',
-            'hashtag' => 1000,
+            'hashtag' => $hashtag,
             'email' => 'anthony-hoens@hotmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('Anthonio97'),
             'remember_token' => Str::random(10),
         ]);
 
+        $hashtag = 1426;
         User::create([
-            'pseudo' => 'Nthn',
-            'slug' => 'nthn',
+            'pseudo' => $pseudo = 'Nthn',
+            'slug' => Str::slug($pseudo) . '.' . $hashtag,
             'name' => 'Minsart Anthony',
-            'hashtag' => 1426,
+            'hashtag' => $hashtag,
             'email' => 'minsartanthony@hotmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('belgique123'),
             'remember_token' => Str::random(10),
         ]);
 
+        $hashtag = 1007;
         User::create([
-            'pseudo' => 'Khonix',
-            'slug' => 'khonix',
+            'pseudo' => $pseudo = 'Khonix',
+            'slug' => Str::slug($pseudo) . '.' . $hashtag,
             'name' => 'Gilson Nicolas',
-            'hashtag' => 1007,
+            'hashtag' => $hashtag,
             'email' => 'gilsnic@hotmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('p@ssw0rd'),

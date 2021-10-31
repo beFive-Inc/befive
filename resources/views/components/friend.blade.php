@@ -4,7 +4,7 @@
     </div>
     <div class="friend__info">
         <h3 aria-level="3" role="heading" class="friend__pseudo">
-            <a href="" class="friend__link">{{ $friend->pseudo }}</a>
+            <a href="{{ route('user.show', $friend->slug) }}" class="friend__link">{{ $friend->pseudo }}</a>
         </h3>
         <p>
             @if($friend->isOnline())

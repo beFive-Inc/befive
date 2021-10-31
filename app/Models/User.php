@@ -18,11 +18,14 @@ use Multicaret\Acquaintances\Traits\CanFollow;
 use Multicaret\Acquaintances\Traits\CanLike;
 use Multicaret\Acquaintances\Traits\CanRate;
 use Multicaret\Acquaintances\Traits\Friendable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
     use HasFactory, Notifiable;
     Use Postable;
+    use InteractsWithMedia;
     use \App\Traits\Friendable;
     use Friendable;
     use CanFollow, CanBeFollowed;

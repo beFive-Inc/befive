@@ -19,6 +19,13 @@ class Relations extends Migration
                 ->on('users')
                 ->onDelete('cascade');
         });
+
+        Schema::table('game_linked', function (Blueprint $table) {
+            $table->foreign('game_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+        });
     }
 
     /**

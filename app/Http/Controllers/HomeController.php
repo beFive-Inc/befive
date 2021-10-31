@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,8 @@ class HomeController extends Controller
 
         $friends = $user->getFriends();
 
-        return view('app.home.index', compact('friends'));
+        $posts = $user->getPostsForMe(5);
+
+        return view('app.home.index', compact('friends', 'posts'));
     }
 }

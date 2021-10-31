@@ -1,7 +1,7 @@
 <header>
     <h1 role="heading" aria-level="1">
         {{ __('Be Five, réseau social pour gamer') }}
-        <img src="{{ asset('/images/logo/befive_logo_white_background.svg') }}" alt="{{ __('Logo de Be Five') }}">
+        <img src="{{ asset('/storage/images/logo/befive_logo_white_background.svg') }}" alt="{{ __('Logo de Be Five') }}">
     </h1>
 
     <form action="/search" method="get">

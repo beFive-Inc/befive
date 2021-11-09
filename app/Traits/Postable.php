@@ -58,14 +58,7 @@ trait Postable
 
     public function getPostsForMe($howMany)
     {
-        $posts = Post::all()->load('creator')->shuffle()->take($howMany);
-
-        return $posts->map(function ($post) {
-            return collect(
-                $post,
-                $post->creator
-            );
-        });
+        return Post::all()->load('creator')->shuffle()->take($howMany);
     }
 
     public function getPublicStatusPosts(): Collection

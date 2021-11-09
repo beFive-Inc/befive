@@ -90,7 +90,7 @@ Route::prefix('users')->middleware('auth')->name('user.')->group(function () {
 
     // POST METHOD
 
-
+    // no actually post method for user
 
     // PUT METHOD
 

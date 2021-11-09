@@ -16,10 +16,12 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('igbd_id')->nullable()->unique();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->string('summary')->default('');
-            $table->dateTimeTz('first_released_at');
+            $table->string('name');
+            $table->string('slug');
+            $table->text('summary')->nullable();
+            $table->string('cover_img')->nullable();
+            $table->json('screenshots')->nullable();
+            $table->dateTimeTz('first_released_at')->nullable()->default(now());
             $table->softDeletes();
             $table->timestamps();
         });

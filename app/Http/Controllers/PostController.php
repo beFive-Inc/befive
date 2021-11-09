@@ -40,7 +40,7 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('', compact('post'));
+        return view('app.posts.edit', compact('post'));
     }
 
     public function update(Request $request, Post $post)
@@ -58,6 +58,8 @@ class PostController extends Controller
         $this->authorize('archive', $post);
 
         Auth::user()->archivePost($post);
+
+        return redirect()->route('homepage');
     }
 
     public function forceDelete(Post $post)
@@ -65,6 +67,8 @@ class PostController extends Controller
         $this->authorize('forceDelete', $post);
 
         Auth::user()->deletePost($post);
+
+        return redirect()->route('homepage');
     }
 
     public function restore(Post $post)
@@ -72,5 +76,7 @@ class PostController extends Controller
         $this->authorize('restore', $post);
 
         Auth::user()->restorePost($post);
+
+        return redirect()->route('homepage');
     }
 }

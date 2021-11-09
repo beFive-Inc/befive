@@ -11,4 +11,6 @@ class Game extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
+
+    protected $fillable = ['igbd_id', 'name', 'slug', 'summary', 'cover_img', 'screenshots', 'first_releases_at'];
 }

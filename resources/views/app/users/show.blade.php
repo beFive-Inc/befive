@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        {{ __('Be Five') }}
+        {{ $user->pseudo }}
     </x-slot>
 
 

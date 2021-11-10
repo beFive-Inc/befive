@@ -53,6 +53,18 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
+        $hashtag = 1234;
+        User::create([
+            'pseudo' => $pseudo = 'Beauty',
+            'slug' => Str::slug($pseudo) . '.' . $hashtag,
+            'name' => 'Belboom Natacha',
+            'hashtag' => $hashtag,
+            'email' => 'natacha.belboom@hotmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('15/09/98'),
+            'remember_token' => Str::random(10),
+        ]);
+
         User::factory()
             ->times(150)
             ->create();

@@ -29,7 +29,7 @@ class FortifyServiceProvider extends ServiceProvider
             public function toResponse($request)
             {
                 if (!Cookie::get('hasDoneFirstStep')) {
-                    return redirect(RouteServiceProvider::STEP);
+                    return redirect(RouteServiceProvider::STEP_ONE);
                 } else {
                     return redirect(RouteServiceProvider::HOME);
                 }

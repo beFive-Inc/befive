@@ -1,0 +1,117 @@
+.friends {
+    grid-column: 9 / 11;
+    padding: 1.5rem;
+    border-radius: 10px;
+    background-color: rgba(16, 12, 16, 0.1);
+    transition: all 1s ease;
+
+    &__title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #100C10;
+        margin-bottom: 1.5rem;
+    }
+
+    .form {
+        margin-bottom: 1.25rem;
+    }
+
+    .nav {
+        margin-bottom: 1rem;
+
+        &__list {
+            display: flex;
+            gap: 2rem;
+            overflow: hidden;
+            align-items: center;
+
+            & li {
+                display: inline-block;
+            }
+
+            & a {
+                font-size: 1rem;
+                font-weight: 500;
+                color: #100C10;
+                text-decoration: none;
+                transition: all .3s ease;
+
+                &.active {
+                    border-bottom: 1px solid #D20000;
+                    padding: 0 2px;
+                }
+            }
+        }
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0.625rem;
+        min-height: 15rem;
+        max-height: 30.625rem;
+        overflow: auto;
+    }
+}
+
+.friend {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 0.625rem;
+    border-radius: 10px;
+    background-color: inherit;
+    padding: 3px;
+
+    &:hover {
+        background-color: rgba(16, 12, 16, 0.1);
+    }
+
+    &__pseudo {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #100C10;
+
+        & a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+
+    &__img_container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 10px;
+
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+            width: 5px;
+            height: 5px;
+            border-radius: 10px;
+        }
+
+        &.online::after {
+            background-color: #00D237;
+        }
+
+        &.offline::after {
+            background-color: #D20000;
+        }
+    }
+
+    &__img {
+        width: 100%;
+    }
+}

@@ -1,0 +1,7 @@
+.main {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    align-items: flex-start;
+    grid-gap: 1.5rem;
+    padding: 0 3rem;
+}

@@ -11,17 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('./resources/js/app.js', './public/js')
-    .js('./resources/js/formcheck.js', './public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ])
-    .postCss('resources/css/header.css', 'public/css', [
-        //
-    ])
-    .postCss('resources/css/banner.css', 'public/css', [
-        //
-    ])
-    .postCss('resources/css/friendlist.css', 'public/css', [
-        //
-    ]);
+mix.js('./resources/js/app.js', 'public/js')
+    .js('./resources/js/formcheck.js', 'public/js')
+    .sass('resources/css/app.scss', 'public/css');

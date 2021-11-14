@@ -13,23 +13,28 @@
 
     <!-- Métadonnées, css et javascript -->
     @livewireStyles
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{ $metaData }}
 </head>
 <body>
-    <h1 aria-level="1" role="heading" aria-hidden="true" class="sr-only">
+    <h1 aria-level="1" role="heading" aria-hidden="true" class="sr_only">
         {{ __('Be Five, premier réseau social pour gamer') }}
     </h1>
-    <form action="{{ route('logout') }}" method="post">
-        @csrf
-
-        <input type="submit" value="Se déconnecter">
-    </form>
     <!-- Header -->
     <x-header></x-header>
 
     <!-- Contenu -->
-    <livewire:friend-list />
-    {{ $content }}
+    <main class="main">
+        <form action="{{ route('logout') }}" method="post">
+            @csrf
+
+            <input type="submit" value="Se déconnecter">
+        </form>
+
+        {{ $content }}
+
+        <livewire:friend-list />
+    </main>
 
 
     <!-- Différents scripts -->

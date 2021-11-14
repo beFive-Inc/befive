@@ -1,0 +1,56 @@
+/* header */
+
+.header {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    align-items: center;
+    grid-gap: 1.5rem;
+    width: 100vw;
+    padding: 1.25rem 3rem;
+    background-color: #F3F3F3;
+    border-bottom: 1px solid #FF9400;
+
+    &__title {
+        grid-column: 1 / 2;
+    }
+
+    &__logo {
+        height: 69px;
+    }
+}
+
+.form {
+    display: flex;
+    grid-column: 2 / 4;
+    flex-direction: row;
+    border-radius: 10px;
+    background-color: rgba(16, 12, 16, 0.25);
+
+    &__search_container {
+        width: 100%;
+    }
+
+    &__btn {
+        border: none;
+        padding: 0.8rem 0.9rem;
+        border-radius: 10px;
+        background-color: rgba(16, 12, 16, 0.2);
+    }
+
+    &__search {
+        font-family: 'Proxima Nova', sans-serif;
+        font-size: 1rem;
+        width: 100%;
+        border: none;
+        padding: 0.8rem 1rem;
+        color: #F3F3F3;
+        background-color: inherit;
+
+        &::placeholder {
+            color: rgba(243, 243, 243, 0.8);
+        }
+    }
+}

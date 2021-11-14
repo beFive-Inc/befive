@@ -7,7 +7,7 @@ const formCheck = {
     init() {
         this.child.forEach((child, index) => {
             child.index = index
-            if (child.type == 'hidden') {
+            if (child.type == 'hidden' || child.value) {
                 this.el.push([child, true])
             } else {
                 this.el.push([child, false])

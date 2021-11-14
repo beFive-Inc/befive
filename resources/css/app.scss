@@ -1,0 +1,42 @@
+@import "reset.css";
+
+html {
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 16px;
+    background-color: #F3F3F3;
+}
+
+html, html * {
+    box-sizing: border-box;
+}
+
+.sr_only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.not_sr_only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+main {
+    margin-top: calc(7rem + 1.5rem);
+}
+@import "header.scss";
+@import "main";
+@import "friendlist.scss";
+@import "menu";

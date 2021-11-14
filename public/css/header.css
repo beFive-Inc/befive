@@ -3,18 +3,12 @@
 .header {
     position: fixed;
     top: 0;
-    z-index: 5;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-gap: 1.5rem;
     width: 100vw;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    background: #15191D;
-    padding: 0 2rem;
-    font-family: 'Bourgeois', sans-serif;
-    font-size: 1rem;
-    text-transform: uppercase;
+    padding: 1.25rem 1.25rem;
 }
 
 /* header nav */

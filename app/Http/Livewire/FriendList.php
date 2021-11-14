@@ -139,7 +139,9 @@ class FriendList extends Component
             $friends = $this->getSortingFriends();
         }
 
-        $this->friendships = $friends;
+        if (!$this->searchQuery) {
+            $this->friendships = $friends;
+        }
 
         return view('livewire.friend-list',[
             'friends' => $friends,

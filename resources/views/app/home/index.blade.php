@@ -12,7 +12,9 @@
 
 
     <x-slot name="content">
+        <x-menu>
 
+        </x-menu>
     </x-slot>
 
 

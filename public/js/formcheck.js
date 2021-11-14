@@ -14,7 +14,7 @@ var formCheck = {
     this.child.forEach(function (child, index) {
       child.index = index;
 
-      if (child.type == 'hidden') {
+      if (child.type == 'hidden' || child.value) {
         _this.el.push([child, true]);
       } else {
         _this.el.push([child, false]);
@@ -35,12 +35,7 @@ var formCheck = {
     this.allChecked = this.el.find(function (el) {
       return el[1] === false;
     });
-
-    if (this.allChecked) {
-      this.btn.disabled = true;
-    } else {
-      this.btn.disabled = false;
-    }
+    this.btn.disabled = !!this.allChecked;
   },
   listener: function listener() {
     var _this2 = this;
@@ -52,6 +47,9 @@ var formCheck = {
     });
   }
 };
-formCheck.init();
+
+if (formCheck.form) {
+  formCheck.init();
+}
 /******/ })()
 ;

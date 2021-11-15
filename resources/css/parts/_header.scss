@@ -1,14 +1,12 @@
 /* header */
 
 .header {
-    position: fixed;
-    top: 0;
+    position: sticky;
     z-index: 100;
     display: grid;
     grid-template-columns: repeat(11, 1fr);
     align-items: center;
     grid-gap: 1.5rem;
-    width: 100vw;
     padding: 1.25rem 3rem;
     background-color: #F3F3F3;
     border-bottom: 1px solid #FF9400;

@@ -18,6 +18,7 @@
 {{ $content }}
 
 <!-- Différents scripts -->
+@livewireScripts
 {{ $script }}
 </body>
 </html>

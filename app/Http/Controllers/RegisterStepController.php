@@ -9,7 +9,7 @@ class RegisterStepController extends Controller
 {
     public function firstStepview()
     {
-
+        return view('app.auth.steps.first');
     }
 
     public function firstStepstore()

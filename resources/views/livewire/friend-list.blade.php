@@ -23,12 +23,15 @@
         </button>
         <div class="form__search_container">
             <label for="search" class="sr_only" aria-hidden="{{ __('Rechercher un joueur') }}">{{ __('Rechercher') }}</label>
-            <input type="search" id="search" class="form__search" wire:model.debounce.200ms="searchQuery" name="s" placeholder="{{ __('Rechercher un joueur') }}">
+            <input type="search" id="search" class="form__search" wire:model.debounce.100ms="searchQuery" name="s" placeholder="{{ __('Rechercher un joueur') }}">
         </div>
     </form>
 
 
     <nav role="navigation" class="friends__nav nav">
+        <h3 aria-level="3" role="heading" class="sr_only">
+            {{ __('Navigations des amis') }}
+        </h3>
         <ul class="nav__list">
             <li wire:click="getGeneralView">
                 <a href="#"

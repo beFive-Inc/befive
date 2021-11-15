@@ -52,6 +52,7 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
     protected $hidden = [
+        'email',
         'password',
         'remember_token',
     ];
@@ -69,6 +70,7 @@ class User extends Authenticatable implements HasMedia
     {
         return Cache::has('user-is-online-' . $this->id);
     }
+
 
     public function posts()
     {

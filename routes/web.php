@@ -23,6 +23,35 @@ Route::get( '/', [\App\Http\Controllers\HomeController::class, 'index'])
 
 
 ////
+// REGISTER STEP ROUTE
+////
+
+Route::prefix('steps')->middleware('auth')->name('step.')->group(function () {
+
+    // GET METHOD
+
+    Route::get('/', function () {
+        return redirect()->route('step.first');
+    });
+
+    Route::get('/first', [\App\Http\Controllers\RegisterStepController::class, 'firstStepview'])
+        ->name('first');
+
+
+    // POST METHOD
+
+    Route::post('/first/store', [\App\Http\Controllers\RegisterStepController::class, 'firstStepstore'])
+        ->name('first.store');
+
+
+    // PUT METHOD
+
+
+    // DELETE METHOD
+});
+
+
+////
 // ALL POSTS ROUTE
 ////
 
@@ -90,7 +119,6 @@ Route::prefix('users')->middleware('auth')->name('user.')->group(function () {
 
     // POST METHOD
 
-    // no actually post method for user
 
     // PUT METHOD
 

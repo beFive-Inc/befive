@@ -1,14 +1,16 @@
 .friends {
+    position: sticky;
     grid-column: 9 / 11;
     padding: 1.5rem;
-    border-radius: 10px;
-    background-color: rgba(16, 12, 16, 0.1);
+    border-radius: var(--border-radius);
+    background-color: var(--black10);
     transition: all 1s ease;
 
     &__title {
-        font-size: 1.25rem;
-        font-weight: bold;
-        color: #100C10;
+        font-size: var(--title-font-size);
+        font-weight: var(--title-font-weight);
+        font-style: var(--title-font-style);
+        color: var(--black);
         margin-bottom: 1.5rem;
     }
 
@@ -30,14 +32,15 @@
             }
 
             & a {
-                font-size: 1rem;
-                font-weight: 500;
-                color: #100C10;
+                font-size: var(--semi-title-font-size);
+                font-weight: var(--semi-title-font-weight);
+                font-style: var(--semi-title-font-style);
+                color: var(--black);
                 text-decoration: none;
                 transition: all .3s ease;
 
                 &.active {
-                    border-bottom: 1px solid #D20000;
+                    border-bottom: 1px solid var(--secondary-color);
                     padding: 0 2px;
                 }
             }
@@ -53,6 +56,7 @@
         min-height: 15rem;
         max-height: 30.625rem;
         overflow: auto;
+        transition: all 1s ease;
     }
 }
 
@@ -63,18 +67,19 @@
     justify-content: flex-start;
     width: 100%;
     gap: 0.625rem;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     background-color: inherit;
     padding: 3px;
 
     &:hover {
-        background-color: rgba(16, 12, 16, 0.1);
+        background-color: var(--black10);
     }
 
     &__pseudo {
-        font-size: 1rem;
-        font-weight: 500;
-        color: #100C10;
+        font-size: var(--semi-title-font-size);
+        font-weight: var(--semi-title-font-weight);
+        font-style: var(--semi-title-font-style);
+        color: var(--black);
 
         & a {
             text-decoration: none;
@@ -89,7 +94,7 @@
         justify-content: center;
         width: 2rem;
         height: 2rem;
-        border-radius: 10px;
+        border-radius: var(--border-radius);
 
         &::after {
             content: '';
@@ -97,21 +102,23 @@
             position: absolute;
             right: 0px;
             bottom: 0px;
-            width: 5px;
-            height: 5px;
-            border-radius: 10px;
+            width: 6px;
+            height: 6px;
+            border-radius: var(--border-radius);
         }
 
         &.online::after {
-            background-color: #00D237;
+            background-color: var(--green);
         }
 
         &.offline::after {
-            background-color: #D20000;
+            background-color: var(--red);
         }
     }
 
     &__img {
         width: 100%;
+        border-radius: var(--border-radius);
+        overflow: hidden;
     }
 }

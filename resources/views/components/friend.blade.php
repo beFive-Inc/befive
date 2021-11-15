@@ -5,7 +5,7 @@
             @else
                 offline
             @endif">
-        <img src="" class="friend__img" alt>
+        <img src="{{ asset('storage/images/users/default.jpg') }}" class="friend__img" alt>
     </div>
     <div class="friend__info">
         <h3 aria-level="3" role="heading" class="friend__pseudo">

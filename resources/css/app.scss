@@ -4,7 +4,7 @@
 html {
     font-family: var(--base-font-family);
     font-size: var(--base-font-size);
-    background-color: var(--white);
+    background-color: var(--black10);
 }
 
 html, html * {
@@ -34,11 +34,49 @@ html, html * {
     white-space: normal;
 }
 
-main {
-    margin-top: 1.5rem;
+.principal_button {
+    font-family: var(--base-font-family);
+    font-size: var(--semi-title-font-size);
+    font-weight: var(--semi-title-font-weight);
+    font-style: var(--semi-title-font-style);
+    line-height: var(--semi-title-line-height);
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border: 1px solid var(--principal-color);
+    background-color: var(--principal-color);
+    transition: all .5s ease;
+
+    &:hover, &:focus, &:active {
+        transform: scale(1.1);
+    }
+}
+
+.secondary_button {
+    font-family: var(--base-font-family);
+    font-size: var(--semi-title-font-size);
+    font-weight: var(--semi-title-font-weight);
+    font-style: var(--semi-title-font-style);
+    line-height: var(--semi-title-line-height);
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    color: var(--black);
+    padding: 1rem 2rem;
+    border: 1px solid var(--principal-color);
+    background-color: var(--white);
+    transition: all .5s ease;
+
+    &:hover, &:focus, &:active {
+        background-color: var(--principal-color80);
+        color: var(--white);
+    }
 }
 
 
+@import "parts/steps";
 @import "parts/header";
 @import "parts/main";
 @import "parts/friendlist";

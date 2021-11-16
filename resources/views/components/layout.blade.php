@@ -25,11 +25,6 @@
 
     <!-- Contenu -->
     <main class="main">
-        <form action="{{ route('logout') }}" method="post">
-            @csrf
-
-            <input type="submit" value="Se déconnecter">
-        </form>
 
         {{ $content }}
 

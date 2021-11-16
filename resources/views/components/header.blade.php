@@ -13,4 +13,10 @@
             <input type="search" id="search" class="form__search" name="search" placeholder="{{ __('Rechercher un joueur') }}">
         </div>
     </form>
+
+    <form action="{{ route('logout') }}" method="post" class="disconnect">
+        @csrf
+
+        <input type="submit" value="Se déconnecter">
+    </form>
 </header>

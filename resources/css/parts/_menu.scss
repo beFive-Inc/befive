@@ -1,6 +1,11 @@
 .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
     position: sticky;
-    grid-column: 2 / 4;
+    grid-column: 1 / 3;
     width: 100%;
     top: 0;
     left: 0;
@@ -24,7 +29,7 @@
         &__list_item {
             display: block;
             width: 100%;
-            background-color: var(--black10);
+            background-color: var(--white);
             border-radius: var(--border-radius);
 
             & a {
@@ -38,25 +43,19 @@
                 text-decoration: none;
                 color: var(--black);
                 border-radius: var(--border-radius);
-            }
+                background-color: var(--white);
 
-            &:not(.active):hover, &:not(.active):focus {
-                background-color: var(--principal-color10);
 
-                & a {
+                &:not(.active):hover, &:not(.active):focus {
+                    background-color: var(--principal-color20);
+                    color: var(--principal-color);
+                }
+
+                &.active, &:active {
+                    background-color: var(--principal-color30);
                     color: var(--principal-color);
                 }
             }
-
-            &.active, &:active {
-                background-color: var(--principal-color20);
-
-                & a {
-                    color: var(--principal-color);
-                }
-            }
-
-
         }
     }
 }

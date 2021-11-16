@@ -1,9 +1,9 @@
 .friends {
     position: sticky;
-    grid-column: 9 / 11;
+    grid-column: 8 / 10;
     padding: 1.5rem;
     border-radius: var(--border-radius);
-    background-color: var(--black10);
+    background-color: var(--white);
     transition: all 1s ease;
 
     &__title {

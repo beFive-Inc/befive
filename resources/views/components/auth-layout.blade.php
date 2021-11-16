@@ -11,11 +11,17 @@
 
 
     <!-- Métadonnées, css et javascript -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{ $metaData }}
 </head>
 <body>
+<h1 aria-level="1" role="heading" class="sr_only">
+    {{ __('Be Five, premier réseau social pour gamer') }}
+</h1>
 <!-- Contenu -->
-{{ $content }}
+<main>
+    {{ $content }}
+</main>
 
 <!-- Différents scripts -->
 @livewireScripts

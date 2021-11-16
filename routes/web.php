@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get( '/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->name('homepage')
-    ->middleware('auth');
+    ->middleware(['auth', 'check.step']);
 
 
 ////
@@ -31,11 +31,17 @@ Route::prefix('steps')->middleware('auth')->name('step.')->group(function () {
     // GET METHOD
 
     Route::get('/', function () {
-        return redirect()->route('step.first');
-    });
+        return redirect()->route('homepage');
+    })->middleware('check.step');
 
     Route::get('/first', [\App\Http\Controllers\RegisterStepController::class, 'firstStepview'])
         ->name('first');
+
+    Route::get('/second', [\App\Http\Controllers\RegisterStepController::class, 'secondStepView'])
+        ->name('second');
+
+    Route::get('/third', [\App\Http\Controllers\RegisterStepController::class, 'thirdStepView'])
+        ->name('third');
 
 
     // POST METHOD

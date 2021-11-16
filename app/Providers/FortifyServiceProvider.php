@@ -28,11 +28,7 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(LoginResponse::class, new class implements LoginResponse {
             public function toResponse($request)
             {
-                if (!Cookie::get('hasDoneFirstStep')) {
-                    return redirect(RouteServiceProvider::STEP_ONE);
-                } else {
-                    return redirect(RouteServiceProvider::HOME);
-                }
+                return redirect(RouteServiceProvider::HOME);
             }
         });
     }

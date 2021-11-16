@@ -1,5 +1,5 @@
 :root {
-    --border-radius: 10px;
+    --border-radius: 0.8rem;
 
     --base-font-family: 'Proxima Nova', 'Open Sans', sans-serif;
     --base-font-size: 16px;
@@ -22,7 +22,7 @@
     --semi-title-font-style: normal;
     --semi-title-line-height: 1.25;
 
-    --date-font-size: 0.75rem;
+    --date-font-size: 0.8   rem;
     --date-font-weight: 300;
     --date-font-style: normal;
     --date-line-height: 1.25;
@@ -49,6 +49,17 @@
     --white20: rgba(243, 243, 243, 0.2);
     --white10: rgba(243, 243, 243, 0.1);
 
+    --pure-white: rgba(255, 255, 255, 1);
+    --pure-white90: rgba(255, 255, 255, 0.9);
+    --pure-white80: rgba(255, 255, 255, 0.8);
+    --pure-white70: rgba(255, 255, 255, 0.7);
+    --pure-white60: rgba(255, 255, 255, 0.6);
+    --pure-white50: rgba(255, 255, 255, 0.5);
+    --pure-white40: rgba(255, 255, 255, 0.4);
+    --pure-white30: rgba(255, 255, 255, 0.3);
+    --pure-white20: rgba(255, 255, 255, 0.2);
+    --pure-white10: rgba(255, 255, 255, 0.1);
+
     --black: rgba(16, 12, 16, 1);
     --black90: rgba(16, 12, 16, 0.9);
     --black80: rgba(16, 12, 16, 0.8);
@@ -59,6 +70,7 @@
     --black30: rgba(16, 12, 16, 0.3);
     --black20: rgba(16, 12, 16, 0.2);
     --black10: rgba(16, 12, 16, 0.1);
+    --black1: rgba(16, 12, 16, 0.01);
 
     --principal-color: rgba(255, 148, 0, 1);
     --principal-color90: rgba(255, 148, 0, 0.9);

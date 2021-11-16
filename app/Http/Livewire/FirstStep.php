@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Http\Middleware\TrustHosts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -18,7 +19,7 @@ class FirstStep extends Component
     public $bannerpic;
     public $temporaryProfilImg;
     public $temporaryBannerImg;
-    public $message;
+    public $statutMessage;
 
     public function changeTemporaryProfilImg(): void
     {
@@ -35,7 +36,7 @@ class FirstStep extends Component
     public function save(): void
     {
         $this->validate([
-            'name' => 'string',
+            'name' => 'string|nullable',
             'profilpic' => 'image|max:1024|nullable',
             'bannerpic' => 'image|max:1024|nullable'
         ]);
@@ -46,16 +47,35 @@ class FirstStep extends Component
             ]);
         }
         if ($this->profilpic) {
-            $name = 'cc' . '.jpg';
+            $name = Str::uuid() . '.' . $this->profilpic->guessExtension();
             $this->profilpic->storeAs('images', $name);
             auth()->user()
                 ->addMedia(storage_path('app/public/images/' . $name))
-                ->toMediaCollection('users-pic');
+                ->toMediaCollection('user_profile_pic');
         }
         if ($this->bannerpic) {
-            $store = $this->bannerpic->store('app/public/images/users/banner-pic');
-            auth()->user()->addMedia($store)->toMediaCollection('banner-pic');
+            $name = Str::uuid() . '.' . $this->bannerpic->guessExtension();
+            $this->bannerpic->storeAs('images', $name);
+            auth()->user()
+                ->addMedia(storage_path('app/public/images/' . $name))
+                ->toMediaCollection('user_banner_pic');
         }
+
+        Cookie::queue('hasDoneFirstStep', true, 60 * 60 * 24 * 365 * 10);
+
+        $this->statutMessage = __('Vos informations de profil ont bien été enregistré.');
+    }
+
+    public function redirectToSecondStep()
+    {
+        if (isset($this->temporaryProfilImg)) {
+            Storage::delete($this->temporaryProfilImg);
+        }
+        if (isset($this->temporaryBannerImg)) {
+            Storage::delete($this->temporaryBannerImg);
+        }
+
+        //$this->redirect(route('step.second'));
     }
 
     public function render()

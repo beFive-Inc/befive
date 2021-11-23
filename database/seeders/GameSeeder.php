@@ -15,6 +15,7 @@ class GameSeeder extends Seeder
      */
     public function run()
     {
+        /*
         $accessTokenCacheKey = 'igdb_cache.access_token';
 
         $accessToken = Cache::put($accessTokenCacheKey, env('TWITCH_TOKEN'));
@@ -31,5 +32,6 @@ class GameSeeder extends Seeder
                 ]);
             }
         }
+        */
     }
 }

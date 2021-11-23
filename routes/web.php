@@ -26,22 +26,22 @@ Route::get( '/', [\App\Http\Controllers\HomeController::class, 'index'])
 // REGISTER STEP ROUTE
 ////
 
-Route::prefix('steps')->middleware('auth')->name('step.')->group(function () {
+Route::prefix('/register/steps')->middleware('auth')->name('step.')->group(function () {
 
     // GET METHOD
 
-    Route::get('/', function () {
-        return redirect()->route('homepage');
-    })->middleware('check.step');
+    Route::get('/', [\App\Http\Controllers\RegisterStepController::class, 'index'])
+        ->name('index');
 
-    Route::get('/first', [\App\Http\Controllers\RegisterStepController::class, 'firstStepview'])
+    Route::get('/?step=first-step', [\App\Http\Controllers\RegisterStepController::class, 'index'])
         ->name('first');
 
-    Route::get('/second', [\App\Http\Controllers\RegisterStepController::class, 'secondStepView'])
+    Route::get('/?step=second-step', [\App\Http\Controllers\RegisterStepController::class, 'index'])
         ->name('second');
 
-    Route::get('/third', [\App\Http\Controllers\RegisterStepController::class, 'thirdStepView'])
+    Route::get('/?step=third-step', [\App\Http\Controllers\RegisterStepController::class, 'index'])
         ->name('third');
+
 
 
     // POST METHOD

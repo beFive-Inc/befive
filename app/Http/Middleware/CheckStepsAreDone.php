@@ -21,12 +21,11 @@ class CheckStepsAreDone
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-
-            if (!Cookie::get('hasDoneFirstStep')) {
-                return redirect(RouteServiceProvider::FIRST_STEP);
+            if (!Cookie::get('has-done-step-1')
+                || !Cookie::get('has-done-step-2')
+                || !Cookie::get('has-done-step-3')) {
+                return redirect(RouteServiceProvider::STEPS);
             }
-
-
         }
 
         return $next($request);

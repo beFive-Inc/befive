@@ -5,8 +5,11 @@
             @else
                 offline
             @endif">
-
-        <img src="" class="friend__img" alt>
+        @if($friend->media->count())
+            <img src="{{ $friend->media[0]->getFullUrl() }}" class="friend__img" alt>
+        @else
+            <img src="" class="friend__img" alt>
+        @endif
     </div>
     <div class="friend__info">
         <h3 aria-level="3" role="heading" class="friend__pseudo">

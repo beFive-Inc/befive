@@ -12,23 +12,18 @@ class RegisterStepController extends Controller
 {
     use Stepable;
 
-    public function firstStepview()
+    public function index()
     {
-        return view('app.auth.steps.first');
+        return view('app.auth.steps.index');
     }
 
     public function firstStepstore(FirstStepRequest $request)
     {
-        $data = $request->validated();
+        $request->validated();
 
         $this->storeFirstStep($request);
 
         return redirect()->route('step.second');
     }
 
-    public function secondStepview()
-    {
-
-        return view('app.auth.steps.second');
-    }
 }

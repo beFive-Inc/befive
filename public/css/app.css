@@ -1,24 +1,25 @@
+@import url(https://use.typekit.net/ejw8rdb.css);
 :root {
-  --border-radius: 0.8rem;
-  --base-font-family: "Proxima Nova", "Open Sans", sans-serif;
+  --border-radius: 10px;
+  --base-font-family: proxima-nova, "Open Sans", sans-serif;
   --base-font-size: 16px;
-  --base-font-weight: 300;
+  --base-font-weight: 400;
   --base-font-style: normal;
   --base-line-height: 1.25;
   --text-font-size: 1rem;
-  --text-font-weight: 300;
+  --text-font-weight: 400;
   --text-font-style: normal;
   --text-line-height: 1.25;
   --title-font-size: 1.25rem;
-  --title-font-weight: 800;
+  --title-font-weight: 700;
   --title-font-style: normal;
   --title-line-height: 1.25;
   --semi-title-font-size: 1rem;
-  --semi-title-font-weight: 500;
+  --semi-title-font-weight: 600;
   --semi-title-font-style: normal;
   --semi-title-line-height: 1.25;
-  --date-font-size: 0.8 rem;
-  --date-font-weight: 300;
+  --date-font-size: 0.8rem;
+  --date-font-weight: 400;
   --date-font-style: normal;
   --date-line-height: 1.25;
   --menu-font-size: 1rem;
@@ -26,10 +27,10 @@
   --menu-font-style: normal;
   --menu-line-height: 1.25;
   --hashtag-font-size: 1rem;
-  --hashtag-font-weight: 300;
+  --hashtag-font-weight: 400;
   --hashtag-font-style: italic;
   --hashtag-line-height: 1.25;
-  --white: rgba(243, 243, 243, 1);
+  --white: rgb(243, 243, 243);
   --white90: rgba(243, 243, 243, 0.9);
   --white80: rgba(243, 243, 243, 0.8);
   --white70: rgba(243, 243, 243, 0.7);
@@ -247,6 +248,155 @@ html, html * {
   min-height: 100vh;
   padding: 0 11.25rem;
 }
+.steps .message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: -6rem;
+  left: 0;
+  right: 0;
+  grid-column: 5/10;
+  width: 100%;
+}
+.steps .message__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  -webkit-animation-name: message;
+          animation-name: message;
+  -webkit-animation-duration: 9s;
+          animation-duration: 9s;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-timing-function: ease;
+          animation-timing-function: ease;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  background-color: var(--white);
+  width: 0;
+  height: 0;
+  padding: 0;
+}
+.steps .message__succeed:before, .steps .message__error:before {
+  content: "";
+  height: 1rem;
+  width: 1rem;
+  display: inline-block;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-size: 100%;
+          mask-size: 100%;
+}
+.steps .message__succeed:before {
+  background-color: var(--green);
+  -webkit-mask-image: url("/storage/icons/solid/check.svg");
+          mask-image: url("/storage/icons/solid/check.svg");
+}
+.steps .message__error:before {
+  background-color: var(--red);
+  -webkit-mask-image: url("/storage/icons/solid/exclamation-triangle.svg");
+          mask-image: url("/storage/icons/solid/exclamation-triangle.svg");
+}
+.steps .message__text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  font-family: var(--base-font-family);
+  font-size: var(--semi-title-font-size);
+  font-weight: var(--semi-title-font-weight);
+  white-space: nowrap;
+}
+@-webkit-keyframes message {
+  0% {
+    width: 0;
+    height: 0;
+    padding: 0;
+  }
+  10% {
+    width: 0;
+    padding: 0 0 0 1.5rem;
+    height: 0;
+  }
+  15% {
+    width: 20px;
+    height: 48px;
+    padding: 1rem 0 1rem 1.5rem;
+  }
+  30% {
+    width: 100%;
+    height: 48px;
+    padding: 1rem 2rem;
+  }
+  70% {
+    width: 100%;
+    height: 48px;
+    padding: 1rem 2rem;
+  }
+  85% {
+    width: 20px;
+    height: 48px;
+    padding: 1rem 0 1rem 1.5rem;
+  }
+  90% {
+    width: 0;
+    height: 0;
+    padding: 0 0 0 1.5rem;
+  }
+  100% {
+    width: 0;
+    height: 0;
+    padding: 0;
+  }
+}
+@keyframes message {
+  0% {
+    width: 0;
+    height: 0;
+    padding: 0;
+  }
+  10% {
+    width: 0;
+    padding: 0 0 0 1.5rem;
+    height: 0;
+  }
+  15% {
+    width: 20px;
+    height: 48px;
+    padding: 1rem 0 1rem 1.5rem;
+  }
+  30% {
+    width: 100%;
+    height: 48px;
+    padding: 1rem 2rem;
+  }
+  70% {
+    width: 100%;
+    height: 48px;
+    padding: 1rem 2rem;
+  }
+  85% {
+    width: 20px;
+    height: 48px;
+    padding: 1rem 0 1rem 1.5rem;
+  }
+  90% {
+    width: 0;
+    height: 0;
+    padding: 0 0 0 1.5rem;
+  }
+  100% {
+    width: 0;
+    height: 0;
+    padding: 0;
+  }
+}
 .steps__linear_gradient {
   position: fixed;
   top: 0;
@@ -262,7 +412,7 @@ html, html * {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
   counter-reset: listItem;
 }
 .steps .nav__list_item {
@@ -277,6 +427,7 @@ html, html * {
   line-height: var(--text-line-height);
   color: var(--black);
   text-decoration: none;
+  transition: all 0.5s ease;
 }
 .steps .nav__list_item:before {
   counter-increment: listItem;
@@ -293,6 +444,11 @@ html, html * {
   border-radius: 6px;
   color: var(--black);
   background-color: var(--black10);
+  transition: all 0.5s ease;
+}
+.steps .nav__list_item.active {
+  font-size: var(--semi-title-font-size);
+  font-weight: var(--semi-title-font-weight);
 }
 .steps .nav__list_item.active:before {
   color: var(--white);
@@ -307,6 +463,7 @@ html, html * {
   padding: 1.5rem;
   border-radius: var(--border-radius);
   background-color: var(--white);
+  transition: all 0.5s ease;
 }
 .steps .preview_card__logo {
   width: 11.25rem;
@@ -327,8 +484,29 @@ html, html * {
   text-align: left;
   margin-bottom: 1rem;
 }
+.steps .preview_card_start {
+  opacity: 0;
+}
+.steps .preview_card_end {
+  opacity: 1;
+}
+.steps__form_carrousel_overflow {
+  overflow: hidden;
+}
+.steps__form_carrousel {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.steps__form_carrousel.form_carrousel-2 {
+  width: calc(200% + 1.5rem);
+}
 .steps__form_container {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
@@ -341,8 +519,24 @@ html, html * {
 .steps__form_container .step_form {
   width: 100%;
   padding: 1.5rem;
+  max-height: 40rem;
   border-radius: var(--border-radius);
   background-color: var(--pure-white);
+  transition: max-height 1s ease, all 1s ease;
+}
+.steps__form_container .step_form input::-webkit-file-upload-button {
+  width: 1rem;
+  height: 1rem;
+  -webkit-mask-image: url("/storage/icons/solid/upload.svg");
+          mask-image: url("/storage/icons/solid/upload.svg");
+  -webkit-mask-size: 100% auto;
+          mask-size: 100% auto;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  background-color: var(--black);
+  text-indent: -9999px;
+  border: none;
+  margin-right: 0.5rem;
 }
 .steps__form_container .step_form__progression {
   display: block;
@@ -361,6 +555,25 @@ html, html * {
   line-height: var(--title-line-height);
   color: var(--black);
   margin-bottom: 2rem;
+}
+.steps__form_container .step_form__games_card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 0.5rem;
+  max-height: 15rem;
+  overflow-y: scroll;
+}
+.steps__form_container .step_form__games_card .game {
+  padding: 1rem;
+  border-radius: var(--border-radius);
+}
+.steps__form_container .step_form__games_card .game.checked {
+  border: 1px solid var(--principal-color);
+}
+.steps__form_container .step_form__games_card .game:hover {
+  background-color: var(--black10);
 }
 .steps__form_container .step_form__field_container {
   display: flex;
@@ -386,19 +599,55 @@ html, html * {
   color: var(--black);
   margin-bottom: 0.325rem;
 }
-.steps__form_container .step_form__full_field input {
+.steps__form_container .step_form__full_field input, .steps__form_container .step_form__full_field select, .steps__form_container .step_form__full_field textarea {
   width: calc(50% - 0.75rem);
-  font-size: var(--date-font-size);
-  font-weight: var(--date-font-weight);
-  font-style: var(--date-font-style);
-  line-height: var(--date-line-height);
+  font-size: var(--text-font-size);
+  font-weight: var(--text-font-weight);
+  font-style: var(--text-font-style);
+  line-height: var(--text-line-height);
   color: var(--black);
   padding: 0.625rem;
   border-radius: 6px;
   border: 1px solid var(--black20);
 }
-.steps__form_container .step_form__full_field input:focus, .steps__form_container .step_form__full_field input:hover {
+.steps__form_container .step_form__full_field input:focus, .steps__form_container .step_form__full_field input:hover, .steps__form_container .step_form__full_field input:focus-visible, .steps__form_container .step_form__full_field select:focus, .steps__form_container .step_form__full_field select:hover, .steps__form_container .step_form__full_field select:focus-visible, .steps__form_container .step_form__full_field textarea:focus, .steps__form_container .step_form__full_field textarea:hover, .steps__form_container .step_form__full_field textarea:focus-visible {
+  outline: none;
   border: 1px solid var(--principal-color);
+}
+.steps__form_container .step_form__full_field input:focus::-webkit-file-upload-button, .steps__form_container .step_form__full_field input:hover::-webkit-file-upload-button, .steps__form_container .step_form__full_field input:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__full_field select:focus::-webkit-file-upload-button, .steps__form_container .step_form__full_field select:hover::-webkit-file-upload-button, .steps__form_container .step_form__full_field select:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__full_field textarea:focus::-webkit-file-upload-button, .steps__form_container .step_form__full_field textarea:hover::-webkit-file-upload-button, .steps__form_container .step_form__full_field textarea:focus-visible::-webkit-file-upload-button {
+  background-color: var(--principal-color);
+}
+.steps__form_container .step_form__mega_field {
+  display: block;
+  width: 100%;
+}
+.steps__form_container .step_form__mega_field label {
+  font-family: var(--base-font-family);
+  display: block;
+  font-size: var(--date-font-size);
+  font-weight: var(--date-font-weight);
+  font-style: var(--date-font-style);
+  line-height: var(--date-line-height);
+  color: var(--black);
+  margin-bottom: 0.325rem;
+}
+.steps__form_container .step_form__mega_field input, .steps__form_container .step_form__mega_field select, .steps__form_container .step_form__mega_field textarea {
+  width: 100%;
+  font-size: var(--text-font-size);
+  font-weight: var(--text-font-weight);
+  font-style: var(--text-font-style);
+  line-height: var(--text-line-height);
+  color: var(--black);
+  padding: 0.625rem;
+  border-radius: 6px;
+  border: 1px solid var(--black20);
+}
+.steps__form_container .step_form__mega_field input:focus, .steps__form_container .step_form__mega_field input:hover, .steps__form_container .step_form__mega_field input:focus-visible, .steps__form_container .step_form__mega_field select:focus, .steps__form_container .step_form__mega_field select:hover, .steps__form_container .step_form__mega_field select:focus-visible, .steps__form_container .step_form__mega_field textarea:focus, .steps__form_container .step_form__mega_field textarea:hover, .steps__form_container .step_form__mega_field textarea:focus-visible {
+  outline: none;
+  border: 1px solid var(--principal-color);
+}
+.steps__form_container .step_form__mega_field input:focus::-webkit-file-upload-button, .steps__form_container .step_form__mega_field input:hover::-webkit-file-upload-button, .steps__form_container .step_form__mega_field input:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__mega_field select:focus::-webkit-file-upload-button, .steps__form_container .step_form__mega_field select:hover::-webkit-file-upload-button, .steps__form_container .step_form__mega_field select:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__mega_field textarea:focus::-webkit-file-upload-button, .steps__form_container .step_form__mega_field textarea:hover::-webkit-file-upload-button, .steps__form_container .step_form__mega_field textarea:focus-visible::-webkit-file-upload-button {
+  background-color: var(--principal-color);
 }
 .steps__form_container .step_form__semi_field {
   display: block;
@@ -414,19 +663,23 @@ html, html * {
   color: var(--black);
   margin-bottom: 0.325rem;
 }
-.steps__form_container .step_form__semi_field input {
+.steps__form_container .step_form__semi_field input, .steps__form_container .step_form__semi_field select, .steps__form_container .step_form__semi_field textarea {
   width: 100%;
-  font-size: var(--date-font-size);
-  font-weight: var(--date-font-weight);
-  font-style: var(--date-font-style);
-  line-height: var(--date-line-height);
+  font-size: var(--text-font-size);
+  font-weight: var(--text-font-weight);
+  font-style: var(--text-font-style);
+  line-height: var(--text-line-height);
   color: var(--black);
   padding: 0.625rem;
   border-radius: 6px;
   border: 1px solid var(--black20);
 }
-.steps__form_container .step_form__semi_field input:focus, .steps__form_container .step_form__semi_field input:hover {
+.steps__form_container .step_form__semi_field input:focus, .steps__form_container .step_form__semi_field input:hover, .steps__form_container .step_form__semi_field input:focus-visible, .steps__form_container .step_form__semi_field select:focus, .steps__form_container .step_form__semi_field select:hover, .steps__form_container .step_form__semi_field select:focus-visible, .steps__form_container .step_form__semi_field textarea:focus, .steps__form_container .step_form__semi_field textarea:hover, .steps__form_container .step_form__semi_field textarea:focus-visible {
+  outline: none;
   border: 1px solid var(--principal-color);
+}
+.steps__form_container .step_form__semi_field input:focus::-webkit-file-upload-button, .steps__form_container .step_form__semi_field input:hover::-webkit-file-upload-button, .steps__form_container .step_form__semi_field input:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__semi_field select:focus::-webkit-file-upload-button, .steps__form_container .step_form__semi_field select:hover::-webkit-file-upload-button, .steps__form_container .step_form__semi_field select:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__semi_field textarea:focus::-webkit-file-upload-button, .steps__form_container .step_form__semi_field textarea:hover::-webkit-file-upload-button, .steps__form_container .step_form__semi_field textarea:focus-visible::-webkit-file-upload-button {
+  background-color: var(--principal-color);
 }
 .steps__form_container .step_form__button_container {
   display: flex;
@@ -434,6 +687,30 @@ html, html * {
   justify-content: flex-end;
   align-items: center;
   gap: 2rem;
+}
+.steps__form_container .step_form_second {
+  transform: translateX(calc(-100% - 1.5rem));
+}
+.steps__form_container .step_form_better_render {
+  max-height: 40rem;
+  -webkit-animation: maxHeightAnim 1s ease forwards;
+          animation: maxHeightAnim 1s ease forwards;
+}
+@-webkit-keyframes maxHeightAnim {
+  0% {
+    max-height: 40rem;
+  }
+  100% {
+    max-height: 13rem;
+  }
+}
+@keyframes maxHeightAnim {
+  0% {
+    max-height: 40rem;
+  }
+  100% {
+    max-height: 13rem;
+  }
 }
 
 .user_card {

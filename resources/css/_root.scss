@@ -1,29 +1,31 @@
-:root {
-    --border-radius: 0.8rem;
+@import url("https://use.typekit.net/ejw8rdb.css");
 
-    --base-font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+:root {
+    --border-radius: 10px;
+
+    --base-font-family: proxima-nova, 'Open Sans', sans-serif;
     --base-font-size: 16px;
-    --base-font-weight: 300;
+    --base-font-weight: 400;
     --base-font-style: normal;
     --base-line-height: 1.25;
 
     --text-font-size: 1rem;
-    --text-font-weight: 300;
+    --text-font-weight: 400;
     --text-font-style: normal;
     --text-line-height: 1.25;
 
     --title-font-size: 1.25rem;
-    --title-font-weight: 800;
+    --title-font-weight: 700;
     --title-font-style: normal;
     --title-line-height: 1.25;
 
     --semi-title-font-size: 1rem;
-    --semi-title-font-weight: 500;
+    --semi-title-font-weight: 600;
     --semi-title-font-style: normal;
     --semi-title-line-height: 1.25;
 
-    --date-font-size: 0.8   rem;
-    --date-font-weight: 300;
+    --date-font-size: 0.8rem;
+    --date-font-weight: 400;
     --date-font-style: normal;
     --date-line-height: 1.25;
 
@@ -33,12 +35,12 @@
     --menu-line-height: 1.25;
 
     --hashtag-font-size: 1rem;
-    --hashtag-font-weight: 300;
+    --hashtag-font-weight: 400;
     --hashtag-font-style: italic;
     --hashtag-line-height: 1.25;
 
 
-    --white: rgba(243, 243, 243, 1);
+    --white: rgb(243, 243, 243);
     --white90: rgba(243, 243, 243, 0.9);
     --white80: rgba(243, 243, 243, 0.8);
     --white70: rgba(243, 243, 243, 0.7);

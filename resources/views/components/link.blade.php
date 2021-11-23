@@ -1,7 +1,7 @@
 @php
     $classes = ($active ?? false)
-                ? 'active'
-                : '';
+                ? 'nav__list_item active'
+                : 'nav__list_item';
 @endphp
 
 

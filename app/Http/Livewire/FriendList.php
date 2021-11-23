@@ -21,7 +21,7 @@ class FriendList extends Component
 
     protected function getSortingFriends(): Collection
     {
-        return auth()->user()->getFriends()->sortByDesc(function ($friend) {
+        return auth()->user()->getFriends()->load('media')->sortByDesc(function ($friend) {
             return $friend->isOnline();
         })->take($this->limitFriends);
     }

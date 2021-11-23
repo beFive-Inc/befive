@@ -30,6 +30,6 @@ Trait Stepable
                 ->toMediaCollection('user_banner_pic');
         }
 
-        Cookie::queue('hasDoneFirstStep', true, 60 * 60 * 24 * 365 * 10);
+        Cookie::queue('has-done-step-1', true, 60 * 60 * 24 * 365 * 10);
     }
 }

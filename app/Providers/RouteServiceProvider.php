@@ -18,8 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/';
-    public const FIRST_STEP = '/steps/first';
-    public const SECOND_STEP = '/steps/second';
+    public const STEPS = '/register/steps';
 
     /**
      * The controller namespace for the application.

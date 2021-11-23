@@ -8,7 +8,6 @@
     </x-slot>
 
     <x-slot name="content">
-        <div class="steps__linear_gradient"></div>
         <livewire:step />
     </x-slot>
 

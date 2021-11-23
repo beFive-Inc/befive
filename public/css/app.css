@@ -211,12 +211,19 @@ html, html * {
   border-radius: var(--border-radius);
   color: var(--white);
   padding: 1rem 2rem;
+  opacity: 1;
   border: 1px solid var(--principal-color);
   background-color: var(--principal-color);
+  box-shadow: 0 0 0 var(--black10);
   transition: all 0.5s ease;
 }
-.principal_button:hover, .principal_button:focus, .principal_button:active {
+.principal_button:not(:disabled):hover, .principal_button:not(:disabled):focus, .principal_button:not(:disabled):active {
   transform: scale(1.1);
+  box-shadow: 3px 3px 10px var(--black10);
+}
+.principal_button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 .secondary_button {
@@ -235,11 +242,37 @@ html, html * {
   transition: all 0.5s ease;
 }
 .secondary_button:hover, .secondary_button:focus, .secondary_button:active {
+  border: 1px solid var(--white);
   background-color: var(--principal-color80);
   color: var(--white);
 }
 
-.steps {
+.error {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.3rem;
+  font-size: var(--date-font-size);
+  font-style: var(--date-font-style);
+  font-weight: 600;
+  line-height: var(--date-line-height);
+  color: var(--red);
+  margin-top: 0.4rem;
+}
+.error:before {
+  content: "";
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  -webkit-mask-image: url("http://127.0.0.1:8000/parts/icons/solid/exclamation-circle.svg");
+          mask-image: url("http://127.0.0.1:8000/parts/icons/solid/exclamation-circle.svg");
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  background-color: var(--red);
+}
+
+.auth {
   position: relative;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
@@ -248,7 +281,7 @@ html, html * {
   min-height: 100vh;
   padding: 0 11.25rem;
 }
-.steps .message {
+.auth .message {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -259,7 +292,7 @@ html, html * {
   grid-column: 5/10;
   width: 100%;
 }
-.steps .message__container {
+.auth .message__container {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -280,7 +313,7 @@ html, html * {
   height: 0;
   padding: 0;
 }
-.steps .message__succeed:before, .steps .message__error:before {
+.auth .message__succeed:before, .auth .message__error:before {
   content: "";
   height: 1rem;
   width: 1rem;
@@ -292,17 +325,17 @@ html, html * {
   -webkit-mask-size: 100%;
           mask-size: 100%;
 }
-.steps .message__succeed:before {
+.auth .message__succeed:before {
   background-color: var(--green);
-  -webkit-mask-image: url("/storage/icons/solid/check.svg");
-          mask-image: url("/storage/icons/solid/check.svg");
+  -webkit-mask-image: url("/parts/icons/solid/check.svg");
+          mask-image: url("/parts/icons/solid/check.svg");
 }
-.steps .message__error:before {
+.auth .message__error:before {
   background-color: var(--red);
-  -webkit-mask-image: url("/storage/icons/solid/exclamation-triangle.svg");
-          mask-image: url("/storage/icons/solid/exclamation-triangle.svg");
+  -webkit-mask-image: url("/parts/icons/solid/exclamation-triangle.svg");
+          mask-image: url("/parts/icons/solid/exclamation-triangle.svg");
 }
-.steps .message__text {
+.auth .message__text {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -397,17 +430,23 @@ html, html * {
     padding: 0;
   }
 }
-.steps__linear_gradient {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 53.75rem;
+.auth__linear_position {
+  position: relative;
+  grid-column: 1/5;
+  grid-row: 1/2;
   min-height: 100vh;
+}
+.auth__linear_gradient {
+  position: absolute;
+  top: 0;
+  left: -11.25rem;
+  right: 0;
+  bottom: 0;
   background: var(--secondary-color);
   background: linear-gradient(135deg, var(--secondary-color) 0%, var(--principal-color) 100%);
   z-index: -5;
 }
-.steps .nav__list {
+.auth .nav__list {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -415,7 +454,7 @@ html, html * {
   gap: 2.5rem;
   counter-reset: listItem;
 }
-.steps .nav__list_item {
+.auth .nav__list_item {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -429,7 +468,7 @@ html, html * {
   text-decoration: none;
   transition: all 0.5s ease;
 }
-.steps .nav__list_item:before {
+.auth .nav__list_item:before {
   counter-increment: listItem;
   content: counter(listItem);
   font-size: var(--semi-title-font-size);
@@ -446,33 +485,50 @@ html, html * {
   background-color: var(--black10);
   transition: all 0.5s ease;
 }
-.steps .nav__list_item.active {
+.auth .nav__list_item.active {
   font-size: var(--semi-title-font-size);
   font-weight: var(--semi-title-font-weight);
 }
-.steps .nav__list_item.active:before {
+.auth .nav__list_item.active:before {
   color: var(--white);
   background-color: var(--principal-color);
 }
-.steps .preview_card {
+.auth .preview_card {
+  position: relative;
+  height: 100vh;
+  grid-column: 1/4;
+  grid-row: 1/2;
+}
+.auth .item {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  transform: translate(0, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  grid-column: 1/4;
   padding: 1.5rem;
   border-radius: var(--border-radius);
   background-color: var(--white);
   transition: all 0.5s ease;
 }
-.steps .preview_card__logo {
+.auth .item:nth-of-type(1) {
+  z-index: 5;
+}
+.auth .item:nth-of-type(2) {
+  z-index: -1;
+}
+.auth .item__logo {
   width: 11.25rem;
   margin-bottom: 3rem;
 }
-.steps .preview_card__logo img {
+.auth .item__logo img {
   width: 100%;
 }
-.steps .preview_card__title {
+.auth .item__title {
   display: block;
   width: 100%;
   font-family: var(--base-font-family);
@@ -484,27 +540,54 @@ html, html * {
   text-align: left;
   margin-bottom: 1rem;
 }
-.steps .preview_card_start {
+.auth .item_hide {
   opacity: 0;
 }
-.steps .preview_card_end {
+.auth .preview_card_start {
+  opacity: 0;
+}
+.auth .preview_card_end {
   opacity: 1;
 }
-.steps__form_carrousel_overflow {
+.auth__form_carrousel_overflow {
   overflow: hidden;
+  width: 100%;
 }
-.steps__form_carrousel {
+.auth__form_carrousel {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1.5rem;
+  width: 100%;
 }
-.steps__form_carrousel.form_carrousel-2 {
+.auth__form_carrousel.form_carrousel-2 {
   width: calc(200% + 1.5rem);
 }
-.steps__form_container {
+.auth__right_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+  grid-column: 5/10;
+}
+.auth__logo_container {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: -7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+}
+.auth__logo {
+  width: auto;
+  height: 100%;
+}
+.auth__form_container {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -513,10 +596,11 @@ html, html * {
   gap: 2rem;
   padding: 2rem;
   grid-column: 5/10;
+  grid-row: 1/2;
   border-radius: var(--border-radius);
   background-color: var(--white);
 }
-.steps__form_container .step_form {
+.auth__form_container .auth_form {
   width: 100%;
   padding: 1.5rem;
   max-height: 40rem;
@@ -524,13 +608,13 @@ html, html * {
   background-color: var(--pure-white);
   transition: max-height 1s ease, all 1s ease;
 }
-.steps__form_container .step_form input::-webkit-file-upload-button {
-  width: 1rem;
-  height: 1rem;
-  -webkit-mask-image: url("/storage/icons/solid/upload.svg");
-          mask-image: url("/storage/icons/solid/upload.svg");
-  -webkit-mask-size: 100% auto;
-          mask-size: 100% auto;
+.auth__form_container .auth_form input::-webkit-file-upload-button {
+  width: 1.5rem;
+  height: auto;
+  -webkit-mask-image: url("/parts/icons/solid/image.svg");
+          mask-image: url("/parts/icons/solid/image.svg");
+  -webkit-mask-size: auto 100%;
+          mask-size: auto 100%;
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
   background-color: var(--black);
@@ -538,7 +622,7 @@ html, html * {
   border: none;
   margin-right: 0.5rem;
 }
-.steps__form_container .step_form__progression {
+.auth__form_container .auth_form__progression {
   display: block;
   font-size: var(--date-font-size);
   font-weight: var(--date-font-weight);
@@ -547,7 +631,7 @@ html, html * {
   color: var(--black50);
   margin-bottom: 0.125rem;
 }
-.steps__form_container .step_form__title {
+.auth__form_container .auth_form__title {
   display: block;
   font-size: var(--title-font-size);
   font-weight: var(--title-font-weight);
@@ -556,7 +640,7 @@ html, html * {
   color: var(--black);
   margin-bottom: 2rem;
 }
-.steps__form_container .step_form__games_card {
+.auth__form_container .auth_form__games_card {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -565,17 +649,17 @@ html, html * {
   max-height: 15rem;
   overflow-y: scroll;
 }
-.steps__form_container .step_form__games_card .game {
+.auth__form_container .auth_form__games_card .game {
   padding: 1rem;
   border-radius: var(--border-radius);
 }
-.steps__form_container .step_form__games_card .game.checked {
+.auth__form_container .auth_form__games_card .game.checked {
   border: 1px solid var(--principal-color);
 }
-.steps__form_container .step_form__games_card .game:hover {
+.auth__form_container .auth_form__games_card .game:hover {
   background-color: var(--black10);
 }
-.steps__form_container .step_form__field_container {
+.auth__form_container .auth_form__field_container {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -585,13 +669,12 @@ html, html * {
   row-gap: 1rem;
   margin-bottom: 2rem;
 }
-.steps__form_container .step_form__full_field {
-  display: block;
+.auth__form_container .auth_form__full_field {
   width: 100%;
 }
-.steps__form_container .step_form__full_field label {
+.auth__form_container .auth_form__full_field label {
   font-family: var(--base-font-family);
-  display: block;
+  display: inline-block;
   font-size: var(--date-font-size);
   font-weight: var(--date-font-weight);
   font-style: var(--date-font-style);
@@ -599,7 +682,7 @@ html, html * {
   color: var(--black);
   margin-bottom: 0.325rem;
 }
-.steps__form_container .step_form__full_field input, .steps__form_container .step_form__full_field select, .steps__form_container .step_form__full_field textarea {
+.auth__form_container .auth_form__full_field input, .auth__form_container .auth_form__full_field select, .auth__form_container .auth_form__full_field textarea {
   width: calc(50% - 0.75rem);
   font-size: var(--text-font-size);
   font-weight: var(--text-font-weight);
@@ -610,20 +693,19 @@ html, html * {
   border-radius: 6px;
   border: 1px solid var(--black20);
 }
-.steps__form_container .step_form__full_field input:focus, .steps__form_container .step_form__full_field input:hover, .steps__form_container .step_form__full_field input:focus-visible, .steps__form_container .step_form__full_field select:focus, .steps__form_container .step_form__full_field select:hover, .steps__form_container .step_form__full_field select:focus-visible, .steps__form_container .step_form__full_field textarea:focus, .steps__form_container .step_form__full_field textarea:hover, .steps__form_container .step_form__full_field textarea:focus-visible {
+.auth__form_container .auth_form__full_field input:focus, .auth__form_container .auth_form__full_field input:hover, .auth__form_container .auth_form__full_field input:focus-visible, .auth__form_container .auth_form__full_field select:focus, .auth__form_container .auth_form__full_field select:hover, .auth__form_container .auth_form__full_field select:focus-visible, .auth__form_container .auth_form__full_field textarea:focus, .auth__form_container .auth_form__full_field textarea:hover, .auth__form_container .auth_form__full_field textarea:focus-visible {
   outline: none;
   border: 1px solid var(--principal-color);
 }
-.steps__form_container .step_form__full_field input:focus::-webkit-file-upload-button, .steps__form_container .step_form__full_field input:hover::-webkit-file-upload-button, .steps__form_container .step_form__full_field input:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__full_field select:focus::-webkit-file-upload-button, .steps__form_container .step_form__full_field select:hover::-webkit-file-upload-button, .steps__form_container .step_form__full_field select:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__full_field textarea:focus::-webkit-file-upload-button, .steps__form_container .step_form__full_field textarea:hover::-webkit-file-upload-button, .steps__form_container .step_form__full_field textarea:focus-visible::-webkit-file-upload-button {
+.auth__form_container .auth_form__full_field input:focus::-webkit-file-upload-button, .auth__form_container .auth_form__full_field input:hover::-webkit-file-upload-button, .auth__form_container .auth_form__full_field input:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__full_field select:focus::-webkit-file-upload-button, .auth__form_container .auth_form__full_field select:hover::-webkit-file-upload-button, .auth__form_container .auth_form__full_field select:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__full_field textarea:focus::-webkit-file-upload-button, .auth__form_container .auth_form__full_field textarea:hover::-webkit-file-upload-button, .auth__form_container .auth_form__full_field textarea:focus-visible::-webkit-file-upload-button {
   background-color: var(--principal-color);
 }
-.steps__form_container .step_form__mega_field {
-  display: block;
+.auth__form_container .auth_form__mega_field {
   width: 100%;
 }
-.steps__form_container .step_form__mega_field label {
+.auth__form_container .auth_form__mega_field label {
   font-family: var(--base-font-family);
-  display: block;
+  display: inline-block;
   font-size: var(--date-font-size);
   font-weight: var(--date-font-weight);
   font-style: var(--date-font-style);
@@ -631,7 +713,7 @@ html, html * {
   color: var(--black);
   margin-bottom: 0.325rem;
 }
-.steps__form_container .step_form__mega_field input, .steps__form_container .step_form__mega_field select, .steps__form_container .step_form__mega_field textarea {
+.auth__form_container .auth_form__mega_field input, .auth__form_container .auth_form__mega_field select, .auth__form_container .auth_form__mega_field textarea {
   width: 100%;
   font-size: var(--text-font-size);
   font-weight: var(--text-font-weight);
@@ -642,20 +724,19 @@ html, html * {
   border-radius: 6px;
   border: 1px solid var(--black20);
 }
-.steps__form_container .step_form__mega_field input:focus, .steps__form_container .step_form__mega_field input:hover, .steps__form_container .step_form__mega_field input:focus-visible, .steps__form_container .step_form__mega_field select:focus, .steps__form_container .step_form__mega_field select:hover, .steps__form_container .step_form__mega_field select:focus-visible, .steps__form_container .step_form__mega_field textarea:focus, .steps__form_container .step_form__mega_field textarea:hover, .steps__form_container .step_form__mega_field textarea:focus-visible {
+.auth__form_container .auth_form__mega_field input:focus, .auth__form_container .auth_form__mega_field input:hover, .auth__form_container .auth_form__mega_field input:focus-visible, .auth__form_container .auth_form__mega_field select:focus, .auth__form_container .auth_form__mega_field select:hover, .auth__form_container .auth_form__mega_field select:focus-visible, .auth__form_container .auth_form__mega_field textarea:focus, .auth__form_container .auth_form__mega_field textarea:hover, .auth__form_container .auth_form__mega_field textarea:focus-visible {
   outline: none;
   border: 1px solid var(--principal-color);
 }
-.steps__form_container .step_form__mega_field input:focus::-webkit-file-upload-button, .steps__form_container .step_form__mega_field input:hover::-webkit-file-upload-button, .steps__form_container .step_form__mega_field input:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__mega_field select:focus::-webkit-file-upload-button, .steps__form_container .step_form__mega_field select:hover::-webkit-file-upload-button, .steps__form_container .step_form__mega_field select:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__mega_field textarea:focus::-webkit-file-upload-button, .steps__form_container .step_form__mega_field textarea:hover::-webkit-file-upload-button, .steps__form_container .step_form__mega_field textarea:focus-visible::-webkit-file-upload-button {
+.auth__form_container .auth_form__mega_field input:focus::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field input:hover::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field input:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field select:focus::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field select:hover::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field select:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field textarea:focus::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field textarea:hover::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field textarea:focus-visible::-webkit-file-upload-button {
   background-color: var(--principal-color);
 }
-.steps__form_container .step_form__semi_field {
-  display: block;
+.auth__form_container .auth_form__semi_field {
   width: calc(50% - 0.75rem);
 }
-.steps__form_container .step_form__semi_field label {
+.auth__form_container .auth_form__semi_field label {
   font-family: var(--base-font-family);
-  display: block;
+  display: inline-block;
   font-size: var(--date-font-size);
   font-weight: var(--date-font-weight);
   font-style: var(--date-font-style);
@@ -663,7 +744,7 @@ html, html * {
   color: var(--black);
   margin-bottom: 0.325rem;
 }
-.steps__form_container .step_form__semi_field input, .steps__form_container .step_form__semi_field select, .steps__form_container .step_form__semi_field textarea {
+.auth__form_container .auth_form__semi_field input, .auth__form_container .auth_form__semi_field select, .auth__form_container .auth_form__semi_field textarea {
   width: 100%;
   font-size: var(--text-font-size);
   font-weight: var(--text-font-weight);
@@ -674,24 +755,30 @@ html, html * {
   border-radius: 6px;
   border: 1px solid var(--black20);
 }
-.steps__form_container .step_form__semi_field input:focus, .steps__form_container .step_form__semi_field input:hover, .steps__form_container .step_form__semi_field input:focus-visible, .steps__form_container .step_form__semi_field select:focus, .steps__form_container .step_form__semi_field select:hover, .steps__form_container .step_form__semi_field select:focus-visible, .steps__form_container .step_form__semi_field textarea:focus, .steps__form_container .step_form__semi_field textarea:hover, .steps__form_container .step_form__semi_field textarea:focus-visible {
+.auth__form_container .auth_form__semi_field input:focus, .auth__form_container .auth_form__semi_field input:hover, .auth__form_container .auth_form__semi_field input:focus-visible, .auth__form_container .auth_form__semi_field select:focus, .auth__form_container .auth_form__semi_field select:hover, .auth__form_container .auth_form__semi_field select:focus-visible, .auth__form_container .auth_form__semi_field textarea:focus, .auth__form_container .auth_form__semi_field textarea:hover, .auth__form_container .auth_form__semi_field textarea:focus-visible {
   outline: none;
   border: 1px solid var(--principal-color);
 }
-.steps__form_container .step_form__semi_field input:focus::-webkit-file-upload-button, .steps__form_container .step_form__semi_field input:hover::-webkit-file-upload-button, .steps__form_container .step_form__semi_field input:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__semi_field select:focus::-webkit-file-upload-button, .steps__form_container .step_form__semi_field select:hover::-webkit-file-upload-button, .steps__form_container .step_form__semi_field select:focus-visible::-webkit-file-upload-button, .steps__form_container .step_form__semi_field textarea:focus::-webkit-file-upload-button, .steps__form_container .step_form__semi_field textarea:hover::-webkit-file-upload-button, .steps__form_container .step_form__semi_field textarea:focus-visible::-webkit-file-upload-button {
+.auth__form_container .auth_form__semi_field input:focus::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field input:hover::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field input:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field select:focus::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field select:hover::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field select:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field textarea:focus::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field textarea:hover::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field textarea:focus-visible::-webkit-file-upload-button {
   background-color: var(--principal-color);
 }
-.steps__form_container .step_form__button_container {
+.auth__form_container .auth_form__button_container {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
   gap: 2rem;
 }
-.steps__form_container .step_form_second {
+.auth__form_container .auth_form__button_container_special {
+  padding: 0 1.5rem;
+  border-radius: var(--border-radius);
+}
+.auth__form_container .auth_form_second {
   transform: translateX(calc(-100% - 1.5rem));
 }
-.steps__form_container .step_form_better_render {
+.auth__form_container .auth_form_better_render {
   max-height: 40rem;
   -webkit-animation: maxHeightAnim 1s ease forwards;
           animation: maxHeightAnim 1s ease forwards;

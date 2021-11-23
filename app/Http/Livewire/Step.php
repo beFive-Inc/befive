@@ -5,9 +5,11 @@ namespace App\Http\Livewire;
 use App\Models\Game;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
 class Step extends Component
@@ -18,12 +20,12 @@ class Step extends Component
     protected string $statusSucceed = 'succeed';
 
     public Collection $steps;
-    public $name;
+    public string $name = '';
     public $profilpic;
     public $bannerpic;
-    public $query;
-    public string $temporaryProfilImg;
-    public string $temporaryBannerImg;
+    public string $query = '';
+    public $temporaryProfilImg;
+    public $temporaryBannerImg;
     public Collection $stepFeedBack;
     public Collection $myGames;
 
@@ -40,28 +42,24 @@ class Step extends Component
             'first' => [
                 'id' => 1,
                 'show' => true,
-                'nav' => true,
             ],
             'second' => [
                 'id' => 2,
-                'show' => (bool)Cookie::get('has-done-step-1'),
-                'nav' => (bool)Cookie::get('has-done-step-1'),
-                'change-css' => (bool)Cookie::get('has-done-step-1'),
+                'show' => (bool) Cookie::get('has-done-step-1'),
             ],
             'third' => [
                 'id' => 3,
-                'show' => (bool)Cookie::get('has-done-step-2'),
-                'nav' => (bool)Cookie::get('has-done-step-2'),
+                'show' => (bool) Cookie::get('has-done-step-2')
             ],
         ]);
     }
 
-    public function validatedFieldFirstStep()
+    public function validatedFieldFirstStep(): array
     {
         return $this->validate([
-            'name' => 'string|nullable',
-            'profilpic' => 'image|max:1024|nullable',
-            'bannerpic' => 'image|max:1024|nullable'
+            'name' => ['string', 'nullable'],
+            'profilpic' => ['image', 'mimes:jpeg,jpg,png,svg,bmp,webp,gif', 'max:2048', 'nullable', 'sometimes'],
+            'bannerpic' => ['image', 'mimes:jpeg,jpg,png,svg,bmp,webp,gif', 'max:2048', 'nullable', 'sometimes']
         ]);
     }
 
@@ -80,13 +78,9 @@ class Step extends Component
 
     public function checkGameIsInArray($gameID): bool
     {
-        if ($this->myGames->filter(function ($game) use ($gameID) {
+        return (bool) $this->myGames->filter(function ($game) use ($gameID) {
             return $game['id'] === $gameID;
-        })->count()) {
-            return true;
-        } else {
-            return false;
-        }
+        })->count();
     }
 
     public function changeTemporaryProfilImg(): void
@@ -101,8 +95,13 @@ class Step extends Component
             str_replace('livewire/preview-file','storage/livewire-tmp',$this->bannerpic->temporaryUrl());
     }
 
-    public function save(): void
+    public function saveFirstStep(): void
     {
+        $this->stepFeedBack = $this->stepFeedBack->replaceRecursive([
+            'message' => __('Il y a eu une erreur de validation.'),
+            'status' => $this->statusError,
+        ]);
+
         $this->validatedFieldFirstStep();
 
         if($this->name) {
@@ -115,6 +114,7 @@ class Step extends Component
             $this->profilpic->storeAs('images', $name);
             auth()->user()
                 ->addMedia(storage_path('app/public/images/' . $name))
+                ->withResponsiveImages()
                 ->toMediaCollection('user_profile_pic');
         }
         if ($this->bannerpic) {
@@ -122,39 +122,43 @@ class Step extends Component
             $this->bannerpic->storeAs('images', $name);
             auth()->user()
                 ->addMedia(storage_path('app/public/images/' . $name))
+                ->withResponsiveImages()
                 ->toMediaCollection('user_banner_pic');
         }
 
         //Cookie::queue('has-done-step-1', true, 60 * 60 * 24 * 365 * 10);
 
-         $this->steps = $this->steps->replaceRecursive([
-            'second' => ['nav' => true],
-        ]);
-    }
-
-    public function getSecondStep()
-    {
-        $this->validatedFieldFirstStep();
-
-        if (isset($this->temporaryProfilImg)) {
+        if ($this->temporaryProfilImg) {
             Storage::delete($this->temporaryProfilImg);
         }
-        if (isset($this->temporaryBannerImg)) {
+        if ($this->temporaryBannerImg) {
             Storage::delete($this->temporaryBannerImg);
         }
 
         $this->steps = $this->steps->replaceRecursive([
             'second' => ['show' => true],
         ]);
+
+        $this->stepFeedBack = $this->stepFeedBack->replaceRecursive([
+            'message' => __('Vos informations de profil ont bien été enregistrées.'),
+            'status' => $this->statusSucceed,
+        ]);
     }
 
-    public function changeCssValue()
+    public function saveSecondStep()
     {
-        $this->validatedFieldFirstStep();
+        if ($this->myGames) {
+            foreach ($this->myGames as $game) {
+                auth()->user()->addGame($game);
+            }
+        }
+
+        //Cookie::queue('has-done-step-2', true, 60 * 60 * 24 * 365 * 10);
 
         $this->steps = $this->steps->replaceRecursive([
-            'second' => ['change-css' => true],
+            'third' => ['show' => true],
         ]);
+
         $this->stepFeedBack = $this->stepFeedBack->replaceRecursive([
             'message' => __('Vos informations de profil ont bien été enregistrées.'),
             'status' => $this->statusSucceed,

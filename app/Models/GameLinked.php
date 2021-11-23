@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class GameLinked extends Model
 {
     use HasFactory;
+
+    protected $table = 'game_linked';
+
+    public function linked()
+    {
+        return $this->morphTo('linked');
+    }
 }

@@ -2,7 +2,7 @@ const formCheck = {
     form: document.querySelector('#check'),
     child: document.querySelectorAll('#check input, #check textarea'),
     el: [],
-    btn: document.querySelector('#check button'),
+    btn: document.querySelector("#check input[type=submit]"),
 
     init() {
         this.child.forEach((child, index) => {

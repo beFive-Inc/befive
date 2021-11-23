@@ -27,7 +27,7 @@
             </x-link>
             <x-link href=""
                     active="">
-                {{ __('Messages') }}
+                {{ __('Mes Messages') }}
             </x-link>
             <x-link href=""
                     active="">

@@ -1,4 +1,4 @@
-.steps {
+.auth {
     position: relative;
     display: grid;
     grid-template-columns: repeat(9, 1fr);
@@ -47,12 +47,12 @@
 
         &__succeed:before {
             background-color: var(--green);
-            mask-image: url("/storage/icons/solid/check.svg");
+            mask-image: url("/parts/icons/solid/check.svg");
         }
 
         &__error:before {
             background-color: var(--red);
-            mask-image: url("/storage/icons/solid/exclamation-triangle.svg");
+            mask-image: url("/parts/icons/solid/exclamation-triangle.svg");
         }
 
         &__text {
@@ -111,12 +111,19 @@
         }
     }
 
-    &__linear_gradient {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 53.75rem;
+    &__linear_position {
+        position: relative;
+        grid-column: 1 / 5;
+        grid-row: 1 / 2;
         min-height: 100vh;
+    }
+
+    &__linear_gradient {
+        position: absolute;
+        top: 0;
+        left: -11.25rem;
+        right: 0;
+        bottom: 0;
         background: var(--secondary-color);
         background: linear-gradient(135deg, var(--secondary-color) 0%, var(--principal-color) 100%);
         z-index: -5;
@@ -180,17 +187,36 @@
 
     }
 
-
     .preview_card {
+        position: relative;
+        height: 100vh;
+        grid-column: 1 / 4;
+        grid-row: 1 / 2;
+    }
+
+    .item {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        opacity: 1;
+        transform: translate(0, -50%);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        grid-column: 1 / 4;
         padding: 1.5rem;
         border-radius: var(--border-radius);
         background-color: var(--white);
         transition: all .5s ease;
+
+        &:nth-of-type(1) {
+            z-index: 5;
+        }
+
+        &:nth-of-type(2) {
+            z-index: -1;
+        }
 
         &__logo {
             width: 11.25rem;
@@ -215,6 +241,10 @@
         }
     }
 
+    .item_hide {
+        opacity: 0;
+    }
+
     .preview_card_start {
         opacity: 0;
     }
@@ -225,6 +255,7 @@
 
     &__form_carrousel_overflow {
         overflow: hidden;
+        width: 100%;
     }
 
     &__form_carrousel {
@@ -234,10 +265,36 @@
         justify-content: flex-start;
         align-items: flex-start;
         gap: 1.5rem;
+        width: 100%;
 
         &.form_carrousel-2 {
             width: calc(200% + calc(1.5rem));
         }
+    }
+
+    &__right_container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 2rem;
+        grid-column: 5 / 10;
+    }
+
+    &__logo_container {
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: calc(-5rem - 2rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 5rem;
+    }
+
+    &__logo {
+        width: auto;
+        height: 100%;
     }
 
     &__form_container {
@@ -249,11 +306,12 @@
         gap: 2rem;
         padding: 2rem;
         grid-column: 5 / 10;
+        grid-row: 1 / 2;
         border-radius: var(--border-radius);
         background-color: var(--white);
 
 
-        .step_form {
+        .auth_form {
             width: 100%;
             padding: 1.5rem;
             max-height: 40rem;
@@ -262,10 +320,10 @@
             transition: max-height 1s ease, all 1s ease;
 
             & input::-webkit-file-upload-button {
-                width: 1rem;
-                height: 1rem;
-                mask-image: url("/storage/icons/solid/upload.svg");
-                mask-size: 100% auto;
+                width: 1.5rem;
+                height: auto;
+                mask-image: url("/parts/icons/solid/image.svg");
+                mask-size: auto 100%;
                 mask-repeat: no-repeat;
                 background-color: var(--black);
                 text-indent: -9999px;
@@ -330,12 +388,11 @@
             }
 
             &__full_field {
-                display: block;
                 width: 100%;
 
                 & label {
                     font-family: var(--base-font-family);
-                    display: block;
+                    display: inline-block;
                     font-size: var(--date-font-size);
                     font-weight: var(--date-font-weight);
                     font-style: var(--date-font-style);
@@ -367,12 +424,11 @@
             }
 
             &__mega_field {
-                display: block;
                 width: 100%;
 
                 & label {
                     font-family: var(--base-font-family);
-                    display: block;
+                    display: inline-block;
                     font-size: var(--date-font-size);
                     font-weight: var(--date-font-weight);
                     font-style: var(--date-font-style);
@@ -404,12 +460,11 @@
             }
 
             &__semi_field {
-                display: block;
                 width: calc(50% - calc(1.5rem / 2));
 
                 & label {
                     font-family: var(--base-font-family);
-                    display: block;
+                    display: inline-block;
                     font-size: var(--date-font-size);
                     font-weight: var(--date-font-weight);
                     font-style: var(--date-font-style);
@@ -441,19 +496,26 @@
             }
 
             &__button_container {
+                width: 100%;
                 display: flex;
                 flex-direction: row;
+                flex-wrap: wrap;
                 justify-content: flex-end;
                 align-items: center;
                 gap: 2rem;
             }
+
+            &__button_container_special {
+                padding: 0 1.5rem;
+                border-radius: var(--border-radius);
+            }
         }
 
-        .step_form_second {
+        .auth_form_second {
             transform: translateX(calc(-100% - 1.5rem));
         }
 
-        .step_form_better_render {
+        .auth_form_better_render {
             max-height: 40rem;
             animation: maxHeightAnim 1s ease forwards;
         }

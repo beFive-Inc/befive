@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Gameable;
 use App\Traits\Postable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,6 +29,7 @@ class User extends Authenticatable implements HasMedia
     use InteractsWithMedia;
     use \App\Traits\Friendable;
     use Friendable;
+    use Gameable;
     use CanFollow, CanBeFollowed;
     use CanLike, CanBeLiked;
     use CanRate, CanBeRated;
@@ -75,5 +77,10 @@ class User extends Authenticatable implements HasMedia
     public function posts()
     {
         return $this->morphMany(Post::class, 'creator');
+    }
+
+    public function games()
+    {
+        return $this->morphMany(GameLinked::class, 'linked');
     }
 }

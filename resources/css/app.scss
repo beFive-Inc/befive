@@ -45,12 +45,20 @@ html, html * {
     border-radius: var(--border-radius);
     color: var(--white);
     padding: 1rem 2rem;
+    opacity: 1;
     border: 1px solid var(--principal-color);
     background-color: var(--principal-color);
+    box-shadow: 0 0 0 var(--black10);
     transition: all .5s ease;
 
-    &:hover, &:focus, &:active {
+    &:not(:disabled):hover, &:not(:disabled):focus, &:not(:disabled):active {
         transform: scale(1.1);
+        box-shadow: 3px 3px 10px var(--black10);
+    }
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
     }
 }
 
@@ -70,8 +78,33 @@ html, html * {
     transition: all .5s ease;
 
     &:hover, &:focus, &:active {
+        border: 1px solid var(--white);
         background-color: var(--principal-color80);
         color: var(--white);
+    }
+}
+
+.error {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .3rem;
+    font-size: var(--date-font-size);
+    font-style: var(--date-font-style);
+    font-weight: 600;
+    line-height: var(--date-line-height);
+    color: var(--red);
+    margin-top: .4rem;
+
+    &:before {
+        content: '';
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        mask-image: url("http://127.0.0.1:8000/parts/icons/solid/exclamation-circle.svg");
+        mask-repeat: no-repeat;
+        background-color: var(--red);
     }
 }
 

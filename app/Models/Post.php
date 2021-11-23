@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Gameable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ class Post extends Model implements HasMedia
     use HasFactory;
     use SoftDeletes;
     use InteractsWithMedia;
+    use Gameable;
 
     const PUBLIC = 'public';
     const PRIVATE = 'private';
@@ -26,6 +28,11 @@ class Post extends Model implements HasMedia
     public function creator()
     {
         return $this->morphTo('creator');
+    }
+
+    public function games()
+    {
+        return $this->morphMany(GameLinked::class, 'linked');
     }
 
     public function fillCreator($creator)

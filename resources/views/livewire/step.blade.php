@@ -5,7 +5,7 @@
     <div class="auth__preview_card preview_card">
         <article class="preview_card__item item {{ $steps['second']['show'] ? 'item_hide' : '' }}">
             <h2 aria-level="2" role="heading" class="item__title">
-                {{ __('Prévisualisation de votre carte') }}
+                {{ __('steps.first.preview.title') }}
             </h2>
 
             <section class="user_card">
@@ -37,7 +37,7 @@
 
         <article class="preview_card__item item">
             <h2 aria-level="2" role="heading" class="item__title">
-                {{ __('Prévisualisation de vos jeux') . ' - ' . $myGames->count() }}
+                {{ __('steps.second.preview.title') . ' - ' . $myGames->count() }}
             </h2>
 
             <section class="game_card">
@@ -68,11 +68,11 @@
 
 
                     <p class="auth_form__progression">
-                        {{ __('Étape') . ' ' . "$countStep/$totalStep" }}
+                        {{ __('steps.singular.name') . ' ' . "$countStep/$totalStep" }}
                     </p>
 
                     <p class="auth_form__title">
-                        {{ __('Personnalisation') }}
+                        {{ __('steps.first.title') }}
                     </p>
 
                     <div class="auth_form__field_container">
@@ -81,7 +81,7 @@
                             <div class="auth_form__full_field">
                                 <div>
                                     <label for="name">
-                                        Nom & prénom <span>({{ __('Optionnel') }})</span>
+                                        {{ __('steps.first.field.name.title') }} <span class="optional">{{ __('validation.optional') }}</span>
                                     </label>
                                 </div>
                                 <input type="text"
@@ -89,7 +89,8 @@
                                        id="name"
                                        class=""
                                        value="{{ auth()->user()->name ?? old('name') }}"
-                                       placeholder="{{ __('Entrez votre nom et votre prénom') }}"
+                                       placeholder="{{ __('steps.first.field.name.placeholder') }}"
+                                       title="{{ __('steps.first.field.name.placeholder') }}"
                                        wire:model="name">
 
                                 @error('name')
@@ -101,7 +102,7 @@
                         <div class="auth_form__semi_field">
                             <div>
                                 <label for="profilpic">
-                                    Photo de profil <span>({{ __('Optionnel') }})</span>
+                                    {{ __('steps.first.field.profil-pic.title') }} <span class="optional">{{ __('validation.optional') }}</span>
                                 </label>
                             </div>
 
@@ -120,7 +121,7 @@
                         <div class="auth_form__semi_field">
                             <div>
                                 <label for="bannerpic">
-                                    Photo de banière <span>({{ __('Optionnel') }})</span>
+                                    {{ __('steps.first.field.banner-pic.title') }} <span class="optional">{{ __('validation.optional') }}</span>
                                 </label>
                             </div>
 
@@ -140,48 +141,49 @@
 
                     <div class="auth_form__button_container">
                         <input type="submit"
-                               value="{{ __('Étape suivante') }}"
+                               value="{{ __('steps.step.next') }}"
                                class="principal_button">
 
                         <a href="{{ route('homepage') }}"
                            class="secondary_button"
                            wire:click.prevent="skipAllStep">
-                            {{ 'Passer toutes les étapes' }}
+                            {{ __('steps.skip') }}
                         </a>
                     </div>
                 </form>
 
-                <form action="{{ route('step.first.store') }}"
+                <form action="{{ route('step.second.store') }}"
                       method="post"
                       class="auth__auth_form auth_form {{ $steps['second']['show'] ? 'auth_form_second' : '' }}">
                     @csrf
 
 
                     <p class="auth_form__progression">
-                        {{ __('Étape') . ' 2/3' }}
+                        {{ __('steps.singular.name') . ' ' . "$countStep/$totalStep" }}
                     </p>
 
                     <p class="auth_form__title">
-                        {{ __('Choississez vos jeux') }}
+                        {{ __('steps.second.title') }}
                     </p>
 
                     <div class="auth_form__field_container">
                         <div class="auth_form__mega_field">
                             <label for="game">
-                                Rechercher un jeu
+                                {{ __('steps.second.field.search.title') }}
                             </label>
 
                             <div>
                                 <input type="search"
                                        name="search"
                                        id="search"
-                                       placeholder="Rechercher un jeux à ajouter"
+                                       placeholder="{{ __('steps.second.field.search.placeholder') }}"
+                                       title="{{ __('steps.second.field.search.placeholder') }}"
                                        wire:model.debounce.200ms="query">
 
 
                                 <section class="auth_form__games_card">
                                     <h2 aria-level="2" role="heading" class="sr_only">
-                                        {{ __('Jeux') }}
+                                        {{ __('steps.second.nav.title') }}
                                     </h2>
 
                                     @if($games)
@@ -203,13 +205,13 @@
                     </div>
                     <div class="auth_form__button_container">
                         <input type="submit"
-                               value="{{ __('Étape suivante') }}"
+                               value="{{ __('steps.step.next') }}"
                                class="principal_button">
 
                         <a href="{{ route('homepage') }}"
                            class="secondary_button"
                            wire:click.prevent="skipAllStep">
-                            {{ 'Passer toutes les étapes' }}
+                            {{ __('steps.skip') }}
                         </a>
                     </div>
                 </form>

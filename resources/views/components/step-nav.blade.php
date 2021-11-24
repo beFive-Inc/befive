@@ -1,19 +1,19 @@
 <nav class="steps__nav nav">
     <h2 aria-level="2" role="heading" class="sr_only">
-        {{ 'Étapes d\'inscription' }}
+        {{ __('steps.title') }}
     </h2>
 
     <ol class="nav__list">
         <x-item :active="$firstStep">
-            {{ __('Personnalisation') }}
+            {{ __('steps.first.nav.title') }}
         </x-item>
 
         <x-item :active="$secondStep">
-            {{ __('Jeux') }}
+            {{ __('steps.second.nav.title') }}
         </x-item>
 
         <x-item :active="$thirdStep">
-            {{ __('Équipe') }}
+            {{ __('steps.third.nav.title') }}
         </x-item>
     </ol>
 </nav>

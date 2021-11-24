@@ -98,7 +98,7 @@ class Step extends Component
     public function saveFirstStep(): void
     {
         $this->stepFeedBack = $this->stepFeedBack->replaceRecursive([
-            'message' => __('Il y a eu une erreur de validation.'),
+            'message' => __('steps.first.failed.message'),
             'status' => $this->statusError,
         ]);
 
@@ -140,7 +140,7 @@ class Step extends Component
         ]);
 
         $this->stepFeedBack = $this->stepFeedBack->replaceRecursive([
-            'message' => __('Vos informations de profil ont bien été enregistrées.'),
+            'message' => __('steps.first.success.message'),
             'status' => $this->statusSucceed,
         ]);
     }

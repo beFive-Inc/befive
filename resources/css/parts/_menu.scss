@@ -26,6 +26,46 @@
             gap: 0.3125rem;
         }
 
+        &__home {
+            mask-image: url('/parts/icons/outline/home.svg');
+        }
+
+        &__profil {
+            mask-image: url('/parts/icons/outline/profile-circle.svg');
+        }
+
+        &__team {
+            mask-image: url('/parts/icons/outline/security.svg');
+        }
+
+        &__friends {
+            mask-image: url("/parts/icons/outline/people.svg");
+        }
+
+        &__message {
+            mask-image: url("/parts/icons/outline/message-text.svg");
+        }
+
+        &__video {
+            mask-image: url("/parts/icons/outline/video.svg");
+        }
+
+        &__games {
+            mask-image: url("/parts/icons/outline/game.svg");
+        }
+
+        &__tournament {
+            mask-image: url("/parts/icons/outline/cup.svg");
+        }
+
+        &__classement {
+            mask-image: url("/parts/icons/outline/ranking.svg");
+        }
+
+        &__settings {
+            mask-image: url("/parts/icons/outline/setting-2.svg");
+        }
+
         &__list_item {
             display: block;
             width: 100%;
@@ -33,7 +73,11 @@
             border-radius: var(--border-radius);
 
             & a {
-                display: block;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                gap: .5rem;
                 font-size: var(--menu-font-size);
                 font-weight: var(--menu-font-weight);
                 font-style: var(--menu-font-style);
@@ -45,15 +89,35 @@
                 border-radius: var(--border-radius);
                 background-color: var(--white);
 
-
-                &:not(.active):hover, &:not(.active):focus {
-                    background-color: var(--principal-color20);
-                    color: var(--principal-color);
+                & span {
+                    content: '';
+                    display: block;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    mask-size: 100%;
+                    mask-repeat: no-repeat;
+                    z-index: 10;
+                    background-color: var(--black);
                 }
 
-                &.active, &:active {
-                    background-color: var(--principal-color30);
+
+                &.active {
+                    color: var(--white);
+                    background: var(--principal-color);
+                    background: linear-gradient(135deg, rgba(210,0,0,1) 0%, rgba(255,148,0,1) 100%);
+
+                    & span {
+                        background-color: var(--white);
+                    }
+                }
+
+                &:not(.active):hover, &:not(.active):focus, &:not(.active):active {
                     color: var(--principal-color);
+
+                    & span {
+                        background: var(--principal-color);
+                        background: linear-gradient(135deg, rgba(210,0,0,1) 0%, rgba(255,148,0,1) 100%);
+                    }
                 }
             }
         }

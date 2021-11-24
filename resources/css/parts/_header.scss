@@ -32,11 +32,18 @@
     }
 
     &__btn {
+        display: block;
         border: none;
         padding: 0.8rem 0.9rem;
         border-radius: var(--border-radius);
         background-color: var(--black20);
         cursor: pointer;
+
+        & img {
+            display: block;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
     }
 
     &__search {

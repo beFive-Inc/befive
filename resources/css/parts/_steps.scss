@@ -37,8 +37,8 @@
 
         &__succeed:before, &__error:before {
             content: '';
-            height: 1rem;
-            width: 1rem;
+            height: 1.5rem;
+            width: 1.5rem;
             display: inline-block;
             mask-repeat: no-repeat;
             mask-position: center;
@@ -47,12 +47,12 @@
 
         &__succeed:before {
             background-color: var(--green);
-            mask-image: url("/parts/icons/solid/check.svg");
+            mask-image: url("/parts/icons/bold/tick-circle.svg");
         }
 
         &__error:before {
             background-color: var(--red);
-            mask-image: url("/parts/icons/solid/exclamation-triangle.svg");
+            mask-image: url("/parts/icons/bold/info-circle.svg");
         }
 
         &__text {
@@ -320,9 +320,9 @@
             transition: max-height 1s ease, all 1s ease;
 
             & input::-webkit-file-upload-button {
-                width: 1.5rem;
-                height: auto;
-                mask-image: url("/parts/icons/solid/image.svg");
+                width: 1.25rem;
+                height: 1.25rem;
+                mask-image: url("/parts/icons/outline/gallery.svg");
                 mask-size: auto 100%;
                 mask-repeat: no-repeat;
                 background-color: var(--black);
@@ -391,8 +391,12 @@
                 width: 100%;
 
                 & label {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: calc(50% - calc(1.5rem / 2));
                     font-family: var(--base-font-family);
-                    display: inline-block;
                     font-size: var(--date-font-size);
                     font-weight: var(--date-font-weight);
                     font-style: var(--date-font-style);
@@ -427,8 +431,12 @@
                 width: 100%;
 
                 & label {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
                     font-family: var(--base-font-family);
-                    display: inline-block;
                     font-size: var(--date-font-size);
                     font-weight: var(--date-font-weight);
                     font-style: var(--date-font-style);
@@ -463,8 +471,12 @@
                 width: calc(50% - calc(1.5rem / 2));
 
                 & label {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
                     font-family: var(--base-font-family);
-                    display: inline-block;
                     font-size: var(--date-font-size);
                     font-weight: var(--date-font-weight);
                     font-style: var(--date-font-style);

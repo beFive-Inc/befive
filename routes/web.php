@@ -49,6 +49,9 @@ Route::prefix('/register/steps')->middleware('auth')->name('step.')->group(funct
     Route::post('/first/store', [\App\Http\Controllers\RegisterStepController::class, 'firstStepstore'])
         ->name('first.store');
 
+    Route::post('/second/store', [\App\Http\Controllers\RegisterStepController::class, 'secondStepstore'])
+        ->name('second.store');
+
 
     // PUT METHOD
 

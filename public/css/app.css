@@ -111,6 +111,16 @@
   --green30: rgba(0, 230, 0, 0.3);
   --green20: rgba(0, 230, 0, 0.2);
   --green10: rgba(0, 230, 0, 0.1);
+  --yellow: rgba(230, 230, 0, 1);
+  --yellow90: rgba(230, 230, 0, 0.9);
+  --yellow80: rgba(230, 230, 0, 0.8);
+  --yellow70: rgba(230, 230, 0, 0.7);
+  --yellow60: rgba(230, 230, 0, 0.6);
+  --yellow50: rgba(230, 230, 0, 0.5);
+  --yellow40: rgba(230, 230, 0, 0.4);
+  --yellow30: rgba(230, 230, 0, 0.3);
+  --yellow20: rgba(230, 230, 0, 0.2);
+  --yellow10: rgba(230, 230, 0, 0.1);
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/
@@ -238,13 +248,21 @@ html, html * {
   color: var(--black);
   padding: 1rem 2rem;
   border: 1px solid var(--principal-color);
-  background-color: var(--white);
+  background-color: inherit;
   transition: all 0.5s ease;
 }
 .secondary_button:hover, .secondary_button:focus, .secondary_button:active {
   border: 1px solid var(--white);
   background-color: var(--principal-color80);
   color: var(--white);
+}
+
+.optional {
+  font-size: var(--date-font-size);
+  font-style: var(--hashtag-font-style);
+  font-weight: var(--hashtag-font-weight);
+  line-height: var(--hashtag-line-height);
+  color: var(--principal-color);
 }
 
 .error {
@@ -263,12 +281,14 @@ html, html * {
 .error:before {
   content: "";
   display: block;
-  width: 1rem;
-  height: 1rem;
-  -webkit-mask-image: url("http://127.0.0.1:8000/parts/icons/solid/exclamation-circle.svg");
-          mask-image: url("http://127.0.0.1:8000/parts/icons/solid/exclamation-circle.svg");
+  width: 1.5rem;
+  height: 1.5rem;
+  -webkit-mask-image: url("/parts/icons/outline/info-circle.svg");
+          mask-image: url("/parts/icons/outline/info-circle.svg");
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
+  -webkit-mask-size: 100%;
+          mask-size: 100%;
   background-color: var(--red);
 }
 
@@ -315,8 +335,8 @@ html, html * {
 }
 .auth .message__succeed:before, .auth .message__error:before {
   content: "";
-  height: 1rem;
-  width: 1rem;
+  height: 1.5rem;
+  width: 1.5rem;
   display: inline-block;
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
@@ -327,13 +347,13 @@ html, html * {
 }
 .auth .message__succeed:before {
   background-color: var(--green);
-  -webkit-mask-image: url("/parts/icons/solid/check.svg");
-          mask-image: url("/parts/icons/solid/check.svg");
+  -webkit-mask-image: url("/parts/icons/bold/tick-circle.svg");
+          mask-image: url("/parts/icons/bold/tick-circle.svg");
 }
 .auth .message__error:before {
   background-color: var(--red);
-  -webkit-mask-image: url("/parts/icons/solid/exclamation-triangle.svg");
-          mask-image: url("/parts/icons/solid/exclamation-triangle.svg");
+  -webkit-mask-image: url("/parts/icons/bold/info-circle.svg");
+          mask-image: url("/parts/icons/bold/info-circle.svg");
 }
 .auth .message__text {
   display: flex;
@@ -609,10 +629,10 @@ html, html * {
   transition: max-height 1s ease, all 1s ease;
 }
 .auth__form_container .auth_form input::-webkit-file-upload-button {
-  width: 1.5rem;
-  height: auto;
-  -webkit-mask-image: url("/parts/icons/solid/image.svg");
-          mask-image: url("/parts/icons/solid/image.svg");
+  width: 1.25rem;
+  height: 1.25rem;
+  -webkit-mask-image: url("/parts/icons/outline/gallery.svg");
+          mask-image: url("/parts/icons/outline/gallery.svg");
   -webkit-mask-size: auto 100%;
           mask-size: auto 100%;
   -webkit-mask-repeat: no-repeat;
@@ -673,8 +693,12 @@ html, html * {
   width: 100%;
 }
 .auth__form_container .auth_form__full_field label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(50% - 0.75rem);
   font-family: var(--base-font-family);
-  display: inline-block;
   font-size: var(--date-font-size);
   font-weight: var(--date-font-weight);
   font-style: var(--date-font-style);
@@ -704,8 +728,12 @@ html, html * {
   width: 100%;
 }
 .auth__form_container .auth_form__mega_field label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   font-family: var(--base-font-family);
-  display: inline-block;
   font-size: var(--date-font-size);
   font-weight: var(--date-font-weight);
   font-style: var(--date-font-style);
@@ -735,8 +763,12 @@ html, html * {
   width: calc(50% - 0.75rem);
 }
 .auth__form_container .auth_form__semi_field label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   font-family: var(--base-font-family);
-  display: inline-block;
   font-size: var(--date-font-size);
   font-weight: var(--date-font-weight);
   font-style: var(--date-font-style);
@@ -906,11 +938,17 @@ html, html * {
   width: 100%;
 }
 .form__btn {
+  display: block;
   border: none;
   padding: 0.8rem 0.9rem;
   border-radius: var(--border-radius);
   background-color: var(--black20);
   cursor: pointer;
+}
+.form__btn img {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 .form__search {
   font-family: var(--base-font-family);
@@ -972,7 +1010,6 @@ html, html * {
 .friends .nav__list {
   display: flex;
   gap: 2rem;
-  overflow: hidden;
   align-items: center;
 }
 .friends .nav__list li {
@@ -1082,6 +1119,46 @@ html, html * {
   justify-content: flex-start;
   gap: 0.3125rem;
 }
+.menu .nav__home {
+  -webkit-mask-image: url("/parts/icons/outline/home.svg");
+          mask-image: url("/parts/icons/outline/home.svg");
+}
+.menu .nav__profil {
+  -webkit-mask-image: url("/parts/icons/outline/profile-circle.svg");
+          mask-image: url("/parts/icons/outline/profile-circle.svg");
+}
+.menu .nav__team {
+  -webkit-mask-image: url("/parts/icons/outline/security.svg");
+          mask-image: url("/parts/icons/outline/security.svg");
+}
+.menu .nav__friends {
+  -webkit-mask-image: url("/parts/icons/outline/people.svg");
+          mask-image: url("/parts/icons/outline/people.svg");
+}
+.menu .nav__message {
+  -webkit-mask-image: url("/parts/icons/outline/message-text.svg");
+          mask-image: url("/parts/icons/outline/message-text.svg");
+}
+.menu .nav__video {
+  -webkit-mask-image: url("/parts/icons/outline/video.svg");
+          mask-image: url("/parts/icons/outline/video.svg");
+}
+.menu .nav__games {
+  -webkit-mask-image: url("/parts/icons/outline/game.svg");
+          mask-image: url("/parts/icons/outline/game.svg");
+}
+.menu .nav__tournament {
+  -webkit-mask-image: url("/parts/icons/outline/cup.svg");
+          mask-image: url("/parts/icons/outline/cup.svg");
+}
+.menu .nav__classement {
+  -webkit-mask-image: url("/parts/icons/outline/ranking.svg");
+          mask-image: url("/parts/icons/outline/ranking.svg");
+}
+.menu .nav__settings {
+  -webkit-mask-image: url("/parts/icons/outline/setting-2.svg");
+          mask-image: url("/parts/icons/outline/setting-2.svg");
+}
 .menu .nav__list_item {
   display: block;
   width: 100%;
@@ -1089,7 +1166,11 @@ html, html * {
   border-radius: var(--border-radius);
 }
 .menu .nav__list_item a {
-  display: block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
   font-size: var(--menu-font-size);
   font-weight: var(--menu-font-weight);
   font-style: var(--menu-font-style);
@@ -1101,11 +1182,30 @@ html, html * {
   border-radius: var(--border-radius);
   background-color: var(--white);
 }
-.menu .nav__list_item a:not(.active):hover, .menu .nav__list_item a:not(.active):focus {
-  background-color: var(--principal-color20);
+.menu .nav__list_item a span {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  -webkit-mask-size: 100%;
+          mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  z-index: 10;
+  background-color: var(--black);
+}
+.menu .nav__list_item a.active {
+  color: var(--white);
+  background: var(--principal-color);
+  background: linear-gradient(135deg, #d20000 0%, #ff9400 100%);
+}
+.menu .nav__list_item a.active span {
+  background-color: var(--white);
+}
+.menu .nav__list_item a:not(.active):hover, .menu .nav__list_item a:not(.active):focus, .menu .nav__list_item a:not(.active):active {
   color: var(--principal-color);
 }
-.menu .nav__list_item a.active, .menu .nav__list_item a:active {
-  background-color: var(--principal-color30);
-  color: var(--principal-color);
+.menu .nav__list_item a:not(.active):hover span, .menu .nav__list_item a:not(.active):focus span, .menu .nav__list_item a:not(.active):active span {
+  background: var(--principal-color);
+  background: linear-gradient(135deg, #d20000 0%, #ff9400 100%);
 }

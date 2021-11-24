@@ -74,7 +74,7 @@ html, html * {
     color: var(--black);
     padding: 1rem 2rem;
     border: 1px solid var(--principal-color);
-    background-color: var(--white);
+    background-color: inherit;
     transition: all .5s ease;
 
     &:hover, &:focus, &:active {
@@ -82,6 +82,14 @@ html, html * {
         background-color: var(--principal-color80);
         color: var(--white);
     }
+}
+
+.optional {
+    font-size: var(--date-font-size);
+    font-style: var(--hashtag-font-style);
+    font-weight: var(--hashtag-font-weight);
+    line-height: var(--hashtag-line-height);
+    color: var(--principal-color);
 }
 
 .error {
@@ -100,10 +108,11 @@ html, html * {
     &:before {
         content: '';
         display: block;
-        width: 1rem;
-        height: 1rem;
-        mask-image: url("http://127.0.0.1:8000/parts/icons/solid/exclamation-circle.svg");
+        width: 1.5rem;
+        height: 1.5rem;
+        mask-image: url("/parts/icons/outline/info-circle.svg");
         mask-repeat: no-repeat;
+        mask-size: 100%;
         background-color: var(--red);
     }
 }

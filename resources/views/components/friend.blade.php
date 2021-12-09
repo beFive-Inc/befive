@@ -15,6 +15,9 @@
         <h3 aria-level="3" role="heading" class="friend__pseudo">
             <a href="{{ route('user.show', $friend->slug) }}" class="friend__link">{{ $friend->pseudo }}</a>
         </h3>
+        <p class="last_online">
+            Actif il y a 20min
+        </p>
     </div>
     <div>
         {{ $slot }}

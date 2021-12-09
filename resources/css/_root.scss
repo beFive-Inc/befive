@@ -26,7 +26,7 @@
 
     --date-font-size: 0.8rem;
     --date-font-weight: 400;
-    --date-font-style: normal;
+    --date-font-style: italic;
     --date-line-height: 1.25;
 
     --menu-font-size: 1rem;
@@ -39,6 +39,11 @@
     --hashtag-font-style: italic;
     --hashtag-line-height: 1.25;
 
+    --background-color: #FFFCF7;
+
+    --box-shadow: 0px 5px .5rem var(--black10) ;
+    --auth-box-shadow: 0px .5rem 1rem var(--black10);
+
 
     --white: rgb(243, 243, 243);
     --white90: rgba(243, 243, 243, 0.9);
@@ -50,6 +55,17 @@
     --white30: rgba(243, 243, 243, 0.3);
     --white20: rgba(243, 243, 243, 0.2);
     --white10: rgba(243, 243, 243, 0.1);
+
+    --blue-link: rgb(24, 119, 242);
+    --blue-link90: rgba(24, 119, 242, 0.9);
+    --blue-link80: rgba(24, 119, 242, 0.8);
+    --blue-link70: rgba(24, 119, 242, 0.7);
+    --blue-link60: rgba(24, 119, 242, 0.6);
+    --blue-link50: rgba(24, 119, 242, 0.5);
+    --blue-link40: rgba(24, 119, 242, 0.4);
+    --blue-link30: rgba(24, 119, 242, 0.3);
+    --blue-link20: rgba(24, 119, 242, 0.2);
+    --blue-link10: rgba(24, 119, 242, 0.1);
 
     --pure-white: rgba(255, 255, 255, 1);
     --pure-white90: rgba(255, 255, 255, 0.9);
@@ -72,6 +88,7 @@
     --black30: rgba(16, 12, 16, 0.3);
     --black20: rgba(16, 12, 16, 0.2);
     --black10: rgba(16, 12, 16, 0.1);
+    --black5: rgba(16, 12, 16, 0.05);
     --black1: rgba(16, 12, 16, 0.01);
 
     --principal-color: rgba(255, 148, 0, 1);

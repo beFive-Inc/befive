@@ -14,6 +14,7 @@ return [
     */
 
     'or' => 'or',
+    'slogan.phrase' => 'First social network for gamer',
 
 ];
 

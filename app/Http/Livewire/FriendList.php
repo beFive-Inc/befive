@@ -12,10 +12,7 @@ class FriendList extends Component
 {
     public Collection $friendships;
     public int $intervalRefresh = 30 * 1000;
-    public bool $requestedView = false;
     public bool $generalView = true;
-    public bool $onlineView = false;
-    public bool $offlineView = false;
     public $searchQuery;
     protected int $limitFriends = 100;
 
@@ -49,23 +46,6 @@ class FriendList extends Component
             })->take($this->limitFriends);
     }
 
-    protected function getOnlineFriends(): Collection
-    {
-        return auth()->user()
-            ->getOnlineFriends()
-            ->sortByDesc(function ($user) {
-                return $user->pseudo;
-            })->take($this->limitFriends);
-    }
-
-    protected function getOfflineFriends(): Collection
-    {
-        return auth()->user()
-            ->getOfflineFriends()
-            ->sortByDesc(function ($user) {
-                return $user->pseudo;
-            });
-    }
 
     public function isFriendWith($friendID): bool
     {
@@ -91,50 +71,13 @@ class FriendList extends Component
         });
     }
 
-    public function getRequestedView(): void
-    {
-        $this->requestedView = true;
-        $this->generalView = false;
-        $this->onlineView = false;
-        $this->offlineView = false;
-    }
-
-    public function getGeneralView(): void
-    {
-        $this->generalView = true;
-        $this->requestedView = false;
-        $this->onlineView = false;
-        $this->offlineView = false;
-    }
-
-    public function getOnlineView(): void
-    {
-        $this->onlineView = true;
-        $this->generalView = false;
-        $this->requestedView = false;
-        $this->offlineView = false;
-    }
-
-    public function getOfflineView(): void
-    {
-        $this->offlineView = true;
-        $this->generalView = false;
-        $this->requestedView = false;
-        $this->onlineView = false;
-    }
-
     public function render()
     {
+        $requestFriend = $this->getRequestedFriends() ?? null;
+        $countFriendsRequest = $requestFriend->count() ?? 0;
+
         if ($this->searchQuery) {
             $friends = $this->getSearchingFriends($this->friendships);
-        } elseif ($this->generalView) {
-            $friends = $this->getSortingFriends();
-        } elseif ($this->requestedView) {
-            $friends = $this->getRequestedFriends();
-        } elseif ($this->onlineView) {
-            $friends = $this->getOnlineFriends();
-        } elseif ($this->offlineView) {
-            $friends = $this->getOfflineFriends();
         } else {
             $friends = $this->getSortingFriends();
         }
@@ -145,6 +88,8 @@ class FriendList extends Component
 
         return view('livewire.friend-list',[
             'friends' => $friends,
+            'requestFriends' => $requestFriend,
+            'countFriendsRequest' => $countFriendsRequest,
         ]);
     }
 }

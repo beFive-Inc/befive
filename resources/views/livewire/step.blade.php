@@ -1,4 +1,4 @@
-<div class="auth">
+<div class="auth step__auth">
     <div class="auth__linear_position">
         <div class="auth__linear_gradient"></div>
     </div>
@@ -84,14 +84,18 @@
                                         {{ __('steps.first.field.name.title') }} <span class="optional">{{ __('validation.optional') }}</span>
                                     </label>
                                 </div>
-                                <input type="text"
-                                       name="name"
-                                       id="name"
-                                       class=""
-                                       value="{{ auth()->user()->name ?? old('name') }}"
-                                       placeholder="{{ __('steps.first.field.name.placeholder') }}"
-                                       title="{{ __('steps.first.field.name.placeholder') }}"
-                                       wire:model="name">
+
+                                <div class="input_anim">
+                                    <input type="text"
+                                           name="name"
+                                           id="name"
+                                           class=""
+                                           value="{{ auth()->user()->name ?? old('name') }}"
+                                           placeholder="{{ __('steps.first.field.name.placeholder') }}"
+                                           title="{{ __('steps.first.field.name.placeholder') }}"
+                                           wire:model="name">
+                                    <span></span>
+                                </div>
 
                                 @error('name')
                                     <span class="error">{{ $message }}</span>

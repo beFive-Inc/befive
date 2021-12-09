@@ -1,9 +1,17 @@
-.friends {
+.friends_group {
     position: sticky;
+    top: 8.5625rem;
     grid-column: 8 / 10;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.friends {
     padding: 1.5rem;
     border-radius: var(--border-radius);
-    background-color: var(--white);
+    background-color: var(--pure-white);
+    box-shadow: var(--box-shadow);
     transition: all 1s ease;
 
     &__title {
@@ -11,11 +19,11 @@
         font-weight: var(--title-font-weight);
         font-style: var(--title-font-style);
         color: var(--black);
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     .form {
-        margin-bottom: 1.25rem;
+        margin-bottom: 1.5rem;
     }
 
     .nav {
@@ -53,7 +61,7 @@
         justify-content: flex-start;
         gap: 0.625rem;
         min-height: 15rem;
-        max-height: 30.625rem;
+        max-height: 25rem;
         overflow: auto;
         transition: all 1s ease;
     }
@@ -74,6 +82,14 @@
         background-color: var(--black10);
     }
 
+    .last_online {
+        font-size: var(--date-font-size);
+        font-weight: var(--date-font-weight);
+        font-style: var(--date-font-style);
+        line-height: var(--date-line-height);
+        color: var(--black50);
+    }
+
     &__pseudo {
         font-size: var(--semi-title-font-size);
         font-weight: var(--semi-title-font-weight);
@@ -91,8 +107,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 2rem;
-        height: 2rem;
+        width: 3rem;
+        height: 3rem;
         border-radius: var(--border-radius);
 
         &::after {
@@ -120,4 +136,8 @@
         border-radius: var(--border-radius);
         overflow: hidden;
     }
+}
+
+.request_friends .friend {
+    background-color: var(--black10);
 }

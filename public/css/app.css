@@ -20,7 +20,7 @@
   --semi-title-line-height: 1.25;
   --date-font-size: 0.8rem;
   --date-font-weight: 400;
-  --date-font-style: normal;
+  --date-font-style: italic;
   --date-line-height: 1.25;
   --menu-font-size: 1rem;
   --menu-font-weight: 600;
@@ -30,6 +30,9 @@
   --hashtag-font-weight: 400;
   --hashtag-font-style: italic;
   --hashtag-line-height: 1.25;
+  --background-color: #FFFCF7;
+  --box-shadow: 0px 5px .5rem var(--black10) ;
+  --auth-box-shadow: 0px .5rem 1rem var(--black10);
   --white: rgb(243, 243, 243);
   --white90: rgba(243, 243, 243, 0.9);
   --white80: rgba(243, 243, 243, 0.8);
@@ -40,6 +43,16 @@
   --white30: rgba(243, 243, 243, 0.3);
   --white20: rgba(243, 243, 243, 0.2);
   --white10: rgba(243, 243, 243, 0.1);
+  --blue-link: rgb(24, 119, 242);
+  --blue-link90: rgba(24, 119, 242, 0.9);
+  --blue-link80: rgba(24, 119, 242, 0.8);
+  --blue-link70: rgba(24, 119, 242, 0.7);
+  --blue-link60: rgba(24, 119, 242, 0.6);
+  --blue-link50: rgba(24, 119, 242, 0.5);
+  --blue-link40: rgba(24, 119, 242, 0.4);
+  --blue-link30: rgba(24, 119, 242, 0.3);
+  --blue-link20: rgba(24, 119, 242, 0.2);
+  --blue-link10: rgba(24, 119, 242, 0.1);
   --pure-white: rgba(255, 255, 255, 1);
   --pure-white90: rgba(255, 255, 255, 0.9);
   --pure-white80: rgba(255, 255, 255, 0.8);
@@ -60,6 +73,7 @@
   --black30: rgba(16, 12, 16, 0.3);
   --black20: rgba(16, 12, 16, 0.2);
   --black10: rgba(16, 12, 16, 0.1);
+  --black5: rgba(16, 12, 16, 0.05);
   --black1: rgba(16, 12, 16, 0.01);
   --principal-color: rgba(255, 148, 0, 1);
   --principal-color90: rgba(255, 148, 0, 0.9);
@@ -180,11 +194,18 @@ table {
 html {
   font-family: var(--base-font-family);
   font-size: var(--base-font-size);
-  background-color: var(--black10);
+  background-color: var(--background-color);
 }
 
 html, html * {
   box-sizing: border-box;
+}
+
+hr {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-top: 1px solid var(--black10);
 }
 
 .sr_only {
@@ -210,6 +231,32 @@ html, html * {
   white-space: normal;
 }
 
+.mb-625 {
+  margin-bottom: 0.625rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.my-1 {
+  margin: 1rem 0;
+}
+
+.forgot_link {
+  font-family: var(--base-font-family);
+  font-size: var(--base-font-size);
+  font-weight: var(--base-font-weight);
+  font-style: var(--base-font-style);
+  line-height: var(--base-line-height);
+  color: var(--blue-link);
+  text-decoration: none;
+  transition: all 0.5s ease;
+}
+.forgot_link:active, .forgot_link:hover, .forgot_link:focus {
+  text-decoration: underline;
+}
+
 .principal_button {
   font-family: var(--base-font-family);
   font-size: var(--semi-title-font-size);
@@ -225,6 +272,7 @@ html, html * {
   border: 1px solid var(--principal-color);
   background-color: var(--principal-color);
   box-shadow: 0 0 0 var(--black10);
+  min-width: 14rem;
   transition: all 0.5s ease;
 }
 .principal_button:not(:disabled):hover, .principal_button:not(:disabled):focus, .principal_button:not(:disabled):active {
@@ -249,6 +297,8 @@ html, html * {
   padding: 1rem 2rem;
   border: 1px solid var(--principal-color);
   background-color: inherit;
+  min-width: 14rem;
+  text-align: center;
   transition: all 0.5s ease;
 }
 .secondary_button:hover, .secondary_button:focus, .secondary_button:active {
@@ -328,7 +378,7 @@ html, html * {
           animation-timing-function: ease;
   overflow: hidden;
   border-radius: var(--border-radius);
-  background-color: var(--white);
+  background-color: var(--pure-white);
   width: 0;
   height: 0;
   padding: 0;
@@ -513,6 +563,12 @@ html, html * {
   color: var(--white);
   background-color: var(--principal-color);
 }
+.auth__slogan_phrase {
+  font-size: var(--title-font-size);
+  font-weight: var(--semi-title-font-weight);
+  font-style: var(--semi-title-font-style);
+  line-height: var(--semi-title-line-height);
+}
 .auth .preview_card {
   position: relative;
   height: 100vh;
@@ -591,17 +647,17 @@ html, html * {
   flex-direction: column;
   justify-content: flex-start;
   gap: 2rem;
-  grid-column: 5/10;
+  grid-column: 6/9;
 }
 .auth__logo_container {
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: -7rem;
   display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   align-items: center;
   justify-content: center;
-  height: 5rem;
+}
+.auth__logo_container img {
+  height: 7.5rem;
 }
 .auth__logo {
   width: auto;
@@ -614,11 +670,11 @@ html, html * {
   align-items: flex-start;
   justify-content: flex-start;
   gap: 2rem;
-  padding: 2rem;
   grid-column: 5/10;
   grid-row: 1/2;
   border-radius: var(--border-radius);
   background-color: var(--white);
+  box-shadow: var(--auth-box-shadow);
 }
 .auth__form_container .auth_form {
   width: 100%;
@@ -681,33 +737,48 @@ html, html * {
 }
 .auth__form_container .auth_form__field_container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 1.5rem;
   row-gap: 1rem;
   margin-bottom: 2rem;
 }
-.auth__form_container .auth_form__full_field {
-  width: 100%;
+.auth__form_container .auth_form__full_field .input_anim, .auth__form_container .auth_form__semi_field .input_anim, .auth__form_container .auth_form__mega_field .input_anim {
+  position: relative;
 }
-.auth__form_container .auth_form__full_field label {
+.auth__form_container .auth_form__full_field .input_anim input:focus, .auth__form_container .auth_form__full_field .input_anim input:active, .auth__form_container .auth_form__full_field .input_anim select:focus, .auth__form_container .auth_form__full_field .input_anim select:active, .auth__form_container .auth_form__full_field .input_anim textarea:focus, .auth__form_container .auth_form__full_field .input_anim textarea:active, .auth__form_container .auth_form__semi_field .input_anim input:focus, .auth__form_container .auth_form__semi_field .input_anim input:active, .auth__form_container .auth_form__semi_field .input_anim select:focus, .auth__form_container .auth_form__semi_field .input_anim select:active, .auth__form_container .auth_form__semi_field .input_anim textarea:focus, .auth__form_container .auth_form__semi_field .input_anim textarea:active, .auth__form_container .auth_form__mega_field .input_anim input:focus, .auth__form_container .auth_form__mega_field .input_anim input:active, .auth__form_container .auth_form__mega_field .input_anim select:focus, .auth__form_container .auth_form__mega_field .input_anim select:active, .auth__form_container .auth_form__mega_field .input_anim textarea:focus, .auth__form_container .auth_form__mega_field .input_anim textarea:active {
+  position: relative;
+  padding-left: calc(1rem + 11px);
+}
+.auth__form_container .auth_form__full_field .input_anim input:focus + span:before, .auth__form_container .auth_form__full_field .input_anim input:active + span:before, .auth__form_container .auth_form__full_field .input_anim select:focus + span:before, .auth__form_container .auth_form__full_field .input_anim select:active + span:before, .auth__form_container .auth_form__full_field .input_anim textarea:focus + span:before, .auth__form_container .auth_form__full_field .input_anim textarea:active + span:before, .auth__form_container .auth_form__semi_field .input_anim input:focus + span:before, .auth__form_container .auth_form__semi_field .input_anim input:active + span:before, .auth__form_container .auth_form__semi_field .input_anim select:focus + span:before, .auth__form_container .auth_form__semi_field .input_anim select:active + span:before, .auth__form_container .auth_form__semi_field .input_anim textarea:focus + span:before, .auth__form_container .auth_form__semi_field .input_anim textarea:active + span:before, .auth__form_container .auth_form__mega_field .input_anim input:focus + span:before, .auth__form_container .auth_form__mega_field .input_anim input:active + span:before, .auth__form_container .auth_form__mega_field .input_anim select:focus + span:before, .auth__form_container .auth_form__mega_field .input_anim select:active + span:before, .auth__form_container .auth_form__mega_field .input_anim textarea:focus + span:before, .auth__form_container .auth_form__mega_field .input_anim textarea:active + span:before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  display: block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--principal-color);
+  transform: translateY(-50%) rotate(45deg);
+  -webkit-animation: inputOpacity 0.5s 0.5 ease forwards;
+          animation: inputOpacity 0.5s 0.5 ease forwards;
+}
+.auth__form_container .auth_form__full_field label, .auth__form_container .auth_form__semi_field label, .auth__form_container .auth_form__mega_field label {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: calc(50% - 0.75rem);
   font-family: var(--base-font-family);
   font-size: var(--date-font-size);
-  font-weight: var(--date-font-weight);
-  font-style: var(--date-font-style);
+  font-weight: var(--semi-title-font-weight);
+  font-style: var(--semi-title-font-style);
   line-height: var(--date-line-height);
   color: var(--black);
   margin-bottom: 0.325rem;
 }
-.auth__form_container .auth_form__full_field input, .auth__form_container .auth_form__full_field select, .auth__form_container .auth_form__full_field textarea {
-  width: calc(50% - 0.75rem);
+.auth__form_container .auth_form__full_field input, .auth__form_container .auth_form__full_field select, .auth__form_container .auth_form__full_field textarea, .auth__form_container .auth_form__semi_field input, .auth__form_container .auth_form__semi_field select, .auth__form_container .auth_form__semi_field textarea, .auth__form_container .auth_form__mega_field input, .auth__form_container .auth_form__mega_field select, .auth__form_container .auth_form__mega_field textarea {
   font-size: var(--text-font-size);
   font-weight: var(--text-font-weight);
   font-style: var(--text-font-style);
@@ -716,92 +787,66 @@ html, html * {
   padding: 0.625rem;
   border-radius: 6px;
   border: 1px solid var(--black20);
+  transition: all 0.3s ease;
+  background-color: var(--pure-white);
 }
-.auth__form_container .auth_form__full_field input:focus, .auth__form_container .auth_form__full_field input:hover, .auth__form_container .auth_form__full_field input:focus-visible, .auth__form_container .auth_form__full_field select:focus, .auth__form_container .auth_form__full_field select:hover, .auth__form_container .auth_form__full_field select:focus-visible, .auth__form_container .auth_form__full_field textarea:focus, .auth__form_container .auth_form__full_field textarea:hover, .auth__form_container .auth_form__full_field textarea:focus-visible {
+.auth__form_container .auth_form__full_field input:hover, .auth__form_container .auth_form__full_field input:focus-visible, .auth__form_container .auth_form__full_field input:focus, .auth__form_container .auth_form__full_field input:active, .auth__form_container .auth_form__full_field select:hover, .auth__form_container .auth_form__full_field select:focus-visible, .auth__form_container .auth_form__full_field select:focus, .auth__form_container .auth_form__full_field select:active, .auth__form_container .auth_form__full_field textarea:hover, .auth__form_container .auth_form__full_field textarea:focus-visible, .auth__form_container .auth_form__full_field textarea:focus, .auth__form_container .auth_form__full_field textarea:active, .auth__form_container .auth_form__semi_field input:hover, .auth__form_container .auth_form__semi_field input:focus-visible, .auth__form_container .auth_form__semi_field input:focus, .auth__form_container .auth_form__semi_field input:active, .auth__form_container .auth_form__semi_field select:hover, .auth__form_container .auth_form__semi_field select:focus-visible, .auth__form_container .auth_form__semi_field select:focus, .auth__form_container .auth_form__semi_field select:active, .auth__form_container .auth_form__semi_field textarea:hover, .auth__form_container .auth_form__semi_field textarea:focus-visible, .auth__form_container .auth_form__semi_field textarea:focus, .auth__form_container .auth_form__semi_field textarea:active, .auth__form_container .auth_form__mega_field input:hover, .auth__form_container .auth_form__mega_field input:focus-visible, .auth__form_container .auth_form__mega_field input:focus, .auth__form_container .auth_form__mega_field input:active, .auth__form_container .auth_form__mega_field select:hover, .auth__form_container .auth_form__mega_field select:focus-visible, .auth__form_container .auth_form__mega_field select:focus, .auth__form_container .auth_form__mega_field select:active, .auth__form_container .auth_form__mega_field textarea:hover, .auth__form_container .auth_form__mega_field textarea:focus-visible, .auth__form_container .auth_form__mega_field textarea:focus, .auth__form_container .auth_form__mega_field textarea:active {
   outline: none;
   border: 1px solid var(--principal-color);
 }
-.auth__form_container .auth_form__full_field input:focus::-webkit-file-upload-button, .auth__form_container .auth_form__full_field input:hover::-webkit-file-upload-button, .auth__form_container .auth_form__full_field input:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__full_field select:focus::-webkit-file-upload-button, .auth__form_container .auth_form__full_field select:hover::-webkit-file-upload-button, .auth__form_container .auth_form__full_field select:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__full_field textarea:focus::-webkit-file-upload-button, .auth__form_container .auth_form__full_field textarea:hover::-webkit-file-upload-button, .auth__form_container .auth_form__full_field textarea:focus-visible::-webkit-file-upload-button {
+.auth__form_container .auth_form__full_field input:hover::-webkit-file-upload-button, .auth__form_container .auth_form__full_field input:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__full_field input:focus::-webkit-file-upload-button, .auth__form_container .auth_form__full_field input:active::-webkit-file-upload-button, .auth__form_container .auth_form__full_field select:hover::-webkit-file-upload-button, .auth__form_container .auth_form__full_field select:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__full_field select:focus::-webkit-file-upload-button, .auth__form_container .auth_form__full_field select:active::-webkit-file-upload-button, .auth__form_container .auth_form__full_field textarea:hover::-webkit-file-upload-button, .auth__form_container .auth_form__full_field textarea:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__full_field textarea:focus::-webkit-file-upload-button, .auth__form_container .auth_form__full_field textarea:active::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field input:hover::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field input:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field input:focus::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field input:active::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field select:hover::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field select:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field select:focus::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field select:active::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field textarea:hover::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field textarea:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field textarea:focus::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field textarea:active::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field input:hover::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field input:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field input:focus::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field input:active::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field select:hover::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field select:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field select:focus::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field select:active::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field textarea:hover::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field textarea:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field textarea:focus::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field textarea:active::-webkit-file-upload-button {
   background-color: var(--principal-color);
+}
+@-webkit-keyframes inputOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes inputOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.auth__form_container .auth_form__full_field {
+  width: 100%;
+}
+.auth__form_container .auth_form__full_field label {
+  width: calc(50% - 0.75rem);
+}
+.auth__form_container .auth_form__full_field input, .auth__form_container .auth_form__full_field select, .auth__form_container .auth_form__full_field textarea {
+  width: calc(50% - 0.75rem);
 }
 .auth__form_container .auth_form__mega_field {
   width: 100%;
 }
 .auth__form_container .auth_form__mega_field label {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
-  font-family: var(--base-font-family);
-  font-size: var(--date-font-size);
-  font-weight: var(--date-font-weight);
-  font-style: var(--date-font-style);
-  line-height: var(--date-line-height);
-  color: var(--black);
-  margin-bottom: 0.325rem;
 }
 .auth__form_container .auth_form__mega_field input, .auth__form_container .auth_form__mega_field select, .auth__form_container .auth_form__mega_field textarea {
   width: 100%;
-  font-size: var(--text-font-size);
-  font-weight: var(--text-font-weight);
-  font-style: var(--text-font-style);
-  line-height: var(--text-line-height);
-  color: var(--black);
-  padding: 0.625rem;
-  border-radius: 6px;
-  border: 1px solid var(--black20);
-}
-.auth__form_container .auth_form__mega_field input:focus, .auth__form_container .auth_form__mega_field input:hover, .auth__form_container .auth_form__mega_field input:focus-visible, .auth__form_container .auth_form__mega_field select:focus, .auth__form_container .auth_form__mega_field select:hover, .auth__form_container .auth_form__mega_field select:focus-visible, .auth__form_container .auth_form__mega_field textarea:focus, .auth__form_container .auth_form__mega_field textarea:hover, .auth__form_container .auth_form__mega_field textarea:focus-visible {
-  outline: none;
-  border: 1px solid var(--principal-color);
-}
-.auth__form_container .auth_form__mega_field input:focus::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field input:hover::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field input:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field select:focus::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field select:hover::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field select:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field textarea:focus::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field textarea:hover::-webkit-file-upload-button, .auth__form_container .auth_form__mega_field textarea:focus-visible::-webkit-file-upload-button {
-  background-color: var(--principal-color);
 }
 .auth__form_container .auth_form__semi_field {
   width: calc(50% - 0.75rem);
 }
 .auth__form_container .auth_form__semi_field label {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
-  font-family: var(--base-font-family);
-  font-size: var(--date-font-size);
-  font-weight: var(--date-font-weight);
-  font-style: var(--date-font-style);
-  line-height: var(--date-line-height);
-  color: var(--black);
-  margin-bottom: 0.325rem;
 }
 .auth__form_container .auth_form__semi_field input, .auth__form_container .auth_form__semi_field select, .auth__form_container .auth_form__semi_field textarea {
   width: 100%;
-  font-size: var(--text-font-size);
-  font-weight: var(--text-font-weight);
-  font-style: var(--text-font-style);
-  line-height: var(--text-line-height);
-  color: var(--black);
-  padding: 0.625rem;
-  border-radius: 6px;
-  border: 1px solid var(--black20);
-}
-.auth__form_container .auth_form__semi_field input:focus, .auth__form_container .auth_form__semi_field input:hover, .auth__form_container .auth_form__semi_field input:focus-visible, .auth__form_container .auth_form__semi_field select:focus, .auth__form_container .auth_form__semi_field select:hover, .auth__form_container .auth_form__semi_field select:focus-visible, .auth__form_container .auth_form__semi_field textarea:focus, .auth__form_container .auth_form__semi_field textarea:hover, .auth__form_container .auth_form__semi_field textarea:focus-visible {
-  outline: none;
-  border: 1px solid var(--principal-color);
-}
-.auth__form_container .auth_form__semi_field input:focus::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field input:hover::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field input:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field select:focus::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field select:hover::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field select:focus-visible::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field textarea:focus::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field textarea:hover::-webkit-file-upload-button, .auth__form_container .auth_form__semi_field textarea:focus-visible::-webkit-file-upload-button {
-  background-color: var(--principal-color);
 }
 .auth__form_container .auth_form__button_container {
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
-  gap: 2rem;
 }
 .auth__form_container .auth_form__button_container_special {
   padding: 0 1.5rem;
@@ -843,7 +888,6 @@ html, html * {
   padding: 1rem;
   border-radius: var(--border-radius);
   background-color: var(--black40);
-  min-height: 5.625rem;
 }
 .user_card__title {
   display: block;
@@ -879,8 +923,8 @@ html, html * {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 3.625rem;
-  height: 3.625rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: var(--border-radius);
   overflow: hidden;
   z-index: 1;
@@ -907,17 +951,36 @@ html, html * {
   width: 100%;
 }
 
+.step__auth .auth__form_container {
+  padding: 1.5rem;
+  background-color: var(--pure-white);
+}
+.step__auth .auth__form_container .auth__auth_form {
+  background-color: var(--white);
+}
+.step__auth .auth_form__field_container {
+  flex-direction: row;
+  justify-content: space-between;
+}
+.step__auth .auth_form__button_container {
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+}
+
 /* header */
 .header {
   position: -webkit-sticky;
   position: sticky;
-  z-index: 100;
+  z-index: 9999;
+  top: 0;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   align-items: center;
   grid-gap: 1.5rem;
   padding: 1.25rem 11.25rem;
-  background-color: var(--white);
+  background-color: var(--pure-white);
   border-bottom: 1px solid var(--principal-color);
 }
 .header__title {
@@ -932,7 +995,7 @@ html, html * {
   grid-column: 3/8;
   flex-direction: row;
   border-radius: var(--border-radius);
-  background-color: var(--black10);
+  background-color: var(--black5);
 }
 .form__search_container {
   width: 100%;
@@ -940,9 +1003,9 @@ html, html * {
 .form__btn {
   display: block;
   border: none;
-  padding: 0.8rem 0.9rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
   border-radius: var(--border-radius);
-  background-color: var(--black20);
+  background-color: transparent;
   cursor: pointer;
 }
 .form__btn img {
@@ -955,18 +1018,21 @@ html, html * {
   font-size: 1rem;
   width: 100%;
   border: none;
-  padding: 0.8rem 1rem;
+  padding: 0.5rem;
   color: var(--black);
   background-color: inherit;
 }
 .form__search::-moz-placeholder {
-  color: var(--black80);
+  color: var(--black50);
 }
 .form__search:-ms-input-placeholder {
-  color: var(--black80);
+  color: var(--black50);
 }
 .form__search::placeholder {
-  color: var(--black80);
+  color: var(--black50);
+}
+.form__search:focus, .form__search:focus-visible, .form__search:hover, .form__search:active {
+  outline: none;
 }
 
 .disconnect {
@@ -985,13 +1051,21 @@ html, html * {
   margin-top: 1.5rem;
 }
 
-.friends {
+.friends_group {
   position: -webkit-sticky;
   position: sticky;
+  top: 8.5625rem;
   grid-column: 8/10;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.friends {
   padding: 1.5rem;
   border-radius: var(--border-radius);
-  background-color: var(--white);
+  background-color: var(--pure-white);
+  box-shadow: var(--box-shadow);
   transition: all 1s ease;
 }
 .friends__title {
@@ -999,10 +1073,10 @@ html, html * {
   font-weight: var(--title-font-weight);
   font-style: var(--title-font-style);
   color: var(--black);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .friends .form {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 .friends .nav {
   margin-bottom: 1rem;
@@ -1034,7 +1108,7 @@ html, html * {
   justify-content: flex-start;
   gap: 0.625rem;
   min-height: 15rem;
-  max-height: 30.625rem;
+  max-height: 25rem;
   overflow: auto;
   transition: all 1s ease;
 }
@@ -1053,6 +1127,13 @@ html, html * {
 .friend:hover {
   background-color: var(--black10);
 }
+.friend .last_online {
+  font-size: var(--date-font-size);
+  font-weight: var(--date-font-weight);
+  font-style: var(--date-font-style);
+  line-height: var(--date-line-height);
+  color: var(--black50);
+}
 .friend__pseudo {
   font-size: var(--semi-title-font-size);
   font-weight: var(--semi-title-font-weight);
@@ -1068,8 +1149,8 @@ html, html * {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: var(--border-radius);
 }
 .friend__img_container::after {
@@ -1094,6 +1175,10 @@ html, html * {
   overflow: hidden;
 }
 
+.request_friends .friend {
+  background-color: var(--black10);
+}
+
 .menu {
   display: flex;
   flex-direction: column;
@@ -1102,12 +1187,10 @@ html, html * {
   gap: 1.5rem;
   position: -webkit-sticky;
   position: sticky;
+  top: 8.5625rem;
   grid-column: 1/3;
   width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 300;
+  z-index: 9300;
 }
 .menu .nav {
   width: 100%;
@@ -1180,7 +1263,7 @@ html, html * {
   text-decoration: none;
   color: var(--black);
   border-radius: var(--border-radius);
-  background-color: var(--white);
+  background-color: var(--black5);
 }
 .menu .nav__list_item a span {
   content: "";
@@ -1204,6 +1287,7 @@ html, html * {
 }
 .menu .nav__list_item a:not(.active):hover, .menu .nav__list_item a:not(.active):focus, .menu .nav__list_item a:not(.active):active {
   color: var(--principal-color);
+  background-color: var(--black10);
 }
 .menu .nav__list_item a:not(.active):hover span, .menu .nav__list_item a:not(.active):focus span, .menu .nav__list_item a:not(.active):active span {
   background: var(--principal-color);

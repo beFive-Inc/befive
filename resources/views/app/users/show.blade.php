@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        {{ $user->pseudo }}
+        {{ "$user->pseudo  #$user->hashtag"  }}
     </x-slot>
 
 

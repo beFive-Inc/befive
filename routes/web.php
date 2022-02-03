@@ -140,7 +140,7 @@ Route::prefix('users')->middleware('auth')->name('user.')->group(function () {
 
     // DELETE METHOD
 
-    Route::delete('/{post:slug}/delete', [\App\Http\Controllers\UserController::class, 'delete'])
+    Route::delete('/{user:slug}/delete', [\App\Http\Controllers\UserController::class, 'delete'])
         ->withTrashed()
         ->name('delete');
 });

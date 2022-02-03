@@ -19,6 +19,7 @@ class HomeController extends Controller
 
         $posts = $user->getPostsForMe(5);
 
+
         return view('app.home.index', compact( 'posts'));
     }
 }

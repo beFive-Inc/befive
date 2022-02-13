@@ -12,7 +12,9 @@
 
 
     <x-slot name="content">
+        <div>
 
+        </div>
     </x-slot>
 
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Gameable;
 use App\Traits\Postable;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -70,9 +71,27 @@ class User extends Authenticatable implements HasMedia
 
     public function isOnline()
     {
-        return Cache::has('user-is-online-' . $this->id);
+        return $this->sessions->last()->last_activity > Carbon::now();
     }
 
+    public function getonlineStatusAttribute()
+    {
+        if ($this->sessions->last()->last_activity > Carbon::now()) {
+            return __('Actif');
+        } else {
+            return __('friends.offline.status', [
+                'time' => Carbon::now()->diffForHumans(
+                    $this->sessions->last()->last_activity,
+            true,
+                ),
+            ]);
+        }
+    }
+
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
 
     public function posts()
     {
@@ -83,4 +102,5 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->morphMany(GameLinked::class, 'linked');
     }
+
 }

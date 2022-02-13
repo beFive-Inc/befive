@@ -18,10 +18,9 @@ class CreateTeamsTable extends Migration
             $table->integer('admin_id')->unsigned();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->string('site')->nullable();
+            $table->string('site_url')->nullable();
             $table->string('site_name')->nullable();
             $table->longText('description');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

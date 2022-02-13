@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use App\Traits\Gameable;
-use App\Traits\Postable;
+use App\Traits\Postable;;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -15,6 +16,20 @@ class Team extends Model implements HasMedia
     use Postable;
     use Gameable;
     use InteractsWithMedia;
+
+    protected $fillable = [
+        'admin_id',
+        'name',
+        'slug',
+        'site_url',
+        'site_name',
+        'description'
+    ];
+
+    public function admin()
+    {
+        return $this->hasOne(User::class, 'id', 'admin_id');
+    }
 
     public function posts()
     {

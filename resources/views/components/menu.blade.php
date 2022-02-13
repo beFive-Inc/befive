@@ -15,15 +15,7 @@
             </x-link>
             <x-link href=""
                     active="">
-                <span class="nav__profil" ></span>{{ __('navigation.profil') }}
-            </x-link>
-            <x-link href=""
-                    active="">
                 <span class="nav__team"></span>{{ __('navigation.team') }}
-            </x-link>
-            <x-link href=""
-                    active="">
-                <span class="nav__friends"></span>{{ __('navigation.friends') }}
             </x-link>
             <x-link href=""
                     active="">
@@ -45,12 +37,6 @@
                     active="">
                 <span class="nav__classement"></span>{{ __('navigation.classement') }}
             </x-link>
-            <x-link href=""
-                    active="">
-                <span class="nav__settings"></span>{{ __('navigation.settings') }}
-            </x-link>
         </ul>
     </nav>
-
-
 </div>

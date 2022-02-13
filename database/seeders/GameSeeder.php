@@ -15,12 +15,11 @@ class GameSeeder extends Seeder
      */
     public function run()
     {
-        /*
         $accessTokenCacheKey = 'igdb_cache.access_token';
 
         $accessToken = Cache::put($accessTokenCacheKey, env('TWITCH_TOKEN'));
 
-        for ($i = 1; $i < 4000000; $i++) {
+        for ($i = 1; $i < 40; $i++) {
             $game = \MarcReichel\IGDBLaravel\Models\Game::find($i);
             if (isset($game)) {
                 Game::create([
@@ -32,6 +31,5 @@ class GameSeeder extends Seeder
                 ]);
             }
         }
-        */
     }
 }

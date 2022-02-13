@@ -17,5 +17,6 @@ return [
     'sign-up.title' => 'Sign Up',
     'field.password' => 'Password',
     'field.email' => 'E-mail address',
+    'failed' => 'An error has occured while your connection.',
 
 ];

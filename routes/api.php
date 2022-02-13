@@ -19,6 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/test', function (){
-    $user = \App\Models\User::with("friends")->get();
+    $user = \App\Models\User::find(1)->getGames();
     return $user;
 });

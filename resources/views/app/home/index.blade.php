@@ -15,6 +15,8 @@
         <x-menu>
 
         </x-menu>
+
+        <livewire:friend-list />
     </x-slot>
 
 

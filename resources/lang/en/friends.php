@@ -20,4 +20,5 @@ return [
     'group.title' => 'My friendlist',
     'accept' => 'Accept',
     'deny' => 'Deny',
+    'offline.status' => 'Offline since :time ago',
 ];

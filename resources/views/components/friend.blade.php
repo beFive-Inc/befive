@@ -16,7 +16,7 @@
             <a href="{{ route('user.show', $friend->slug) }}" class="friend__link">{{ $friend->pseudo }}</a>
         </h3>
         <p class="last_online">
-            Actif il y a 20min
+            {{ $friend->onlineStatus }}
         </p>
     </div>
     <div>

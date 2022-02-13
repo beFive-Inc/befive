@@ -28,7 +28,6 @@
 
         {{ $content }}
 
-        <livewire:friend-list />
     </main>
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Game;
 use App\Models\GameLinked;
 use App\Models\Post;
 use Illuminate\Support\Str;
@@ -17,5 +18,11 @@ trait Gameable
             ->save($newGame);
 
         return $newGame;
+    }
+
+    public function getGames() {
+        return $this->games->map(function ($game) {
+            return Game::find($game->game_id);
+        });
     }
 }

@@ -86,13 +86,13 @@ class Step extends Component
     public function changeTemporaryProfilImg(): void
     {
         $this->temporaryProfilImg =
-            str_replace('livewire/preview-file','storage/livewire-tmp',$this->profilpic->temporaryUrl());
+            str_replace('livewire/preview-file','storage/public/livewire-tmp',$this->profilpic->temporaryUrl());
     }
 
     public function changeTemporaryBannerImg(): void
     {
         $this->temporaryBannerImg =
-            str_replace('livewire/preview-file','storage/livewire-tmp',$this->bannerpic->temporaryUrl());
+            str_replace('livewire/preview-file','storage/public/livewire-tmp',$this->bannerpic->temporaryUrl());
     }
 
     public function saveFirstStep(): void

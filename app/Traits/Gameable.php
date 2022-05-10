@@ -25,4 +25,9 @@ trait Gameable
             return Game::find($game->game_id);
         });
     }
+
+    public function deleteGame($game)
+    {
+        return $game->delete();
+    }
 }

@@ -23,6 +23,73 @@ use Multicaret\Acquaintances\Traits\Friendable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * App\Models\User
+ *
+ * @property int $id
+ * @property string $pseudo
+ * @property string $slug
+ * @property string|null $name
+ * @property int $hashtag
+ * @property string $email
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string $password
+ * @property string|null $two_factor_secret
+ * @property string|null $two_factor_recovery_codes
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|User[] $followers
+ * @property-read int|null $followers_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Multicaret\Acquaintances\Models\Friendship[] $friends
+ * @property-read int|null $friends_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\GameLinked[] $games
+ * @property-read int|null $games_count
+ * @property-read mixed $average_rating_all_types
+ * @property-read mixed $average_rating
+ * @property-read int|null $likers_count
+ * @property-read mixed $likers_count_readable
+ * @property-read mixed $sum_rating_all_types
+ * @property-read mixed $sum_rating
+ * @property-read mixed $user_average_rating_all_types
+ * @property-read mixed $user_average_rating
+ * @property-read mixed $user_sum_rating_all_types
+ * @property-read mixed $user_sum_rating
+ * @property-read mixed $online_status
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Multicaret\Acquaintances\Models\FriendFriendshipGroups[] $groups
+ * @property-read int|null $groups_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|User[] $likers
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
+ * @property-read int|null $media_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
+ * @property-read int|null $posts_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Multicaret\Acquaintances\Models\InteractionRelation[] $ratings
+ * @property-read int|null $ratings_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Multicaret\Acquaintances\Models\InteractionRelation[] $ratingsPure
+ * @property-read int|null $ratings_pure_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Session[] $sessions
+ * @property-read int|null $sessions_count
+ * @method static \Database\Factories\UserFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereHashtag($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePseudo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorRecoveryCodes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable implements HasMedia
 {
     use HasFactory, Notifiable;
@@ -34,6 +101,7 @@ class User extends Authenticatable implements HasMedia
     use CanFollow, CanBeFollowed;
     use CanLike, CanBeLiked;
     use CanRate, CanBeRated;
+
 
     /**
      * The attributes that are mass assignable.

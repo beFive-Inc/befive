@@ -4,7 +4,7 @@
         aria-level="1">
         <a href="{{ route('homepage') }}">
             <span class="sr_only">
-                {{ __('Be Five, réseau social pour gamer') }}
+                {{ __('Be Five Chat') }}
             </span>
             <img class="header__logo"
                  src="{{ asset('/parts/logo/befive_logo_white_background.svg') }}"
@@ -12,33 +12,14 @@
         </a>
     </h1>
 
-    <form action="/search"
-          method="get"
-          class="header__form form">
-        <button class="form__btn">
-            <img src="{{ asset('parts/icons/outline/search-normal-1.svg') }}"
-                 alt>
-        </button>
-        <div class="form__search_container">
-            <label for="search"
-                   class="sr_only"
-                   aria-hidden="{{ __('friends.field.search.placeholder') }}">
-                {{ __('friends.field.search') }}
-            </label>
-            <input type="search"
-                   id="search"
-                   class="form__search"
-                   name="search"
-                   placeholder="{{ __('friends.field.search.placeholder') }}">
-        </div>
-    </form>
+    <div>
+        <form action="{{ route('logout') }}"
+              method="post"
+              class="disconnect">
+            @csrf
 
-    <form action="{{ route('logout') }}"
-          method="post"
-          class="disconnect">
-        @csrf
-
-        <input type="submit"
-               value="Se déconnecter">
-    </form>
+            <input type="submit"
+                   value="Se déconnecter">
+        </form>
+    </div>
 </header>

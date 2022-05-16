@@ -15,11 +15,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-
-        $posts = $user->getPostsForMe(5);
+        $friends = Auth::user()->getFriends()->load('media');
 
 
-        return view('app.home.index', compact( 'posts'));
+        return view('app.home.index', compact( 'friends'));
     }
 }

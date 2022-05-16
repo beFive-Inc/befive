@@ -4,11 +4,12 @@
     position: sticky;
     z-index: 9999;
     top: 0;
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     grid-gap: 1.5rem;
-    padding: 1.25rem 11.25rem;
+    padding: 1.25rem 2.5rem;
     background-color: var(--pure-white);
     border-bottom: 1px solid var(--principal-color);
 
@@ -27,6 +28,7 @@
     flex-direction: row;
     border-radius: var(--border-radius);
     background-color: var(--black5);
+    margin-bottom: 1.5rem;
 
     &__search_container {
         width: 100%;

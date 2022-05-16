@@ -975,11 +975,12 @@ hr {
   position: sticky;
   z-index: 9999;
   top: 0;
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   grid-gap: 1.5rem;
-  padding: 1.25rem 11.25rem;
+  padding: 1.25rem 2.5rem;
   background-color: var(--pure-white);
   border-bottom: 1px solid var(--principal-color);
 }
@@ -996,6 +997,7 @@ hr {
   flex-direction: row;
   border-radius: var(--border-radius);
   background-color: var(--black5);
+  margin-bottom: 1.5rem;
 }
 .form__search_container {
   width: 100%;
@@ -1043,11 +1045,8 @@ hr {
 }
 
 .main {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  align-items: flex-start;
   grid-gap: 1.5rem;
-  padding: 0 11.25rem;
+  padding: 0 2.5rem;
   margin-top: 1.5rem;
 }
 
@@ -1280,7 +1279,7 @@ hr {
 .menu .nav__list_item a.active {
   color: var(--white);
   background: var(--principal-color);
-  background: linear-gradient(135deg, #d20000 0%, #ff9400 100%);
+  background: linear-gradient(135deg, rgb(210, 0, 0) 0%, rgb(255, 148, 0) 100%);
 }
 .menu .nav__list_item a.active span {
   background-color: var(--white);
@@ -1291,5 +1290,5 @@ hr {
 }
 .menu .nav__list_item a:not(.active):hover span, .menu .nav__list_item a:not(.active):focus span, .menu .nav__list_item a:not(.active):active span {
   background: var(--principal-color);
-  background: linear-gradient(135deg, #d20000 0%, #ff9400 100%);
+  background: linear-gradient(135deg, rgb(210, 0, 0) 0%, rgb(255, 148, 0) 100%);
 }

@@ -19,93 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get( '/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->name('homepage')
-    ->middleware(['auth', 'check.step']);
-
-
-////
-// REGISTER STEP ROUTE
-////
-
-Route::prefix('/register/steps')->middleware('auth')->name('step.')->group(function () {
-
-    // GET METHOD
-
-    Route::get('/', [\App\Http\Controllers\RegisterStepController::class, 'index'])
-        ->name('index');
-
-    Route::get('/?step=first-step', [\App\Http\Controllers\RegisterStepController::class, 'index'])
-        ->name('first');
-
-    Route::get('/?step=second-step', [\App\Http\Controllers\RegisterStepController::class, 'index'])
-        ->name('second');
-
-    Route::get('/?step=third-step', [\App\Http\Controllers\RegisterStepController::class, 'index'])
-        ->name('third');
-
-
-
-    // POST METHOD
-
-    Route::post('/first/store', [\App\Http\Controllers\RegisterStepController::class, 'firstStepstore'])
-        ->name('first.store');
-
-    Route::post('/second/store', [\App\Http\Controllers\RegisterStepController::class, 'secondStepstore'])
-        ->name('second.store');
-
-
-    // PUT METHOD
-
-
-    // DELETE METHOD
-});
-
-
-////
-// ALL POSTS ROUTE
-////
-
-Route::prefix('posts')->middleware('auth')->name('post.')->group(function () {
-
-    // GET METHOD
-
-    Route::get('/', function () {
-        return redirect()->route('homepage');
-    });
-
-    Route::get('/{post:uuid}', function (\App\Models\Post $post) {
-        return redirect()->route('post.edit', $post->uuid);
-    });
-
-    Route::get('/{post:uuid}/edit', [\App\Http\Controllers\PostController::class, 'edit'])
-        ->name('edit');
-
-
-    // POST METHOD
-
-    Route::post('/store', [\App\Http\Controllers\PostController::class, 'store'])
-        ->name('create');
-
-
-    // PUT METHOD
-
-    Route::put('/{post:uuid}/update', [\App\Http\Controllers\PostController::class, 'update'])
-        ->name('update');
-
-    Route::put('/{post:uuid}/restore', [\App\Http\Controllers\PostController::class, 'restore'])
-        ->name('restore');
-
-
-    // DELETE METHOD
-
-    Route::delete('/{post:uuid}/archive', [\App\Http\Controllers\PostController::class, 'archive'])
-        ->withTrashed()
-        ->name('archive');
-
-    Route::delete('/{post:uuid}/force-delete', [\App\Http\Controllers\PostController::class, 'forceDelete'])
-        ->withTrashed()
-        ->name('forceDelete');
-});
-
+    ->middleware(['auth']);
 
 
 ////
@@ -145,3 +59,15 @@ Route::prefix('users')->middleware('auth')->name('user.')->group(function () {
         ->name('delete');
 });
 
+////
+// ALL MESSAGES ROUTE
+////
+
+Route::prefix('messages')->middleware('auth')->name('messages.')->group(function () {
+
+});
+
+
+////
+// ALL SETTINGS ROUTE
+////

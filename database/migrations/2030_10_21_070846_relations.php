@@ -13,26 +13,7 @@ class Relations extends Migration
      */
     public function up()
     {
-        Schema::table('teams', function (Blueprint $table){
-            $table->foreign('admin_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-        });
 
-        Schema::table('game_linked', function (Blueprint $table) {
-            $table->foreign('game_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-        });
-
-        Schema::table('sessions', function (Blueprint $table) {
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-        });
     }
 
     /**

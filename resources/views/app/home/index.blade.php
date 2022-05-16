@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        {{ __('Be Five') }}
+        {{ __('Be Five | Homepage') }}
     </x-slot>
 
 
@@ -12,11 +12,13 @@
 
 
     <x-slot name="content">
-        <x-menu>
+        <x-search-bar></x-search-bar>
 
-        </x-menu>
-
-        <livewire:friend-list />
+        <div>
+            @foreach($friends as $friend)
+                <x-friend :friend="$friend"></x-friend>
+            @endforeach
+        </div>
     </x-slot>
 
 

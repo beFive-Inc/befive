@@ -82,33 +82,31 @@
                             </div>
 
 
-                            <div class="auth_form__button_container">
-                                <input type="submit"
-                                       value="{{ __('auth.sign-in.btn') }}"
-                                       class="principal_button mb-625"
-                                       disabled>
+                                <div class="auth_form__button_container">
+                                    <input type="submit"
+                                           value="{{ __('auth.sign-in.btn') }}"
+                                           class="principal_button mb-625"
+                                           disabled>
 
-                                <a href="{{ route('password.request') }}" class="forgot_link">
-                                    {!! __('passwords.forget') !!}
-                                </a>
+                                    <a href="{{ route('password.request') }}" class="forgot_link">
+                                        {!! __('passwords.forget') !!}
+                                    </a>
 
-                                <hr class="my-1">
+                                    <hr class="my-1">
 
-                                <p>
-                                    {!!  __('passwords.not.account') !!}
-                                </p>
+                                    <p>
+                                        {!!  __('passwords.not.account') !!}
+                                    </p>
 
-                                <a href="{{ route('register') }}"
-                                   class="secondary_button mt-1">
-                                    {{ __('auth.sign-up.btn') }}
-                                </a>
-                            </div>
+                                    <a href="{{ route('register') }}"
+                                       class="secondary_button mt-1">
+                                        {{ __('auth.sign-up.btn') }}
+                                    </a>
+                                </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-
         </div>
     </x-slot>
 

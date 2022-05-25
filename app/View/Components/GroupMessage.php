@@ -2,18 +2,21 @@
 
 namespace App\View\Components;
 
+use App\Models\Chatroom;
 use Illuminate\View\Component;
 
-class SearchBar extends Component
+class GroupMessage extends Component
 {
+    public Chatroom $chatroom;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Chatroom $chatroom)
     {
-        //
+        $this->chatroom = $chatroom;
     }
 
     /**
@@ -23,6 +26,6 @@ class SearchBar extends Component
      */
     public function render()
     {
-        return view('components.search-bar');
+        return view('components.group-message');
     }
 }

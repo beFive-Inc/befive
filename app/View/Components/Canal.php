@@ -2,22 +2,21 @@
 
 namespace App\View\Components;
 
+use App\Models\Chatroom;
 use Illuminate\View\Component;
 
-class Link extends Component
+class Canal extends Component
 {
-    public $active;
-    public $href;
+    public Chatroom $chatroom;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($active, $href)
+    public function __construct(Chatroom $chatroom)
     {
-        $this->active = $active;
-        $this->href = $href;
+        $this->chatroom = $chatroom;
     }
 
     /**
@@ -27,6 +26,6 @@ class Link extends Component
      */
     public function render()
     {
-        return view('components.link');
+        return view('components.canal');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chatroom;
 use App\Models\Game;
 use App\Models\Post;
 use App\Models\Team;
@@ -15,9 +16,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $friends = Auth::user()->getFriends()->load('media');
+        $chatrooms = Auth::user()
+            ->getGroups();
 
-
-        return view('app.home.index', compact( 'friends'));
+        return view('app.home.index', compact( 'chatrooms'));
     }
 }

@@ -15,6 +15,21 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('group_member_id')
+                ->constrained();
+
+            $table->foreignId('message_id')
+                ->nullable()
+                ->default(null)
+                ->constrained();
+
+            $table->text('message')->nullable();
+
+            $table->string('type')
+                ->comment('message/media')
+                ->default('message');
+
             $table->timestamps();
         });
     }

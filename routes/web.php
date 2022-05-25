@@ -21,6 +21,18 @@ Route::get( '/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->name('homepage')
     ->middleware(['auth']);
 
+////
+// SEARCH ROUTE
+////
+
+Route::prefix('search')->middleware('auth')->name('search.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\SearchController::class, 'index'])
+        ->name('index');
+
+    Route::post('/', [\App\Http\Controllers\SearchController::class, 'store'])
+        ->name('store');
+});
+
 
 ////
 // ALL USERS ROUTE
@@ -59,12 +71,32 @@ Route::prefix('users')->middleware('auth')->name('user.')->group(function () {
         ->name('delete');
 });
 
+
 ////
 // ALL MESSAGES ROUTE
 ////
 
 Route::prefix('messages')->middleware('auth')->name('messages.')->group(function () {
 
+    // GET METHOD
+
+    Route::get('/{chatroom:uuid}', [\App\Http\Controllers\MessageController::class, 'show'])
+        ->name('show');
+
+    Route::post('/create', [\App\Http\Controllers\MessageController::class, 'create'])
+        ->name('create');
+});
+
+////
+// ALL FRIENDS ROUTE
+////
+
+Route::prefix('friends')->middleware('auth')->name('friends.')->group(function () {
+
+    // GET METHOD
+
+    Route::get('/', [\App\Http\Controllers\FriendsController::class, 'index'])
+        ->name('index');
 });
 
 

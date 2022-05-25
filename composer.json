@@ -20,6 +20,7 @@
         "livewire/livewire": "^2.4",
         "marcreichel/igdb-laravel": "^3.2",
         "multicaret/laravel-acquaintances": "^3.5",
+        "pusher/pusher-php-server": "^7.0",
         "spatie/laravel-medialibrary": "9.0.0"
     },
     "require-dev": {

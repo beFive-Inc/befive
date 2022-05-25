@@ -2,18 +2,21 @@
 
 namespace App\View\Components;
 
+use App\Models\Chatroom;
 use Illuminate\View\Component;
 
-class UserCard extends Component
+class MessageLayout extends Component
 {
+    public Chatroom $chatroom;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Chatroom $chatroom)
     {
-        //
+        $this->chatroom = $chatroom;
     }
 
     /**
@@ -23,6 +26,6 @@ class UserCard extends Component
      */
     public function render()
     {
-        return view('components.user-card');
+        return view('components.layout.message-layout');
     }
 }

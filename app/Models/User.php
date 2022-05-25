@@ -3,10 +3,14 @@
 namespace App\Models;
 
 use App\Traits\Gameable;
+use App\Traits\Messageable;
 use App\Traits\Postable;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -94,6 +98,7 @@ class User extends Authenticatable implements HasMedia
 {
     use HasFactory, Notifiable;
     Use Postable;
+    use Messageable;
     use InteractsWithMedia;
     use \App\Traits\Friendable;
     use Friendable;
@@ -137,11 +142,17 @@ class User extends Authenticatable implements HasMedia
         'email_verified_at' => 'datetime',
     ];
 
-    public function isOnline()
+    /**
+     * @return bool
+     */
+    public function isOnline(): bool
     {
         return $this->sessions->last()->last_activity > Carbon::now();
     }
 
+    /**
+     * @return array|Application|Translator|string|null
+     */
     public function getonlineStatusAttribute()
     {
         if ($this->sessions->last()->last_activity > Carbon::now()) {
@@ -156,19 +167,28 @@ class User extends Authenticatable implements HasMedia
         }
     }
 
-    public function sessions()
+    /**
+     * @return HasMany
+     */
+    public function sessions(): HasMany
     {
         return $this->hasMany(Session::class);
     }
 
-    public function posts()
+    /**
+     * @return BelongsToMany
+     */
+    public function groups(): BelongsToMany
     {
-        return $this->morphMany(Post::class, 'creator');
+        return $this->belongsToMany(Chatroom::class, ChatroomUser::class, 'user_id', 'group_id', 'id', 'id');
     }
 
-    public function games()
+    /**
+     * @return BelongsTo
+     */
+    public function status(): BelongsTo
     {
-        return $this->morphMany(GameLinked::class, 'linked');
+        return $this->belongsTo(Status::class);
     }
 
 }

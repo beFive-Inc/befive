@@ -928,6 +928,7 @@ hr {
   border-radius: var(--border-radius);
   overflow: hidden;
   z-index: 1;
+  background-color: #F2F2F2;
 }
 .user_card__profilpic img {
   width: 100%;
@@ -1279,7 +1280,7 @@ hr {
 .menu .nav__list_item a.active {
   color: var(--white);
   background: var(--principal-color);
-  background: linear-gradient(135deg, rgb(210, 0, 0) 0%, rgb(255, 148, 0) 100%);
+  background: linear-gradient(135deg, #d20000 0%, #ff9400 100%);
 }
 .menu .nav__list_item a.active span {
   background-color: var(--white);
@@ -1290,5 +1291,36 @@ hr {
 }
 .menu .nav__list_item a:not(.active):hover span, .menu .nav__list_item a:not(.active):focus span, .menu .nav__list_item a:not(.active):active span {
   background: var(--principal-color);
-  background: linear-gradient(135deg, rgb(210, 0, 0) 0%, rgb(255, 148, 0) 100%);
+  background: linear-gradient(135deg, #d20000 0%, #ff9400 100%);
+}
+
+.tooltip__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+}
+.tooltip__img {
+  width: 50px;
+}
+.tooltip__img img {
+  width: 100%;
+}
+.tooltip__info {
+  flex: 1 0 350px;
+}
+
+.searchbar {
+  transition: all 0.5s ease-in;
+}
+.searchbar.show {
+  display: block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: #ccc;
 }

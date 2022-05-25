@@ -2,24 +2,21 @@
 
 namespace App\View\Components;
 
+use App\Models\Chatroom;
 use Illuminate\View\Component;
 
-class StepNav extends Component
+class FriendMessage extends Component
 {
-    public $firstStep;
-    public $secondStep;
-    public $thirdStep;
+    public Chatroom $chatroom;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($firststep, $secondstep, $thirdstep)
+    public function __construct(Chatroom $chatroom)
     {
-        $this->firstStep = $firststep;
-        $this->secondStep = $secondstep;
-        $this->thirdStep = $thirdstep;
+        $this->chatroom = $chatroom;
     }
 
     /**
@@ -29,6 +26,6 @@ class StepNav extends Component
      */
     public function render()
     {
-        return view('components.step-nav');
+        return view('components.friend-message');
     }
 }

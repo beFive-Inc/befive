@@ -12,14 +12,28 @@
         </a>
     </h1>
 
-    <div>
-        <form action="{{ route('logout') }}"
-              method="post"
-              class="disconnect">
-            @csrf
-
-            <input type="submit"
-                   value="Se déconnecter">
-        </form>
+    <div class="user_card__profilpic">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ auth()->user()->getMedia('user_profile_pic')?->last()?->getFullUrl() }}" alt>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Amis</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{{ route('friends.index') }}">Amis</a></li>
+            <li><a class="dropdown-item" href="#">Messages archivés</a></li>
+            <li><h6 class="dropdown-header">Profil</h6></li>
+            <li><a class="dropdown-item" href="#">Statut</a></li>
+            <li><a class="dropdown-item" href="#">Modifier son profil</a></li>
+            <li><h6 class="dropdown-header">Compte</h6></li>
+            <li><a class="dropdown-item" href="#">Paramètres du compte</a></li>
+            <li><a class="dropdown-item" href="#">Mentions légales et politiques</a></li>
+            <li>
+                <form method="post" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="dropdown-item">Se déconnecter</button>
+                </form>
+            </li>
+        </ul>
     </div>
+
 </header>

@@ -83,7 +83,7 @@ class ChatroomCreate extends Component
      */
     protected function getSortingFriends(): Collection
     {
-        return $this->friendList;
+        return auth()->user()->getFriends();
     }
 
     /**

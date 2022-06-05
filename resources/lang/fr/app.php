@@ -14,6 +14,7 @@ return [
     'slogan' => 'Be Five Chat, première messagerie adaptée pour les gamers&nbsp!',
     'placeholder' => 'Aa',
     'chatroom.add' => 'Ajouter :user à la chatroom',
+    'chatroom.add.search.nothing' => 'Aucun amis ne correspond à la recherche ":search"',
     'chatroom.add.already' => ':user a déja été ajouté à la chatroom',
     'chatroom.remove' => 'Retirer :user de la chatroom',
     'notification' => 'Vos Notification',

@@ -31,19 +31,25 @@
     </div>
     <div class="modal-scrollable">
         <div class="searchbar__query_container">
-            @foreach($friends as $key => $friend)
-                <x-friend :friend="$friend">
-                    <div class="actions">
-                        <button wire:click="toggleToChatroom({{ $key }})"
-                                class="add_to_chatroom {{ $this->isInTheChatroom($key) ? 'selected' : '' }}"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="left"
-                                title="{{ $this->isInTheChatroom($key) ? __('app.chatroom.add.already', ['user' => $friend->pseudo]) : __('app.chatroom.add', ['user' => $friend->pseudo]) }}">
-                            <span class="sr_only">{{ $this->isInTheChatroom($key) ? __('app.chatroom.add.already', ['user' => $friend->pseudo]) : __('app.chatroom.add', ['user' => $friend->pseudo]) }}</span>
-                        </button>
-                    </div>
-                </x-friend>
-            @endforeach
+            @if($friends->count())
+                @foreach($friends as $key => $friend)
+                    <x-friend :friend="$friend">
+                        <div class="actions">
+                            <button wire:click="toggleToChatroom({{ $key }})"
+                                    class="add_to_chatroom {{ $this->isInTheChatroom($key) ? 'selected' : '' }}"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="left"
+                                    title="{{ $this->isInTheChatroom($key) ? __('app.chatroom.add.already', ['user' => $friend->pseudo]) : __('app.chatroom.add', ['user' => $friend->pseudo]) }}">
+                                <span class="sr_only">{{ $this->isInTheChatroom($key) ? __('app.chatroom.add.already', ['user' => $friend->pseudo]) : __('app.chatroom.add', ['user' => $friend->pseudo]) }}</span>
+                            </button>
+                        </div>
+                    </x-friend>
+                @endforeach
+            @else
+                <p>
+                    {{ __('app.chatroom.add.search.nothing', ["search" => $query]) }}
+                </p>
+            @endif
         </div>
     </div>
     <div class="modal-footer">

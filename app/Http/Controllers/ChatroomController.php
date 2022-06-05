@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class MessageController extends Controller
+class ChatroomController extends Controller
 {
     public function show(Chatroom $chatroom)
     {

@@ -13,8 +13,8 @@
 
     <!-- Métadonnées, css et javascript -->
     @livewireStyles
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{ $metaData }}
 </head>
 <body>
@@ -22,10 +22,43 @@
         {{ __('Be Five, premier réseau social pour gamer') }}
     </h1>
     <!-- Header -->
-    <x-header></x-header>
+    <x-header :friends="$friends" :request-friends="$requestFriends" :medias="$medias"></x-header>
 
     <!-- Contenu -->
     <main class="main">
+        <div class="searchbar pointer" data-bs-toggle="modal" data-bs-target="#searchBar">
+            <div class="form special">
+                <div class="form__btn">
+                    <img src="{{ asset('parts/icons/outline/search-normal-1.svg') }}"
+                         alt>
+                </div>
+                <div class="form__search_container">
+                    <p class="form__search">
+                        {{ __('app.search.placeholder') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="searchBar"
+             class="modal modal-fade"
+             data-bs-backdrop="static"
+             data-bs-keyboard="false"
+             tabindex="-1"
+             aria-labelledby="staticBackdropLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal-special-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <livewire:search-bar :own-friends="$friends"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{ $content }}
     </main>
 

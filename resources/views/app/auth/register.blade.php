@@ -1,144 +1,81 @@
 <x-auth-layout>
     <x-slot name="title">
-        {{ __('Inscription à Be Five') }}
+        {{ __('auth.sign-up.title') }}
     </x-slot>
 
-
-
-    <x-slot name="metaData">
-
-    </x-slot>
-
-
+    <x-slot name="metaData"></x-slot>
 
     <x-slot name="content">
-        <div class="auth__right_container">
-            <div class="auth__logo_container">
-                <img src="{{ asset('parts/logo/befive_logo_white_background.svg') }}" class="auth__logo"
-                     alt="Logo de befive">
-
-                <p class="auth__slogan_phrase">
-                    {{ __('messages.slogan.phrase') }}
-                </p>
+        <div class="auth">
+            <div class="auth__logo">
+                <img src="{{ asset('parts/logo/be-five-chat-logo.svg') }}"
+                     alt="{{ __('logo.alt') }}"
+                     class="logo">
             </div>
 
+            <div class="auth__form">
+                <section class="hook">
+                    <h2 aria-level="2"
+                        role="heading"
+                        class="hook__title">
+                        {!! __('auth.sign-up.hook.title') !!}
+                    </h2>
 
-            <div class="auth__form_container">
-                <div class="auth__form_carrousel_overflow">
-                    <div class="auth__form_carrousel">
-                        <form action="{{ route('register') }}"
-                              method="post"
-                              class="auth__auth_form auth_form"
-                              id="check">
-                            @csrf
+                    <p class="hook__text">
+                        {!! __('auth.sign-up.hook.text') !!}
+                    </p>
+                </section>
 
-                            <p class="auth_form__title">
-                                {{ __('auth.sign-up.title') }}
-                            </p>
+                <form action="{{ route('register') }}"
+                      method="post"
+                      class="form">
+                    @csrf
 
-                            <div class="auth_form__field_container">
-                                <div class="auth_form__mega_field">
-                                    <div>
-                                        <label for="pseudo" title="{{ __('Veuillez inscrire votre pseudo') }}">
-                                            {{ __('Pseudo') }}
-                                        </label>
-                                    </div>
-                                    <div class="input_anim">
-                                        <input type="text"
-                                               id="pseudo"
-                                               name="pseudo"
-                                               value="{{ old('pseudo') }}"
-                                               placeholder="{{ __('Veuillez inscrire votre pseudo') }}">
-                                        <span></span>
-                                    </div>
+                    <x-field type="text"
+                             name="pseudo"
+                             id="pseudo"
+                             :notice="__('auth.pseudo.notice')"
+                             :labeltext="__('auth.pseudo.label')"
+                             :placeholder="__('auth.pseudo.placeholder')"
+                             :autocomplete="false"
+                             :required="true">
+                    </x-field>
 
-                                    @error('pseudo')
-                                        <span class="error">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
+                    <x-field type="email"
+                             name="email"
+                             id="email"
+                             :notice="__('auth.email.notice')"
+                             :labeltext="__('auth.email.label')"
+                             :placeholder="__('auth.email.placeholder')"
+                             :autocomplete="'email'"
+                             :required="true">
+                    </x-field>
 
-                                <div class="auth_form__mega_field">
-                                    <div>
-                                        <label for="email" title="{{ __('Veuillez inscrire votre adresse e-mail') }}">
-                                            {{ __('auth.field.email') }}
-                                        </label>
-                                    </div>
-                                    <div class="input_anim">
-                                        <input type="email"
-                                               id="email"
-                                               name="email"
-                                               value="{{ old('email') }}"
-                                               placeholder="{{ __('auth.field.email') }}">
-                                        <span></span>
-                                    </div>
+                    <x-field type="password"
+                             name="password"
+                             id="password"
+                             :notice="__('auth.password.notice')"
+                             :labeltext="__('auth.password.label')"
+                             :placeholder="__('auth.password.placeholder')"
+                             :autocomplete="'new-password'"
+                             :required="true">
+                    </x-field>
 
-                                    @error('email')
-                                        <span class="error">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
+                    <div class="actions">
+                        <input type="submit"
+                               value="{{ __('auth.sign-up') }}"
+                               class="btn btn-primary">
 
-                                <div class="auth_form__mega_field">
-                                    <div>
-                                        <label for="password"
-                                               title="{{ __('Veuillez inscrire votre mot de passe') }}">
-                                            {{ __('auth.field.password') }}
-                                        </label>
-                                    </div>
-
-                                    <div class="input_anim">
-                                        <input type="password"
-                                               id="password"
-                                               name="password"
-                                               placeholder="********">
-                                        <span></span>
-                                    </div>
-
-                                    @error('password')
-                                        <span class="error">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-
-                            <div class="auth_form__button_container">
-                                <input type="submit"
-                                       value="{{ __('auth.sign-up.btn') }}"
-                                       class="principal_button mb-625"
-                                       disabled>
-
-                                <a href="{{ route('password.request') }}" class="forgot_link">
-                                    {!! __('passwords.forget') !!}
-                                </a>
-
-                                <hr class="my-1">
-
-                                <p>
-                                    {!!  __('Already have an account&nbsp;?') !!}
-                                </p>
-
-                                <a href="{{ route('login') }}"
-                                   class="secondary_button mt-1">
-                                    {{ __('auth.sign-in.btn') }}
-                                </a>
-                            </div>
-                        </form>
+                        <p class="actions__secondary">
+                            <x-default-link :href="route('login')">
+                                {!!  __('auth.account') !!}
+                            </x-default-link>
+                        </p>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
-
-        </div>
     </x-slot>
 
-
-
-    <x-slot name="script">
-        <script src="{{ asset('js/formcheck.js') }}"></script>
-    </x-slot>
+    <x-slot name="script"></x-slot>
 </x-auth-layout>

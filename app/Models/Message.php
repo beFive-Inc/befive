@@ -4,32 +4,40 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Message extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'group_member_id',
+        'chatroom_user_id',
         'message_id',
-        'message',
-        'type'
+        'message'
     ];
 
-    public function getDateAttribute()
+    /**
+     * @return string
+     */
+    public function getDateAttribute(): string
     {
         return Carbon::parse($this->created_at)
             ->diffForHumans();
     }
 
-    public function member()
+    /**
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(ChatroomUser::class, 'group_member_id', 'id');
+        return $this->belongsTo(ChatroomUser::class, 'chatroom_user_id', 'id');
     }
 
-    public function group()
+
+    public function chatroom()
     {
-        return $this->hasOneThrough(Chatroom::class, ChatroomUser::class, 'group_id', 'id', 'group_member_id', 'id');
+        return $this->author()->with('chatroom');
     }
 }

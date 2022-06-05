@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('chatroom.{uuid}', function ($user, $uuid) {
     return $user;
 });
+
+Broadcast::channel('add-friend.{id}', function ($user, $id) {
+    return $user;
+});

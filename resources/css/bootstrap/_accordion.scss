@@ -1,0 +1,48 @@
+.accordion {
+
+    .accordion-item {
+        border: none;
+        box-shadow: none;
+
+        &:nth-of-type(even) {
+            .accordion-button {
+                background-color: darken($light-grey, 3);
+            }
+        }
+
+        .accordion-button {
+            font-size: 1.6rem;
+            font-weight: $font-medium;
+            background-color: $light-grey;
+
+            &:focus, &:hover {
+                border-color: transparent;
+                box-shadow: none;
+                background-color: rgba($primary, 0.1);
+            }
+
+            &:not(.collapsed) {
+                color: $primary;
+                background-color: rgba($primary, 0.2);
+                box-shadow: none;
+
+                &::after {
+                    background-image: var(--bs-accordion-btn-icon);
+                }
+            }
+        }
+    }
+
+    .accordion-body {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding-left: 2.5rem;
+        gap: 1.5rem;
+    }
+
+    .accordion-canal {
+        gap: 1rem;
+    }
+}

@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :friends="$friends" :request-friends="$requestFriends" :medias="$medias">
     <x-slot name="title">
         {{ __('Be Five | Homepage') }}
     </x-slot>
@@ -12,81 +12,85 @@
 
 
     <x-slot name="content">
-        <livewire:search-bar/>
-
         <div class="accordion">
-            @foreach($chatrooms as $chatroom)
-                @php $lastChatroom = $lastChatroom ?? $chatroom @endphp
-                @php $nextChatroom = $chatrooms->take($loop->iteration + 1)->reverse()->first() @endphp
-                @php $type = $chatroom->isCanal ?? $chatroom->isGroup @endphp
-
-                @if($chatroom->isCanal)
-                    @if($chatroom->isCanal != $lastChatroom->isCanal || $loop->first)
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                    {{ __('Canaux') }}
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                <div class="accordion-body">
-                    @endif
-
-                                    <x-canal :chatroom="$chatroom"></x-canal>
-
-                    @if($chatroom->isCanal != $nextChatroom->isCanal || $loop->last)
-                                </div>
-                            </div>
+            @if($canals->count())
+                <section class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            {{ __('app.canals') }}
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body accordion-canal">
+                            @foreach($canals as $chatroom)
+                                <livewire:canal :chatroom="$chatroom"/>
+                            @endforeach
                         </div>
-                    @endif
-                @elseif($chatroom->isGroup)
-                    @if($chatroom->isGroup != $lastChatroom->isgroup || $loop->first)
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                    {{ __('Groupe') }}
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
-                                <div class="accordion-body">
-                    @endif
-
-                                    <x-group-message :chatroom="$chatroom"></x-group-message>
-
-                    @if($chatroom->isGroup != $nextChatroom->isgroup || $loop->last)
-                                </div>
-                            </div>
+                    </div>
+                </section>
+            @endif
+            @if($groups->count())
+                <section class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                            {{ __('app.groups') }}
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+                        <div class="accordion-body">
+                            @foreach($groups as $chatroom)
+                                <livewire:group-message :chatroom="$chatroom" :friends="$friends"/>
+                            @endforeach
                         </div>
-                    @endif
-                @else
-                    @if($chatroom->isConversation != $lastChatroom->isConversation || $loop->first)
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                    {{ __('Amis') }}
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
-                                <div class="accordion-body">
-                    @endif
-
-                                    <x-friend-message :chatroom="$chatroom"></x-friend-message>
-
-                    @if($chatroom->isConversation != $nextChatroom->isConversation || $loop->last)
-                                </div>
-                            </div>
+                    </div>
+                </section>
+            @endif
+            @if($conversations->count())
+                <section class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                            {{ __('app.conversations') }}
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+                        <div class="accordion-body">
+                            @foreach($conversations as $chatroom)
+                                <livewire:conversation-message :chatroom="$chatroom" :friends="$friends"/>
+                            @endforeach
                         </div>
-                    @endif
-                @endif
-
-                @php $lastChatroom = $chatroom @endphp
-            @endforeach
+                    </div>
+                </section>
+            @endif
         </div>
     </x-slot>
 
 
 
     <x-slot name="script">
+        @foreach($chatrooms as $chatroom)
+            <script>
+                Echo.join(`chatroom.<?= $chatroom->uuid ?>`)
+                    .here(users => {
+                        console.log(users.length + ' utilisateurs')
+                    })
+                    .joining(user => {
+                        console.log(user.name + ' a rejoint')
+                    })
+                    .leaving(user => {
+                        console.log(user.name + ' est parti')
+                    })
+                    .listen('MessageSent', (e) => {
+                        window.livewire.emit('messageSent')
+                    });
+            </script>
+        @endforeach
 
+        <script>
+            Echo.join(`add-friend.1`)
+                .listen('FriendAdded', (e) => {
+                    console.log(e)
+                    window.livewire.emit('friendAdded');
+                });
+        </script>
     </x-slot>
 </x-layout>

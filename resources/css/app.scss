@@ -1,164 +1,23 @@
-@import "root";
+//** Reset
+@import "variables";
+@import "font";
 @import "reset";
+@import "base";
 
-html {
-    font-family: var(--base-font-family);
-    font-size: var(--base-font-size);
-    background-color: var(--background-color);
-}
+//** Bootstrap
+@import "bootstrap/default-class";
+@import "bootstrap/tooltip";
+@import "bootstrap/dropdown";
+@import "bootstrap/accordion";
+@import "bootstrap/modal";
 
-html, html * {
-    box-sizing: border-box;
-}
-
-hr {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-top: 1px solid var(--black10);
-}
-
-.sr_only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-.not_sr_only {
-    position: static;
-    width: auto;
-    height: auto;
-    padding: 0;
-    margin: 0;
-    overflow: visible;
-    clip: auto;
-    white-space: normal;
-}
-
-.mb-625 {
-    margin-bottom: .625rem;
-}
-
-.mt-1 {
-    margin-top: 1rem;
-}
-
-.my-1 {
-    margin: 1rem 0;
-}
-
-.forgot_link {
-    font-family: var(--base-font-family);
-    font-size: var(--base-font-size);
-    font-weight: var(--base-font-weight);
-    font-style: var(--base-font-style);
-    line-height: var(--base-line-height);
-    color: var(--blue-link);
-    text-decoration: none;
-    transition: all .5s ease;
-
-    &:active, &:hover, &:focus {
-        text-decoration: underline;
-    }
-}
-
-.principal_button {
-    font-family: var(--base-font-family);
-    font-size: var(--semi-title-font-size);
-    font-weight: var(--semi-title-font-weight);
-    font-style: var(--semi-title-font-style);
-    line-height: var(--semi-title-line-height);
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: var(--border-radius);
-    color: var(--white);
-    padding: 1rem 2rem;
-    opacity: 1;
-    border: 1px solid var(--principal-color);
-    background-color: var(--principal-color);
-    box-shadow: 0 0 0 var(--black10);
-    min-width: 14rem;
-    transition: all .5s ease;
-
-    &:not(:disabled):hover, &:not(:disabled):focus, &:not(:disabled):active {
-        transform: scale(1.1);
-        box-shadow: 3px 3px 10px var(--black10);
-    }
-
-    &:disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
-    }
-}
-
-.secondary_button {
-    font-family: var(--base-font-family);
-    font-size: var(--semi-title-font-size);
-    font-weight: var(--semi-title-font-weight);
-    font-style: var(--semi-title-font-style);
-    line-height: var(--semi-title-line-height);
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    color: var(--black);
-    padding: 1rem 2rem;
-    border: 1px solid var(--principal-color);
-    background-color: inherit;
-    min-width: 14rem;
-    text-align: center;
-    transition: all .5s ease;
-
-    &:hover, &:focus, &:active {
-        border: 1px solid var(--white);
-        background-color: var(--principal-color80);
-        color: var(--white);
-    }
-}
-
-.optional {
-    font-size: var(--date-font-size);
-    font-style: var(--hashtag-font-style);
-    font-weight: var(--hashtag-font-weight);
-    line-height: var(--hashtag-line-height);
-    color: var(--principal-color);
-}
-
-.error {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: .3rem;
-    font-size: var(--date-font-size);
-    font-style: var(--date-font-style);
-    font-weight: 600;
-    line-height: var(--date-line-height);
-    color: var(--red);
-    margin-top: .4rem;
-
-    &:before {
-        content: '';
-        display: block;
-        width: 1.5rem;
-        height: 1.5rem;
-        mask-image: url("/parts/icons/outline/info-circle.svg");
-        mask-repeat: no-repeat;
-        mask-size: 100%;
-        background-color: var(--red);
-    }
-}
-
-
-@import "parts/steps";
-@import "parts/header";
+//** Parts
 @import "parts/main";
-@import "parts/friendlist";
-@import "parts/menu";
-@import "parts/tooltip";
+@import "parts/button";
+@import "parts/auth";
+@import "parts/form";
+@import "parts/header";
 @import "parts/searchbar";
+@import "parts/chatroom";
+@import "parts/friendlist";
+

@@ -31,6 +31,8 @@
                 })
                 .listen('MessageSent', (e) => {
                     window.livewire.emit('messageSent', e.message)
+                }).listenForWhisper('typing', (e) => {
+                    console.log(e);
                 });
         </script>
     </x-slot>

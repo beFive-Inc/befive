@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
     {
         $hashtag = 1000;
         User::create([
+            'uuid' => Str::uuid(),
             'pseudo' => $pseudo = 'Thebester',
             'slug' => Str::slug($pseudo) . '.' . $hashtag,
             'name' => 'Hoens Anthony',
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
         $hashtag = 1426;
         User::create([
             'pseudo' => $pseudo = 'Nthn',
+            'uuid' => Str::uuid(),
             'slug' => Str::slug($pseudo) . '.' . $hashtag,
             'name' => 'Minsart Anthony',
             'hashtag' => $hashtag,
@@ -44,6 +46,7 @@ class UserSeeder extends Seeder
         $hashtag = 1007;
         User::create([
             'pseudo' => $pseudo = 'Khonix',
+            'uuid' => Str::uuid(),
             'slug' => Str::slug($pseudo) . '.' . $hashtag,
             'name' => 'Gilson Nicolas',
             'hashtag' => $hashtag,
@@ -56,6 +59,7 @@ class UserSeeder extends Seeder
         $hashtag = 1234;
         User::create([
             'pseudo' => $pseudo = 'Beauty',
+            'uuid' => Str::uuid(),
             'slug' => Str::slug($pseudo) . '.' . $hashtag,
             'name' => 'Belboom Natacha',
             'hashtag' => $hashtag,

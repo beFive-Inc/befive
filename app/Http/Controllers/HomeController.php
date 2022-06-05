@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\FriendAdded;
 use App\Models\Chatroom;
-use App\Models\Game;
-use App\Models\Post;
-use App\Models\Team;
+use App\Models\ChatroomUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +15,44 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $chatrooms = Auth::user()
-            ->getGroups();
+        $medias = auth()->user()
+            ->load('media')
+            ->media;
 
-        return view('app.home.index', compact( 'chatrooms'));
+        $chatrooms = auth()->user()
+            ->getChatrooms();
+
+        $requestFriends = auth()->user()
+            ->getFriendRequests()
+            ->load('media');
+
+        $friends = \auth()->user()
+            ->getFriends()
+            ->load('media');
+
+        $canals = $chatrooms->filter(function ($chatroom) {
+           return $chatroom->isCanal;
+        });
+
+        $groups = $chatrooms->filter(function ($chatroom) {
+            return $chatroom->isGroup;
+        });
+
+        $conversations = $chatrooms->filter(function ($chatroom) {
+            return $chatroom->isConversation;
+        });
+
+        return view(
+            'app.home.index',
+            compact(
+                'chatrooms',
+                'canals',
+                'groups',
+                'conversations',
+                'requestFriends',
+                'friends',
+                'medias'
+            )
+        );
     }
 }

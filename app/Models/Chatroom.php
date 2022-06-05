@@ -15,19 +15,55 @@ class Chatroom extends Model
 
     const CANAL = 'canal';
 
-    public function members(): HasMany
+    protected $fillable = [
+        'name',
+        'uuid',
+        'type'
+    ];
+
+    /**
+     * @return HasMany
+     */
+    public function authors(): HasMany
     {
-        return $this->hasMany(ChatroomUser::class, 'group_id', 'id');
+        return $this->hasMany(ChatroomUser::class, 'chatroom_id', 'id')->withTrashed();
     }
 
+    /**
+     * @return mixed
+     */
+    public function ownAuthor()
+    {
+        return $this->hasMany(ChatroomUser::class, 'chatroom_id', 'id')
+            ->withTrashed()
+            ->where('user_id', '=', auth()->id());
+    }
+
+    /**
+     * @return mixed
+     */
+    public function otherAuthor()
+    {
+        return $this->hasMany(ChatroomUser::class, 'chatroom_id', 'id')
+            ->withTrashed()
+            ->where('user_id', '!=', auth()->id());
+    }
+
+    /**
+     * @return HasManyThrough
+     */
     public function messages(): HasManyThrough
     {
-        return $this->hasManyThrough(Message::class, ChatroomUser::class, 'group_id',  'group_member_id', 'id', 'id');
+        return $this->hasManyThrough(Message::class, ChatroomUser::class, 'chatroom_id',  'chatroom_user_id', 'id', 'id')
+            ->orderBy('created_at', 'DESC');
     }
 
-    public function name(): HasOne
+    /**
+     * @return HasManyThrough
+     */
+    public function onlyFiveLastMessages(): HasManyThrough
     {
-        return $this->hasOne(ChatroomName::class, 'chatroom_id', 'id');
+        return $this->messages()->limit(1);
     }
 
     /**
@@ -37,7 +73,7 @@ class Chatroom extends Model
      */
     public function getIsGroupAttribute(): bool
     {
-        return $this->members->count() > 1 && $this->type !=  self::CANAL;
+        return $this->authors->count() > 2 && $this->type !=  self::CANAL;
     }
 
     /**
@@ -57,6 +93,6 @@ class Chatroom extends Model
      */
     public function getIsConversationAttribute(): bool
     {
-        return $this->members->count() == 1 && $this->type != self::CANAL;
+        return $this->authors->count() == 2 && $this->type != self::CANAL;
     }
 }

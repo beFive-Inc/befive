@@ -1,11 +1,63 @@
 .auth {
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    grid-gap: 1.5rem;
+    justify-content: flex-start;
+    padding: 9.5rem 0 4rem;
     min-height: 100vh;
-    padding: 0 11.25rem;
+    max-width: 62rem;
+    margin: 0 auto;
+    gap: 6rem;
+
+    .alert {
+        font-size: 1.3rem;
+        width: 100%;
+        margin-top: 2rem;
+        color: $white;
+
+        &.alert-success {
+            background-color: $success;
+            border: darken($success, 10);
+        }
+    }
+
+    &__logo {
+        height: 10rem;
+        overflow: hidden;
+
+        .logo {
+            width: auto;
+            height: 100%;
+        }
+    }
+
+    &__form {
+        display: block;
+        width: 100%;
+
+        .hook {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            width: 100%;
+            margin-bottom: 3rem;
+
+
+            &__title {
+                font-size: 1.8rem;
+                font-weight: $font-bold;
+            }
+
+            &__text {
+                font-size: 1.5rem;
+                font-weight: $font-regular;
+            }
+        }
+
+    }
 
     .message {
         display: flex;
@@ -29,7 +81,7 @@
             animation-timing-function: ease;
             overflow: hidden;
             border-radius: $border-radius;
-            background-color: $pure-white;
+            background-color: $white;
             width: 0;
             height: 0;
             padding: 0;
@@ -61,9 +113,6 @@
             align-items: center;
             justify-content: center;
             gap: 0.625rem;
-            font-family: $base-font-family;
-            font-size: $semi-title-font-size;
-            font-weight: $semi-title-font-weight;
             white-space: nowrap;
         }
     }
@@ -109,534 +158,5 @@
             height: 0;
             padding: 0;
         }
-    }
-
-    &__linear_position {
-        position: relative;
-        grid-column: 1 / 5;
-        grid-row: 1 / 2;
-        min-height: 100vh;
-    }
-
-    &__linear_gradient {
-        position: absolute;
-        top: 0;
-        left: -11.25rem;
-        right: 0;
-        bottom: 0;
-        background: $secondary-color;
-        background: linear-gradient(135deg, $secondary-color 0%, $principal-color 100%);
-        z-index: -5;
-    }
-
-    .nav {
-
-        &__list {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 2.5rem;
-            counter-reset: listItem;
-        }
-
-        &__list_item {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 1rem;
-            font-size: $text-font-size;
-            font-weight: $text-font-weight;
-            font-style: $text-font-style;
-            line-height: $text-line-height;
-            color: $black;
-            text-decoration: none;
-            transition: all .5s ease;
-
-            &:before {
-                counter-increment: listItem;
-                content: counter(listItem);
-                font-size: $semi-title-font-size;
-                font-weight: $semi-title-font-weight;
-                font-style: $semi-title-font-style;
-                line-height: $semi-title-line-height;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 2rem;
-                height: 2rem;
-                border-radius: 6px;
-                color: $black;
-                background-color: $black10;
-                transition: all .5s ease;
-            }
-
-            &.active {
-                font-size: $semi-title-font-size;
-                font-weight: $semi-title-font-weight;
-
-                &:before {
-                    color: $white;
-                    background-color: $principal-color;
-                }
-            }
-
-        }
-
-
-    }
-
-    &__slogan_phrase {
-        font-size: $title-font-size;
-        font-weight: $semi-title-font-weight;
-        font-style: $semi-title-font-style;
-        line-height: $semi-title-line-height;
-    }
-
-    .preview_card {
-        position: relative;
-        height: 100vh;
-        grid-column: 1 / 4;
-        grid-row: 1 / 2;
-    }
-
-    .item {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        opacity: 1;
-        transform: translate(0, -50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 1.5rem;
-        border-radius: $border-radius;
-        background-color: $white;
-        transition: all .5s ease;
-
-        &:nth-of-type(1) {
-            z-index: 5;
-        }
-
-        &:nth-of-type(2) {
-            z-index: -1;
-        }
-
-        &__logo {
-            width: 11.25rem;
-            margin-bottom: 3rem;
-
-            & img {
-                width: 100%;
-            }
-        }
-
-        &__title {
-            display: block;
-            width: 100%;
-            font-family: $base-font-family;
-            font-size: $title-font-size;
-            font-weight: $title-font-weight;
-            font-style: $title-font-style;
-            line-height: $title-line-height;
-            color: $black;
-            text-align: left;
-            margin-bottom: 1rem;
-        }
-    }
-
-    .item_hide {
-        opacity: 0;
-    }
-
-    .preview_card_start {
-        opacity: 0;
-    }
-
-    .preview_card_end {
-        opacity: 1;
-    }
-
-    &__form_carrousel_overflow {
-        overflow: hidden;
-        width: 100%;
-    }
-
-    &__form_carrousel {
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: 1.5rem;
-        width: 100%;
-
-        &.form_carrousel-2 {
-            width: calc(200% + calc(1.5rem));
-        }
-    }
-
-    &__right_container {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        gap: 2rem;
-        grid-column: 6 / 9;
-    }
-
-    &__logo_container {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        align-items: center;
-        justify-content: center;
-
-        & img {
-            height: 7.5rem;
-        }
-    }
-
-    &__logo {
-        width: auto;
-        height: 100%;
-    }
-
-    &__form_container {
-        display: flex;
-        position: relative;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 2rem;
-        grid-column: 5 / 10;
-        grid-row: 1 / 2;
-        border-radius: $border-radius;
-        background-color: $white;
-        box-shadow: $auth-box-shadow;
-
-
-        .auth_form {
-            width: 100%;
-            padding: 1.5rem;
-            max-height: 40rem;
-            border-radius: $border-radius;
-            background-color: $pure-white;
-            transition: max-height 1s ease, all 1s ease;
-
-            & input::-webkit-file-upload-button {
-                width: 1.25rem;
-                height: 1.25rem;
-                mask-image: url("/parts/icons/outline/gallery.svg");
-                mask-size: auto 100%;
-                mask-repeat: no-repeat;
-                background-color: $black;
-                text-indent: -9999px;
-                border: none;
-                margin-right: .5rem;
-            }
-
-            &__progression {
-                display: block;
-                font-size: $date-font-size;
-                font-weight: $date-font-weight;
-                font-style: $date-font-style;
-                line-height: $date-line-height;
-                color: $black50;
-                margin-bottom: 0.125rem;
-            }
-
-            &__title {
-                display: block;
-                font-size: $title-font-size;
-                font-weight: $title-font-weight;
-                font-style: $title-font-style;
-                line-height: $title-line-height;
-                color: $black;
-                margin-bottom: 2rem;
-            }
-
-            &__games_card {
-                display: flex;
-                flex-direction: column;
-                align-items: stretch;
-                width: 100%;
-                gap: .5rem;
-                max-height: 15rem;
-                overflow-y: scroll;
-
-
-                .game {
-                    padding: 1rem;
-                    border-radius: $border-radius;
-
-                    &.checked {
-                        border: 1px solid $principal-color;
-                    }
-
-                    &:hover {
-                        background-color: $black10;
-                    }
-                }
-            }
-
-
-            &__field_container {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-                gap: 1.5rem;
-                row-gap: 1rem;
-                margin-bottom: 2rem;
-            }
-
-            &__full_field, &__semi_field, &__mega_field {
-                .input_anim {
-                    position: relative;
-
-                    & input, & select, & textarea {
-                        &:focus, &:active {
-                            position: relative;
-                            padding-left: calc(1rem + 11px);
-                            &+span:before {
-                                content: '';
-                                position: absolute;
-                                left: 1rem;
-                                top: 50%;
-                                display: block;
-                                width: 6px;
-                                height: 6px;
-                                background-color: $principal-color;
-                                transform: translateY(-50%) rotate(45deg);
-                                animation: inputOpacity .5s .5 ease forwards;
-                            }
-                        }
-                    }
-                }
-                & label {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    font-family: $base-font-family;
-                    font-size: $date-font-size;
-                    font-weight: $semi-title-font-weight;
-                    font-style: $semi-title-font-style;
-                    line-height: $date-line-height;
-                    color: $black;
-                    margin-bottom: 0.325rem;
-                }
-
-                & input, & select, & textarea {
-                    font-size: $text-font-size;
-                    font-weight: $text-font-weight;
-                    font-style: $text-font-style;
-                    line-height: $text-line-height;
-                    color: $black;
-                    padding: 0.625rem;
-                    border-radius: 6px;
-                    border: 1px solid $black20;
-                    transition: all .3s ease;
-                    background-color: $pure-white;
-
-                    &:hover, &:focus-visible, &:focus, &:active {
-                        outline: none;
-                        border: 1px solid $principal-color;
-
-                        &::-webkit-file-upload-button {
-                            background-color: $principal-color;
-                        }
-                    }
-                }
-            }
-
-            @keyframes inputOpacity {
-                0% {
-                    opacity: 0;
-                }
-                100% {
-                    opacity: 1;
-                }
-            }
-
-            &__full_field {
-                width: 100%;
-
-                & label {
-                    width: calc(50% - calc(1.5rem / 2));
-                }
-
-                & input, & select, & textarea {
-                    width: calc(50% - calc(1.5rem / 2));
-                }
-            }
-
-            &__mega_field {
-                width: 100%;
-
-                & label {
-                    width: 100%;
-                }
-
-                & input, & select, & textarea {
-                    width: 100%;
-                }
-            }
-
-            &__semi_field {
-                width: calc(50% - calc(1.5rem / 2));
-
-                & label {
-                    width: 100%;
-                }
-
-                & input, & select, & textarea {
-                    width: 100%;
-                }
-            }
-
-            &__button_container {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                flex-wrap: wrap;
-                justify-content: flex-end;
-                align-items: center;
-            }
-
-            &__button_container_special {
-                padding: 0 1.5rem;
-                border-radius: $border-radius;
-            }
-        }
-
-        .auth_form_second {
-            transform: translateX(calc(-100% - 1.5rem));
-        }
-
-        .auth_form_better_render {
-            max-height: 40rem;
-            animation: maxHeightAnim 1s ease forwards;
-        }
-
-        @keyframes maxHeightAnim {
-            0% {
-                max-height: 40rem;
-            }
-            100% {
-                max-height: 13rem;
-            }
-        }
-    }
-}
-
-.user_card {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: $border-radius;
-    background-color: $black40;
-
-
-    &__title {
-        display: block;
-        font-size: $semi-title-font-size;
-        font-weight: $semi-title-font-weight;
-        font-style: $semi-title-font-style;
-        line-height: $semi-title-line-height;
-        color: $white;
-        z-index: 1;
-    }
-
-    &__info {
-        z-index: 1;
-    }
-
-    &__hashtag {
-        font-size: $hashtag-font-size;
-        font-weight: $hashtag-font-weight;
-        font-style: $hashtag-font-style;
-        line-height: $hashtag-line-height;
-        z-index: 1;
-    }
-
-    &__name {
-        display: block;
-        font-size: $date-font-size;
-        font-weight: $date-font-weight;
-        font-style: $date-font-style;
-        line-height: $date-line-height;
-        text-transform: uppercase;
-        color: $white;
-        z-index: 1;
-    }
-
-    &__profilpic {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        width: 3rem;
-        height: 3rem;
-        border-radius: $border-radius;
-        z-index: 1;
-        background-color: #F2F2F2;
-
-        & img {
-            width: 100%;
-        }
-    }
-
-    &__bannerpic {
-        position: absolute;
-        width: 100%;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        border-radius: $border-radius;
-        overflow: hidden;
-        z-index: 0;
-
-        & img {
-            width: 100%;
-        }
-    }
-}
-
-.step__auth {
-    .auth__form_container {
-        padding: 1.5rem;
-        background-color: $pure-white;
-
-        .auth__auth_form {
-            background-color: $white;
-        }
-    }
-
-    .auth_form__field_container {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .auth_form__button_container {
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 2rem;
     }
 }

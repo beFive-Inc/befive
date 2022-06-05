@@ -15,8 +15,11 @@ class CreateChatroomUsersTable extends Migration
     {
         Schema::create('chatroom_users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('group_id')->constrained();
+            $table->foreignId('chatroom_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->string('name')->nullable();
+            $table->string('status')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

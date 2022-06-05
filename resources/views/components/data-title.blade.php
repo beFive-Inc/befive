@@ -1,14 +1,14 @@
 <div class="tooltip__container">
     <div class="tooltip__img">
-        <img src="@foreach($chatroom->members as $member){{ $member->user?->getFirstMedia('profile')?->getUrl() }}@endforeach" alt="">
+        <img src="{{ $chatroom->authors->first()->user?->getFirstMedia('profile')?->getUrl() ?? asset('parts/user/profile_img.webp') }}" alt="">
     </div>
     <div class="tooltip_info">
         <h3 aria-level="3" role="heading">
             @if($chatroom->name)
-                {{ $chatroom->name->title }}
+                {{ $chatroom->name }}
             @else
-                @foreach($chatroom->members as $member)
-                    {{ $member->user->pseudo }}
+                @foreach($chatroom->authors as $author)
+                    {{ $author->user->pseudo }}
                 @endforeach
             @endif
         </h3>

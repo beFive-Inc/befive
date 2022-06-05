@@ -31,9 +31,9 @@ class ChatroomPolicy
      */
     public function view(User $user, Chatroom $chatroom)
     {
-        return $chatroom->members
-            ->filter(function($member) use ($user) {
-                return $member->user->id === $user->id;
+        return $chatroom->authors
+            ->filter(function($author) use ($user) {
+                return $author->user->id === $user->id;
             })->count()
             ? Response::allow()
             : Response::deny(__('Vous ne faites pas partie de cette conversation'));

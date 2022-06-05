@@ -12,8 +12,6 @@
 
 
     <x-slot name="content">
-        <livewire:search-bar/>
-
         <div>
             <livewire:friend-list/>
         </div>

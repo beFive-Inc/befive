@@ -4,18 +4,23 @@ namespace App\Traits;
 
 use App\Models\Chatroom;
 use App\Models\ChatroomUser;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
+
 
 trait Messageable
 {
 
     /**
-     * @param bool $removeOwnUser Bool for removing Own User
+     * @param bool $removeSoftDelete Bool for removing soft delete
      * @return Collection
      */
-    public function getGroups(bool $removeOwnUser = true) : Collection
+    public function getChatrooms(bool $removeSoftDelete = true) : Collection
     {
-        $collection = $removeOwnUser ? $this->removeOwnUser() : $this->getGroupsWithAll();
+        $collection = $this->getChatroomsWithAll();
+
+        if ($removeSoftDelete) {
+            $collection = $this->removeSoftDelete($collection);
+        }
 
         return $this->sort($collection);
     }
@@ -23,63 +28,86 @@ trait Messageable
     /**
      * @return Collection
      */
-    public function removeOwnUser(): Collection
+    public function getChatroomsWithAll() : Collection
     {
-        return $this->groups()
-            ->with('members.user', 'messages', 'name')
-            ->get()
-            ->each(function ($group) {
-                return $group->members = $group->members->filter(function ($member) {
-                    return $member->user->id != \Auth::id();
-                });
-            });
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getGroupsWithAll() : Collection
-    {
-        return $this->groups()
-            ->with('members.user', 'messages', 'name')
+        return $this->chatrooms()
+            ->with(['authors.user', 'messages.author.user'])
             ->get();
     }
 
-    public function sort(Collection $collection): Collection
-    {
-        $newCollection = $this->sortByGroup($collection);
-        return $this->sortByCanal($newCollection);
-    }
-
     /**
-     * Sort a collection by canal
-     *
      * @param Collection $collection
      * @return Collection
      */
-    public function sortByCanal(Collection $collection): Collection
+    public function removeSoftDelete(Collection $collection): Collection
     {
-        return $collection->sort(function ($a, $b) {
-            $al = $a->isCanal;
-            $bl = $b->isCanal;
-            if ($al == $bl) {
-                return 0;
-            }
-            return ($al < $bl) ? +1 : -1;
+        return $collection->filter(function ($chatroom) {
+            return $chatroom->authors->filter(function ($author) {
+                return empty($author->deleted_at) && $author->user->id === auth()->id();
+            })->count();
         });
     }
 
     /**
-     * Sort a collection by group
+     * @param Collection $collection
+     * @return Collection
+     */
+    public function sort(Collection $collection): Collection
+    {
+        return $this->orderByCreatedAt($collection);
+    }
+
+    /**
+     * Group a collection by canal
      *
      * @param Collection $collection
      * @return Collection
      */
-    public function sortByGroup(Collection $collection): Collection
+    public function groupByCanal(Collection $collection): Collection
+    {
+        return $collection->groupBy(function ($chatroom) {
+            return $chatroom->isCanal;
+        })->collapse();
+    }
+
+    /**
+     * Group a collection by group
+     *
+     * @param Collection $collection
+     * @return Collection
+     */
+    public function groupByGroup(Collection $collection): Collection
+    {
+        return $collection->groupBy(function ($chatroom) {
+            return $chatroom->isGroup;
+        })->collapse();
+    }
+
+    /**
+     * Group a collection by conversation
+     *
+     * @param Collection $collection
+     * @return Collection
+     */
+    public function groupByConversation(Collection $collection): Collection
+    {
+        return $collection->groupBy(function ($chatroom) {
+            return $chatroom->isConversation;
+        })->collapse();
+    }
+
+    /**
+     * Order by created_at collection
+     *
+     * @param Collection $collection
+     * @return Collection
+     */
+    public function orderByCreatedAt(Collection $collection): Collection
     {
         return $collection->sort(function ($a, $b) {
-            $al = $a->isGroup;
-            $bl = $b->isGroup;
+            $al = $a->messages->first()->created_at;
+            $bl = $b->messages->first()->created_at;
+
             if ($al == $bl) {
                 return 0;
             }

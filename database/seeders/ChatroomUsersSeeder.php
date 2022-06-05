@@ -16,9 +16,9 @@ class ChatroomUsersSeeder extends Seeder
      */
     public function run()
     {
-        $groups = Chatroom::all();
+        $chatrooms = Chatroom::all();
 
-        foreach ($groups as $group) {
+        foreach ($chatrooms as $chatroom) {
             $rand = rand(0, 100);
             $user = User::all()
                 ->except(1)
@@ -31,18 +31,18 @@ class ChatroomUsersSeeder extends Seeder
                 ->first();
 
             ChatroomUser::create([
-                'group_id' => $group->id,
+                'chatroom_id' => $chatroom->id,
                 'user_id' => $user->id,
             ]);
 
             ChatroomUser::create([
-                'group_id' => $group->id,
+                'chatroom_id' => $chatroom->id,
                 'user_id' => 1,
             ]);
 
             if ($rand >= 75) {
                 ChatroomUser::create([
-                    'group_id' => $group->id,
+                    'chatroom_id' => $chatroom->id,
                     'user_id' => $otherUser->id,
                 ]);
             }

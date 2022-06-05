@@ -6,18 +6,21 @@ use App\Events\MessageSent;
 use App\Models\ChatroomUser;
 use App\Models\Message;
 use App\Models\Chatroom as ChatroomModel;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class Chatroom extends Component
 {
     public ChatroomModel $chatroom;
     public ChatroomUser $authIngroup;
-    public $message;
+    public string $message = '';
 
-    public $messages;
+    public bool $isSender = false;
+
+    public Collection $messages;
 
     protected $listeners = [
-        'messageSent' => 'addMessage',
+        'messageSent' => 'EchoGetMessage',
     ];
 
     public function mount()
@@ -25,10 +28,18 @@ class Chatroom extends Component
         $this->messages = $this->chatroom->messages;
     }
 
+    public function EchoGetMessage($message)
+    {
+        if (!$this->isSender) {
+            $this->messages->prepend(Message::find($message['id']));
+        }
+        $this->resetIsSender();
+    }
+
     public function send()
     {
         $message = Message::create([
-            'group_member_id' => $this->authIngroup->id,
+            'chatroom_user_id' => $this->authIngroup->id,
             'message_id' => null,
             'message' => $this->message,
             'type' => 'message'
@@ -36,22 +47,28 @@ class Chatroom extends Component
 
         $this->message = '';
 
+        $this->messages->prepend($message);
+
+        $this->isSenderToTrue();
+
         broadcast(new MessageSent($message, $this->chatroom->uuid));
+    }
+
+    public function isSenderToTrue()
+    {
+        $this->isSender = true;
+    }
+
+    public function resetIsSender()
+    {
+        $this->isSender = false;
     }
 
     public function check()
     {
-        $specialCharacter = \Str::contains($this->message,' @');
+        if (\Str::contains($this->message,'@')) {
 
-        if ($specialCharacter) {
-            dd($specialCharacter);
         }
-    }
-
-    public function addMessage($message)
-    {
-        $realMessage = Message::find($message['id']);
-        $this->messages->push($realMessage);
     }
 
     public function render()

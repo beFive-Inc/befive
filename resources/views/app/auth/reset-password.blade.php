@@ -1,65 +1,72 @@
-@extends('layouts.app')
+<x-auth-layout>
+    <x-slot name="title">
+        {{ __('Connexion à Be Five') }}
+    </x-slot>
 
-@section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Reset Password') }}</div>
+    <x-slot name="metaData"></x-slot>
 
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('password.update') }}">
-                            @csrf
+    <x-slot name="content">
+        <div class="auth">
+            <div class="auth__logo">
+                <img src="{{ asset('parts/logo/be-five-chat-logo.svg') }}"
+                     alt="{{ __('logo.alt') }}"
+                     class="logo">
+            </div>
 
-                            <input type="hidden" name="token" value="{{ request()->route('token') }}">
 
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+            <div class="auth__form">
+                <section class="hook">
+                    <h2 aria-level="2"
+                        role="heading"
+                        class="hook__title">
+                        {{ __('passwords.reset.title') }}
+                    </h2>
+                </section>
 
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('emails') is-invalid @enderror" name="email" value="{{ request()->get('emails') ?? old('emails') }}" required autocomplete="email" autofocus>
+                <form action="{{ route('password.update') }}"
+                      method="post"
+                      class="form">
+                    @csrf
 
-                                    @error('emails')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+                    <x-field type="email"
+                             name="email"
+                             id="email"
+                             :notice="__('auth.email.notice')"
+                             :labeltext="__('auth.email.label')"
+                             :placeholder="__('auth.email.placeholder')"
+                             :autocomplete="'email'"
+                             :required="true">
+                    </x-field>
 
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                    <x-field type="password"
+                             name="password"
+                             id="password"
+                             :notice="__('auth.password.notice')"
+                             :labeltext="__('auth.password.label')"
+                             :placeholder="__('auth.password.placeholder')"
+                             :autocomplete="'new-password'"
+                             :required="true">
+                    </x-field>
 
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                    <x-field type="password"
+                             name="password_confirmation"
+                             id="password_confirmation"
+                             :notice="__('auth.new.password.notice')"
+                             :labeltext="__('auth.new.password.label')"
+                             :placeholder="__('auth.new.password.placeholder')"
+                             :autocomplete="'new-password'"
+                             :required="true">
+                    </x-field>
 
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Reset Password') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="actions">
+                        <input type="submit"
+                               value="{{ __('passwords.reset.title') }}"
+                               class="btn btn-primary">
                     </div>
-                </div>
+                </form>
             </div>
         </div>
-    </div>
-@endsection
+    </x-slot>
+
+    <x-slot name="script"></x-slot>
+</x-auth-layout>

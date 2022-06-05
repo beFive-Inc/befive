@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use App\Traits\Operator;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,6 +11,8 @@ use function React\Promise\map;
 
 class FriendList extends Component
 {
+    use Operator;
+
     public Collection $friendships;
     public int $intervalRefresh = 30 * 1000;
     public bool $generalView = true;
@@ -21,12 +24,6 @@ class FriendList extends Component
         return auth()->user()->getFriends()->load('media')->sortByDesc(function ($friend) {
             return $friend->isOnline();
         })->take($this->limitFriends);
-    }
-
-    protected function likeOperator($pattern, $subject): bool
-    {
-        $pattern = str_replace('%', '.*', preg_quote($pattern, '/'));
-        return preg_match("/^{$pattern}$/i", $subject);
     }
 
     protected function getSearchingFriends($friends): Collection

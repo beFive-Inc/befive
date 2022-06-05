@@ -7,14 +7,21 @@ use Illuminate\View\Component;
 class Friend extends Component
 {
     public $friend;
+    public $onlyImageAndName;
+    public $actionsToAdd;
+    public $actionsToSearch;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($friend)
+    public function __construct($friend, $actionsToAdd = false, $actionsToSearch = false, $onlyImageAndName = false)
     {
         $this->friend = $friend;
+        $this->actionsToAdd = $actionsToAdd;
+        $this->actionsToSearch = $actionsToSearch;
+        $this->onlyImageAndName = $onlyImageAndName;
     }
 
     /**

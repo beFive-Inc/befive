@@ -26,6 +26,7 @@ class UserFactory extends Factory
         $hashtag = $this->faker->numberBetween(1000, 9999);
         return [
             'pseudo' => $name,
+            'uuid' => Str::uuid(),
             'name' => $this->faker->name,
             'slug' => Str::slug($name) . '.' . $hashtag,
             'hashtag' => $hashtag,

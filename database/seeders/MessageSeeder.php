@@ -39,12 +39,13 @@ class MessageSeeder extends Seeder
             for($i = 0; $i < $randMessage; $i++) {
                 $randMessageAction = rand(0, 100);
                 $messageAction = Message::all()
-                    ->where('group_member_id', $member->id);
+                    ->where('chatroom_user_id', $member->id);
 
                 Message::create([
-                    'group_member_id' => $member->id,
+                    'chatroom_user_id' => $member->id,
                     'message_id' => $randMessageAction > 75 && count($messageAction) ? $messageAction->shuffle()->first()->id : null,
                     'message' => $message->shuffle()->first(),
+                    'view_at' => now(),
                 ]);
             }
         }

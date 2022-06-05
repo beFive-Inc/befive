@@ -21,4 +21,9 @@ return [
     'accept' => 'Accept',
     'deny' => 'Deny',
     'offline.status' => 'Offline since :time ago',
+    'options' => 'Paramètres pour cet ami',
+    'delete' => 'Supprimer cet ami',
+    'block' => 'Bloquer cet utilisateur',
+    'unblock' => 'Débloquer cet utilisateur',
+    'rename' => 'Renommer votre ami',
 ];

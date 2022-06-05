@@ -3,13 +3,13 @@
 
     <h1 role="heading" aria-level="1">
         @if($chatroom->name)
-            {{ $chatroom->name->title }}
+            {{ $chatroom->name }}
         @else
-            @foreach($chatroom->members as $member)
+            @foreach($chatroom->authors as $author)
                 @if($loop->last)
-                    {{ $member->user->pseudo }}
+                    {{ $author->user->pseudo }}
                 @else
-                    {{ $member->user->pseudo }},
+                    {{ $author->user->pseudo }},
                 @endif
             @endforeach
         @endif

@@ -19,5 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/test', function (){
-    return \App\Models\ChatroomName::with('chatroom')->get();
+    return \App\Models\User::with('type')->get();
 });

@@ -3,81 +3,56 @@
         {{ __('Connexion à Be Five') }}
     </x-slot>
 
-
-    <x-slot name="metaData">
-
-    </x-slot>
+    <x-slot name="metaData"></x-slot>
 
     <x-slot name="content">
-        <div class="auth__right_container">
-            <div class="auth__logo_container">
-                <img src="{{ asset('parts/logo/befive_logo_white_background.svg') }}"
-                     class="auth__logo"
-                     alt="Logo de befive">
-
-                <p class="auth__slogan_phrase">
-                    {{ __('messages.slogan.phrase') }}
-                </p>
+        <div class="auth">
+            <div class="auth__logo">
+                <img src="{{ asset('parts/logo/be-five-chat-logo.svg') }}"
+                     alt="{{ __('logo.alt') }}"
+                     class="logo">
             </div>
 
 
-            <div class="auth__form_container">
-                <div class="auth__form_carrousel_overflow">
-                    <div class="auth__form_carrousel">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+            <div class="auth__form">
+                <section class="hook">
+                    <h2 aria-level="2"
+                        role="heading"
+                        class="hook__title">
+                        {{ __('passwords.reset.title') }}
+                    </h2>
+                </section>
 
-                        <form action="{{ route('password.email') }}"
-                              method="post"
-                              class="auth__auth_form auth_form"
-                              id="check">
-                            @csrf
+                <form action="{{ route('password.email') }}"
+                      method="post"
+                      class="form">
+                    @csrf
 
-                            <p class="auth_form__title">
-                                {{ __('Reset Password') }}
-                            </p>
+                    <x-field type="email"
+                             name="email"
+                             id="email"
+                             :notice="__('auth.email.notice')"
+                             :labeltext="__('auth.email.label')"
+                             :placeholder="__('auth.email.placeholder')"
+                             :autocomplete="true"
+                             :required="true">
+                    </x-field>
 
-                            <div class="auth_form__field_container">
-                                <div class="auth_form__mega_field">
-                                    <div>
-                                        <label for="email" title="{{ __('Veuillez inscrire votre adresse e-mail') }}">
-                                            {{ __('auth.field.email') }}
-                                        </label>
-                                    </div>
-                                    <div class="input_anim">
-                                        <input type="email"
-                                               id="email"
-                                               name="email"
-                                               value="{{ old('email') }}"
-                                               placeholder="{{ __('auth.field.email') }}">
-                                        <span></span>
-                                    </div>
-
-                                    @error('email')
-                                        <span class="error">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="auth_form__button_container">
-                                <input type="submit"
-                                       value="{{ __('Send Password Reset Link') }}"
-                                       class="principal_button mb-625"
-                                       disabled>
-                            </div>
-                        </form>
+                    <div class="actions">
+                        <input type="submit"
+                               value="{{ __('passwords.send') }}"
+                               class="btn btn-primary">
                     </div>
-                </div>
+                </form>
+
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
             </div>
         </div>
     </x-slot>
 
-    <x-slot name="script">
-
-    </x-slot>
+    <x-slot name="script"></x-slot>
 </x-auth-layout>

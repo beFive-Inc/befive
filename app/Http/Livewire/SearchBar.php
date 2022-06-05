@@ -4,11 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Message;
 use App\Models\User;
+use App\Traits\Operator;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class SearchBar extends Component
 {
+    use Operator;
     const LIMIT = 5;
     const SUGGEST_LIMIT = 15;
 
@@ -19,16 +21,13 @@ class SearchBar extends Component
 
     public Collection $ownFriends;
 
-    public string $query;
+    public string $query = '';
 
     public bool $isShowed;
 
     public function mount()
     {
         $this->isShowed = false;
-        $this->query = '';
-
-        $this->ownFriends = \Auth::user()->getFriends();
     }
 
     /**
@@ -48,27 +47,14 @@ class SearchBar extends Component
     }
 
     /**
-     * @param $pattern
-     * @param $subject
-     * @return bool
-     */
-    public function likeOperator($pattern, $subject): bool
-    {
-        $pattern = str_replace('%', '.*', preg_quote($pattern, '/'));
-        return preg_match("/^{$pattern}$/i", $subject);
-    }
-
-    /**
      * @return Collection
      */
     public function showSuggests(): Collection
     {
-        return $this->ownFriends->map(function ($friend) {
-           return $friend->getFriends()
-               ->filter(function ($friendFromFriend) use ($friend) {
-                    return $friendFromFriend->id != \Auth::id();
-               });
-        })->collapse()
+        return auth()->user()
+            ->getFriendsOfFriends()
+            ->load('media')
+            ->diffKeys($this->ownFriends)
             ->take(self::SUGGEST_LIMIT);
     }
 
@@ -88,9 +74,6 @@ class SearchBar extends Component
     public function getOtherPeople(): Collection
     {
         return User::where('pseudo', 'LIKE', "%$this->query%")
-            ->where('pseudo', '!=', \Auth::user()->pseudo)
-            ->orWhere('hashtag', 'LIKE', "%$this->query%")
-            ->orWhere('name', 'LIKE', "%$this->query%")
             ->whereNotIn('id', $this->ownFriends->map(function ($friend) {
                 return $friend->id;
             }))
@@ -100,7 +83,7 @@ class SearchBar extends Component
 
     public function getMessages()
     {
-        return Message::whereHas('member', function ($query) {
+        return Message::whereHas('author', function ($query) {
                 return $query->where('user_id', '=', \Auth::id());
             })->where('message', 'LIKE', "%$this->query%")
             ->limit(self::LIMIT)

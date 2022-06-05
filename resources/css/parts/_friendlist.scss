@@ -1,105 +1,51 @@
-.friends_group {
-    position: sticky;
-    top: 8.5625rem;
-    grid-column: 8 / 10;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.friends {
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    background-color: var(--pure-white);
-    box-shadow: var(--box-shadow);
-    transition: all 1s ease;
-
-    &__title {
-        font-size: var(--title-font-size);
-        font-weight: var(--title-font-weight);
-        font-style: var(--title-font-style);
-        color: var(--black);
-        margin-bottom: 1rem;
-    }
-
-    .form {
-        margin-bottom: 1.5rem;
-    }
-
-    .nav {
-        margin-bottom: 1rem;
-
-        &__list {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-
-            & li {
-                display: inline-block;
-            }
-
-            & a {
-                font-size: var(--semi-title-font-size);
-                font-weight: var(--semi-title-font-weight);
-                font-style: var(--semi-title-font-style);
-                color: var(--black);
-                text-decoration: none;
-                transition: all .3s ease;
-
-                &.active {
-                    border-bottom: 1px solid var(--secondary-color);
-                    padding: 0 2px;
-                }
-            }
-        }
-    }
-
-    &__container {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        gap: 0.625rem;
-        min-height: 15rem;
-        max-height: 25rem;
-        overflow: auto;
-        transition: all 1s ease;
-    }
-}
-
 .friend {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     width: 100%;
-    gap: 0.625rem;
-    border-radius: var(--border-radius);
+    gap: 1rem;
     background-color: inherit;
-    padding: 3px;
 
-    &:hover {
-        background-color: var(--black10);
+    &__container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+
+        &.special {
+            flex-direction: column;
+            gap: .5rem;
+        }
     }
 
-    .last_online {
-        font-size: var(--date-font-size);
-        font-weight: var(--date-font-weight);
-        font-style: var(--date-font-style);
-        line-height: var(--date-line-height);
-        color: var(--black50);
+    &__selected {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 1.5rem;
+        flex-wrap: nowrap;
+        overflow-y: auto;
+        padding-bottom: 1rem;
+        margin-bottom: 2.5rem;
+
+        .friend {
+            width: auto;
+        }
+    }
+
+    &__hashtag {
+        font-size: 1.2rem;
+        font-weight: $font-medium;
+        color: lighten($dark-grey, 45);
     }
 
     &__pseudo {
-        font-size: var(--semi-title-font-size);
-        font-weight: var(--semi-title-font-weight);
-        font-style: var(--semi-title-font-style);
-        color: var(--black);
-
-        & a {
-            text-decoration: none;
-            color: inherit;
-        }
+        font-size: 1.6rem;
+        font-weight: $font-medium;
+        color: $dark-grey;
     }
 
     &__img_container {
@@ -107,9 +53,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 3rem;
-        height: 3rem;
-        border-radius: var(--border-radius);
+        width: 46px;
+        height: 46px;
 
         &::after {
             content: '';
@@ -119,25 +64,68 @@
             bottom: 0px;
             width: 6px;
             height: 6px;
-            border-radius: var(--border-radius);
+            border-radius: $border-radius;
         }
 
         &.online::after {
-            background-color: var(--green);
+            background-color: $green;
         }
 
         &.offline::after {
-            background-color: var(--red);
+            background-color: $red;
         }
     }
 
     &__img {
         width: 100%;
-        border-radius: var(--border-radius);
+        border-radius: $border-radius;
         overflow: hidden;
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        justify-self: flex-end;
+        gap: 1rem;
+
+        .add_to_chatroom {
+            width: 24px;
+            height: 24px;
+            border: none;
+            mask-image: url("/parts/icons/outline/add-circle.svg");
+            mask-repeat: no-repeat;
+            mask-size: 100%;
+            mask-position: center;
+            background-color: $dark-grey;
+            transition: .3s ease-in;
+
+            &:hover, &:focus, &:active {
+                background-color: $primary;
+            }
+
+            &.selected {
+                mask-image: url("/parts/icons/bold/tick-circle.svg");
+                background-color: $success;
+            }
+        }
+
+        .friend_add, .chatroom_create {
+
+            & button {
+                background-color: transparent;
+                border: none;
+                padding: 0;
+                margin: 0;
+                cursor: pointer;
+                width: 24px;
+                height: 24px;
+
+                & img {
+                    width: 100%;
+                }
+            }
+        }
     }
 }
 
-.request_friends .friend {
-    background-color: var(--black10);
-}

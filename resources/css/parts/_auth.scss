@@ -28,8 +28,8 @@
             animation-fill-mode: forwards;
             animation-timing-function: ease;
             overflow: hidden;
-            border-radius: var(--border-radius);
-            background-color: var(--pure-white);
+            border-radius: $border-radius;
+            background-color: $pure-white;
             width: 0;
             height: 0;
             padding: 0;
@@ -46,12 +46,12 @@
         }
 
         &__succeed:before {
-            background-color: var(--green);
+            background-color: $green;
             mask-image: url("/parts/icons/bold/tick-circle.svg");
         }
 
         &__error:before {
-            background-color: var(--red);
+            background-color: $red;
             mask-image: url("/parts/icons/bold/info-circle.svg");
         }
 
@@ -61,9 +61,9 @@
             align-items: center;
             justify-content: center;
             gap: 0.625rem;
-            font-family: var(--base-font-family);
-            font-size: var(--semi-title-font-size);
-            font-weight: var(--semi-title-font-weight);
+            font-family: $base-font-family;
+            font-size: $semi-title-font-size;
+            font-weight: $semi-title-font-weight;
             white-space: nowrap;
         }
     }
@@ -124,8 +124,8 @@
         left: -11.25rem;
         right: 0;
         bottom: 0;
-        background: var(--secondary-color);
-        background: linear-gradient(135deg, var(--secondary-color) 0%, var(--principal-color) 100%);
+        background: $secondary-color;
+        background: linear-gradient(135deg, $secondary-color 0%, $principal-color 100%);
         z-index: -5;
     }
 
@@ -146,39 +146,39 @@
             align-items: center;
             justify-content: flex-start;
             gap: 1rem;
-            font-size: var(--text-font-size);
-            font-weight: var(--text-font-weight);
-            font-style: var(--text-font-style);
-            line-height: var(--text-line-height);
-            color: var(--black);
+            font-size: $text-font-size;
+            font-weight: $text-font-weight;
+            font-style: $text-font-style;
+            line-height: $text-line-height;
+            color: $black;
             text-decoration: none;
             transition: all .5s ease;
 
             &:before {
                 counter-increment: listItem;
                 content: counter(listItem);
-                font-size: var(--semi-title-font-size);
-                font-weight: var(--semi-title-font-weight);
-                font-style: var(--semi-title-font-style);
-                line-height: var(--semi-title-line-height);
+                font-size: $semi-title-font-size;
+                font-weight: $semi-title-font-weight;
+                font-style: $semi-title-font-style;
+                line-height: $semi-title-line-height;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 width: 2rem;
                 height: 2rem;
                 border-radius: 6px;
-                color: var(--black);
-                background-color: var(--black10);
+                color: $black;
+                background-color: $black10;
                 transition: all .5s ease;
             }
 
             &.active {
-                font-size: var(--semi-title-font-size);
-                font-weight: var(--semi-title-font-weight);
+                font-size: $semi-title-font-size;
+                font-weight: $semi-title-font-weight;
 
                 &:before {
-                    color: var(--white);
-                    background-color: var(--principal-color);
+                    color: $white;
+                    background-color: $principal-color;
                 }
             }
 
@@ -188,10 +188,10 @@
     }
 
     &__slogan_phrase {
-        font-size: var(--title-font-size);
-        font-weight: var(--semi-title-font-weight);
-        font-style: var(--semi-title-font-style);
-        line-height: var(--semi-title-line-height);
+        font-size: $title-font-size;
+        font-weight: $semi-title-font-weight;
+        font-style: $semi-title-font-style;
+        line-height: $semi-title-line-height;
     }
 
     .preview_card {
@@ -213,8 +213,8 @@
         align-items: center;
         justify-content: flex-start;
         padding: 1.5rem;
-        border-radius: var(--border-radius);
-        background-color: var(--white);
+        border-radius: $border-radius;
+        background-color: $white;
         transition: all .5s ease;
 
         &:nth-of-type(1) {
@@ -237,12 +237,12 @@
         &__title {
             display: block;
             width: 100%;
-            font-family: var(--base-font-family);
-            font-size: var(--title-font-size);
-            font-weight: var(--title-font-weight);
-            font-style: var(--title-font-style);
-            line-height: var(--title-line-height);
-            color: var(--black);
+            font-family: $base-font-family;
+            font-size: $title-font-size;
+            font-weight: $title-font-weight;
+            font-style: $title-font-style;
+            line-height: $title-line-height;
+            color: $black;
             text-align: left;
             margin-bottom: 1rem;
         }
@@ -314,17 +314,17 @@
         gap: 2rem;
         grid-column: 5 / 10;
         grid-row: 1 / 2;
-        border-radius: var(--border-radius);
-        background-color: var(--white);
-        box-shadow: var(--auth-box-shadow);
+        border-radius: $border-radius;
+        background-color: $white;
+        box-shadow: $auth-box-shadow;
 
 
         .auth_form {
             width: 100%;
             padding: 1.5rem;
             max-height: 40rem;
-            border-radius: var(--border-radius);
-            background-color: var(--pure-white);
+            border-radius: $border-radius;
+            background-color: $pure-white;
             transition: max-height 1s ease, all 1s ease;
 
             & input::-webkit-file-upload-button {
@@ -333,7 +333,7 @@
                 mask-image: url("/parts/icons/outline/gallery.svg");
                 mask-size: auto 100%;
                 mask-repeat: no-repeat;
-                background-color: var(--black);
+                background-color: $black;
                 text-indent: -9999px;
                 border: none;
                 margin-right: .5rem;
@@ -341,21 +341,21 @@
 
             &__progression {
                 display: block;
-                font-size: var(--date-font-size);
-                font-weight: var(--date-font-weight);
-                font-style: var(--date-font-style);
-                line-height: var(--date-line-height);
-                color: var(--black50);
+                font-size: $date-font-size;
+                font-weight: $date-font-weight;
+                font-style: $date-font-style;
+                line-height: $date-line-height;
+                color: $black50;
                 margin-bottom: 0.125rem;
             }
 
             &__title {
                 display: block;
-                font-size: var(--title-font-size);
-                font-weight: var(--title-font-weight);
-                font-style: var(--title-font-style);
-                line-height: var(--title-line-height);
-                color: var(--black);
+                font-size: $title-font-size;
+                font-weight: $title-font-weight;
+                font-style: $title-font-style;
+                line-height: $title-line-height;
+                color: $black;
                 margin-bottom: 2rem;
             }
 
@@ -371,14 +371,14 @@
 
                 .game {
                     padding: 1rem;
-                    border-radius: var(--border-radius);
+                    border-radius: $border-radius;
 
                     &.checked {
-                        border: 1px solid var(--principal-color);
+                        border: 1px solid $principal-color;
                     }
 
                     &:hover {
-                        background-color: var(--black10);
+                        background-color: $black10;
                     }
                 }
             }
@@ -411,7 +411,7 @@
                                 display: block;
                                 width: 6px;
                                 height: 6px;
-                                background-color: var(--principal-color);
+                                background-color: $principal-color;
                                 transform: translateY(-50%) rotate(45deg);
                                 animation: inputOpacity .5s .5 ease forwards;
                             }
@@ -423,33 +423,33 @@
                     flex-direction: row;
                     justify-content: space-between;
                     align-items: center;
-                    font-family: var(--base-font-family);
-                    font-size: var(--date-font-size);
-                    font-weight: var(--semi-title-font-weight);
-                    font-style: var(--semi-title-font-style);
-                    line-height: var(--date-line-height);
-                    color: var(--black);
+                    font-family: $base-font-family;
+                    font-size: $date-font-size;
+                    font-weight: $semi-title-font-weight;
+                    font-style: $semi-title-font-style;
+                    line-height: $date-line-height;
+                    color: $black;
                     margin-bottom: 0.325rem;
                 }
 
                 & input, & select, & textarea {
-                    font-size: var(--text-font-size);
-                    font-weight: var(--text-font-weight);
-                    font-style: var(--text-font-style);
-                    line-height: var(--text-line-height);
-                    color: var(--black);
+                    font-size: $text-font-size;
+                    font-weight: $text-font-weight;
+                    font-style: $text-font-style;
+                    line-height: $text-line-height;
+                    color: $black;
                     padding: 0.625rem;
                     border-radius: 6px;
-                    border: 1px solid var(--black20);
+                    border: 1px solid $black20;
                     transition: all .3s ease;
-                    background-color: var(--pure-white);
+                    background-color: $pure-white;
 
                     &:hover, &:focus-visible, &:focus, &:active {
                         outline: none;
-                        border: 1px solid var(--principal-color);
+                        border: 1px solid $principal-color;
 
                         &::-webkit-file-upload-button {
-                            background-color: var(--principal-color);
+                            background-color: $principal-color;
                         }
                     }
                 }
@@ -511,7 +511,7 @@
 
             &__button_container_special {
                 padding: 0 1.5rem;
-                border-radius: var(--border-radius);
+                border-radius: $border-radius;
             }
         }
 
@@ -544,17 +544,17 @@
     width: 100%;
     gap: 1rem;
     padding: 1rem;
-    border-radius: var(--border-radius);
-    background-color: var(--black40);
+    border-radius: $border-radius;
+    background-color: $black40;
 
 
     &__title {
         display: block;
-        font-size: var(--semi-title-font-size);
-        font-weight: var(--semi-title-font-weight);
-        font-style: var(--semi-title-font-style);
-        line-height: var(--semi-title-line-height);
-        color: var(--white);
+        font-size: $semi-title-font-size;
+        font-weight: $semi-title-font-weight;
+        font-style: $semi-title-font-style;
+        line-height: $semi-title-line-height;
+        color: $white;
         z-index: 1;
     }
 
@@ -563,21 +563,21 @@
     }
 
     &__hashtag {
-        font-size: var(--hashtag-font-size);
-        font-weight: var(--hashtag-font-weight);
-        font-style: var(--hashtag-font-style);
-        line-height: var(--hashtag-line-height);
+        font-size: $hashtag-font-size;
+        font-weight: $hashtag-font-weight;
+        font-style: $hashtag-font-style;
+        line-height: $hashtag-line-height;
         z-index: 1;
     }
 
     &__name {
         display: block;
-        font-size: var(--date-font-size);
-        font-weight: var(--date-font-weight);
-        font-style: var(--date-font-style);
-        line-height: var(--date-line-height);
+        font-size: $date-font-size;
+        font-weight: $date-font-weight;
+        font-style: $date-font-style;
+        line-height: $date-line-height;
         text-transform: uppercase;
-        color: var(--white);
+        color: $white;
         z-index: 1;
     }
 
@@ -588,8 +588,7 @@
         justify-content: center;
         width: 3rem;
         height: 3rem;
-        border-radius: var(--border-radius);
-        overflow: hidden;
+        border-radius: $border-radius;
         z-index: 1;
         background-color: #F2F2F2;
 
@@ -609,7 +608,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        border-radius: var(--border-radius);
+        border-radius: $border-radius;
         overflow: hidden;
         z-index: 0;
 
@@ -622,10 +621,10 @@
 .step__auth {
     .auth__form_container {
         padding: 1.5rem;
-        background-color: var(--pure-white);
+        background-color: $pure-white;
 
         .auth__auth_form {
-            background-color: var(--white);
+            background-color: $white;
         }
     }
 

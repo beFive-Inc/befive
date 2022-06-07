@@ -10,6 +10,8 @@ class StatusType extends Model
 {
     use HasFactory;
 
+    protected $table = 'status_types';
+
     public $timestamps = false;
 
     public function getSlugAttribute(): string

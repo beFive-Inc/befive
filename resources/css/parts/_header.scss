@@ -1,0 +1,167 @@
+/* header */
+
+.header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    grid-gap: 1.5rem;
+    padding: 2.2rem 1.5rem 2.3rem;
+    background-color: $white;
+    margin: 0 auto 1rem;
+    max-width: 1920px;
+    transition: .3s ease-in;
+
+    &__logo {
+        height: 5rem;
+        transition: .3s ease-in;
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        gap: .5rem;
+
+        .action {
+            background-color: $primary;
+        }
+
+        .notification, .action {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: $border-radius;
+
+            &:hover, &:focus, &:active {
+                background-color: $dark-grey;
+
+                .dropdown-btn, .modal-btn {
+                    background-color: $white;
+                }
+            }
+
+            .modal-btn, .dropdown-btn {
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                margin: 0;
+                border: none;
+                color: $dark-grey;
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: 24px 24px;
+                background-color: $dark-grey;
+            }
+
+            .modal-btn {
+                mask-image: url("/parts/icons/outline/message-add-1.svg");
+                background-color: $white;
+            }
+
+            .dropdown-btn {
+                mask-image: url("/parts/icons/outline/notification.svg");
+                background-color: $dark-grey;
+            }
+        }
+
+        .user-menu {
+            width: 54px;
+            height: 54px;
+            margin-left: 5px;
+            border-radius: $border-radius;
+            background-color: $light-grey;
+            overflow: hidden;
+
+            .dropdown-btn {
+                width: 100%;
+                height: 100%;
+                background-color: transparent;
+                border: none;
+                padding: 0;
+                margin: 0;
+                border-radius: $border-radius;
+
+                & img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: 920px) {
+        padding: 2.2rem 4rem 2.3rem;
+
+        &__logo {
+            height: 6rem;
+        }
+    }
+}
+
+.header-m {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background-color: $white;
+    z-index: 30;
+    transition: .5s ease-in;
+    box-shadow: 0 3px 6px rgba($black, 0.05);
+
+    .profile-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+
+        .back {
+            display: block;
+            width: 24px;
+            height: 24px;
+            text-decoration: none;
+            mask-image: url("/parts/icons/linear/arrow-left.svg");
+            mask-repeat: no-repeat;
+            mask-size: 100%;
+            mask-position: center;
+            background-color: $primary;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+
+            &__img_container {
+                width: 32px;
+                height: 32px;
+            }
+
+            &__img {
+                width: 100%;
+                border-radius: $border-radius;
+            }
+
+            &__name {
+                font-size: 1.6rem;
+                font-weight: $font-medium;
+                flex: 1;
+                margin: 0;
+            }
+        }
+    }
+
+
+    @media screen and (min-width: 920px) {
+        padding: 2rem 4rem;
+    }
+}

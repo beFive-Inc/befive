@@ -1,0 +1,57 @@
+html {
+    font-family: $font-family;
+    font-size: $base-font-size;
+    line-height: $line-height;
+    background-color: $background-color;
+    color: $dark-grey;
+}
+
+html, html * {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+hr {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-top: 1px solid rgba($black, .1);
+}
+
+
+::-webkit-scrollbar {
+    width: .6rem;
+    height: .6rem;
+    transition: .3s ease-in;
+}
+
+::-webkit-scrollbar-track {
+    background: $light-grey;
+    transition: .3s ease-in;
+}
+
+::-webkit-scrollbar-thumb {
+    background: lighten($dark-grey, 45);
+    transition: .3s ease-in;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: lighten($dark-grey, 30);
+    transition: .3s ease-in;
+}
+
+.error {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: $font-regular;
+    color: $danger;
+    margin-top: .4rem;
+}
+
+.no_item {
+    font-size: 1.4rem;
+    font-weight: $font-regular;
+}

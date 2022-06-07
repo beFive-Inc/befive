@@ -16,7 +16,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             FriendsSeeder::class,
-            PostsSeeder::class
+            SessionSeeder::class,
+            ChatroomSeeder::class,
+            ChatroomUsersSeeder::class,
+            MessageSeeder::class,
+            StatusTypeSeeder::class,
+            StatusSeeder::class,
+            UserImgSeeder::class,
         ]);
     }
 }

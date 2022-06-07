@@ -1,0 +1,16 @@
+//
+// Tooltips
+// --------------------------------------------------
+
+// Base class
+.tooltip {
+    font-size: $tooltip-font-size;
+}
+
+// Wrapper for the tooltip content
+.tooltip-inner {
+    max-width: $tooltip-max-width;
+    padding: $tooltip-padding-y $tooltip-padding-x;
+    text-align: center;
+    background-color: $tooltip-bg;
+}

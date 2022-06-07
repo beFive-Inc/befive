@@ -17,41 +17,60 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $hashtag = 1000;
         User::create([
-            'pseudo' => 'Thebester',
-            'url' => 'thebester',
+            'uuid' => Str::uuid(),
+            'pseudo' => $pseudo = 'Thebester',
+            'slug' => Str::slug($pseudo) . '.' . $hashtag,
             'name' => 'Hoens Anthony',
-            'tag' => 1000,
+            'hashtag' => $hashtag,
             'email' => 'anthony-hoens@hotmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('Anthonio97'),
             'remember_token' => Str::random(10),
         ]);
 
+        $hashtag = 1426;
         User::create([
-            'pseudo' => 'Nthn',
-            'url' => 'nthn',
+            'pseudo' => $pseudo = 'Nthn',
+            'uuid' => Str::uuid(),
+            'slug' => Str::slug($pseudo) . '.' . $hashtag,
             'name' => 'Minsart Anthony',
-            'tag' => 1426,
-            'email' => 'minsartanthony@hotmaail.com',
+            'hashtag' => $hashtag,
+            'email' => 'minsartanthony@hotmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('belgique123'),
             'remember_token' => Str::random(10),
         ]);
 
+        $hashtag = 1007;
         User::create([
-            'pseudo' => 'Khonix',
-            'url' => 'khonix',
+            'pseudo' => $pseudo = 'Khonix',
+            'uuid' => Str::uuid(),
+            'slug' => Str::slug($pseudo) . '.' . $hashtag,
             'name' => 'Gilson Nicolas',
-            'tag' => 1007,
+            'hashtag' => $hashtag,
             'email' => 'gilsnic@hotmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('p@ssw0rd'),
             'remember_token' => Str::random(10),
         ]);
 
+        $hashtag = 1234;
+        User::create([
+            'pseudo' => $pseudo = 'Beauty',
+            'uuid' => Str::uuid(),
+            'slug' => Str::slug($pseudo) . '.' . $hashtag,
+            'name' => 'Belboom Natacha',
+            'hashtag' => $hashtag,
+            'email' => 'natacha.belboom@hotmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('15/09/98'),
+            'remember_token' => Str::random(10),
+        ]);
+
         User::factory()
-            ->times(15)
+            ->times(300)
             ->create();
     }
 }

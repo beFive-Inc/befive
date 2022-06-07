@@ -1,0 +1,59 @@
+.modal {
+
+
+    &-content {
+        padding: 2rem 1.5rem;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0 3px 6px rgba($black, 0.16);
+    }
+
+    &-special-content {
+        padding: 0;
+
+        .modal-header {
+            padding: 3rem 2.5rem 1rem;
+        }
+
+        .modal-body {
+            padding: 1rem 1rem 3rem 2.5rem;
+        }
+
+        .form {
+            margin-right: 1.5rem;
+        }
+
+        .modal-scrollable {
+            padding-right: 1rem;
+        }
+    }
+
+    &-header {
+        border: none;
+    }
+
+    &-footer {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        width: 75%;
+        gap: 1rem;
+        padding: 0;
+        align-self: flex-end;
+        border: none;
+        margin-left: auto;
+
+        .btn {
+            max-width: 22rem;
+        }
+    }
+
+    &-scrollable {
+        transition: 0.3s ease-in;
+        min-height: 10rem;
+        max-height: 30rem;
+        overflow-y: scroll;
+    }
+}

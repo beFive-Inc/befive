@@ -1,0 +1,164 @@
+.messages {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    min-height: 100vh;
+    max-height: 100vh;
+
+    &__container {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex: 1;
+        padding: 8.5rem 1.5rem 0;
+        margin: 0;
+        overflow-y: auto;
+        transition: .5s ease-in;
+        max-height: calc(100vh - 6.5rem);
+
+        .item {
+            display: block;
+            max-width: 32rem;
+            margin-bottom: 1rem;
+
+            .message {
+                font-size: 1.4rem;
+                font-weight: $font-regular;
+                padding: .5rem 1rem .6rem;
+                max-width: 28rem;
+                border-radius: 5px;
+
+                p {
+                    margin: 0;
+                }
+            }
+        }
+
+        .own {
+            align-self: flex-end;
+
+            + .own {
+                margin-bottom: 4px;
+            }
+
+            + .other {
+                margin-bottom: 1rem;
+            }
+
+            &.item {
+
+                .item__container {
+                    display: flex;
+                    flex-direction: row;
+                    align-self: flex-end;
+                    justify-content: flex-end;
+
+                    .message {
+                        background-color: $dark-grey;
+                        color: $white;
+                    }
+                }
+            }
+        }
+
+        .other {
+            align-self: flex-start;
+
+            + .other {
+                margin-bottom: 4px;
+            }
+
+            + .own {
+                margin-bottom: 1rem;
+            }
+
+            &.item {
+
+                .item__container {
+                    display: flex;
+                    flex-direction: row;
+                    align-self: flex-end;
+                    justify-content: flex-start;
+
+                    .message {
+                        color: $dark-grey;
+                        background-color: $light-grey;
+                    }
+                }
+            }
+        }
+    }
+
+    .form {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: stretch;
+        width: 100%;
+        padding: 1rem;
+        border-top: 1px solid rgba($black, 0.1);
+        min-height: 6.5rem;
+
+        &__container {
+            flex: 1;
+            position: relative;
+        }
+
+        &__btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: .3s ease-in;
+
+            &.send {
+                width: 24px;
+                height: 24px;
+                right: 0;
+                mask-image: url('/parts/icons/bold/send-1.svg');
+                mask-repeat: no-repeat;
+                mask-size: 100%;
+                mask-position: center;
+                background-color: $dark-grey;
+
+                &.show {
+                    right: 10px;
+                    opacity: 1;
+                }
+
+                &:hover, &:focus {
+                    background-color: $primary;
+                }
+            }
+        }
+
+        &__hide {
+            opacity: 0;
+        }
+
+        &__input {
+            width: 100%;
+            padding: 8px 10px;
+            min-height: 3.4rem;
+            max-height: 8rem;
+            overflow: hidden;
+            resize: none;
+        }
+    }
+
+
+    @media screen and (min-width: 920px) {
+        &__container {
+            padding: 9.5rem 4rem 0;
+        }
+
+        .form {
+            padding: 1.5rem 4rem;
+        }
+    }
+}

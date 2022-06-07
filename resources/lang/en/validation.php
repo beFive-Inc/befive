@@ -149,4 +149,5 @@ return [
 
     'attributes' => [],
 
+    'optional' => 'Optional',
 ];

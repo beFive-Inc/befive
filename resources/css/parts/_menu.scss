@@ -1,0 +1,119 @@
+.menu {
+
+    li:last-of-type {
+
+        .menu__item {
+            margin-bottom: 0;
+        }
+    }
+
+    &__item {
+        font-size: 1.4rem;
+        font-weight: $font-regular;
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: .5rem;
+        margin-bottom: .5rem;
+
+        &::before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 24px;
+            flex: 0 0 24px;
+            background-color: $dark-grey;
+        }
+
+        &.active {
+            background-color: $primary;
+        }
+
+        &:not(.active):hover {
+            background-color: lighten($primary, 45);
+        }
+
+        &:active {
+            background-color: $primary;
+
+            &::before {
+                background-color: $white;
+            }
+        }
+    }
+
+    &__archive::before {
+        mask-image: url('/parts/icons/bold/archive.svg');
+    }
+
+    &__friends::before {
+        mask-image: url("/parts/icons/bold/profile-2user.svg");
+    }
+
+    &__edit-profile::before {
+        mask-image: url("/parts/icons/bold/user-edit.svg");
+    }
+
+    &__status::before {
+        mask-image: url("/parts/icons/bold/notification-1.svg");
+    }
+
+    &__rgpd::before {
+        mask-image: url("/parts/icons/bold/document-text.svg");
+    }
+
+    &__group::before {
+        mask-image: url("/parts/icons/bold/profile-2user.svg");
+    }
+
+    &__delete::before {
+        mask-image: url("/parts/icons/bold/message-remove.svg");
+    }
+
+    &__message-archive::before {
+        mask-image: url("/parts/icons/bold/archive-2.svg");
+    }
+
+    &__rename::before {
+        mask-image: url("/parts/icons/bold/message-edit.svg");
+    }
+
+    &__block::before {
+        mask-image: url("/parts/icons/bold/profile-delete.svg");
+    }
+
+    &__danger {
+        width: 100%;
+        cursor: pointer;
+        background-color: transparent;
+        margin: 0;
+        text-decoration: none;
+        border: none;
+        color: $danger;
+        text-align: left;
+
+        &::before {
+            background-color: $danger;
+        }
+
+        &:hover {
+            color: darken($danger, 5);
+            background-color: lighten($danger, 45);
+        }
+
+        &:active {
+            background-color: $danger;
+            color: $white;
+        }
+    }
+
+    &__disconnect::before {
+        mask-image: url("/parts/icons/bold/logout.svg");
+    }
+
+    &__settings::before {
+        mask-image: url("/parts/icons/bold/setting-2.svg");
+    }
+
+}

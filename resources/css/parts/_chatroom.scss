@@ -1,0 +1,104 @@
+.chatroom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+
+    &__container {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+
+    &__img_container {
+        position: relative;
+        width: 45px;
+        height: 45px;
+    }
+
+    &__img {
+        width: 100%;
+        border-radius: $border-radius;
+        overflow: hidden;
+
+        &.first {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            z-index: 10;
+            border: 1px solid $white;
+        }
+
+        &.second {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            z-index: 11;
+            border: 1px solid $white;
+        }
+    }
+
+    &__name {
+        display: inline-block;
+        font-size: 1.6rem;
+        font-weight: $font-medium;
+        transition: .3s ease-in;
+
+        &.new {
+            font-weight: $font-bold;
+
+            & a {
+                color: $black;
+            }
+        }
+    }
+
+    &__info {
+        flex: 1;
+    }
+
+    &__link {
+        color: $dark-grey;
+        text-decoration: none;
+
+        &:hover, &:focus, &:active {
+            color: $dark-grey;
+            font-weight: $font-bold;
+        }
+    }
+
+    &__members {
+        padding-left: 1.5rem;
+        font-size: 1.3rem;
+        font-weight: $font-medium;
+        color: lighten($dark-grey, 45);
+    }
+
+    &__message_container {
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        gap: 1.5rem;
+    }
+
+    &__message, &__date {
+        font-size: 1.4rem;
+        font-weight: $font-regular;
+    }
+
+    &__message {
+
+        &.new {
+            color: $black;
+            font-weight: $font-medium;
+        }
+    }
+}

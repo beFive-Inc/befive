@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Message;
 use App\Models\ChatroomUser;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Crypt;
 
 class MessageSeeder extends Seeder
 {
@@ -30,7 +31,10 @@ class MessageSeeder extends Seeder
             'Non, c\'est hyper naze',
             'Pas de soucis',
             'Désolé',
-            'Il fait beau'
+            'Il fait beau',
+            'Je te connais ?',
+            "C'est pas vrai",
+            "Tu es qui ?"
         ]);
         $members = ChatroomUser::all();
 
@@ -44,8 +48,7 @@ class MessageSeeder extends Seeder
                 Message::create([
                     'chatroom_user_id' => $member->id,
                     'message_id' => $randMessageAction > 75 && count($messageAction) ? $messageAction->shuffle()->first()->id : null,
-                    'message' => $message->shuffle()->first(),
-                    'view_at' => now(),
+                    'message' => Crypt::encrypt($message->shuffle()->first())
                 ]);
             }
         }

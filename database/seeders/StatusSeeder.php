@@ -18,21 +18,26 @@ class StatusSeeder extends Seeder
     {
         $users = User::all();
 
-        $status = [
+        $status = collect([
             'Je suis là',
             'En pleine partie',
             'Venez parler',
-            'J\'aime tout le monde'
-        ];
+            'Je joue',
+            "M'ennuyez pas",
+            'J\'aime tout le monde',
+            'Qui fais quoi ?',
+            'Yo tout le monde',
+            'Je veux rencontrer Squeezie',
+        ]);
 
         foreach ($users as $user) {
-            $rand = rand(0, count($status) - 1);
+            $rand = rand(0, 100);
             $type = StatusType::all()->shuffle()->first();
 
             Status::create([
                'user_id' => $user->id,
                'type_id' => $type->id,
-               'message' => $status[$rand],
+               'message' => $rand > 50 ? $status->shuffle()->first() : null,
             ]);
         }
     }

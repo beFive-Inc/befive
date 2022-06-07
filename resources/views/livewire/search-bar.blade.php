@@ -34,28 +34,43 @@
             </section>
         @else
             @if($friends->count())
-                <p>
-                    Amis
-                </p>
-                @foreach($friends as $friend)
-                    <x-friend :friend="$friend"/>
-                @endforeach
+                <section class="searchbar__container">
+                    <h2 aria-level="2" role="heading" class="title">
+                        {{ __('search.friends') }}
+                    </h2>
+
+                    <div class="searchbar__query_container">
+                        @foreach($friends as $friend)
+                            <x-friend :friend="$friend"/>
+                        @endforeach
+                    </div>
+                </section>
             @endif
             @if($others->count())
-                <p>
-                    Autres
-                </p>
-                @foreach($others as $friend)
-                    <x-friend :friend="$friend"/>
-                @endforeach
+                <section class="searchbar__container">
+                    <h2 aria-level="2" role="heading" class="title">
+                        {{ __('search.others') }}
+                    </h2>
+
+                    <div class="searchbar__query_container">
+                        @foreach($others as $friend)
+                            <x-friend :friend="$friend" :actions-to-search="true"/>
+                        @endforeach
+                    </div>
+                </section>
             @endif
-            @if($messages->count())
-                <p>
-                    Messages
-                </p>
-                @foreach($messages as $message)
-                    <x-message :message="$message" />
-                @endforeach
+            @if($canals->count())
+                <section class="searchbar__container">
+                    <h2 aria-level="2" role="heading" class="title">
+                        {{ __('search.messages') }}
+                    </h2>
+
+                    <div class="searchbar__query_container">
+                        @foreach($canals as $chatroom)
+                            <livewire:canal :chatroom="$chatroom" />
+                        @endforeach
+                    </div>
+                </section>
             @endif
         @endif
     </div>

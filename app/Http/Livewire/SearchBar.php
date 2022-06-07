@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Traits\Operator;
 use Illuminate\Support\Collection;
 use Livewire\Component;
+use App\Models\Chatroom;
 
 class SearchBar extends Component
 {
@@ -17,7 +18,7 @@ class SearchBar extends Component
     public Collection $suggests;
     public Collection $friends;
     public Collection $others;
-    public Collection $messages;
+    public Collection $canals;
 
     public Collection $ownFriends;
 
@@ -81,11 +82,10 @@ class SearchBar extends Component
             ->get();
     }
 
-    public function getMessages()
+    public function getCanals()
     {
-        return Message::whereHas('author', function ($query) {
-                return $query->where('user_id', '=', \Auth::id());
-            })->where('message', 'LIKE', "%$this->query%")
+        return Chatroom::with('authors')
+            ->where('name', 'LIKE', "%$this->query%")
             ->limit(self::LIMIT)
             ->get();
     }
@@ -97,7 +97,7 @@ class SearchBar extends Component
         } else {
             $this->friends = $this->getSearchingFriends();
             $this->others = $this->getOtherPeople();
-            $this->messages = $this->getMessages();
+            $this->canals = $this->getCanals();
         }
 
         return view('livewire.search-bar');

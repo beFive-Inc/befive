@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :friends="$friends" :request-friends="$requestFriends" :medias="$medias">
     <x-slot name="title">
         {{ __('Be Five | Homepage') }}
     </x-slot>

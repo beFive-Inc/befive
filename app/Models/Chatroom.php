@@ -18,7 +18,7 @@ class Chatroom extends Model
     protected $fillable = [
         'name',
         'uuid',
-        'type'
+        'type',
     ];
 
     /**
@@ -26,7 +26,8 @@ class Chatroom extends Model
      */
     public function authors(): HasMany
     {
-        return $this->hasMany(ChatroomUser::class, 'chatroom_id', 'id')->withTrashed();
+        return $this->hasMany(ChatroomUser::class, 'chatroom_id', 'id')
+            ->withTrashed();
     }
 
     /**

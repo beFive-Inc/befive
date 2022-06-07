@@ -3,20 +3,23 @@
 namespace App\View\Components;
 
 use App\Models\Chatroom;
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
 class MessageLayout extends Component
 {
     public Chatroom $chatroom;
+    public Collection $otherInGroup;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(Chatroom $chatroom)
+    public function __construct(Chatroom $chatroom, Collection $otherInGroup)
     {
         $this->chatroom = $chatroom;
+        $this->otherInGroup = $otherInGroup;
     }
 
     /**

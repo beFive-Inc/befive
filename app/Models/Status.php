@@ -12,6 +12,12 @@ class Status extends Model
 
     protected $table = 'status';
 
+    protected $fillable = [
+        'user_id',
+        'type_id',
+        'message'
+    ];
+
     /**
      * @return HasMany
      */

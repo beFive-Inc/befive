@@ -71,6 +71,28 @@
     margin-top: .5rem;
 }
 
+.btn-info {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: $border-radius;
+    background-color: $primary;
+    mask-image: url("/parts/icons/bold/info-circle.svg");
+    mask-repeat: no-repeat;
+    mask-size: 100%;
+    mask-position: center;
+    transform: rotate(180deg);
+
+    &:hover, &:focus {
+        background-color: darken($primary, 5);
+    }
+
+    &:active {
+        background-color: darken($primary, 10);
+    }
+}
+
 .forgot_link {
     font-size: 1.2rem;
     font-weight: $font-medium;

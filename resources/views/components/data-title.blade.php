@@ -13,7 +13,7 @@
             @endif
         </h3>
         <p>
-            {{ $chatroom->messages->last()->message }}
+            {{ $chatroom->messages->last()->decryptedMessage }}
         </p>
     </div>
 </div>

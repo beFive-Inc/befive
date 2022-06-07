@@ -10,7 +10,7 @@
             </h3>
             @if(!$onlyImageAndName)
                 <p class="friend__hashtag">
-                    {{ '#' . $friend->hashtag }}
+                    {{ $getStatusMessage ? __($friend->statusMessage) : '#' . $friend->hashtag }}
                 </p>
             @endif
         </div>

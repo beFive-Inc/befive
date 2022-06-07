@@ -5,6 +5,10 @@
     border-radius: 5px;
     box-shadow: 0 3px 6px rgba($black, 0.16);
 
+    .dropdown-menu {
+        min-width: 15rem;
+    }
+
     &:first-child .dropdown-header, &:first-child .dropdown-user {
         margin-top: 0;
     }
@@ -73,6 +77,10 @@
             }
         }
     }
+}
+
+.dropstart {
+    width: 100%;
 }
 
 .dropdown-options {

@@ -70,7 +70,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::factory()
-            ->times(25)
+            ->times(300)
             ->create();
     }
 }

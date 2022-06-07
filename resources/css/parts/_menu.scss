@@ -26,7 +26,11 @@
             background-color: $dark-grey;
         }
 
-        &:hover {
+        &.active {
+            background-color: $primary;
+        }
+
+        &:not(.active):hover {
             background-color: lighten($primary, 45);
         }
 

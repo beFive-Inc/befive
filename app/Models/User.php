@@ -52,6 +52,7 @@ class User extends Authenticatable implements HasMedia
         'pseudo',
         'slug',
         'hashtag',
+        'uuid',
         'email',
         'password',
     ];
@@ -99,6 +100,11 @@ class User extends Authenticatable implements HasMedia
                 ),
             ]);
         }
+    }
+
+    public function getStatusMessageAttribute()
+    {
+        return $this->status->message ?? $this->type->name;
     }
 
     /**

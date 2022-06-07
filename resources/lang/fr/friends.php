@@ -11,12 +11,11 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'title' => 'Friends',
-    'field.search' => 'Search',
-    'field.search.placeholder' => 'Search a player',
-    'general.no-friends' => 'You don’t have any friends for the moment.',
-    'searching.no-friends' => 'No match friends for «:keyword».',
-    'request.title' => 'My Request',
+    'title' => 'Vos amis',
+    'field.search' => 'Rechercher vos amis',
+    'field.search.placeholder' => 'Rechercher vos amis',
+    'general.no-friends' => "Vous n'avez pas d'amis pour le moment.",
+    'searching.no-friends' => 'Aucun amis trouvé pour «:keyword».',
     'group.title' => 'My friendlist',
     'accept' => 'Accept',
     'deny' => 'Deny',
@@ -24,6 +23,11 @@ return [
     'options' => 'Paramètres pour cet ami',
     'delete' => 'Supprimer cet ami',
     'block' => 'Bloquer cet utilisateur',
+    'block.title' => 'Bloqué',
     'unblock' => 'Débloquer cet utilisateur',
     'rename' => 'Renommer votre ami',
+    'all.title' => 'Tous',
+    'online.title' => 'En ligne',
+    'request.title' => 'Demande',
+    'nav.title' => 'Menu des amis',
 ];

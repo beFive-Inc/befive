@@ -3,46 +3,113 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
-use App\Traits\Operator;
-use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
-use Illuminate\Database\Eloquent\Collection;
-use function React\Promise\map;
+use App\Traits\Operator;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class FriendList extends Component
 {
     use Operator;
 
-    public Collection $friendships;
-    public int $intervalRefresh = 30 * 1000;
-    public bool $generalView = true;
-    public $searchQuery;
-    protected int $limitFriends = 100;
+    public EloquentCollection $friends;
+    public EloquentCollection $friendships;
+    public EloquentCollection $friendRequests;
+    public EloquentCollection $friendBlocked;
 
-    protected function getSortingFriends(): Collection
+    public string $searchQuery = '';
+
+    public Collection $navItems;
+
+    protected int $limitFriends = 100;
+    public int $intervalRefresh = 30 * 1000;
+
+    public function mount()
     {
-        return auth()->user()->getFriends()->load('media')->sortByDesc(function ($friend) {
+        $this->friendRequests = auth()->user()->getFriendRequests()->load('media');
+        $this->friendships = auth()->user()->getFriends()->load('media');
+        $this->friendBlocked = auth()->user()->getBlockedFriendships();
+
+        $this->navItems = collect([
+            'all' => [
+                'isActive' => true,
+                'title' => __('friends.all.title'),
+                'method' => 'getSortingFriends',
+            ],
+            'online' => [
+                'isActive' => false,
+                'title' => __('friends.online.title'),
+                'method' => 'getOnlineFriends',
+            ],
+            'request' => [
+                'isActive' => false,
+                'title' => __('friends.request.title'),
+                'method' => 'getRequestedFriends',
+            ],
+            'blocked' => [
+                'isActive' => false,
+                'title' => __('friends.block.title'),
+                'method' => 'getBlockedFriends',
+            ]
+        ]);
+    }
+
+    protected function getSortingFriends(): EloquentCollection
+    {
+        return $this->friendships->sortByDesc(function ($friend) {
             return $friend->isOnline();
         })->take($this->limitFriends);
     }
 
-    protected function getSearchingFriends($friends): Collection
+    protected function getSearchingFriends()
     {
-        return $friends->filter(function ($friend) {
+        $this->friends = $this->friends->filter(function ($friend) {
             return $this->likeOperator("%$this->searchQuery%", $friend->pseudo);
         });
     }
 
-    protected function getRequestedFriends(): Collection
+    protected function getBlockedFriends(): EloquentCollection
     {
-        return auth()->user()
-            ->getFriendRequests()
-            ->sortByDesc('created_at')
-            ->map(function ($user) {
-                return User::find($user->sender_id);
-            })->take($this->limitFriends);
+        return $this->friendBlocked;
     }
 
+    protected function getRequestedFriends(): EloquentCollection
+    {
+        return $this->friendRequests
+            ->sortByDesc('created_at')
+            ->take($this->limitFriends);
+    }
+
+    protected function getOnlineFriends(): EloquentCollection
+    {
+        return $this->friendships->filter(function ($friend) {
+            return $friend->isOnline();
+        });
+    }
+
+    public function changeData(string $key)
+    {
+        foreach ($this->navItems as $k => $item) {
+            $this->navItems = $this->navItems->replaceRecursive([$k => [
+                'isActive' => false,
+            ]]);
+        }
+        $this->navItems = $this->navItems->replaceRecursive([$key => [
+            'isActive' => true,
+        ]]);
+
+        $this->changeFriendList();
+    }
+
+    protected function changeFriendList()
+    {
+        foreach ($this->navItems as $item) {
+            if ($item['isActive']) {
+                $this->friends = $this->{$item['method']}();
+            }
+
+        }
+    }
 
     public function isFriendWith($friendID): bool
     {
@@ -52,41 +119,21 @@ class FriendList extends Component
     public function acceptFriendRequest($friendID): void
     {
         auth()->user()->acceptFriendRequest(User::find($friendID));
-        $this->refresh();
     }
 
     public function denyFriendRequest($friendID): void
     {
         auth()->user()->denyFriendRequest(User::find($friendID));
-        $this->refresh();
-    }
-
-    public function refresh(): void
-    {
-        $this->friendships->map(function ($friend) {
-            return Cache::get('user-is-online-' . $friend->id);
-        });
     }
 
     public function render()
     {
-        $requestFriend = $this->getRequestedFriends() ?? null;
-        $countFriendsRequest = $requestFriend->count() ?? 0;
-
         if ($this->searchQuery) {
-            $friends = $this->getSearchingFriends($this->friendships);
+            $this->getSearchingFriends();
         } else {
-            $friends = $this->getSortingFriends();
+            $this->changeFriendList();
         }
 
-        if (!$this->searchQuery) {
-            $this->friendships = $friends;
-        }
-
-        return view('livewire.friend-list',[
-            'friends' => $friends,
-            'requestFriends' => $requestFriend,
-            'countFriendsRequest' => $countFriendsRequest,
-        ]);
+        return view('livewire.friend-list');
     }
 }

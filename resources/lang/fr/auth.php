@@ -11,6 +11,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'update' => 'Mettre à jour',
     'sign-in' => 'Se connecter',
     'sign-in.title' => 'Connexion à Be Five Chat',
     'sign-in.hook.title' => "Viens t'amuser avec nous&nbsp;!",
@@ -31,6 +32,8 @@ return [
     'pseudo.label' => 'Pseudo',
     'pseudo.notice' => 'Veuillez inscrire votre pseudo',
     'pseudo.placeholder' => 'JohnDoe',
+    'name.label' => 'Nom',
+    'name.notice' => 'Veuillez inscrire votre nom',
 
 
 

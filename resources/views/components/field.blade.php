@@ -11,7 +11,7 @@
            id="{{ $id }}"
            name="{{ $name }}"
            class="form__input @error($name){{ 'error' }}@enderror"
-           value="{{ old($name) }}"
+           value="{{ old($name) ?? $value }}"
            placeholder="{{ $placeholder }}"
            autocomplete="{{ $autocomplete ?? 'off' }}"
            {{ $required ? 'required' : '' }}>

@@ -9,6 +9,7 @@ use Livewire\Component;
 class GroupMessage extends Component
 {
     public Chatroom $chatroom;
+    public Collection $allChatrooms;
     public Collection $friends;
 
     public $listeners = [

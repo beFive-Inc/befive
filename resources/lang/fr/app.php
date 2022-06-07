@@ -12,7 +12,12 @@ return [
     |
     */
     'slogan' => 'Be Five Chat, première messagerie adaptée pour les gamers&nbsp!',
+    'back' => 'Revenir en arrière',
+    'info' => 'Info',
+    'send' => 'Envoyer',
     'placeholder' => 'Aa',
+    'chatroom.archive' => 'Vos messages archivés',
+    'chatroom.no-archive' => "Vous n'avez aucun messages archivés.",
     'chatroom.add' => 'Ajouter :user à la chatroom',
     'chatroom.add.search.nothing' => 'Aucun amis ne correspond à la recherche ":search"',
     'chatroom.add.already' => ':user a déja été ajouté à la chatroom',
@@ -23,7 +28,9 @@ return [
     'friend.request' => "Demande d'amis",
     'conversations' => 'Conversations',
     'conversations.create' => 'Créer un groupe avec :user',
+    'conversations.view' => 'Marquer comme lu',
     'conversations.rename' => 'Renommer la conversation',
+    'conversations.restore' => 'Désarchiver cette conversation',
     'conversations.delete' => 'Supprimer cette conversation',
     'conversations.archive' => 'Archiver cette conversation',
     'groups.add' => 'Ajouter des membres',

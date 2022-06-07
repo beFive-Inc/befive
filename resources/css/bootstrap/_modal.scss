@@ -40,6 +40,7 @@
         justify-content: flex-end;
         width: 75%;
         gap: 1rem;
+        padding: 0;
         align-self: flex-end;
         border: none;
         margin-left: auto;
@@ -54,6 +55,5 @@
         min-height: 10rem;
         max-height: 30rem;
         overflow-y: scroll;
-        padding: 0 0 2rem;
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 class Header extends Component
 {
     public Collection $friends;
+    public Collection $chatrooms;
     public Collection $requestFriends;
     public Collection $medias;
 
@@ -16,11 +17,12 @@ class Header extends Component
      *
      * @return void
      */
-    public function __construct(Collection $friends, Collection $requestFriends, Collection $medias)
+    public function __construct(Collection $friends, Collection $requestFriends, Collection $medias, Collection $chatrooms)
     {
         $this->friends = $friends;
         $this->requestFriends = $requestFriends;
         $this->medias = $medias;
+        $this->chatrooms = $chatrooms;
     }
 
     /**

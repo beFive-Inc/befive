@@ -22,10 +22,10 @@
     {{ __('Be Five, premier réseau social pour gamer') }}
 </h1>
 <!-- Header -->
-<x-message-header :chatroom="$chatroom"></x-message-header>
+<x-message-header :chatroom="$chatroom" :other-in-group="$otherInGroup"></x-message-header>
 
 <!-- Contenu -->
-<main class="main">
+<main>
     {{ $content }}
 </main>
 

@@ -17,7 +17,7 @@ class CreateStatusTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('type_id')->constrained();
-            $table->string('message');
+            $table->string('message')->nullable();
             $table->timestamps();
         });
     }

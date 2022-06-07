@@ -1,7 +1,8 @@
-<div>
-    <p>
-        {{ $message->message }}
-    </p>
+<div class="item__container">
 
-    <span>{{ $message->date }}</span>
+    <div class="message">
+        <p>
+            {{ $message->decryptedMessage }}
+        </p>
+    </div>
 </div>

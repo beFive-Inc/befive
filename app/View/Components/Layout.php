@@ -10,17 +10,19 @@ class Layout extends Component
     public Collection $friends;
     public Collection $requestFriends;
     public Collection $medias;
+    public Collection $chatrooms;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(Collection $friends, Collection $requestFriends, Collection $medias)
+    public function __construct(Collection $friends, Collection $requestFriends, Collection $medias, Collection $chatrooms)
     {
         $this->friends = $friends;
         $this->requestFriends = $requestFriends;
         $this->medias = $medias;
+        $this->chatrooms = $chatrooms;
     }
 
     /**

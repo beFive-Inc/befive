@@ -1,26 +1,45 @@
-<header class="header">
-    <a href="{{ route('homepage') }}">{{ __('Revenir en arrière') }}</a>
+<header class="header-m">
+    <div class="profile-container">
+        <a class="back"
+           href="{{ route('homepage') }}">
+            <span class="sr_only">{{ __('app.back') }}</span>
+        </a>
 
-    <h1 role="heading" aria-level="1">
-        @if($chatroom->name)
-            {{ $chatroom->name }}
-        @else
-            @foreach($chatroom->authors as $author)
-                @if($loop->last)
-                    {{ $author->user->pseudo }}
+        <div class="profile">
+            <div class="profile__img_container">
+                @foreach($otherInGroup->take(1) as $author)
+                    @if($loop->first)
+                        <img src="{{ $author->user?->getFirstMedia('profile')?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="profile__img first" alt>
+                    @elseif($loop->last)
+                        <img src="{{ $author->user?->getFirstMedia('profile')?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="profile__img second" alt>
+                    @endif
+                @endforeach
+            </div>
+            <h1 role="heading"
+                aria-level="1"
+                class="profile__name">
+                @if($chatroom->name)
+                    {{ $chatroom->name }}
                 @else
-                    {{ $author->user->pseudo }},
+                    @foreach($otherInGroup as $author)
+                        @if($loop->last)
+                            {{ $author->user->pseudo }}
+                        @else
+                            {{ $author->user->pseudo }},
+                        @endif
+                    @endforeach
                 @endif
-            @endforeach
-        @endif
-    </h1>
-
-    <div>
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-            Info
-        </button>
-
+            </h1>
+        </div>
     </div>
+
+    <button class="btn-info"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight">
+        <span class="sr_only">{{ __('app.info') }}</span>
+    </button>
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">

@@ -32,17 +32,21 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <livewire:chatroom-create :friend-list="$friends"/>
+                            <livewire:chatroom-create :friend-list="$friends" :all-chatroom="$chatrooms"/>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="user-menu">
-            <button type="button" class="dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="dropdown-btn"
+                    id="dropdownMenuClickableInside"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside"
+                    aria-expanded="false">
                 <img src="{{ $medias->first()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" alt>
             </button>
-            <ul class="dropdown-menu menu">
+            <ul class="dropdown-menu menu" aria-labelledby="dropdownMenuClickableInside">
                 <li class="dropdown-user">
                     <a href="{{ route('user.edit') }}" class="dropdown-user__see">
                         <span class="sr_only">{{ __('user.see') }}</span>
@@ -63,8 +67,19 @@
                 <li><a class="menu__item dropdown-item menu__friends" href="{{ route('friends.index') }}">Amis</a></li>
                 <li><a class="menu__item dropdown-item menu__archive" href="{{ route('chatroom.index.archive') }}">Messages archivés</a></li>
                 <li><h6 class="dropdown-header">Profil</h6></li>
-                <li><a class="menu__item dropdown-item menu__status" href="#">Statut</a></li>
-                <li><a class="menu__item dropdown-item menu__edit-profile" href="#">Modifier son profil</a></li>
+                <li>
+                    <div class="btn-group dropstart">
+                        <button type="button"
+                                class="menu__item dropdown-item menu__status"
+                                data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside"
+                                aria-expanded="false">
+                            Statut
+                        </button>
+                        <livewire:status />
+                    </div>
+                </li>
+                <li><a class="menu__item dropdown-item menu__edit-profile" href="{{ route('user.edit') }}">Modifier son profil</a></li>
                 <li><h6 class="dropdown-header">Compte</h6></li>
                 <li><a class="menu__item dropdown-item menu__settings" href="#">Paramètres du compte</a></li>
                 <li><a class="menu__item dropdown-item menu__rgpd" href="#">Mentions légales et politiques</a></li>

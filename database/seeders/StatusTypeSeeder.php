@@ -15,10 +15,10 @@ class StatusTypeSeeder extends Seeder
     public function run()
     {
         $types = [
-            'En ligne',
+            'Online',
             'Absent',
-            'Occupé',
-            'Hors Ligne',
+            'Busy',
+            'Offline',
         ];
 
         foreach ($types as $type) {

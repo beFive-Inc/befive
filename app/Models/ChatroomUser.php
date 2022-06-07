@@ -36,6 +36,14 @@ class ChatroomUser extends Model
     ];
 
     /**
+     * @return bool
+     */
+    public function isViewed(): bool
+    {
+        return $this->messages->first()->created_at > $this->view_at;
+    }
+
+    /**
      * @return BelongsTo
      */
     public function chatroom(): BelongsTo
@@ -57,6 +65,7 @@ class ChatroomUser extends Model
      */
     public function messages(): HasMany
     {
-        return $this->hasMany(Message::class, 'chatroom_user_id', 'id');
+        return $this->hasMany(Message::class, 'chatroom_user_id', 'id')
+            ->orderBy('created_at', 'DESC');
     }
 }

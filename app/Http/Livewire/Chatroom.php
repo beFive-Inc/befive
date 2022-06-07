@@ -6,7 +6,9 @@ use App\Events\MessageSent;
 use App\Models\ChatroomUser;
 use App\Models\Message;
 use App\Models\Chatroom as ChatroomModel;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Crypt;
 use Livewire\Component;
 
 class Chatroom extends Component
@@ -36,22 +38,32 @@ class Chatroom extends Component
         $this->resetIsSender();
     }
 
+    public function setViewAt()
+    {
+        $this->authIngroup->view_at = Carbon::now();
+        $this->authIngroup->save();
+    }
+
     public function send()
     {
-        $message = Message::create([
-            'chatroom_user_id' => $this->authIngroup->id,
-            'message_id' => null,
-            'message' => $this->message,
-            'type' => 'message'
-        ]);
+        if (!empty($this->message)) {
+            $message = Message::create([
+                'chatroom_user_id' => $this->authIngroup->id,
+                'message_id' => null,
+                'message' => Crypt::encrypt($this->message),
+                'type' => 'message'
+            ]);
 
-        $this->message = '';
+            $this->message = '';
 
-        $this->messages->prepend($message);
+            $this->messages->prepend($message);
 
-        $this->isSenderToTrue();
+            $this->isSenderToTrue();
 
-        broadcast(new MessageSent($message, $this->chatroom->uuid));
+            broadcast(new MessageSent($message, $this->chatroom->uuid));
+        } else {
+            return false;
+        }
     }
 
     public function isSenderToTrue()

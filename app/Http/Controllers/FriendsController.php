@@ -11,9 +11,25 @@ class FriendsController extends Controller
 
     public function index()
     {
-        $friends = \Auth::user()->getFriends()->load('status');
+        $medias = auth()->user()
+            ->load('media')
+            ->media;
 
-        return view('app.friends.index', compact('friends'));
+        $requestFriends = auth()->user()
+            ->getFriendRequests()
+            ->load('media');
+
+        $friends = \auth()->user()
+            ->getFriends()
+            ->load('media', 'status');
+
+
+        return view('app.friends.index',
+            compact(
+                'friends',
+                'requestFriends',
+                'medias'
+            ));
     }
 
     public function create()

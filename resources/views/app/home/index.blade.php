@@ -1,4 +1,4 @@
-<x-layout :friends="$friends" :request-friends="$requestFriends" :medias="$medias">
+<x-layout :friends="$friends" :request-friends="$requestFriends" :medias="$medias" :chatrooms="$chatrooms">
     <x-slot name="title">
         {{ __('Be Five | Homepage') }}
     </x-slot>
@@ -39,7 +39,7 @@
                     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
                         <div class="accordion-body">
                             @foreach($groups as $chatroom)
-                                <livewire:group-message :chatroom="$chatroom" :friends="$friends"/>
+                                <livewire:group-message :chatroom="$chatroom" :friends="$friends" :all-chatrooms="$chatrooms"/>
                             @endforeach
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
                         <div class="accordion-body">
                             @foreach($conversations as $chatroom)
-                                <livewire:conversation-message :chatroom="$chatroom" :friends="$friends"/>
+                                <livewire:conversation-message :chatroom="$chatroom" :friends="$friends" :all-chatrooms="$chatrooms"/>
                             @endforeach
                         </div>
                     </div>

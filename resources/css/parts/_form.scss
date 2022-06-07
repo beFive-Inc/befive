@@ -13,6 +13,14 @@
         margin-top: .4rem;
     }
 
+    &.special {
+
+        .actions {
+            width: 50%;
+            align-self: flex-end;
+        }
+    }
+
     &__field {
         display: block;
         width: 100%;

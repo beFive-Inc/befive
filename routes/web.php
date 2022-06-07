@@ -59,6 +59,9 @@ Route::prefix('user')->middleware('auth')->name('user.')->group(function () {
     Route::put('/update', [\App\Http\Controllers\UserController::class, 'update'])
         ->name('update');
 
+    Route::put('/change-status', [\App\Http\Controllers\UserController::class, 'changeStatus'])
+        ->name('change-status');
+
     Route::put('/restore', [\App\Http\Controllers\UserController::class, 'restore'])
         ->name('restore');
 
@@ -81,12 +84,16 @@ Route::prefix('chatroom')->middleware('auth')->name('chatroom.')->group(function
     // GET METHOD
 
     Route::get('/archive', [\App\Http\Controllers\ChatroomController::class, 'indexArchive'])
+        ->withTrashed()
         ->name('index.archive');
 
     Route::get('/{chatroom:uuid}', [\App\Http\Controllers\ChatroomController::class, 'show'])
         ->name('show');
 
     // POST METHOD
+
+    Route::post('/view', [\App\Http\Controllers\ChatroomController::class, 'view'])
+        ->name('view');
 
     Route::post('/create', [\App\Http\Controllers\ChatroomController::class, 'create'])
         ->name('create');
@@ -98,6 +105,10 @@ Route::prefix('chatroom')->middleware('auth')->name('chatroom.')->group(function
 
     Route::put('/rename', [\App\Http\Controllers\ChatroomController::class, 'rename'])
         ->name('rename');
+
+    Route::put('/restore', [\App\Http\Controllers\ChatroomController::class, 'restore'])
+        ->withTrashed()
+        ->name('restore');
 
     // DELETE METHOD
 

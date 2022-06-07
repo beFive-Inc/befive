@@ -30,7 +30,7 @@
             </h3>
             <div class="chatroom__message_container">
                 <p class="chatroom__message">
-                    {{ $chatroom->messages->first()?->message }}
+                    {{ $chatroom->messages->first()?->decryptedMessage }}
                 </p>
                 <p class="chatroom__date">
                     {{ $chatroom->messages->first()?->date }}
@@ -102,7 +102,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <livewire:chatroom-create :friend-list="$friends" :pre-selected-friends="$chatroom->authors"/>
+                        <livewire:chatroom-create :friend-list="$friends" :pre-selected-friends="$chatroom->authors" :pre-selected-friends-are-required="true" :all-chatroom="$allChatrooms"/>
                     </div>
                 </div>
             </div>

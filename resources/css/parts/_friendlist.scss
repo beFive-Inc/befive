@@ -1,3 +1,51 @@
+.friends {
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 1.5rem;
+    }
+
+    .nav {
+        display: block;
+        position: relative;
+        margin-bottom: 2.5rem;
+        width: 100%;
+
+        &__container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2.5rem;
+        }
+
+        &__item {
+            display: inline-block;
+            position: relative;
+        }
+
+        &__link {
+            font-size: 1.2rem;
+            font-weight: $font-regular;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: $dark-grey;
+            border-bottom: 2px solid $white;
+            cursor: pointer;
+            transition: .3s ease-in;
+
+            &.active {
+                font-weight: $font-bold;
+                color: $black;
+                border-bottom: 2px solid $primary;
+            }
+        }
+    }
+}
+
 .friend {
     display: flex;
     flex-direction: row;
@@ -6,6 +54,55 @@
     width: 100%;
     gap: 1rem;
     background-color: inherit;
+    position: relative;
+
+    &__remove{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: transparent;
+        border: none;
+        z-index: 10;
+
+        .icon {
+            background-color: white;
+            border-radius: $border-radius;
+            display: block;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 0;
+            right: -5px;
+            transition: .3s ease-in;
+
+            &::after{
+                content: '';
+                display: block;
+                position: relative;
+                width: 20px;
+                height: 20px;
+                mask-image: url("/parts/icons/bold/close-circle.svg");
+                mask-repeat: no-repeat;
+                mask-position: center;
+                background-color: $dark-grey;
+                transition: .3s ease-in;
+            }
+        }
+
+        &:hover {
+
+            .icon {
+                background-color: $light-grey;
+
+                &::after {
+                    background-color: darken($dark-grey, 20);
+                }
+            }
+        }
+    }
+
 
     &__container {
         display: flex;
@@ -102,6 +199,10 @@
 
             &:hover, &:focus, &:active {
                 background-color: $primary;
+            }
+
+            &:disabled {
+                opacity: .5;
             }
 
             &.selected {

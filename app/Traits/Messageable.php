@@ -6,19 +6,19 @@ use App\Models\Chatroom;
 use App\Models\ChatroomUser;
 use Illuminate\Support\Collection;
 
-
 trait Messageable
 {
-
     /**
-     * @param bool $removeSoftDelete Bool for removing soft delete
+     * @param bool $onlySoftDelete
      * @return Collection
      */
-    public function getChatrooms(bool $removeSoftDelete = true) : Collection
+    public function getChatrooms(bool $onlySoftDelete = false) : Collection
     {
         $collection = $this->getChatroomsWithAll();
 
-        if ($removeSoftDelete) {
+        if ($onlySoftDelete) {
+            $collection = $this->getOnlySoftDelete($collection);
+        } else {
             $collection = $this->removeSoftDelete($collection);
         }
 
@@ -32,7 +32,10 @@ trait Messageable
     {
         return $this->chatrooms()
             ->with(['authors.user', 'messages.author.user'])
-            ->get();
+            ->get()
+            ->filter(function ($chatroom) {
+                return $chatroom->messages->count();
+            });
     }
 
     /**
@@ -44,6 +47,19 @@ trait Messageable
         return $collection->filter(function ($chatroom) {
             return $chatroom->authors->filter(function ($author) {
                 return empty($author->deleted_at) && $author->user->id === auth()->id();
+            })->count();
+        });
+    }
+
+    /**
+     * @param Collection $collection
+     * @return Collection
+     */
+    public function getOnlySoftDelete(Collection $collection): Collection
+    {
+        return $collection->filter(function ($chatroom) {
+            return $chatroom->authors->filter(function ($author) {
+                return !empty($author->deleted_at) && $author->user->id === auth()->id();
             })->count();
         });
     }

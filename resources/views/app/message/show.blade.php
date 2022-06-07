@@ -1,4 +1,4 @@
-<x-message-layout :chatroom="$chatroom">
+<x-message-layout :chatroom="$chatroom" :other-in-group="$otherInGroup">
     <x-slot name="title">
         {{ __('Be Five | Homepage') }}
     </x-slot>

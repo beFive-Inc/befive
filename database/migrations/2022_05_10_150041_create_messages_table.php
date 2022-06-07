@@ -26,8 +26,6 @@ class CreateMessagesTable extends Migration
 
             $table->text('message')->nullable();
 
-            $table->dateTime('view_at')->nullable();
-
             $table->timestamps();
         });
     }

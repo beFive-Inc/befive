@@ -22,7 +22,7 @@
         {{ __('Be Five, premier réseau social pour gamer') }}
     </h1>
     <!-- Header -->
-    <x-header :friends="$friends" :request-friends="$requestFriends" :medias="$medias"></x-header>
+    <x-header :friends="$friends" :request-friends="$requestFriends" :medias="$medias" :chatrooms="$chatrooms"></x-header>
 
     <!-- Contenu -->
     <main class="main">

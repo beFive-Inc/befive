@@ -16,7 +16,7 @@ class CreateStatusTable extends Migration
         Schema::create('status', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('type_id')->constrained();
+            $table->foreignId('status_type_id')->constrained();
             $table->string('message')->nullable();
             $table->timestamps();
         });

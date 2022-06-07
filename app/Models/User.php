@@ -133,7 +133,7 @@ class User extends Authenticatable implements HasMedia
 
     public function type()
     {
-        return $this->hasOneThrough(StatusType::class, Status::class, 'user_id', 'id', 'id', 'type_id');
+        return $this->hasOneThrough(StatusType::class, Status::class, 'user_id', 'id', 'id', 'status_type_id');
     }
 
 }

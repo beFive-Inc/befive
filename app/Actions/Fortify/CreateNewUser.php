@@ -45,7 +45,7 @@ class CreateNewUser implements CreatesNewUsers
         $user->status()
             ->create([
                 'user_id' => $user->id,
-                'type_id' => 1
+                'status_type_id' => 1
             ]);
 
         return $user;

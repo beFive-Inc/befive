@@ -5,10 +5,10 @@
                 @csrf
                 @method('put')
 
-                <input type="hidden" name="type_id" value="{{ $type->id }}">
+                <input type="hidden" name="status_type_id" value="{{ $type->id }}">
 
                 <button type="submit" class="dropdown-item menu__item menu__{{ $type->slug }}
-                                        {{ auth()->user()->status->type_id === $type->id ? 'active' : '' }}">
+                                        {{ auth()->user()->status->status_type_id === $type->id ? 'active' : '' }}">
                     {{ __($type->name) }}
                 </button>
             </form>

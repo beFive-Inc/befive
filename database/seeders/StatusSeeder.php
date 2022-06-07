@@ -36,7 +36,7 @@ class StatusSeeder extends Seeder
 
             Status::create([
                'user_id' => $user->id,
-               'type_id' => $type->id,
+               'status_type_id' => $type->id,
                'message' => $rand > 50 ? $status->shuffle()->first() : null,
             ]);
         }

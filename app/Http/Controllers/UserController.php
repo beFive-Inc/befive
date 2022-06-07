@@ -64,7 +64,7 @@ class UserController extends Controller
         auth()->user()
             ->status()
             ->update([
-                'type_id' => \request('type_id')
+                'status_type_id' => \request('status_type_id')
             ]);
 
         return redirect()->route('homepage');

@@ -20,7 +20,7 @@ class Status extends Component
         auth()->user()
             ->status()
             ->update([
-                'type_id' => $id
+                'status_type_id' => $id
             ]);
     }
 

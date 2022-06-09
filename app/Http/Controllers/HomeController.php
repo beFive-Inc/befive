@@ -23,8 +23,7 @@ class HomeController extends Controller
             ->getChatrooms();
 
         $requestFriends = auth()->user()
-            ->getFriendRequests()
-            ->load('media');
+            ->getFriendRequests();
 
         $friends = \auth()->user()
             ->getFriends()

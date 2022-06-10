@@ -40,7 +40,7 @@ class ChatroomUser extends Model
      */
     public function isViewed(): bool
     {
-        return $this->messages->first()->created_at > $this->view_at;
+        return $this->messages->first()->created_at >= $this->view_at;
     }
 
     /**

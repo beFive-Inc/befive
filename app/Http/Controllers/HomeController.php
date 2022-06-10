@@ -23,7 +23,10 @@ class HomeController extends Controller
             ->getChatrooms();
 
         $requestFriends = auth()->user()
-            ->getFriendRequests();
+            ->getFriendRequests()
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
 
         $friends = \auth()->user()
             ->getFriends()

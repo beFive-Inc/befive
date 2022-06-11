@@ -175,6 +175,29 @@ hr {
   text-transform: uppercase;
   margin: 1.5rem 0 0.5rem;
 }
+.dropdown-menu .dropdown-special-header {
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.dropdown-menu .dropdown-link {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #FF9400;
+  transition: 0.5s ease-in;
+}
+.dropdown-menu .dropdown-link:hover, .dropdown-menu .dropdown-link:focus {
+  text-decoration: underline;
+}
+.dropdown-menu .dropdown-header-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
 .dropdown-menu .dropdown-nomargin {
   margin: 0;
 }
@@ -216,6 +239,9 @@ hr {
   font-size: 1.2rem;
   font-weight: 500;
   color: #a0a0a0;
+}
+.dropdown-menu .friend, .dropdown-menu .chatroom {
+  padding: 0.4rem;
 }
 
 .dropstart {
@@ -426,6 +452,89 @@ hr {
 .main {
   grid-gap: 1.2rem;
   padding: 0 1.5rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-self: flex-end;
+  gap: 1rem;
+}
+.actions .add_to_chatroom {
+  width: 24px;
+  height: 24px;
+  border: none;
+  -webkit-mask-image: url("/parts/icons/outline/add-circle.svg");
+          mask-image: url("/parts/icons/outline/add-circle.svg");
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 100%;
+          mask-size: 100%;
+  -webkit-mask-position: center;
+          mask-position: center;
+  background-color: #3A3A3A;
+  transition: 0.3s ease-in;
+}
+.actions .add_to_chatroom:hover, .actions .add_to_chatroom:focus, .actions .add_to_chatroom:active {
+  background-color: #FF9400;
+}
+.actions .add_to_chatroom:disabled {
+  opacity: 0.5;
+}
+.actions .add_to_chatroom.selected {
+  -webkit-mask-image: url("/parts/icons/bold/tick-circle.svg");
+          mask-image: url("/parts/icons/bold/tick-circle.svg");
+  background-color: #20C600;
+}
+.actions .friend_add button, .actions .chatroom_create button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+.actions .friend_add button img, .actions .chatroom_create button img {
+  width: 100%;
+}
+
+.action {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+}
+.action:focus, .action:hover, .action:active {
+  background-color: #FF9400;
+}
+.action.danger:focus, .action.danger:hover, .action.danger:active {
+  background-color: #FF1200;
+}
+.action__friend-accept {
+  -webkit-mask-image: url("/parts/icons/outline/user-add.svg");
+          mask-image: url("/parts/icons/outline/user-add.svg");
+  background-color: #3A3A3A;
+}
+.action__friend-deny {
+  -webkit-mask-image: url("/parts/icons/outline/user-minus.svg");
+          mask-image: url("/parts/icons/outline/user-minus.svg");
+  background-color: #3A3A3A;
+}
+.action__canal-accept {
+  -webkit-mask-image: url("/parts/icons/outline/message-add-1.svg");
+          mask-image: url("/parts/icons/outline/message-add-1.svg");
+  background-color: #3A3A3A;
+}
+.action__canal-deny {
+  -webkit-mask-image: url("/parts/icons/outline/message-minus.svg");
+          mask-image: url("/parts/icons/outline/message-minus.svg");
+  background-color: #3A3A3A;
 }
 
 .btn {
@@ -783,6 +892,7 @@ hr {
   color: #6d6d6d;
 }
 .form .actions {
+  display: block;
   margin-top: 1rem;
 }
 .form .actions__secondary {
@@ -816,24 +926,41 @@ hr {
   align-items: center;
   gap: 0.5rem;
 }
-.header .actions .action {
+.header .actions .message-create {
   background-color: #FF9400;
 }
-.header .actions .notification, .header .actions .action {
+.header .actions .notification {
+  position: relative;
+}
+.header .actions .notification .bulle {
   display: block;
-  width: 40px;
-  height: 40px;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  transition: 0.5s ease;
+  border-radius: 99px;
+  z-index: 5;
+}
+.header .actions .notification .bulle.notified {
+  background-color: #FF9400;
+  border: 1px solid #fff;
+}
+.header .actions .notification, .header .actions .message-create {
+  display: block;
   border-radius: 99px;
 }
-.header .actions .notification:hover, .header .actions .notification:focus, .header .actions .notification:active, .header .actions .action:hover, .header .actions .action:focus, .header .actions .action:active {
+.header .actions .notification:hover, .header .actions .notification:focus, .header .actions .notification:active, .header .actions .message-create:hover, .header .actions .message-create:focus, .header .actions .message-create:active {
   background-color: #3A3A3A;
 }
-.header .actions .notification:hover .dropdown-btn, .header .actions .notification:hover .modal-btn, .header .actions .notification:focus .dropdown-btn, .header .actions .notification:focus .modal-btn, .header .actions .notification:active .dropdown-btn, .header .actions .notification:active .modal-btn, .header .actions .action:hover .dropdown-btn, .header .actions .action:hover .modal-btn, .header .actions .action:focus .dropdown-btn, .header .actions .action:focus .modal-btn, .header .actions .action:active .dropdown-btn, .header .actions .action:active .modal-btn {
+.header .actions .notification:hover .dropdown-btn, .header .actions .notification:hover .modal-btn, .header .actions .notification:focus .dropdown-btn, .header .actions .notification:focus .modal-btn, .header .actions .notification:active .dropdown-btn, .header .actions .notification:active .modal-btn, .header .actions .message-create:hover .dropdown-btn, .header .actions .message-create:hover .modal-btn, .header .actions .message-create:focus .dropdown-btn, .header .actions .message-create:focus .modal-btn, .header .actions .message-create:active .dropdown-btn, .header .actions .message-create:active .modal-btn {
   background-color: #fff;
 }
-.header .actions .notification .modal-btn, .header .actions .notification .dropdown-btn, .header .actions .action .modal-btn, .header .actions .action .dropdown-btn {
-  width: 100%;
-  height: 100%;
+.header .actions .notification .modal-btn, .header .actions .notification .dropdown-btn, .header .actions .message-create .modal-btn, .header .actions .message-create .dropdown-btn {
+  width: 40px;
+  height: 40px;
   padding: 0;
   margin: 0;
   border: none;
@@ -846,12 +973,12 @@ hr {
           mask-size: 24px 24px;
   background-color: #3A3A3A;
 }
-.header .actions .notification .modal-btn, .header .actions .action .modal-btn {
+.header .actions .notification .modal-btn, .header .actions .message-create .modal-btn {
   -webkit-mask-image: url("/parts/icons/outline/message-add-1.svg");
           mask-image: url("/parts/icons/outline/message-add-1.svg");
   background-color: #fff;
 }
-.header .actions .notification .dropdown-btn, .header .actions .action .dropdown-btn {
+.header .actions .notification .dropdown-btn, .header .actions .message-create .dropdown-btn {
   -webkit-mask-image: url("/parts/icons/outline/notification.svg");
           mask-image: url("/parts/icons/outline/notification.svg");
   background-color: #3A3A3A;
@@ -1260,51 +1387,6 @@ hr {
   border-radius: 99px;
   overflow: hidden;
 }
-.friend .actions {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-self: flex-end;
-  gap: 1rem;
-}
-.friend .actions .add_to_chatroom {
-  width: 24px;
-  height: 24px;
-  border: none;
-  -webkit-mask-image: url("/parts/icons/outline/add-circle.svg");
-          mask-image: url("/parts/icons/outline/add-circle.svg");
-  -webkit-mask-repeat: no-repeat;
-          mask-repeat: no-repeat;
-  -webkit-mask-size: 100%;
-          mask-size: 100%;
-  -webkit-mask-position: center;
-          mask-position: center;
-  background-color: #3A3A3A;
-  transition: 0.3s ease-in;
-}
-.friend .actions .add_to_chatroom:hover, .friend .actions .add_to_chatroom:focus, .friend .actions .add_to_chatroom:active {
-  background-color: #FF9400;
-}
-.friend .actions .add_to_chatroom:disabled {
-  opacity: 0.5;
-}
-.friend .actions .add_to_chatroom.selected {
-  -webkit-mask-image: url("/parts/icons/bold/tick-circle.svg");
-          mask-image: url("/parts/icons/bold/tick-circle.svg");
-  background-color: #20C600;
-}
-.friend .actions .friend_add button, .friend .actions .chatroom_create button {
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-}
-.friend .actions .friend_add button img, .friend .actions .chatroom_create button img {
-  width: 100%;
-}
 
 .messages {
   display: flex;
@@ -1448,5 +1530,26 @@ hr {
   display: inline-block;
   font-size: 2rem;
   font-weight: 700;
+  margin-bottom: 2rem;
+}
+.page__semi-title {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #3A3A3A;
   margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #FF9400;
+  border-radius: 99px;
+  margin-left: 0.5rem;
 }

@@ -13,7 +13,9 @@
             @endforeach
         </div>
         <div class="chatroom__info">
-            <h3 aria-level="3" role="heading" class="chatroom__name">
+            <h4 aria-level="4"
+                role="heading"
+                class="chatroom__name">
                 <a href="{{ route('chatroom.show', $chatroom->uuid) }}" class="chatroom__link">
                     @if($chatroom->name)
                         {{ $chatroom->name }}
@@ -27,7 +29,7 @@
                         @endforeach
                     @endif
                 </a>
-            </h3>
+            </h4>
             <div class="chatroom__message_container">
                 <p class="chatroom__message">
                     {{ $chatroom->messages->first()?->decryptedMessage }}
@@ -90,19 +92,6 @@
                                 <input type="submit" class="btn btn-primary" value="{{ __('field.conversation.rename.submit') }}"/>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="chatroomCreateWith-{{ $chatroom->uuid }}" tabindex="-1" aria-labelledby="chatroomCreateWith-{{ $chatroom->uuid }}">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content modal-special-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <livewire:chatroom-create :friend-list="$friends" :pre-selected-friends="$chatroom->authors" :pre-selected-friends-are-required="true" :all-chatroom="$allChatrooms"/>
                     </div>
                 </div>
             </div>

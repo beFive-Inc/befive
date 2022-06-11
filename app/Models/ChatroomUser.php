@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Messageable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,10 +13,7 @@ class ChatroomUser extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
-    const STATUS_ACCEPTED = 'accepted';
-    const STATUS_PENDING = 'pending';
-    const STATUS_DENIED = 'denied';
+    use Messageable;
 
     protected $table = 'chatroom_users';
 
@@ -32,7 +30,9 @@ class ChatroomUser extends Model
     protected $fillable = [
         'chatroom_id',
         'user_id',
-        'name'
+        'name',
+        'status',
+        'view_at'
     ];
 
     /**
@@ -40,7 +40,7 @@ class ChatroomUser extends Model
      */
     public function isViewed(): bool
     {
-        return $this->chatroom->messages->first()->created_at >= $this->view_at;
+        return $this->chatroom->lastMessage->first()->created_at >= $this->view_at;
     }
 
     /**

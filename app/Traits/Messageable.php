@@ -2,8 +2,7 @@
 
 namespace App\Traits;
 
-use App\Models\Chatroom;
-use App\Models\ChatroomUser;
+use App\Constant\ChatroomStatus;
 use Illuminate\Support\Collection;
 
 trait Messageable
@@ -36,6 +35,39 @@ trait Messageable
             ->filter(function ($chatroom) {
                 return $chatroom->messages->count();
             });
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getRequestedCanals() : Collection
+    {
+        return $this->chatrooms()
+            ->with(['authors'])
+            ->whereHas('authors', function ($query) {
+                $query->where('status', '=', ChatroomStatus::PENDING);
+            })
+            ->get();
+    }
+
+    /**
+     * @return void
+     */
+    public function denyCanalRequest(): void
+    {
+        $this->update([
+            'status' => ChatroomStatus::DENIED,
+        ]);
+    }
+
+    /**
+     * @return void
+     */
+    public function acceptCanalRequest(): void
+    {
+        $this->update([
+            'status' => ChatroomStatus::ACCEPTED,
+        ]);
     }
 
     /**

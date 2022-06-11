@@ -40,7 +40,12 @@ class ChatroomController extends Controller
 
         $requestFriends = auth()->user()
             ->getFriendRequests()
-            ->load('media');
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
+
+        $requestCanals = auth()->user()
+            ->getRequestedCanals();
 
         $friends = \auth()->user()
             ->getFriends()
@@ -50,6 +55,7 @@ class ChatroomController extends Controller
             compact(
                 'chatrooms',
                 'deletedChatrooms',
+                'requestCanals',
                 'friends',
                 'requestFriends',
                 'medias'
@@ -98,6 +104,24 @@ class ChatroomController extends Controller
         $chatroom->update([
             'name' => \request('name'),
         ]);
+
+        return redirect()->route('homepage');
+    }
+
+    public function accept()
+    {
+        $user = ChatroomUser::find(request('author_id'));
+
+        $user->acceptCanalRequest();
+
+        return redirect()->route('homepage');
+    }
+
+    public function deny()
+    {
+        $user = ChatroomUser::find('author_id');
+
+        $user->denyCanalRequest();
 
         return redirect()->route('homepage');
     }

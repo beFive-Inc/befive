@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constant\ChatroomType;
 use App\Models\Chatroom;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -41,7 +42,7 @@ class ChatroomSeeder extends Seeder
             Chatroom::create([
                 'uuid' => Str::uuid(),
                 'name' => $randType > 75 ? $canalNames->shuffle()->first() : $names->shuffle()->first(),
-                'type' => $randType > 75 ? Chatroom::CANAL : null,
+                'type' => $randType > 75 ? ChatroomType::CANAL : null,
             ]);
         }
     }

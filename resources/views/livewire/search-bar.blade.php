@@ -28,7 +28,7 @@
                 </h2>
                 <div class="searchbar__query_container">
                     @foreach($suggests as $suggest)
-                        <x-friend :friend="$suggest" :actions-to-search="true"/>
+                        <x-friend :friend="$suggest" :actions="true"/>
                     @endforeach
                 </div>
             </section>
@@ -41,7 +41,7 @@
 
                     <div class="searchbar__query_container">
                         @foreach($friends as $friend)
-                            <x-friend :friend="$friend"/>
+                            <x-friend :friend="$friend" :actions="true"/>
                         @endforeach
                     </div>
                 </section>
@@ -54,7 +54,15 @@
 
                     <div class="searchbar__query_container">
                         @foreach($others as $friend)
-                            <x-friend :friend="$friend" :actions-to-search="true"/>
+                            <x-friend :friend="$friend" :actions="true">
+                                <form action="{{ route('friends.add') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="uuid" value="{{ $friend->uuid }}">
+                                    <button>
+                                        Valider
+                                    </button>
+                                </form>
+                            </x-friend>
                         @endforeach
                     </div>
                 </section>
@@ -67,7 +75,7 @@
 
                     <div class="searchbar__query_container">
                         @foreach($canals as $chatroom)
-                            <livewire:canal :chatroom="$chatroom" />
+                            <livewire:canal :chatroom="$chatroom"/>
                         @endforeach
                     </div>
                 </section>

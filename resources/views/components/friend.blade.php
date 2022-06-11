@@ -5,9 +5,9 @@
         </div>
 
         <div class="friend__info">
-            <h3 aria-level="3" role="heading" class="friend__pseudo">
+            <h4 aria-level="3" role="heading" class="friend__pseudo">
                 {{ $friend->pseudo }}
-            </h3>
+            </h4>
             @if(!$onlyImageAndName)
                 <p class="friend__hashtag">
                     {{ $getStatusMessage ? __($friend->statusMessage) : '#' . $friend->hashtag }}
@@ -15,33 +15,9 @@
             @endif
         </div>
     </div>
-    @if($actionsToSearch)
+   @if($actions)
         <div class="actions">
-            <form class="chatroom_create" action="{{ route('chatroom.create.conversation') }}" method="post">
-                @csrf
-
-                <input type="hidden" name="uuid" value="{{ $friend->uuid }}">
-
-                <button type="submit">
-                    <img src="{{ asset('parts/icons/outline/message-circle.svg') }}" alt>
-                </button>
-            </form>
-
-            <form class="friend_add" action="{{ route('friends.add') }}" method="post">
-                @csrf
-
-                <input type="hidden" name="uuid" value="{{ $friend->uuid }}">
-
-                <button type="submit">
-                    @if(auth()->user()->hasSentFriendRequestTo($friend))
-                        <img src="{{ asset('parts/icons/bold/add-circle.svg') }}" alt>
-                    @else
-                        <img src="{{ asset('parts/icons/outline/add-circle.svg') }}" alt>
-                    @endif
-                </button>
-            </form>
+            {{ $slot }}
         </div>
     @endif
-
-    {{ $slot }}
 </article>

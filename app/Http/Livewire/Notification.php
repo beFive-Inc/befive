@@ -2,23 +2,95 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\ChatroomUser;
+use App\Models\User;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class Notification extends Component
 {
-    public Collection $requestedFriends;
-    public Collection $requestedCanals;
+    public int $limit = 2;
+    public Collection $requestCanals;
     public Collection $requestFriends;
-    public int $limit = 3;
+    public Collection $requestedCanals;
+    public Collection $requestedFriends;
 
     protected $listeners = [
         'friendAdded' => 'check'
     ];
 
+    public function mount()
+    {
+        $this->requestedCanals = $this->requestCanals->take($this->limit);
+        $this->requestedFriends = $this->requestFriends->take($this->limit);
+    }
+
+    /**
+     * @return void
+     */
     public function check()
     {
-        dd('oui');
+        $this->requestCanals = $this->getRequestedCanals();
+        $this->requestedCanals = $this->requestCanals->take($this->limit);
+        $this->requestFriends = $this->getRequestedFriends();
+        $this->requestedFriends = $this->requestFriends->take($this->limit);
+    }
+
+
+    /**
+     * @return void
+     */
+    public function acceptCanal(int $authorID)
+    {
+        $user = ChatroomUser::find($authorID);
+
+        $user->acceptCanalRequest();
+
+        $this->requestCanals = $this->getRequestedCanals();
+        $this->requestedCanals = $this->requestCanals->take($this->limit);
+    }
+
+    /**
+     * @return void
+     */
+    public function denyCanal(int $authorID)
+    {
+        $user = ChatroomUser::find($authorID);
+
+        $user->denyCanalRequest();
+
+        $this->requestCanals = $this->getRequestedCanals();
+        $this->requestedCanals = $this->requestCanals->take($this->limit);
+    }
+
+    /**
+     * @param string $uuid
+     * @return void
+     */
+    public function acceptFriend(string $uuid)
+    {
+        $user = User::where('uuid', '=', $uuid)
+            ->first();
+
+        auth()->user()->acceptFriendRequest($user);
+
+        $this->requestFriends = $this->getRequestedFriends();
+        $this->requestedFriends = $this->requestFriends->take($this->limit);
+    }
+
+    /**
+     * @param string $uuid
+     * @return void
+     */
+    public function denyFriend(string $uuid)
+    {
+        $user = User::where('uuid', '=', $uuid)
+            ->first();
+
+        auth()->user()->denyFriendRequest($user);
+
+        $this->requestFriends = $this->getRequestedFriends();
+        $this->requestedFriends = $this->requestFriends->take($this->limit);
     }
 
     /**
@@ -28,9 +100,11 @@ class Notification extends Component
      */
     public function getRequestedFriends(): Collection
     {
-        return $this->requestFriends
-            ->sortByDesc('created_at')
-            ->take($this->limit);
+        return auth()->user()
+            ->getFriendRequests()
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
     }
 
     /**
@@ -40,16 +114,13 @@ class Notification extends Component
      */
     public function getRequestedCanals(): Collection
     {
-        return $this->requestFriends
-            ->sortByDesc('created_at')
-            ->take($this->limit);
+        return auth()
+            ->user()
+            ->getRequestedCanals();
     }
 
     public function render()
     {
-        $this->requestedFriends = $this->getRequestedFriends();
-        $this->requestedCanals = $this->getRequestedCanals();
-
         return view('livewire.notification');
     }
 }

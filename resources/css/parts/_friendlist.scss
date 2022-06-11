@@ -178,55 +178,5 @@
         border-radius: $border-radius;
         overflow: hidden;
     }
-
-    .actions {
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        justify-self: flex-end;
-        gap: 1rem;
-
-        .add_to_chatroom {
-            width: 24px;
-            height: 24px;
-            border: none;
-            mask-image: url("/parts/icons/outline/add-circle.svg");
-            mask-repeat: no-repeat;
-            mask-size: 100%;
-            mask-position: center;
-            background-color: $dark-grey;
-            transition: .3s ease-in;
-
-            &:hover, &:focus, &:active {
-                background-color: $primary;
-            }
-
-            &:disabled {
-                opacity: .5;
-            }
-
-            &.selected {
-                mask-image: url("/parts/icons/bold/tick-circle.svg");
-                background-color: $success;
-            }
-        }
-
-        .friend_add, .chatroom_create {
-
-            & button {
-                background-color: transparent;
-                border: none;
-                padding: 0;
-                margin: 0;
-                cursor: pointer;
-                width: 24px;
-                height: 24px;
-
-                & img {
-                    width: 100%;
-                }
-            }
-        }
-    }
 }
 

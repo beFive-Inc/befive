@@ -15,12 +15,13 @@
 
         <div class="form__container">
             <input type="hidden" name="member_id" value="{{ $authIngroup->id }}">
-            <textarea name="message"
-                      rows="1"
-                      class="form__input"
-                      placeholder="{{ __('app.placeholder') }}"
-                      wire:model.debounce.500ms="message"
-                      wire:keyup.debounce.300ms="check"></textarea>
+            <input type="text"
+                   name="message"
+                   rows="1"
+                   class="form__input"
+                   placeholder="{{ __('app.placeholder') }}"
+                   wire:model.debounce.500ms="message"
+                   wire:keyup.debounce.300ms="check"/>
 
             <button type="submit" class="form__btn send form__hide {{ !empty($message) ? 'show' : '' }}">
                 <span class="sr_only">{{ __('app.send') }}</span>

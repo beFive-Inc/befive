@@ -31,7 +31,12 @@ class UserController extends Controller
 
         $requestFriends = auth()->user()
             ->getFriendRequests()
-            ->load('media');
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
+
+        $requestCanals = auth()->user()
+            ->getRequestedCanals();
 
         $friends = \auth()->user()
             ->getFriends()
@@ -42,6 +47,7 @@ class UserController extends Controller
                 'medias',
                 'chatrooms',
                 'requestFriends',
+                'requestCanals',
                 'friends'
             )
         );

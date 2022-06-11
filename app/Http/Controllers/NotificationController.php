@@ -2,16 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\FriendAdded;
-use App\Models\Chatroom;
-use App\Models\ChatroomUser;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Cookie;
 
-class HomeController extends Controller
+class NotificationController extends Controller
 {
     public function index()
     {
@@ -21,9 +15,6 @@ class HomeController extends Controller
 
         $chatrooms = auth()->user()
             ->getChatrooms();
-
-        $requestCanals = auth()->user()
-            ->getRequestedCanals();
 
         $requestFriends = auth()->user()
             ->getFriendRequests()
@@ -35,15 +26,15 @@ class HomeController extends Controller
             ->getFriends()
             ->load('media');
 
-        return view(
-            'app.home.index',
-            compact(
-                'chatrooms',
-                'requestFriends',
-                'requestCanals',
-                'friends',
-                'medias'
-            )
-        );
+        $requestCanals = auth()->user()
+            ->getRequestedCanals();
+
+        return view('app.notification.index', compact(
+            'medias',
+            'chatrooms',
+            'requestFriends',
+            'requestCanals',
+            'friends',
+        ));
     }
 }

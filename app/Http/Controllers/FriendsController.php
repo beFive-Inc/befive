@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\FriendAdded;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Multicaret\Acquaintances\Models\Friendship;
@@ -15,19 +16,29 @@ class FriendsController extends Controller
             ->load('media')
             ->media;
 
+        $chatrooms = auth()->user()
+            ->getChatrooms();
+
         $requestFriends = auth()->user()
             ->getFriendRequests()
-            ->load('media');
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
+
+        $requestCanals = auth()->user()
+            ->getRequestedCanals();
 
         $friends = \auth()->user()
             ->getFriends()
-            ->load('media', 'status');
+            ->load('media');
 
 
         return view('app.friends.index',
             compact(
                 'friends',
+                'chatrooms',
                 'requestFriends',
+                'requestCanals',
                 'medias'
             ));
     }
@@ -39,6 +50,8 @@ class FriendsController extends Controller
 
         auth()->user()->befriend($friendToAdd);
 
+        broadcast(new FriendAdded($friendToAdd));
+
         return redirect()->route('homepage');
     }
 
@@ -46,6 +59,26 @@ class FriendsController extends Controller
     {
 
         return redirect()->route('homepage');
+    }
+
+    public function accept()
+    {
+        $user = User::where('uuid', '=', \request('uuid'))
+            ->first();
+
+        auth()->user()->acceptFriendRequest($user);
+
+        return redirect()->route('friends.index');
+    }
+
+    public function deny()
+    {
+        $user = User::where('uuid', '=', \request('uuid'))
+            ->first();
+
+        auth()->user()->denyFriendRequest($user);
+
+        return redirect()->route('friends.index');
     }
 
     public function block()

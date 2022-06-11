@@ -26,7 +26,7 @@ class FriendList extends Component
 
     public function mount()
     {
-        $this->friendRequests = auth()->user()->getFriendRequests()->load('media');
+        $this->friendRequests = auth()->user()->getFriendRequests();
         $this->friendships = auth()->user()->getFriends()->load('media');
         $this->friendBlocked = auth()->user()->getBlockedFriendships();
 

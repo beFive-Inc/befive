@@ -22,6 +22,11 @@ Route::get( '/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->withTrashed()
     ->middleware(['auth']);
 
+
+Route::get('/notifications', [\App\Http\Controllers\NotificationController::class, 'index'])
+    ->name('notifications')
+    ->middleware(['auth']);
+
 ////
 // SEARCH ROUTE
 ////
@@ -103,6 +108,12 @@ Route::prefix('chatroom')->middleware('auth')->name('chatroom.')->group(function
 
     // PUT METHOD
 
+    Route::put('/accept', [\App\Http\Controllers\ChatroomController::class, 'accept'])
+        ->name('accept');
+
+    Route::put('/deny', [\App\Http\Controllers\ChatroomController::class, 'deny'])
+        ->name('deny');
+
     Route::put('/rename', [\App\Http\Controllers\ChatroomController::class, 'rename'])
         ->name('rename');
 
@@ -139,6 +150,12 @@ Route::prefix('friends')->middleware('auth')->name('friends.')->group(function (
         ->name('add');
 
     // PUT METHOD
+
+    Route::put('/accept', [\App\Http\Controllers\FriendsController::class, 'accept'])
+        ->name('accept');
+
+    Route::put('/deny', [\App\Http\Controllers\FriendsController::class, 'deny'])
+        ->name('deny');
 
     Route::put('/rename', [\App\Http\Controllers\FriendsController::class, 'rename'])
         ->name('rename');

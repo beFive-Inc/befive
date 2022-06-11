@@ -25,6 +25,34 @@
         margin: 1.5rem 0 .5rem;
     }
 
+    .dropdown-special-header {
+        font-size: 1.2rem;
+        font-weight: $font-regular;
+        text-transform: uppercase;
+    }
+
+    .dropdown-link {
+        font-size: 1.2rem;
+        font-weight: $font-medium;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: $primary;
+        transition: .5s ease-in;
+
+        &:hover, &:focus {
+            text-decoration: underline;
+        }
+    }
+
+    .dropdown-header-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+
     .dropdown-nomargin {
         margin: 0;
     }
@@ -76,6 +104,10 @@
                 color: lighten($dark-grey, 40);
             }
         }
+    }
+
+    .friend, .chatroom {
+        padding: 0.4rem;
     }
 }
 

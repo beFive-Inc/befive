@@ -2,28 +2,27 @@
 
 namespace App\View\Components;
 
+use App\Models\User;
 use Illuminate\View\Component;
 
 class Friend extends Component
 {
-    public $friend;
-    public $onlyImageAndName;
-    public $actionsToAdd;
-    public $actionsToSearch;
-    public $getStatusMessage;
+    public User $friend;
+    public bool $actions;
+    public bool $getStatusMessage;
+    public bool $onlyImageAndName;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($friend, $actionsToAdd = false, $actionsToSearch = false, $onlyImageAndName = false, $getStatusMessage = false)
+    public function __construct(User $friend, bool $actions = true, bool $getStatusMessage = false, bool $onlyImageAndName = false)
     {
         $this->friend = $friend;
-        $this->actionsToAdd = $actionsToAdd;
-        $this->actionsToSearch = $actionsToSearch;
-        $this->onlyImageAndName = $onlyImageAndName;
+        $this->actions = $actions;
         $this->getStatusMessage = $getStatusMessage;
+        $this->onlyImageAndName = $onlyImageAndName;
     }
 
     /**

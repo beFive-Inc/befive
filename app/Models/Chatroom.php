@@ -2,18 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Constant\ChatroomType;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Chatroom extends Model
 {
     use HasFactory;
-
-    const CANAL = 'canal';
 
     protected $fillable = [
         'name',
@@ -62,7 +59,7 @@ class Chatroom extends Model
     /**
      * @return HasManyThrough
      */
-    public function onlyFiveLastMessages(): HasManyThrough
+    public function lastMessage(): HasManyThrough
     {
         return $this->messages()->limit(1);
     }
@@ -74,7 +71,7 @@ class Chatroom extends Model
      */
     public function getIsGroupAttribute(): bool
     {
-        return $this->authors->count() > 2 && $this->type !=  self::CANAL;
+        return $this->authors->count() > 2 && $this->type !=  ChatroomType::CANAL;
     }
 
     /**
@@ -84,7 +81,7 @@ class Chatroom extends Model
      */
     public function getIsCanalAttribute(): bool
     {
-        return $this->type === self::CANAL;
+        return $this->type === ChatroomType::CANAL;
     }
 
     /**
@@ -94,6 +91,6 @@ class Chatroom extends Model
      */
     public function getIsConversationAttribute(): bool
     {
-        return $this->authors->count() == 2 && $this->type != self::CANAL;
+        return $this->authors->count() == 2 && $this->type != ChatroomType::CANAL;
     }
 }

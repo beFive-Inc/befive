@@ -2,27 +2,29 @@
 
 namespace App\View\Components;
 
-use Illuminate\Support\Collection;
 use Illuminate\View\Component;
+use Illuminate\Support\Collection;
 
 class Header extends Component
 {
+    public Collection $medias;
     public Collection $friends;
     public Collection $chatrooms;
+    public Collection $requestCanals;
     public Collection $requestFriends;
-    public Collection $medias;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(Collection $friends, Collection $requestFriends, Collection $medias, Collection $chatrooms)
+    public function __construct(Collection $friends, Collection $requestFriends, Collection $medias, Collection $chatrooms, Collection $requestCanals)
     {
-        $this->friends = $friends;
-        $this->requestFriends = $requestFriends;
         $this->medias = $medias;
+        $this->friends = $friends;
         $this->chatrooms = $chatrooms;
+        $this->requestCanals = $requestCanals;
+        $this->requestFriends = $requestFriends;
     }
 
     /**

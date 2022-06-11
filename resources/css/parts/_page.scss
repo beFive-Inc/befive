@@ -4,6 +4,14 @@
         display: inline-block;
         font-size: 2rem;
         font-weight: $font-bold;
+        margin-bottom: 2rem;
+    }
+
+    &__semi-title {
+        font-size: 1.2rem;
+        font-weight: $font-regular;
+        color: $dark-grey;
         margin-bottom: 1rem;
+        text-transform: uppercase;
     }
 }

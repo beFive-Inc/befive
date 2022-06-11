@@ -14,12 +14,9 @@
 
     <div class="actions">
         <div class="notification dropdown-center">
-            <button type="button" class="dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="sr_only">{{ __('app.notification') }}</span>
-            </button>
-            <livewire:notification :request-friends="$requestFriends"/>
+            <livewire:notification :request-friends="$requestFriends" :request-canals="$requestCanals"/>
         </div>
-        <div class="action">
+        <div class="message-create">
             <button type="button" class="modal-btn" data-bs-toggle="modal" data-bs-target="#createGroup">
                 <span class="sr_only">{{ __('app.create.conversation') }}</span>
             </button>
@@ -76,7 +73,7 @@
                                 aria-expanded="false">
                             Statut
                         </button>
-                        <livewire:status />
+                        <livewire:status/>
                     </div>
                 </li>
                 <li><a class="menu__item dropdown-item menu__edit-profile" href="{{ route('user.edit') }}">Modifier son profil</a></li>

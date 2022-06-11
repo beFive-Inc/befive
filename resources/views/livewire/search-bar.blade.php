@@ -41,7 +41,15 @@
 
                     <div class="searchbar__query_container">
                         @foreach($friends as $friend)
-                            <x-friend :friend="$friend" :actions="true"/>
+                            <x-friend :friend="$friend" :actions="true">
+                                <form action="{{ route('chatroom.create.conversation') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="uuid" value="{{ $friend->uuid }}">
+                                    <button>
+                                        Parler
+                                    </button>
+                                </form>
+                            </x-friend>
                         @endforeach
                     </div>
                 </section>

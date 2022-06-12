@@ -1021,6 +1021,7 @@ hr {
   gap: 1rem;
   transition: 0.5s ease-in;
   max-height: 0;
+  padding-right: 1rem;
   overflow: hidden;
 }
 .name.show {
@@ -1370,6 +1371,12 @@ hr {
   font-size: 1.4rem;
   font-weight: 400;
 }
+.chatroom__message {
+  flex: 1;
+  max-height: 1em;
+  max-width: calc(100vw - 200px);
+  overflow: hidden;
+}
 .chatroom__message.new {
   color: #000;
   font-weight: 500;
@@ -1671,6 +1678,12 @@ hr {
   }
 }
 
+.page-menu {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  box-shadow: none;
+}
 .page__title {
   display: inline-block;
   font-size: 2rem;

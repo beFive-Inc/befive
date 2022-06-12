@@ -32,7 +32,7 @@
             </h4>
             <div class="chatroom__message_container">
                 <p class="chatroom__message">
-                    {{ $chatroom->messages->first()?->decryptedMessage }}
+                    {{ $chatroom->messages->first()->author->user_id === auth()->id() ? __('app.me') : $chatroom->messages->first()->author->user->pseudo }} : {{ $chatroom->messages->first()?->decryptedMessage }}
                 </p>
                 <p class="chatroom__date">
                     {{ $chatroom->messages->first()?->date }}

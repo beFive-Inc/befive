@@ -36,13 +36,15 @@
             </div>
         </div>
         <div class="user-menu">
-            <button type="button" class="dropdown-btn"
-                    id="dropdownMenuClickableInside"
-                    data-bs-toggle="dropdown"
-                    data-bs-auto-close="outside"
-                    aria-expanded="false">
+            <a href="{{ route('menu') }}"
+               type="button"
+               class="dropdown-btn"
+               id="dropdownMenuClickableInside"
+               data-bs-toggle="dropdown"
+               data-bs-auto-close="outside"
+               aria-expanded="false">
                 <img src="{{ $medias->first()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" alt>
-            </button>
+            </a>
             <ul class="dropdown-menu menu" aria-labelledby="dropdownMenuClickableInside">
                 <li class="dropdown-user">
                     <a href="{{ route('user.edit') }}" class="dropdown-user__see">
@@ -66,13 +68,14 @@
                 <li><h6 class="dropdown-header">Profil</h6></li>
                 <li>
                     <div class="btn-group dropstart">
-                        <button type="button"
-                                class="menu__item dropdown-item menu__status"
-                                data-bs-toggle="dropdown"
-                                data-bs-auto-close="outside"
-                                aria-expanded="false">
+                        <a href="{{ route('user.status') }}"
+                           type="button"
+                           class="menu__item dropdown-item menu__status"
+                           data-bs-toggle="dropdown"
+                           data-bs-auto-close="outside"
+                           aria-expanded="false">
                             Statut
-                        </button>
+                        </a>
                         <livewire:status/>
                     </div>
                 </li>

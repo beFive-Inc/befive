@@ -13,7 +13,9 @@ return [
     */
     'slogan' => 'Be Five Chat, première messagerie adaptée pour les gamers&nbsp!',
     'back' => 'Revenir en arrière',
+    'me' => 'Vous',
     'info' => 'Info',
+    'navigation' => 'Navigation principale',
     'no-notifications' => "Vous n'avez pas de notifications.",
     'no-notifications.friends' => "Vous n'avez pas de demande d'amis.",
     'no-notifications.canals' => "Vous n'avez pas de demande de canaux.",

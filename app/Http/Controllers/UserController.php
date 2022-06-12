@@ -12,12 +12,46 @@ class UserController extends Controller
     {
         $users = User::with('team', 'games')->paginate(50);
 
-        return view('app.users.index', compact('users'));
+        return view('app.user.index', compact('users'));
+    }
+
+    public function status()
+    {
+        $medias = auth()->user()
+            ->load('media')
+            ->media;
+
+        $chatrooms = auth()->user()
+            ->getChatrooms();
+
+        $requestCanals = auth()->user()
+            ->getRequestedCanals();
+
+        $requestFriends = auth()->user()
+            ->getFriendRequests()
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
+
+        $friends = auth()->user()
+            ->getFriends()
+            ->load('media');
+
+        return view(
+            'app.user.status',
+            compact(
+                'chatrooms',
+                'requestFriends',
+                'requestCanals',
+                'friends',
+                'medias'
+            )
+        );
     }
 
     public function show(User $user)
     {
-        return view('app.users.show', compact('user'));
+        return view('app.user.show', compact('user'));
     }
 
     public function edit()
@@ -42,7 +76,7 @@ class UserController extends Controller
             ->getFriends()
             ->load('media');
 
-        return view('app.users.edit',
+        return view('app.user.edit',
             compact(
                 'medias',
                 'chatrooms',

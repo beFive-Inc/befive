@@ -95,6 +95,10 @@
     }
 
     &__message {
+        flex: 1;
+        max-height: 1em;
+        max-width: calc(100vw - 200px);
+        overflow: hidden;
 
         &.new {
             color: $black;

@@ -22,6 +22,10 @@ Route::get( '/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->withTrashed()
     ->middleware(['auth']);
 
+Route::get( '/menu', [\App\Http\Controllers\HomeController::class, 'menu'])
+    ->name('menu')
+    ->middleware(['auth']);
+
 
 Route::prefix('notifications')->middleware('auth')->name('notification.')->group(function () {
 
@@ -60,6 +64,8 @@ Route::prefix('user')->middleware('auth')->name('user.')->group(function () {
     Route::get('/', [\App\Http\Controllers\UserController::class ,'index'])
         ->name('index');
 
+    Route::get('/status', [\App\Http\Controllers\UserController::class, 'status'])
+        ->name('status');
 
     Route::get('/edit', [\App\Http\Controllers\UserController::class, 'edit'])
         ->name('edit');

@@ -25,16 +25,20 @@ class Message extends Model
     public function getDateAttribute(): string
     {
         $date = Carbon::parse($this->created_at);
-        if (Carbon::now()->diffInMinutes($this->created_at) < 60 || Carbon::now()->diffInHours($this->created_at) < 24) {
-            return $date->format('H:i');
-        } elseif (Carbon::now()->diffInDays() < 7) {
-            return $date->format('D');
-        } elseif(Carbon::now()->diffInWeeks() < 4) {
-            return $date->format('d m');
-        }
 
-        return Carbon::parse($this->created_at)
-            ->diffForHumans();
+        if (Carbon::now()->diffInYears($this->created_at) >= 1) {
+            return Carbon::parse($this->created_at)
+                ->diffForHumans();
+        } elseif (Carbon::now()->diffInMonths($this->created_at) >= 1) {
+            return Carbon::parse($this->created_at)
+                ->diffForHumans();
+        } elseif (Carbon::now()->diffInWeeks($this->created_at) >= 1) {
+            return $date->format('j F');
+        } elseif (Carbon::now()->diffInDays($this->created_at) >= 1) {
+            return $date->format('l');
+        } else {
+            return $date->format('H:i');
+        }
     }
 
     public function getDecryptedMessageAttribute()

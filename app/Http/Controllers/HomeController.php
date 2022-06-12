@@ -46,4 +46,38 @@ class HomeController extends Controller
             )
         );
     }
+
+    public function menu()
+    {
+        $medias = auth()->user()
+            ->load('media')
+            ->media;
+
+        $chatrooms = auth()->user()
+            ->getChatrooms();
+
+        $requestCanals = auth()->user()
+            ->getRequestedCanals();
+
+        $requestFriends = auth()->user()
+            ->getFriendRequests()
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
+
+        $friends = auth()->user()
+            ->getFriends()
+            ->load('media');
+
+        return view(
+            'app.home.menu',
+            compact(
+                'chatrooms',
+                'requestFriends',
+                'requestCanals',
+                'friends',
+                'medias'
+            )
+        );
+    }
 }

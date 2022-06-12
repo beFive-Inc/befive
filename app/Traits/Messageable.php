@@ -47,7 +47,7 @@ trait Messageable
     {
         return $collection->filter(function ($chatroom) {
             return $chatroom->authors->filter(function ($author) {
-                return $author->status === ChatroomUserStatus::PENDING;
+                return $author->status === ChatroomUserStatus::PENDING && $author->user_id === auth()->id();
             })->count();
         });
     }

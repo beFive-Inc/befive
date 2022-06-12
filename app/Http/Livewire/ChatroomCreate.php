@@ -115,8 +115,6 @@ class ChatroomCreate extends Component
                 $this->addOtherFriendToSelectedFriend($preFriend->user);
             }
         }
-
-        $this->refreshSelectedFriend();
     }
 
     /**
@@ -159,7 +157,6 @@ class ChatroomCreate extends Component
         $this->rememberKeys->put($key, $key);
         $this->setKey($key, 'key', $key);
         $this->resetError();
-        $this->refreshSelectedFriend();
     }
 
     /**
@@ -171,7 +168,6 @@ class ChatroomCreate extends Component
         $this->rememberKeys->pull($key);
         $this->setKey($key, 'key', null);
         $this->resetError();
-        $this->refreshSelectedFriend();
     }
 
     /**
@@ -211,7 +207,7 @@ class ChatroomCreate extends Component
     public function checkIfAChatroomExist(): Collection
     {
         return $this->allChatroom->filter(function ($chatroom) {
-            if ($this->isCanal && $chatroom->iscanal) {
+            if (!$chatroom->isCanal) {
                 return $chatroom->authors->count() === $this->selectedFriends->count()
                     && $chatroom->authors->count() === $chatroom->authors->filter(function ($author) use ($chatroom) {
                         return $this->selectedFriends->filter(function ($friend) use ($author) {
@@ -219,14 +215,7 @@ class ChatroomCreate extends Component
                         })->count();
                     })->count();
             } else {
-                if (!$chatroom->isCanal) {
-                    return $chatroom->authors->count() === $this->selectedFriends->count()
-                        && $chatroom->authors->count() === $chatroom->authors->filter(function ($author) use ($chatroom) {
-                            return $this->selectedFriends->filter(function ($friend) use ($author) {
-                                return $author->user->id === $friend->id;
-                            })->count();
-                        })->count();
-                }
+                return false;
             }
         });
     }
@@ -237,12 +226,19 @@ class ChatroomCreate extends Component
      */
     public function createChatroom(): bool
     {
+        $this->resetError();
         $this->addOwnUser();
-        $isAlreadyAChatroom = $this->checkIfAChatroomExist();
+        $isAlreadyAChatroom = collect([]);
 
-        if ($isAlreadyAChatroom->count()) {
+        if (!$this->isCanal) {
+            $isAlreadyAChatroom = $this->checkIfAChatroomExist();
+        }
+
+        if ($this->isCanal && empty($this->name)) {
+            $this->error = __('validation.chatroom.create.name');
+        } elseif ($isAlreadyAChatroom->count()) {
             $this->redirect(route('chatroom.show', $isAlreadyAChatroom->first()->uuid));
-        } elseif($this->selectedFriends->count()) {
+        } elseif($this->selectedFriends->count() > 1) {
             $chatroom = Chatroom::create([
                 'uuid' => Str::uuid(),
                 'name' => !empty($this->name) ? $this->name : null,
@@ -254,15 +250,15 @@ class ChatroomCreate extends Component
                 ChatroomUser::create([
                     'chatroom_id' => $chatroom->id,
                     'user_id' => $friend->id,
-                    'status' => ChatroomUserStatus::ACCEPTED,
+                    'status' => $this->isCanal && $friend->id != auth()->id() ? ChatroomUserStatus::PENDING :ChatroomUserStatus::ACCEPTED,
                     'view_at' => Carbon::now()
                 ]);
             }
 
             $this->redirect(route('chatroom.show', $chatroom->uuid));
+        } else {
+            $this->error = __('validation.chatroom.create');
         }
-
-        $this->error = __('validation.chatroom.create');
 
         return false;
     }
@@ -329,6 +325,8 @@ class ChatroomCreate extends Component
 
     public function render()
     {
+        $this->refreshSelectedFriend();
+
         if ($this->query) {
             $friends = $this->getSearchingFriends();
         } else {

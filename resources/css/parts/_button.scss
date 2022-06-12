@@ -105,3 +105,17 @@
         text-decoration: underline;
     }
 }
+
+.link {
+    font-size: 1.2rem;
+    font-weight: $font-medium;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: $primary;
+    transition: .5s ease-in;
+
+    &:hover, &:focus, &:active {
+        color: $primary;
+        text-decoration: underline;
+    }
+}

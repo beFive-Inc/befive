@@ -51,7 +51,7 @@
                 </button>
             </li>
             <li>
-                <button class="dropdown-item menu__item menu__block" data-bs-toggle="modal" data-bs-target="#chatroomCreateWith-{{ $chatroom->uuid }}">
+                <button class="dropdown-item menu__item menu__add-in-group" data-bs-toggle="modal" data-bs-target="#chatroomCreateWith-{{ $chatroom->uuid }}">
                     {{ __('app.groups.add') }}
                 </button>
             </li>

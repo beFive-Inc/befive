@@ -16,6 +16,7 @@ class Chatroom extends Model
         'name',
         'uuid',
         'type',
+        'status'
     ];
 
     /**

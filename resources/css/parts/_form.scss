@@ -75,3 +75,143 @@
         }
     }
 }
+
+.checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-right: 1rem;
+    margin-bottom: 1.5rem;
+
+    &__container {
+        position: relative;
+        width: 240px;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        overflow: hidden;
+        border-radius: $border-radius;
+        text-align: center;
+        color: $dark-grey;
+        padding-right: 120px;
+        background-color: $light-grey;
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            pointer-events: none;
+        }
+    }
+
+    &__special-container {
+        width: 180px;
+        padding-right: 90px;
+        justify-self: flex-start;
+        transition: .5s ease-in;
+        opacity: 0;
+        pointer-events: none;
+
+        &.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        &:before {
+            width: 90px;
+        }
+
+        .checkbox__input {
+
+            &:checked + .checkbox__label:before {
+                transform: translateX(90px);
+            }
+        }
+    }
+
+    &__input {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 2;
+
+        &:checked + .checkbox__label:before {
+            transform: translateX(120px);
+            transition: transform 300ms linear;
+        }
+
+        & + .checkbox__label {
+            position: relative;
+            padding: 1rem 0;
+            display: block;
+            user-select: none;
+            pointer-events: none;
+
+            &:before {
+                content: "";
+                background: rgba($primary, 0.5);
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                border-radius: $border-radius;
+                transform: translateX(0);
+                transition: transform 300ms;
+            }
+
+            .checkbox__span {
+                position: relative;
+            }
+        }
+    }
+}
+
+.name {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    transition: .5s ease-in;
+    max-height: 0;
+    overflow: hidden;
+
+    &.show {
+        margin-bottom: 1.5rem;
+        max-height: 3.5rem;
+    }
+
+    &__input {
+        padding: .5rem;
+        flex: 1;
+        height: 100%;
+        background-color: $light-grey;
+        border: none;
+    }
+
+    &__label {
+        width: 24px;
+        height: 24px;
+        mask-image: url("/parts/icons/outline/message-text.svg");
+        mask-repeat: no-repeat;
+        background-color: $dark-grey;
+    }
+}
+
+
+

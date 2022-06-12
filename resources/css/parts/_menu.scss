@@ -34,7 +34,7 @@
             background-color: lighten($primary, 45);
         }
 
-        &:active {
+        &:not(.active):active {
             background-color: $primary;
 
             &::before {
@@ -67,6 +67,10 @@
         mask-image: url("/parts/icons/bold/profile-2user.svg");
     }
 
+    &__add-in-group::before {
+        mask-image: url("/parts/icons/bold/profile-add.svg");
+    }
+
     &__delete::before {
         mask-image: url("/parts/icons/bold/message-remove.svg");
     }
@@ -83,6 +87,10 @@
         mask-image: url("/parts/icons/bold/profile-delete.svg");
     }
 
+    &__view::before {
+        mask-image: url("/parts/icons/bold/message-tick.svg");
+    }
+
     &__danger {
         width: 100%;
         cursor: pointer;
@@ -97,12 +105,12 @@
             background-color: $danger;
         }
 
-        &:hover {
+        &:not(.active):hover {
             color: darken($danger, 5);
             background-color: lighten($danger, 45);
         }
 
-        &:active {
+        &:not(.active):active {
             background-color: $danger;
             color: $white;
         }

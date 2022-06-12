@@ -117,12 +117,12 @@
                         <form action="{{ route('chatroom.view') }}" method="post">
                             @csrf
                             <input type="hidden" name="author_id" value="{{ $ownAuthor->id }}">
-                            <button type="submit" class="dropdown-item menu__item menu__message-archive">{{ __('app.conversations.view') }}</button>
+                            <button type="submit" class="dropdown-item menu__item menu__view">{{ __('app.conversations.view') }}</button>
                         </form>
                     </li>
                 @endif
                 <li>
-                    <button class="dropdown-item menu__item menu__rename" data-bs-toggle="modal" data-bs-target="#chatroomCreateWith-{{ $chatroom->uuid }}">
+                    <button class="dropdown-item menu__item menu__group" data-bs-toggle="modal" data-bs-target="#chatroomCreateWith-{{ $chatroom->uuid }}">
                         {{ __('app.conversations.create', [
                             'user' => $otherAuthor->user->pseudo,
                         ]) }}

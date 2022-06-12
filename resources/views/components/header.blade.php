@@ -17,9 +17,9 @@
             <livewire:notification :request-friends="$requestFriends" :request-canals="$requestCanals"/>
         </div>
         <div class="message-create">
-            <button type="button" class="modal-btn" data-bs-toggle="modal" data-bs-target="#createGroup">
+            <a href="{{ route('chatroom.create') }}" type="button" class="modal-btn" data-bs-toggle="modal" data-bs-target="#createGroup">
                 <span class="sr_only">{{ __('app.create.conversation') }}</span>
-            </button>
+            </a>
 
             <!-- Create Conversation Modal -->
             <div class="modal fade" id="createGroup" tabindex="-1" aria-labelledby="createGroup" aria-hidden="true">

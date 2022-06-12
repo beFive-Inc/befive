@@ -37,4 +37,66 @@ class NotificationController extends Controller
             'friends',
         ));
     }
+
+    public function indexFriends()
+    {
+        $medias = auth()->user()
+            ->load('media')
+            ->media;
+
+        $chatrooms = auth()->user()
+            ->getChatrooms();
+
+        $requestFriends = auth()->user()
+            ->getFriendRequests()
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
+
+        $friends = auth()->user()
+            ->getFriends()
+            ->load('media');
+
+        $requestCanals = auth()->user()
+            ->getRequestedCanals();
+
+        return view('app.notification.friends', compact(
+            'medias',
+            'chatrooms',
+            'requestFriends',
+            'requestCanals',
+            'friends',
+        ));
+    }
+
+    public function indexCanals()
+    {
+        $medias = auth()->user()
+            ->load('media')
+            ->media;
+
+        $chatrooms = auth()->user()
+            ->getChatrooms();
+
+        $requestFriends = auth()->user()
+            ->getFriendRequests()
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
+
+        $friends = auth()->user()
+            ->getFriends()
+            ->load('media');
+
+        $requestCanals = auth()->user()
+            ->getRequestedCanals();
+
+        return view('app.notification.canals', compact(
+            'medias',
+            'chatrooms',
+            'requestFriends',
+            'requestCanals',
+            'friends',
+        ));
+    }
 }

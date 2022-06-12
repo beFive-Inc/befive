@@ -7,7 +7,7 @@
         @endforeach
     </ul>
 
-    <form action="{{ route('chatroom.create') }}"
+    <form action="{{ route('chatroom.message.store') }}"
           method="post"
           class="form"
           wire:submit.prevent="send">

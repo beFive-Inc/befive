@@ -14,10 +14,6 @@ class UserImgSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::limit(10)->get();
 
-        foreach ($users as $user) {
-            $user->addMedia(storage_path("app/public/user/profile_img_$user->id.webp"))->toMediaCollection('profile');
-        }
     }
 }

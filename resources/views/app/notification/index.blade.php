@@ -16,11 +16,14 @@
                 @if($requestFriends->count() || $requestCanals->count())
                     @if($requestFriends->count())
                         <section>
-                            <h3 aria-level="3"
-                                role="heading"
-                                class="page__semi-title">
-                                {{ __('app.notifications.friends.requests') }}
-                            </h3>
+                            <div class="flex-between">
+                                <h3 aria-level="3"
+                                    role="heading"
+                                    class="page__semi-title">
+                                    {{ __('app.notifications.friends.requests') }} <span class="number">{{ $requestFriends->count() }}</span>
+                                </h3>
+                                <a href="{{ route('notification.friends') }}" class="link">{{ __('app.view-all') }}</a>
+                            </div>
                             <div class="searchbar__query_container">
                                 @foreach($requestFriends as $requestFriend)
                                     <x-friend :friend="$requestFriend">
@@ -56,19 +59,24 @@
                     @endif
                     @if($requestCanals->count())
                         <section>
-                            <h3 role="heading"
-                                aria-level="3"
-                                class="page__semi-title">
-                                {{ __('app.notifications.canals.requests') }}
-                            </h3>
+                            <div class="flex-between">
+                                <h3 role="heading"
+                                    aria-level="3"
+                                    class="page__semi-title">
+                                    {{ __('app.notifications.canals.requests') }} <span class="number">{{ $requestCanals->count() }}</span>
+                                </h3>
+                                <a href="{{ route('notification.canals') }}" class="link">{{ __('app.view-all') }}</a>
+                            </div>
                             <div class="searchbar__query_container">
                                 @foreach($requestCanals as $requestCanal)
                                     <x-canal :chatroom="$requestCanal">
-                                        <form action="" method="post">
+                                        <form action="{{ route('chatroom.accept') }}" method="post">
                                             @csrf
                                             @method('put')
 
-                                            <input type="hidden" name="author_id" value="">
+                                            <input type="hidden" name="author_id" value="{{ $requestCanal->authors->filter(function ($author) {
+                                            return $author->user->id === auth()->id();
+                                        })->first()->id }}">
 
                                             <button class="action action__canal-accept">
                                                 <span class="sr_only">
@@ -77,11 +85,13 @@
                                             </button>
                                         </form>
 
-                                        <form action="" method="post">
+                                        <form action="{{ route('chatroom.deny') }}" method="post">
                                             @csrf
                                             @method('put')
 
-                                            <input type="hidden" name="author_id" value="">
+                                            <input type="hidden" name="author_id" value="{{ $requestCanal->authors->filter(function ($author) {
+                                            return $author->user->id === auth()->id();
+                                        })->first()->id }}">
 
                                             <button class="action action__canal-deny danger">
                                                 <span class="sr_only">
@@ -96,7 +106,7 @@
                     @endif
                 @else
                     <p class="no_item">
-                        {{ __('app.chatroom.no-archive') }}
+                        {{ __('app.no-notifications') }}
                     </p>
                 @endif
             </div>

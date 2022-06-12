@@ -18,6 +18,7 @@ class CreateChatroomTable extends Migration
             $table->uuid('uuid');
             $table->string('name')->nullable();
             $table->string('type')->nullable();
+            $table->string('status')->default(\App\Constant\ChatroomStatus::PUBLIC)->comment('public/private');
             $table->timestamps();
         });
     }

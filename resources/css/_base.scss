@@ -55,3 +55,10 @@ hr {
     font-size: 1.4rem;
     font-weight: $font-regular;
 }
+
+.flex-between {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

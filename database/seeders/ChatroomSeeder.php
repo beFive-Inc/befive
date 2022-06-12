@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constant\ChatroomStatus;
 use App\Constant\ChatroomType;
 use App\Models\Chatroom;
 use App\Models\User;

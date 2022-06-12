@@ -5,7 +5,7 @@
         </div>
 
         <div class="friend__info">
-            <h4 aria-level="3" role="heading" class="friend__pseudo">
+            <h4 aria-level="4" role="heading" class="friend__pseudo">
                 {{ $friend->pseudo }}
             </h4>
             @if(!$onlyImageAndName)

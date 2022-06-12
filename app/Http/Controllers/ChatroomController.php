@@ -72,20 +72,15 @@ class ChatroomController extends Controller
         return redirect()->route('homepage');
     }
 
-    public function create()
-    {
-        return redirect()->back();
-    }
-
-    public function createConversation()
+    public function store()
     {
         $chatroom = Chatroom::create([
             'uuid' => Str::uuid(),
         ]);
 
         ChatroomUser::create([
-           'chatroom_id' => $chatroom->id,
-           'user_id' => auth()->id(),
+            'chatroom_id' => $chatroom->id,
+            'user_id' => auth()->id(),
         ]);
 
         ChatroomUser::create([
@@ -94,6 +89,16 @@ class ChatroomController extends Controller
         ]);
 
         return redirect()->route('chatroom.show', $chatroom->uuid);
+    }
+
+    public function create()
+    {
+
+    }
+
+    public function messageStore()
+    {
+
     }
 
     public function rename()
@@ -114,16 +119,16 @@ class ChatroomController extends Controller
 
         $user->acceptCanalRequest();
 
-        return redirect()->route('homepage');
+        return redirect()->route('notification.canals');
     }
 
     public function deny()
     {
-        $user = ChatroomUser::find('author_id');
+        $user = ChatroomUser::find(request('author_id'));
 
         $user->denyCanalRequest();
 
-        return redirect()->route('homepage');
+        return redirect()->route('notification.canals');
     }
 
     public function archive()

@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Constant\ChatroomStatus;
+use App\Constant\ChatroomUserStatus;
 use Illuminate\Support\Collection;
 
 trait Messageable
@@ -15,6 +15,8 @@ trait Messageable
     {
         $collection = $this->getChatroomsWithAll();
 
+        $collection = $this->getAccepted($collection);
+
         if ($onlySoftDelete) {
             $collection = $this->getOnlySoftDelete($collection);
         } else {
@@ -22,6 +24,45 @@ trait Messageable
         }
 
         return $this->sort($collection);
+    }
+
+    /**
+     * @param  Collection $collection
+     * @return Collection
+     */
+    public function getAccepted(Collection $collection): Collection
+    {
+        return $collection->filter(function ($chatroom) {
+            return $chatroom->authors->filter(function ($author) {
+                return $author->status === ChatroomUserStatus::ACCEPTED;
+            })->count();
+        });
+    }
+
+    /**
+     * @param  Collection $collection
+     * @return Collection
+     */
+    public function getPending(Collection $collection): Collection
+    {
+        return $collection->filter(function ($chatroom) {
+            return $chatroom->authors->filter(function ($author) {
+                return $author->status === ChatroomUserStatus::PENDING;
+            })->count();
+        });
+    }
+
+    /**
+     * @param  Collection $collection
+     * @return Collection
+     */
+    public function getDenied(Collection $collection): Collection
+    {
+        return $collection->filter(function ($chatroom) {
+            return $chatroom->authors->filter(function ($author) {
+                return $author->status === ChatroomUserStatus::DENIED;
+            })->count();
+        });
     }
 
     /**
@@ -42,12 +83,11 @@ trait Messageable
      */
     public function getRequestedCanals() : Collection
     {
-        return $this->chatrooms()
+        $collection = $this->chatrooms()
             ->with(['authors'])
-            ->whereHas('authors', function ($query) {
-                $query->where('status', '=', ChatroomStatus::PENDING);
-            })
             ->get();
+
+        return $this->getPending($collection);
     }
 
     /**
@@ -56,7 +96,7 @@ trait Messageable
     public function denyCanalRequest(): void
     {
         $this->update([
-            'status' => ChatroomStatus::DENIED,
+            'status' => ChatroomUserStatus::DENIED,
         ]);
     }
 
@@ -66,7 +106,7 @@ trait Messageable
     public function acceptCanalRequest(): void
     {
         $this->update([
-            'status' => ChatroomStatus::ACCEPTED,
+            'status' => ChatroomUserStatus::ACCEPTED,
         ]);
     }
 

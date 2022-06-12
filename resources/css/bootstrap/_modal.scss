@@ -44,6 +44,7 @@
         align-self: flex-end;
         border: none;
         margin-left: auto;
+        margin-top: 1rem;
 
         .btn {
             max-width: 22rem;
@@ -53,7 +54,7 @@
     &-scrollable {
         transition: 0.3s ease-in;
         min-height: 10rem;
-        max-height: 30rem;
+        max-height: 20rem;
         overflow-y: scroll;
     }
 }

@@ -1,4 +1,12 @@
 <div>
+    <style>
+        .checkbox__container::before {
+            content: "{{ __('Canal') }}" !important;
+        }
+        .checkbox__special-container::before {
+            content: "{{ __(\App\Constant\ChatroomStatus::PRIVATE) }}" !important;
+        }
+    </style>
     <div class="searchbar">
         <div class="form">
             <div class="form__btn">
@@ -12,6 +20,46 @@
                        placeholder="{{ __('field.chatroom.create.search.placeholder') }}"/>
             </div>
         </div>
+    </div>
+    <div class="checkbox">
+        <div class="checkbox__container checkbox__special-container {{ $isCanal ? 'show' : '' }}">
+            <input class="checkbox__input"
+                   id="canal"
+                   type="checkbox"
+                   {{ $isPublic ? '' : 'checked' }}
+                   wire:change="togglePublic"/>
+            <label class="checkbox__label"
+                   for="canal">
+                <span class="checkbox__span">
+                    {{ __(\App\Constant\ChatroomStatus::PUBLIC) }}
+                </span>
+            </label>
+        </div>
+        <div class="checkbox__container">
+            <input class="checkbox__input"
+                   id="canal"
+                   type="checkbox"
+                   {{ $isCanal ? 'checked' : '' }}
+                   wire:change="toggleCanal"/>
+            <label class="checkbox__label"
+                   for="canal">
+                <span class="checkbox__span">
+                    {{ $selectedFriends->count() < 2 ? 'Conversation' : 'Groupe' }}
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="name {{ $selectedFriends->count() >= 2 || $isCanal ? 'show' : '' }}">
+        <label for="name"
+               class="name__label">
+                <span class="sr_only">{{ __('app.chatroom.name') }}</span>
+        </label>
+        <input type="text"
+               id="name"
+               name="name"
+               placeholder="{{ __('app.chatroom.name') }}"
+               class="name__input"
+               wire:model="name">
     </div>
     @if($selectedFriends->count() || $preSelectedFriends->count())
         <div class="friend__selected">

@@ -18,7 +18,7 @@ class CreateChatroomUsersTable extends Migration
             $table->foreignId('chatroom_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->string('name')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status')->default(\App\Constant\ChatroomUserStatus::ACCEPTED)->comment('accepted/pending/denied');
             $table->dateTime('view_at')->nullable();
             $table->softDeletes();
             $table->timestamps();

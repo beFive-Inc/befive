@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Constant\ChatroomStatus;
+use App\Constant\ChatroomUserStatus;
 use App\Models\Chatroom;
 use App\Models\ChatroomUser;
 use App\Models\User;
@@ -36,20 +38,23 @@ class ChatroomUsersSeeder extends Seeder
                 ChatroomUser::create([
                     'chatroom_id' => $chatroom->id,
                     'user_id' => $user->id,
-                    'view_at' => Carbon::now()
+                    'view_at' => Carbon::now(),
+                    'status' => ChatroomUserStatus::ACCEPTED
                 ]);
             }
 
             ChatroomUser::create([
                 'chatroom_id' => $chatroom->id,
                 'user_id' => 1,
-                'view_at' => Carbon::now()
+                'view_at' => Carbon::now(),
+                'status' => ChatroomUserStatus::ACCEPTED
             ]);
 
             ChatroomUser::create([
                 'chatroom_id' => $chatroom->id,
                 'user_id' => $otherUser->shuffle()->first()->id,
-                'view_at' => Carbon::now()
+                'view_at' => Carbon::now(),
+                'status' => ChatroomUserStatus::ACCEPTED
             ]);
 
             if ($rand >= 75) {
@@ -57,9 +62,14 @@ class ChatroomUsersSeeder extends Seeder
                     ChatroomUser::create([
                         'chatroom_id' => $chatroom->id,
                         'user_id' => $otherUser->shuffle()->first()->id,
-                        'view_at' => Carbon::now()
+                        'view_at' => Carbon::now(),
+                        'status' => ChatroomUserStatus::ACCEPTED
                     ]);
                 }
+            }
+            if ($chatroom->isGroup || $chatroom->isConversation) {
+                $chatroom->status = ChatroomStatus::PRIVATE;
+                $chatroom->save();
             }
         }
     }

@@ -68,7 +68,7 @@ class FriendsController extends Controller
 
         auth()->user()->acceptFriendRequest($user);
 
-        return redirect()->route('friends.index');
+        return redirect()->route('notification.friends');
     }
 
     public function deny()
@@ -78,7 +78,7 @@ class FriendsController extends Controller
 
         auth()->user()->denyFriendRequest($user);
 
-        return redirect()->route('friends.index');
+        return redirect()->route('notification.friends');
     }
 
     public function block()

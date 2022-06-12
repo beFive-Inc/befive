@@ -23,9 +23,18 @@ Route::get( '/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->middleware(['auth']);
 
 
-Route::get('/notifications', [\App\Http\Controllers\NotificationController::class, 'index'])
-    ->name('notifications')
-    ->middleware(['auth']);
+Route::prefix('notifications')->middleware('auth')->name('notification.')->group(function () {
+
+    Route::get('/', [\App\Http\Controllers\NotificationController::class, 'index'])
+        ->name('index');
+
+    Route::get('/friends', [\App\Http\Controllers\NotificationController::class, 'indexFriends'])
+        ->name('friends');
+
+    Route::get('/canals', [\App\Http\Controllers\NotificationController::class, 'indexCanals'])
+        ->name('canals');
+});
+
 
 ////
 // SEARCH ROUTE
@@ -92,6 +101,9 @@ Route::prefix('chatroom')->middleware('auth')->name('chatroom.')->group(function
         ->withTrashed()
         ->name('index.archive');
 
+    Route::get('/create', [\App\Http\Controllers\ChatroomController::class, 'create'])
+        ->name('create');
+
     Route::get('/{chatroom:uuid}', [\App\Http\Controllers\ChatroomController::class, 'show'])
         ->name('show');
 
@@ -100,11 +112,12 @@ Route::prefix('chatroom')->middleware('auth')->name('chatroom.')->group(function
     Route::post('/view', [\App\Http\Controllers\ChatroomController::class, 'view'])
         ->name('view');
 
-    Route::post('/create', [\App\Http\Controllers\ChatroomController::class, 'create'])
-        ->name('create');
+    Route::post('/message/store', [\App\Http\Controllers\ChatroomController::class, 'messageStore'])
+        ->name('message.store');
 
-    Route::post('/create/conversation', [\App\Http\Controllers\ChatroomController::class, 'createConversation'])
-        ->name('create.conversation');
+
+    Route::post('/store', [\App\Http\Controllers\ChatroomController::class, 'store'])
+        ->name('store');
 
     // PUT METHOD
 

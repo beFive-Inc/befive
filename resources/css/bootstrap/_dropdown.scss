@@ -31,19 +31,6 @@
         text-transform: uppercase;
     }
 
-    .dropdown-link {
-        font-size: 1.2rem;
-        font-weight: $font-medium;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: $primary;
-        transition: .5s ease-in;
-
-        &:hover, &:focus {
-            text-decoration: underline;
-        }
-    }
-
     .dropdown-header-container {
         display: flex;
         flex-direction: row;

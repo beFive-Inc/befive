@@ -4,10 +4,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Constant\ChatroomStatus;
+use App\Constant\ChatroomUserStatus;
+use App\Constant\ChatroomType;
 use App\Models\Chatroom;
 use App\Models\ChatroomUser;
 use App\Models\User;
 use App\Traits\Operator;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -17,7 +21,8 @@ class ChatroomCreate extends Component
     use Operator;
 
     public Collection $allChatroom;
-    public bool $chooseCreateCanal = false;
+    public bool $isCanal = false;
+    public bool $isPublic = true;
 
     public Collection $friendList;
     public Collection $rememberKeys;
@@ -206,35 +211,51 @@ class ChatroomCreate extends Component
     public function checkIfAChatroomExist(): Collection
     {
         return $this->allChatroom->filter(function ($chatroom) {
-            return $chatroom->authors->count() === $this->selectedFriends->count()
-                && $chatroom->authors->count() === $chatroom->authors->filter(function ($author) {
-                    return $this->selectedFriends->filter(function ($friend) use ($author) {
-                        return $author->user->id === $friend->id;
+            if ($this->isCanal && $chatroom->iscanal) {
+                return $chatroom->authors->count() === $this->selectedFriends->count()
+                    && $chatroom->authors->count() === $chatroom->authors->filter(function ($author) use ($chatroom) {
+                        return $this->selectedFriends->filter(function ($friend) use ($author) {
+                            return $author->user->id === $friend->id;
+                        })->count();
                     })->count();
-                })->count();
+            } else {
+                if (!$chatroom->isCanal) {
+                    return $chatroom->authors->count() === $this->selectedFriends->count()
+                        && $chatroom->authors->count() === $chatroom->authors->filter(function ($author) use ($chatroom) {
+                            return $this->selectedFriends->filter(function ($friend) use ($author) {
+                                return $author->user->id === $friend->id;
+                            })->count();
+                        })->count();
+                }
+            }
         });
     }
 
 
-    public function createChatroom()
+    /**
+     * @return false
+     */
+    public function createChatroom(): bool
     {
         $this->addOwnUser();
         $isAlreadyAChatroom = $this->checkIfAChatroomExist();
 
         if ($isAlreadyAChatroom->count()) {
             $this->redirect(route('chatroom.show', $isAlreadyAChatroom->first()->uuid));
-
         } elseif($this->selectedFriends->count()) {
             $chatroom = Chatroom::create([
                 'uuid' => Str::uuid(),
-                'name' => $this->name,
+                'name' => !empty($this->name) ? $this->name : null,
+                'type' => $this->isCanal ? ChatroomType::CANAL : null,
+                'status' => $this->isCanal && $this->isPublic ? ChatroomStatus::PUBLIC : ChatroomStatus::PRIVATE,
             ]);
 
             foreach ($this->selectedFriends as $friend) {
                 ChatroomUser::create([
                     'chatroom_id' => $chatroom->id,
                     'user_id' => $friend->id,
-                    'status' => ChatroomUser::STATUS_ACCEPTED,
+                    'status' => ChatroomUserStatus::ACCEPTED,
+                    'view_at' => Carbon::now()
                 ]);
             }
 
@@ -264,7 +285,7 @@ class ChatroomCreate extends Component
      */
     public function createCanal()
     {
-        $this->chooseCreateCanal = true;
+        $this->isCanal = true;
     }
 
     /**
@@ -272,7 +293,38 @@ class ChatroomCreate extends Component
      */
     public function createGroup()
     {
-        $this->chooseCreateCanal = false;
+        $this->isCanal = false;
+    }
+
+    public function toggleCanal()
+    {
+        if ($this->isCanal === true) {
+            $this->createGroup();
+        } else {
+            $this->createCanal();
+        }
+    }
+
+    public function setIsPublic()
+    {
+        $this->isPublic = true;
+    }
+
+    /**
+     * @return void
+     */
+    public function unsetIsPublic()
+    {
+        $this->isPublic = false;
+    }
+
+    public function togglePublic()
+    {
+        if ($this->isPublic === true) {
+            $this->unsetIsPublic();
+        } else {
+            $this->setIsPublic();
+        }
     }
 
     public function render()

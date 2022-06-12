@@ -1,6 +1,6 @@
 <div>
     <span class="bulle {{ $requestFriends->count() || $requestCanals->count() ? 'notified' : '' }}"></span>
-    <a href="{{ route('notifications') }}"
+    <a href="{{ route('notification.index') }}"
        type="button"
        data-bs-toggle="dropdown"
        data-bs-auto-close="outside"
@@ -18,8 +18,8 @@
                     <span class="number">{{ $requestFriends->count() }}</span>
                 </p>
                 @if($requestFriends->count() > $limit)
-                    <a href="{{ route('notifications') }}"
-                       class="dropdown-link">{{ __('app.view-all') }}</a>
+                    <a href="{{ route('notification.friends') }}"
+                       class="link">{{ __('app.view-all') }}</a>
                 @endif
             </li>
             @foreach($requestedFriends as $requestedFriend)
@@ -72,8 +72,8 @@
                     <span class="number">{{ $requestCanals->count() }}</span>
                 </p>
                 @if($requestCanals->count() > $limit)
-                    <a href="{{ route('notifications') }}"
-                       class="dropdown-link">{{ __('app.view-all') }}</a>
+                    <a href="{{ route('notification.canals') }}"
+                       class="link">{{ __('app.view-all') }}</a>
                 @endif
             </li>
             @foreach($requestedCanals as $chatroom)

@@ -29,10 +29,11 @@
                 .leaving(user => {
                     console.log(user.name + ' est parti')
                 })
+                .listenForWhisper('typing', (e) => {
+                    console.log(e.name);
+                })
                 .listen('MessageSent', (e) => {
                     window.livewire.emit('messageSent', e.message)
-                }).listenForWhisper('typing', (e) => {
-                    console.log(e);
                 });
         </script>
     </x-slot>

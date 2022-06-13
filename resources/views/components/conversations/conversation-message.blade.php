@@ -1,6 +1,7 @@
 <article class="chatroom">
     <div class="chatroom__container">
-        <div class="chatroom__img_container status {{ Str::slug($otherAuthor->user->type->name) }}">
+        <div class="chatroom__img_container status
+        {{ $otherAuthor->user->sessions->last()->last_activity >= \Carbon\Carbon::now() && $otherAuthor->user->type->name ? Str::slug($otherAuthor->user->type->name) : 'offline' }}">
             <img src="{{ $chatroom->authors->first()->user?->getFirstMedia('profile')?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="chatroom__img" alt>
         </div>
         <div class="chatroom__info">

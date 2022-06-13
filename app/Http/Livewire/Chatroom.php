@@ -9,6 +9,7 @@ use App\Models\Chatroom as ChatroomModel;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Chatroom extends Component
@@ -79,6 +80,7 @@ class Chatroom extends Component
     public function check()
     {
         if (\Str::contains($this->message,'@')) {
+            $content = Str::after($this->message, '@');
 
         }
     }

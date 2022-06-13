@@ -34,6 +34,7 @@ return [
     'pseudo.placeholder' => 'JohnDoe',
     'name.label' => 'Nom',
     'name.notice' => 'Veuillez inscrire votre nom',
+    'name.placeholder' => 'Counter Strike : Global Offensive',
 
 
 

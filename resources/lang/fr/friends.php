@@ -28,6 +28,7 @@ return [
     'rename' => 'Renommer votre ami',
     'all.title' => 'Tous',
     'online.title' => 'En ligne',
+    'sended.title' => 'Envoyé',
     'request.title' => 'Demande',
     'nav.title' => 'Menu des amis',
 ];

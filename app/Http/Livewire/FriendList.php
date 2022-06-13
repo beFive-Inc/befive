@@ -16,6 +16,7 @@ class FriendList extends Component
     public EloquentCollection $friendships;
     public EloquentCollection $friendRequests;
     public EloquentCollection $friendBlocked;
+    public EloquentCollection $pendingFriends;
 
     public string $searchQuery = '';
 
@@ -26,6 +27,8 @@ class FriendList extends Component
 
     public function mount()
     {
+        $this->pendingFriends = auth()->user()
+            ->getPendingFriendships();
         $this->friendRequests = auth()->user()->getFriendRequests();
         $this->friendships = auth()->user()->getFriends()->load('media');
         $this->friendBlocked = auth()->user()->getBlockedFriendships();
@@ -46,6 +49,11 @@ class FriendList extends Component
                 'title' => __('friends.request.title'),
                 'method' => 'getRequestedFriends',
             ],
+            'sended' => [
+                'isActive' => false,
+                'title' => __('friends.sended.title'),
+                'method' => 'getPendingRequestFriends',
+            ],
             'blocked' => [
                 'isActive' => false,
                 'title' => __('friends.block.title'),
@@ -54,6 +62,9 @@ class FriendList extends Component
         ]);
     }
 
+    /**
+     * @return EloquentCollection
+     */
     protected function getSortingFriends(): EloquentCollection
     {
         return $this->friendships->sortByDesc(function ($friend) {
@@ -61,18 +72,27 @@ class FriendList extends Component
         })->take($this->limitFriends);
     }
 
-    protected function getSearchingFriends()
+    /**
+     * @return void
+     */
+    protected function getSearchingFriends(): void
     {
         $this->friends = $this->friends->filter(function ($friend) {
             return $this->likeOperator("%$this->searchQuery%", $friend->pseudo);
         });
     }
 
+    /**
+     * @return EloquentCollection
+     */
     protected function getBlockedFriends(): EloquentCollection
     {
         return $this->friendBlocked;
     }
 
+    /**
+     * @return EloquentCollection
+     */
     protected function getRequestedFriends(): EloquentCollection
     {
         return $this->friendRequests
@@ -80,6 +100,23 @@ class FriendList extends Component
             ->take($this->limitFriends);
     }
 
+    /**
+     * @return EloquentCollection
+     */
+    protected function getPendingRequestFriends(): EloquentCollection
+    {
+        return auth()->user()
+            ->getPendingFriendships()
+            ->filter(function ($friend) {
+                return $friend->recipient_id != auth()->id();
+            })->map(function ($user) {
+                return User::find($user->recipient_id);
+            });
+    }
+
+    /**
+     * @return EloquentCollection
+     */
     protected function getOnlineFriends(): EloquentCollection
     {
         return $this->friendships->filter(function ($friend) {
@@ -87,6 +124,10 @@ class FriendList extends Component
         });
     }
 
+    /**
+     * @param string $key
+     * @return void
+     */
     public function changeData(string $key)
     {
         foreach ($this->navItems as $k => $item) {
@@ -101,27 +142,41 @@ class FriendList extends Component
         $this->changeFriendList();
     }
 
-    protected function changeFriendList()
+    /**
+     * @return void
+     */
+    protected function changeFriendList(): void
     {
         foreach ($this->navItems as $item) {
             if ($item['isActive']) {
                 $this->friends = $this->{$item['method']}();
             }
-
         }
     }
 
-    public function isFriendWith($friendID): bool
+    /**
+     * @param int $friendID
+     * @return bool
+     */
+    public function isFriendWith(int $friendID): bool
     {
         return auth()->user()->isFriendWith(User::find($friendID));
     }
 
-    public function acceptFriendRequest($friendID): void
+    /**
+     * @param int $friendID
+     * @return void
+     */
+    public function acceptFriendRequest(int $friendID): void
     {
         auth()->user()->acceptFriendRequest(User::find($friendID));
     }
 
-    public function denyFriendRequest($friendID): void
+    /**
+     * @param int $friendID
+     * @return void
+     */
+    public function denyFriendRequest(int $friendID): void
     {
         auth()->user()->denyFriendRequest(User::find($friendID));
     }

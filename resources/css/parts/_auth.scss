@@ -10,6 +10,11 @@
     margin: 0 auto;
     gap: 6rem;
 
+    &.special-auth {
+        padding: 0;
+        min-height: auto;
+    }
+
     .alert {
         font-size: 1.3rem;
         width: 100%;

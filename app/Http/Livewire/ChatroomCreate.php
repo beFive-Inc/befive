@@ -10,6 +10,7 @@ use App\Constant\ChatroomType;
 use App\Models\Chatroom;
 use App\Models\ChatroomUser;
 use App\Models\User;
+use App\Traits\Chatroom as ChatroomHelper;
 use App\Traits\Operator;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -19,6 +20,7 @@ use Livewire\Component;
 class ChatroomCreate extends Component
 {
     use Operator;
+    use ChatroomHelper;
 
     public Collection $allChatroom;
     public bool $isCanal = false;
@@ -202,26 +204,6 @@ class ChatroomCreate extends Component
     }
 
     /**
-     * @return Collection
-     */
-    public function checkIfAChatroomExist(): Collection
-    {
-        return $this->allChatroom->filter(function ($chatroom) {
-            if (!$chatroom->isCanal) {
-                return $chatroom->authors->count() === $this->selectedFriends->count()
-                    && $chatroom->authors->count() === $chatroom->authors->filter(function ($author) use ($chatroom) {
-                        return $this->selectedFriends->filter(function ($friend) use ($author) {
-                            return $author->user->id === $friend->id;
-                        })->count();
-                    })->count();
-            } else {
-                return false;
-            }
-        });
-    }
-
-
-    /**
      * @return false
      */
     public function createChatroom(): bool
@@ -231,7 +213,7 @@ class ChatroomCreate extends Component
         $isAlreadyAChatroom = collect([]);
 
         if (!$this->isCanal) {
-            $isAlreadyAChatroom = $this->checkIfAChatroomExist();
+            $isAlreadyAChatroom = $this->checkIfThisChatroomExist($this->allChatroom, $this->selectedFriends);
         }
 
         if ($this->isCanal && empty($this->name)) {

@@ -5,6 +5,10 @@
     justify-content: flex-start;
     gap: 2rem;
 
+    & .checkbox {
+        margin-bottom: 0;
+    }
+
     .error {
         display: block;
         font-size: 1.3rem;

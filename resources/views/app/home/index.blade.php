@@ -19,8 +19,8 @@
                 });
         </script>
 
-        @foreach($chatrooms as $chatroom)
-            <script>
+        <script>
+            @foreach($chatrooms as $chatroom)
                 Echo.join(`chatroom.<?= $chatroom->uuid ?>`)
                     .here(users => {
                         console.log(users.length + ' utilisateurs')
@@ -34,7 +34,7 @@
                     .listen('MessageSent', (e) => {
                         window.livewire.emit('messageSent')
                     });
-            </script>
-        @endforeach
+            @endforeach
+        </script>
     </x-slot>
 </x-layout>

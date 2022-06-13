@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chatroom;
-use App\Models\ChatroomUser;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Chatroom;
 use Illuminate\Support\Str;
+use App\Models\ChatroomUser;
+use App\Constant\ChatroomType;
+use App\Constant\ChatroomStatus;
+use App\Constant\ChatroomUserStatus;
+use App\Http\Requests\ChatroomStoreRequest;
+use \App\Traits\Chatroom as ChatroomHelper;
 
 class ChatroomController extends Controller
 {
+    use ChatroomHelper;
+
     public function show(Chatroom $chatroom)
     {
         $this->authorize('view', $chatroom);
@@ -72,28 +78,81 @@ class ChatroomController extends Controller
         return redirect()->route('homepage');
     }
 
-    public function store()
+    public function store(ChatroomStoreRequest $request)
     {
-        $chatroom = Chatroom::create([
-            'uuid' => Str::uuid(),
-        ]);
+        $validatedData = $request->validated();
+        $chatrooms = auth()->user()
+            ->getChatrooms();
 
-        ChatroomUser::create([
-            'chatroom_id' => $chatroom->id,
-            'user_id' => auth()->id(),
-        ]);
+        $validatedData['friends'][] = auth()->user()->uuid;
 
-        ChatroomUser::create([
-            'chatroom_id' => $chatroom->id,
-            'user_id' => User::where('uuid', '=', \request('uuid'))->first()->id,
-        ]);
+        $friends = User::whereIn('uuid', $validatedData['friends'])
+            ->get();
+
+        $isAlreadyAChatroom = collect([]);
+
+        if (!$request->has('type')) {
+            $isAlreadyAChatroom = $this->checkIfThisChatroomExist($chatrooms, $friends);
+        }
+
+        if ($isAlreadyAChatroom->count()) {
+            return redirect()->route('chatroom.show', $isAlreadyAChatroom->first()->uuid);
+        } else {
+            $chatroom = Chatroom::create([
+                'uuid' => Str::uuid(),
+                'name' => !empty($validatedData['name']) ? $validatedData['name'] : null,
+                'type' => $request->has('type') ? ChatroomType::CANAL : null,
+                'status' => $request->has('type') && !$request->has('status') ? ChatroomStatus::PUBLIC : ChatroomStatus::PRIVATE,
+            ]);
+
+            foreach ($friends as $friend) {
+                ChatroomUser::create([
+                    'chatroom_id' => $chatroom->id,
+                    'user_id' => $friend->id,
+                    'status' => !$request->has('type') && $friend->id != auth()->id() ? ChatroomUserStatus::PENDING : ChatroomUserStatus::ACCEPTED,
+                    'view_at' => Carbon::now()
+                ]);
+            }
+
+        }
 
         return redirect()->route('chatroom.show', $chatroom->uuid);
     }
 
     public function create()
     {
+        $medias = auth()->user()
+            ->load('media')
+            ->media;
 
+        $chatrooms = auth()->user()
+            ->getChatrooms();
+
+        $deletedChatrooms = auth()->user()
+            ->getChatrooms(true);
+
+        $requestFriends = auth()->user()
+            ->getFriendRequests()
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
+
+        $requestCanals = auth()->user()
+            ->getRequestedCanals();
+
+        $friends = \auth()->user()
+            ->getFriends()
+            ->load('media');
+
+        return view('app.message.create',
+            compact(
+                'chatrooms',
+                'deletedChatrooms',
+                'requestCanals',
+                'friends',
+                'requestFriends',
+                'medias'
+            ));
     }
 
     public function messageStore()

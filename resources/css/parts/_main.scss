@@ -1,12 +1,12 @@
 .main {
     grid-gap: 1.2rem;
-    padding: 0 1.5rem;
+    padding: 0 1.5rem 6rem;
     transition: .3s ease-in;
     max-width: 1920px;
     margin: 0 auto;
 
 
     @media screen and (min-width: 920px) {
-        padding: 0 4rem;
+        padding: 0 4rem 6rem;
     }
 }

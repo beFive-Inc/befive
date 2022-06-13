@@ -456,14 +456,14 @@ hr {
 
 .main {
   grid-gap: 1.2rem;
-  padding: 0 1.5rem;
+  padding: 0 1.5rem 6rem;
   transition: 0.3s ease-in;
   max-width: 1920px;
   margin: 0 auto;
 }
 @media screen and (min-width: 920px) {
   .main {
-    padding: 0 4rem;
+    padding: 0 4rem 6rem;
   }
 }
 
@@ -1352,6 +1352,9 @@ hr {
   font-size: 1.6rem;
   font-weight: 500;
   transition: 0.3s ease-in;
+  max-width: calc(100vw - 100px);
+  max-height: 16px;
+  overflow: hidden;
 }
 .chatroom__name.new {
   font-weight: 700;
@@ -1465,7 +1468,8 @@ hr {
   height: 20px;
   position: absolute;
   top: 0;
-  right: -5px;
+  right: 50%;
+  transform: translateX(calc(50% + 15px));
   transition: 0.3s ease-in;
 }
 .friend__remove .icon::after {
@@ -1532,22 +1536,6 @@ hr {
   width: 46px;
   height: 46px;
 }
-.friend__img_container::after {
-  content: "";
-  display: block;
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  width: 6px;
-  height: 6px;
-  border-radius: 99px;
-}
-.friend__img_container.online::after {
-  background-color: #20C600;
-}
-.friend__img_container.offline::after {
-  background-color: #FF1200;
-}
 .friend__img {
   width: 100%;
   border-radius: 99px;
@@ -1587,6 +1575,10 @@ hr {
   border-radius: 5px;
   word-break: break-all;
 }
+.messages__container .item .message__img {
+  max-width: 100%;
+  width: auto;
+}
 .messages__container .item .message p {
   margin: 0;
 }
@@ -1606,7 +1598,7 @@ hr {
   justify-content: flex-end;
 }
 .messages__container .own.item .item__container .message {
-  background-color: #3A3A3A;
+  background-color: #545454;
   color: #fff;
 }
 .messages__container .other {
@@ -1637,20 +1629,49 @@ hr {
   width: 100%;
   padding: 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  min-height: 6.5rem;
 }
 .messages .form__container {
   flex: 1;
   position: relative;
 }
+.messages .form__background {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding-right: 1rem;
+  background-color: #f7f7f7;
+}
 .messages .form__btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   background-color: transparent;
   border: none;
   cursor: pointer;
+  pointer-events: auto;
   transition: 0.3s ease-in;
+}
+.messages .form__btn.file {
+  width: 24px;
+  height: 24px;
+  right: 10px;
+  -webkit-mask-image: url("/parts/icons/bold/document-upload.svg");
+          mask-image: url("/parts/icons/bold/document-upload.svg");
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 100%;
+          mask-size: 100%;
+  -webkit-mask-position: center;
+          mask-position: center;
+  background-color: #3A3A3A;
+}
+.messages .form__btn.file.show {
+  right: 44px;
+  opacity: 1;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.messages .form__btn.file:hover, .messages .form__btn.file:focus {
+  background-color: #FF9400;
 }
 .messages .form__btn.send {
   width: 24px;
@@ -1669,20 +1690,24 @@ hr {
 .messages .form__btn.send.show {
   right: 10px;
   opacity: 1;
+  cursor: pointer;
+  pointer-events: auto;
 }
 .messages .form__btn.send:hover, .messages .form__btn.send:focus {
   background-color: #FF9400;
 }
 .messages .form__hide {
   opacity: 0;
+  pointer-events: none;
 }
 .messages .form__input {
-  width: 100%;
+  flex: 1;
   padding: 8px 10px;
   min-height: 3.4rem;
   max-height: 8rem;
   overflow: hidden;
   resize: none;
+  background-color: transparent;
 }
 @media screen and (min-width: 920px) {
   .messages__container {
@@ -1725,4 +1750,29 @@ hr {
   background-color: #FF9400;
   border-radius: 99px;
   margin-left: 0.5rem;
+}
+
+.status::after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-radius: 99px;
+}
+.status.absent::after {
+  background-color: #F24848;
+}
+.status.busy::after {
+  background-color: #FF9400;
+}
+.status.online::after {
+  background-color: #84D582;
+}
+.status.offline::after {
+  border: none;
+  background-color: transparent;
 }

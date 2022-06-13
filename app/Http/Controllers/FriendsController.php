@@ -30,7 +30,7 @@ class FriendsController extends Controller
 
         $friends = \auth()->user()
             ->getFriends()
-            ->load('media');
+            ->load('media', 'type');
 
 
         return view('app.friends.index',

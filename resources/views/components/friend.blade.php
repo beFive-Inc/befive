@@ -1,6 +1,6 @@
 <article class="friend">
     <div class="friend__container {{ $onlyImageAndName ? 'special' : '' }}">
-        <div class="friend__img_container">
+        <div class="friend__img_container status {{ Str::slug($friend->type->name) }}">
             <img src="{{ $friend->media?->first()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="friend__img" alt>
         </div>
 

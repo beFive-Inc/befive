@@ -74,7 +74,8 @@
             height: 20px;
             position: absolute;
             top: 0;
-            right: -5px;
+            right: 50%;
+            transform: translateX(calc(50% + 15px));
             transition: .3s ease-in;
 
             &::after{
@@ -153,24 +154,6 @@
         width: 46px;
         height: 46px;
 
-        &::after {
-            content: '';
-            display: block;
-            position: absolute;
-            right: 0px;
-            bottom: 0px;
-            width: 6px;
-            height: 6px;
-            border-radius: $border-radius;
-        }
-
-        &.online::after {
-            background-color: $green;
-        }
-
-        &.offline::after {
-            background-color: $red;
-        }
     }
 
     &__img {

@@ -1,11 +1,6 @@
 <article class="chatroom">
     <div class="chatroom__container">
-        <div class="chatroom__img_container
-            @if(true)
-                online
-            @else
-                offline
-            @endif">
+        <div class="chatroom__img_container status {{ Str::slug($otherAuthor->user->type->name) }}">
             <img src="{{ $chatroom->authors->first()->user?->getFirstMedia('profile')?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="chatroom__img" alt>
         </div>
         <div class="chatroom__info">

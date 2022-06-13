@@ -31,6 +31,11 @@
                 border-radius: 5px;
                 word-break: break-all;
 
+                &__img {
+                    max-width: 100%;
+                    width: auto;
+                }
+
                 p {
                     margin: 0;
                 }
@@ -57,7 +62,7 @@
                     justify-content: flex-end;
 
                     .message {
-                        background-color: $dark-grey;
+                        background-color: lighten($dark-grey, 10);
                         color: $white;
                     }
                 }
@@ -101,21 +106,50 @@
         width: 100%;
         padding: 1rem;
         border-top: 1px solid rgba($black, 0.1);
-        min-height: 6.5rem;
 
         &__container {
             flex: 1;
             position: relative;
         }
 
+        &__background {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            padding-right: 1rem;
+            background-color: $light-grey;
+        }
+
         &__btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
             background-color: transparent;
             border: none;
             cursor: pointer;
+            pointer-events: auto;
             transition: .3s ease-in;
+
+            &.file {
+                width: 24px;
+                height: 24px;
+                right: 10px;
+                mask-image: url('/parts/icons/bold/document-upload.svg');
+                mask-repeat: no-repeat;
+                mask-size: 100%;
+                mask-position: center;
+                background-color: $dark-grey;
+
+                &.show {
+                    right: 44px;
+                    opacity: 1;
+                    cursor: pointer;
+                    pointer-events: auto;
+                }
+
+                &:hover, &:focus {
+                    background-color: $primary;
+                }
+            }
 
             &.send {
                 width: 24px;
@@ -130,6 +164,8 @@
                 &.show {
                     right: 10px;
                     opacity: 1;
+                    cursor: pointer;
+                    pointer-events: auto;
                 }
 
                 &:hover, &:focus {
@@ -140,15 +176,17 @@
 
         &__hide {
             opacity: 0;
+            pointer-events: none;
         }
 
         &__input {
-            width: 100%;
+            flex: 1;
             padding: 8px 10px;
             min-height: 3.4rem;
             max-height: 8rem;
             overflow: hidden;
             resize: none;
+            background-color: transparent;
         }
     }
 

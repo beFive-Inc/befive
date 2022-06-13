@@ -11,3 +11,35 @@
     border-radius: $border-radius;
     margin-left: .5rem;
 }
+
+.status {
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        width: 12px;
+        height: 12px;
+        border: 2px solid $white;
+        border-radius: $border-radius;
+    }
+
+    &.absent::after {
+        background-color: $light-red;
+    }
+
+    &.busy::after {
+        background-color: $primary;
+    }
+
+    &.online::after {
+        background-color: $light-green;
+    }
+
+    &.offline::after {
+        border: none;
+        background-color: transparent;
+    }
+}

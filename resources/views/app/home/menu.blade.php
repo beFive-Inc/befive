@@ -8,7 +8,7 @@
     </x-slot>
 
     <x-slot name="content">
-        <nav>
+        <nav class="auth special-auth">
             <h2 class="sr_only" role="heading" aria-level="2">
                 {{ __('app.navigation') }}
             </h2>

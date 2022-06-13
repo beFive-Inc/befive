@@ -12,7 +12,7 @@
 
 
     <x-slot name="content">
-        <div class="auth">
+        <div class="auth special-auth">
             <div class="auth__form">
                 <form action="{{ route('user.update') }}"
                       method="post"

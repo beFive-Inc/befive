@@ -71,7 +71,7 @@ trait Messageable
     public function getChatroomsWithAll() : Collection
     {
         return $this->chatrooms()
-            ->with(['authors.user', 'messages.author.user'])
+            ->with(['authors.user.sessions', 'messages.author.user'])
             ->get()
             ->filter(function ($chatroom) {
                 return $chatroom->messages->count();

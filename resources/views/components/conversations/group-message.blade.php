@@ -1,7 +1,9 @@
 <article class="chatroom">
     <div class="chatroom__container">
-        <div class="chatroom__img_container
-            @if(true) online @else offline @endif">
+        <div class="chatroom__img_container status
+            @if($chatroom->authors->filter(function ($author) {
+                return $author->user->sessions->last()->last_activity >= \Carbon\Carbon::now() && $author->user_id != auth()->id();
+})->count()) online @else offline @endif">
 
             @foreach($chatroom->messages->take(2) as $message)
                 @if($loop->first)

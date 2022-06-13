@@ -21,13 +21,13 @@ class LastUserActivity
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check()) {
+        if(auth()->check()) {
             $expiresAt = Carbon::now()->addMinutes(5);
 
             $lastSession = Session::where('user_id', '=', Auth::id())
                 ->get()->last();
 
-            if ($lastSession) {
+            if ($lastSession->count()) {
                 if (Carbon::parse($lastSession->last_activity)->addMinutes(30) < Carbon::now()) {
                     Session::create([
                         'user_id' => Auth::id(),
@@ -36,7 +36,7 @@ class LastUserActivity
                         'payload' => json_decode($request->getContent(), true),
                         'last_activity' => $expiresAt,
                     ]);
-                } else if ($lastSession->last_activity < Carbon::now()) {
+                } else {
                     $lastSession->update([
                         'last_activity' => $expiresAt,
                     ]);

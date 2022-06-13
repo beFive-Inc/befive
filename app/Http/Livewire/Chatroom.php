@@ -11,9 +11,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Chatroom extends Component
 {
+    use WithFileUploads;
+
     public ChatroomModel $chatroom;
     public ChatroomUser $authIngroup;
     public string $message = '';
@@ -21,6 +24,8 @@ class Chatroom extends Component
     public bool $isSender = false;
 
     public Collection $messages;
+
+    public $files;
 
     protected $listeners = [
         'messageSent' => 'EchoGetMessage',
@@ -39,15 +44,31 @@ class Chatroom extends Component
         $this->resetIsSender();
     }
 
+    /**
+     * @param string $url
+     * @return string
+     */
+    public function getTemporaryRealUrl(string $url): string
+    {
+        return Str::replace('livewire/preview-file', 'livewire-tmp', $url);
+    }
+
     public function setViewAt()
     {
         $this->authIngroup->view_at = Carbon::now();
         $this->authIngroup->save();
     }
 
-    public function send()
+    public function update()
     {
-        if (!empty($this->message)) {
+        $this->validate([
+            'files.*' => 'max:4096', // 2MB Max
+        ]);
+    }
+
+    public function save()
+    {
+        if (empty($this->message)) {
             $message = Message::create([
                 'chatroom_user_id' => $this->authIngroup->id,
                 'message_id' => null,
@@ -61,9 +82,40 @@ class Chatroom extends Component
 
             $this->isSenderToTrue();
 
+            if ($this->files) {
+                foreach ($this->files as $file) {
+                    $message->addMedia($file)
+                        ->toMediaCollection('message');
+                }
+            }
+
             broadcast(new MessageSent($message, $this->chatroom->uuid));
+
+            $this->files = [];
         } else {
-            return false;
+            $message = Message::create([
+                'chatroom_user_id' => $this->authIngroup->id,
+                'message_id' => null,
+                'message' => Crypt::encrypt($this->message),
+                'type' => 'message'
+            ]);
+
+            $this->message = '';
+
+            $this->messages->prepend($message);
+
+            $this->isSenderToTrue();
+
+            if ($this->files) {
+                foreach ($this->files as $file) {
+                    $message->addMedia($file)
+                        ->toMediaCollection('message');
+                }
+            }
+
+            broadcast(new MessageSent($message, $this->chatroom->uuid));
+
+            $this->files = [];
         }
     }
 
@@ -79,7 +131,12 @@ class Chatroom extends Component
 
     public function check()
     {
-        if (\Str::contains($this->message,'@')) {
+        if (Str::contains($this->message, 'https://www.youtube.com/')
+            || Str::contains($this->message, 'www.youtube.com/')
+            || Str::contains($this->message, 'youtube.com/')) {
+
+        }
+        if (Str::contains($this->message,'@')) {
             $content = Str::after($this->message, '@');
 
         }

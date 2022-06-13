@@ -38,5 +38,6 @@ return [
     'chatroom.create.group.submit' => 'Créer le groupe',
     'chatroom.create.search.placeholder' => 'Rechercher des amis',
     'chatroom.create.friend.remove' => 'Retirer cet ami de la liste',
+    'chatroom.file.label' => 'Ajouter des images, vidéos ou des audios',
 
 ];

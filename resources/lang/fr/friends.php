@@ -22,6 +22,7 @@ return [
     'offline.status' => 'Offline since :time ago',
     'options' => 'Paramètres pour cet ami',
     'delete' => 'Supprimer cet ami',
+    'request.delete' => 'Supprimer la demande envoyée',
     'block' => 'Bloquer cet utilisateur',
     'block.title' => 'Bloqué',
     'unblock' => 'Débloquer cet utilisateur',

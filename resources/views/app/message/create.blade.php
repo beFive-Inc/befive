@@ -63,7 +63,7 @@
                 </x-field>
 
 
-                <select name="friends[]" id="friends" size="10" multiple>
+                <select name="friends[]" class="form__select" id="friends" size="10" multiple>
                         @foreach($friends as $friend)
                             <option value="{{ $friend->uuid }}">{{ $friend->pseudo }}</option>
                         @endforeach

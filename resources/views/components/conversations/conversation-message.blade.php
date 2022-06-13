@@ -192,7 +192,7 @@
                                     {!!  __('field.conversation.friend.block.explain') !!}
                                 </p>
 
-                                <input type="hidden" name="uuid" value="{{ $chatroom->authors->first()->user->uuid }}">
+                                <input type="hidden" name="uuid" value="{{ $otherAuthor->user->uuid }}">
 
                                 <div class="modal-footer">
                                     <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.abort') }}</span>

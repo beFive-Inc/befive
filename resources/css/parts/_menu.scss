@@ -75,6 +75,10 @@
         mask-image: url("/parts/icons/bold/message-remove.svg");
     }
 
+    &__friend-delete::before {
+        mask-image: url("/parts/icons/bold/profile-remove.svg");
+    }
+
     &__message-archive::before {
         mask-image: url("/parts/icons/bold/archive-2.svg");
     }

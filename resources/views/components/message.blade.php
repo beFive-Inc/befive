@@ -7,7 +7,7 @@
         <p>
             @foreach($allWordInMessage as $msg)
                 @if(Str::contains($msg, 'http') || Str::contains($msg, 'www'))
-                    <a href="{{ $msg }}">{{ $msg }}</a>
+                    <a href="{{ $msg }}" target="_blank">{{ $msg }}</a>
                 @else
                     {{ $msg }}
                 @endif

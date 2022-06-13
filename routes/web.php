@@ -165,7 +165,7 @@ Route::prefix('friends')->middleware('auth')->name('friends.')->group(function (
 
     // POST METHOD
 
-    Route::post('/add', [\App\Http\Controllers\FriendsController::class, 'create'])
+    Route::post('/add', [\App\Http\Controllers\FriendsController::class, 'add'])
         ->name('add');
 
     // PUT METHOD

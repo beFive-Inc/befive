@@ -43,7 +43,7 @@ class FriendsController extends Controller
             ));
     }
 
-    public function create()
+    public function add()
     {
         $friendToAdd = User::where('uuid', '=', \request('uuid'))
             ->first();
@@ -68,7 +68,7 @@ class FriendsController extends Controller
 
         auth()->user()->acceptFriendRequest($user);
 
-        return redirect()->route('notification.friends');
+        return redirect()->route('friends.index');
     }
 
     public function deny()
@@ -78,7 +78,7 @@ class FriendsController extends Controller
 
         auth()->user()->denyFriendRequest($user);
 
-        return redirect()->route('notification.friends');
+        return redirect()->route('friends.index');
     }
 
     public function block()
@@ -87,7 +87,7 @@ class FriendsController extends Controller
 
         auth()->user()->blockFriend($friend);
 
-        return redirect()->route('homepage');
+        return redirect()->route('friends.index');
     }
 
     public function unblock()
@@ -96,7 +96,7 @@ class FriendsController extends Controller
 
         auth()->user()->unblockFriend($friend);
 
-        return redirect()->route('homepage');
+        return redirect()->route('friends.index');
     }
 
     public function delete()
@@ -105,6 +105,6 @@ class FriendsController extends Controller
 
         auth()->user()->unfriend($friend);
 
-        return redirect()->route('homepage');
+        return redirect()->route('friends.index');
     }
 }

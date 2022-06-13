@@ -29,9 +29,19 @@ class FriendList extends Component
     {
         $this->pendingFriends = auth()->user()
             ->getPendingFriendships();
-        $this->friendRequests = auth()->user()->getFriendRequests();
+        $this->friendRequests = auth()->user()->getFriendRequests()
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
         $this->friendships = auth()->user()->getFriends()->load('media');
-        $this->friendBlocked = auth()->user()->getBlockedFriendships();
+        $this->friendBlocked = auth()->user()->getBlockedFriendships()
+            ->map(function ($user) {
+                if ($user->sender_id === auth()->id()) {
+                    return User::find($user->recipient_id);
+                } else {
+                    return User::find($user->sender_id);
+                }
+            });
 
         $this->navItems = collect([
             'all' => [

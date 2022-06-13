@@ -51,7 +51,42 @@
         <div class="friends__container">
             @if($friends->count())
                 @foreach($friends as $friend)
-                    <x-friend :friend="$friend" :get-status-message="true"></x-friend>
+                    <x-friend
+                        :friend="$friend"
+                        :get-status-message="$navItems['all']['isActive'] || $navItems['online']['isActive'] ? true : false"
+                        :actions="$navItems['request']['isActive'] ? true : false"
+                        :options="$navItems['request']['isActive'] ? false : true"
+                        :is-friend="$navItems['all']['isActive'] || $navItems['online']['isActive'] ? true : false"
+                        :is-asked="$navItems['sended']['isActive'] ? true : false"
+                        :is-blocked="$navItems['blocked']['isActive'] ? true : false">
+                        @if($navItems['request']['isActive'])
+                            <form method="post" action="{{ route('friends.accept') }}">
+                                @csrf
+                                @method('put')
+
+                                <input type="hidden" name="uuid" value="{{ $friend->uuid }}">
+
+                                <button class="action action__friend-accept">
+                                    <span class="sr_only">
+                                        {{ __('friends.accept') }}
+                                    </span>
+                                </button>
+                            </form>
+
+                            <form method="post" action="{{ route('friends.deny') }}">
+                                @csrf
+                                @method('put')
+
+                                <input type="hidden" name="uuid" value="{{ $friend->uuid }}">
+
+                                <button class="action action__friend-deny danger">
+                                    <span class="sr_only">
+                                        {{ __('friends.deny') }}
+                                    </span>
+                                </button>
+                            </form>
+                        @endif
+                    </x-friend>
                 @endforeach
             @else
                 @if($searchQuery)

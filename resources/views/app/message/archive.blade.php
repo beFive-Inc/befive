@@ -25,6 +25,7 @@
                     @if($deletedChatrooms->count())
                         @foreach($deletedChatrooms as $chatroom)
                             <x-conversation-message :chatroom="$chatroom"
+                                                    :is-archived="true"
                                                     :own-author="$chatroom->authors->filter(
                                                     function ($author) {return $author->user->id === auth()->id();})
                                                     ->first()"

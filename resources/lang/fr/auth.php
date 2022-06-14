@@ -12,6 +12,7 @@ return [
     |
     */
     'update' => 'Mettre à jour',
+    'profile.img' => 'Photo de profil',
     'sign-in' => 'Se connecter',
     'sign-in.title' => 'Connexion à Be Five Chat',
     'sign-in.hook.title' => "Viens t'amuser avec nous&nbsp;!",

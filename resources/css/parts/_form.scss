@@ -258,5 +258,29 @@
     }
 }
 
+.profile-edit {
+
+
+    &__img-input-container {
+        position: relative;
+    }
+
+    &__img-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 25rem;
+        height: 25rem;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: $border-radius;
+        margin-bottom: 2rem;
+
+        & img {
+            width: 100%;
+        }
+    }
+}
+
 
 

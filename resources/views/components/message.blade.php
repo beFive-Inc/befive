@@ -6,7 +6,9 @@
     <div class="message">
         <p>
             @foreach($allWordInMessage as $msg)
-                @if(Str::contains($msg, 'http') || Str::contains($msg, 'www'))
+                @if(Str::contains($msg, 'http') && Str::contains($msg, '.gif'))
+                    <img src="{{ $msg }}" alt="Gif">
+                @elseif(Str::contains($msg, 'http') || Str::contains($msg, 'www'))
                     <a href="{{ $msg }}" target="_blank">{{ $msg }}</a>
                 @else
                     {{ $msg }}

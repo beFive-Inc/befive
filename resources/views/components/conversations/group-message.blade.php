@@ -103,7 +103,7 @@
                     <div class="modal-body">
                         <form method="post"
                               class="form"
-                              action="{{ route('chatroom.archive') }}">
+                              action="{{ route('chatroom.delete') }}">
                             @csrf
                             @method('delete')
 
@@ -115,7 +115,8 @@
                                 {!! __('field.group.leave.explain') !!}
                             </p>
 
-                            <input type="hidden" name="uuid" value="{{ $chatroom->uuid }}">
+                            <input type="hidden" name="author_id" value="{{ $chatroom->authors->filter(function ($author) {
+                                return $author->user_id === auth()->id(); })->first()->id }}">
 
                             <div class="modal-footer">
                                 <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.abort') }}</span>

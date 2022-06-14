@@ -74,6 +74,8 @@ class Notification extends Component
 
         auth()->user()->acceptFriendRequest($user);
 
+        $this->emit('friendRefresh');
+
         $this->requestFriends = $this->getRequestedFriends();
         $this->requestedFriends = $this->requestFriends->take($this->limit);
     }

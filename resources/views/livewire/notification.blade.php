@@ -66,7 +66,7 @@
             @if($requestedFriends->count() && $requestedCanals->count())
                 <li><hr class="dropdown-divider"></li>
             @elseif(!$requestedFriends->count() && !$requestedCanals->count())
-                <li><hp class="dropdown-header dropdown-nomargin">{{ __('app.notification.none') }}</hp></li>
+                <li><p class="dropdown-header dropdown-nomargin">{{ __('app.notification.none') }}</p></li>
             @endif
 
             @if($requestedCanals->count())
@@ -118,9 +118,9 @@
                                         })->first()->id }}">
 
                                 <button class="action action__canal-deny danger">
-                            <span class="sr_only">
-                                {{ __('app.chatroom.deny') }}
-                            </span>
+                                    <span class="sr_only">
+                                        {{ __('app.chatroom.deny') }}
+                                    </span>
                                 </button>
                             </form>
                         </x-canal>

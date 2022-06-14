@@ -52,7 +52,7 @@
         font-weight: $font-medium;
         transition: .3s ease-in;
         max-width: calc(100vw - 100px);
-        max-height: 16px;
+        max-height: 1em;
         overflow: hidden;
 
         &.new {

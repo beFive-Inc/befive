@@ -133,6 +133,9 @@ Route::prefix('chatroom')->middleware('auth')->name('chatroom.')->group(function
     Route::put('/deny', [\App\Http\Controllers\ChatroomController::class, 'deny'])
         ->name('deny');
 
+    Route::put('/author/rename', [\App\Http\Controllers\ChatroomController::class, 'authorRename'])
+        ->name('author.rename');
+
     Route::put('/rename', [\App\Http\Controllers\ChatroomController::class, 'rename'])
         ->name('rename');
 

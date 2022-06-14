@@ -16,9 +16,12 @@
         </div>
 
         <input type="file"
-               name="photo"
+               name="profile"
                accept="image/*"
                wire:model="photo">
+        @error('profile')
+            <span class="error">{{ $message }}</span>
+        @enderror
     </div>
 
     <div class="form__field">

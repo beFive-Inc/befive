@@ -55,5 +55,7 @@ return [
     'groups' => 'Groupes',
     'search.placeholder' => "Rechercher sur l'application",
     'abort' => 'Annuler',
+    'status.submit' => 'Changer le message de status',
+    'status.label' => 'Message de status',
 
 ];

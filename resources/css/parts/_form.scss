@@ -107,6 +107,38 @@
     }
 
 
+    &__status {
+        width: 100%;
+        margin-bottom: 1rem;
+
+        .status-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: .5rem;
+            background-color: $light-grey;
+        }
+
+        .status-label {
+            font-size: 1.2rem;
+            font-weight: $font-regular;
+            text-transform: uppercase;
+            margin-bottom: .5rem;
+        }
+
+        input {
+            flex: 1;
+            font-size: 1.2rem;
+            font-weight: $font-regular;
+            background-color: transparent;
+            border: none;
+            padding: .4rem;
+        }
+    }
+
+
     .actions {
         display: block;
         margin-top: 1rem;

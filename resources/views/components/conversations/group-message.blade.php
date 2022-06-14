@@ -7,10 +7,10 @@
 
             @foreach($chatroom->messages->take(2) as $message)
                 @if($loop->first)
-                    <img src="{{ $message->author->user?->getFirstMedia('profile')?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="chatroom__img first" alt>
+                    <img src="{{ $message->author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="chatroom__img second" alt>
                 @endif
                 @if($loop->last)
-                    <img src="{{ $message->author->user?->getFirstMedia('profile')?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="chatroom__img second" alt>
+                    <img src="{{ $message->author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="chatroom__img first" alt>
                 @endif
             @endforeach
         </div>

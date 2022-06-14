@@ -38,15 +38,17 @@
         <div class="user-menu">
             <a href="{{ route('menu') }}"
                type="button"
-               class="dropdown-btn"
+               class="dropdown-btn status {{ Str::slug(auth()->user()->type->name) }}"
                id="dropdownMenuClickableInside"
                data-bs-toggle="dropdown"
                data-bs-auto-close="outside"
                aria-expanded="false">
-                <img src="{{ $medias->first()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" alt>
+                <div class="img">
+                    <img src="{{ $medias->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" alt>
+                </div>
             </a>
             <nav role="navigation">
-                <h2 aria-level="2" role="heading">
+                <h2 aria-level="2" role="heading" class="sr_only">
                     {{ __('app.navigation') }}
                 </h2>
                 <ul class="dropdown-menu menu" aria-labelledby="dropdownMenuClickableInside">
@@ -54,8 +56,10 @@
                         <a href="{{ route('user.edit') }}" class="dropdown-user__see">
                             <span class="sr_only">{{ __('user.see') }}</span>
                         </a>
-                        <div class="dropdown-user__img">
-                            <img src="{{ $medias->first()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" alt>
+                        <div class="status-show status {{ Str::slug(auth()->user()->type->name) }}">
+                            <div class="dropdown-user__img">
+                                <img src="{{ $medias->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" alt>
+                            </div>
                         </div>
                         <div class="dropdown-user__info">
                             <p class="dropdown-user__info__pseudo">
@@ -71,7 +75,7 @@
                     <li><a class="menu__item dropdown-item menu__archive" href="{{ route('chatroom.index.archive') }}">Messages archivés</a></li>
                     <li><h3 aria-level="3" role="heading" class="dropdown-header">Profil</h3></li>
                     <li>
-                        <div class="btn-group dropstart">
+                        <div class="btn-group">
                             <a href="{{ route('user.status') }}"
                                type="button"
                                class="menu__item dropdown-item menu__status"

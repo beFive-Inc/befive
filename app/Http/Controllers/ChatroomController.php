@@ -160,6 +160,18 @@ class ChatroomController extends Controller
 
     }
 
+    public function authorRename()
+    {
+        $author = ChatroomUser::where('id', '=', \request('author_id'))
+            ->first();
+
+        $author->update([
+            'name' => \request('name'),
+        ]);
+
+        return redirect()->route('homepage');
+    }
+
     public function rename()
     {
         $chatroom = Chatroom::where('uuid', '=', \request('chatroom_uuid'))

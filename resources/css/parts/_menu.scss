@@ -7,6 +7,10 @@
         }
     }
 
+    .status-show {
+        position: relative;
+    }
+
     &__item {
         font-size: 1.4rem;
         font-weight: $font-regular;
@@ -27,7 +31,7 @@
         }
 
         &.active {
-            background-color: $primary;
+            background-color: $dark-grey;
         }
 
         &:not(.active):hover {
@@ -41,6 +45,32 @@
                 background-color: $white;
             }
         }
+    }
+
+    &__status-icon::before {
+        flex: 0 0 16px;
+        width: 16px;
+        height: 16px;
+        border-radius: $border-radius;
+    }
+
+    &__online::before {
+        background-color: $light-green;
+        border: 2px solid $white;
+    }
+
+    &__busy::before {
+        background-color: $primary;
+        border: 2px solid $white;
+    }
+
+    &__absent::before {
+        background-color: $light-red;
+        border: 2px solid $white;
+    }
+
+    &__offline::before {
+        background-color: transparent;
     }
 
     &__archive::before {
@@ -94,6 +124,7 @@
     &__view::before {
         mask-image: url("/parts/icons/bold/message-tick.svg");
     }
+
 
     &__danger {
         width: 100%;

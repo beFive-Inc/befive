@@ -2,7 +2,7 @@
     <div class="chatroom__container">
         <div class="chatroom__img_container status
         {{ $otherAuthor->user->sessions->last()->last_activity >= \Carbon\Carbon::now() && $otherAuthor->user->type->name ? Str::slug($otherAuthor->user->type->name) : 'offline' }}">
-            <img src="{{ $chatroom->authors->first()->user?->getFirstMedia('profile')?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="chatroom__img" alt>
+            <img src="{{ $otherAuthor->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="chatroom__img" alt>
         </div>
         <div class="chatroom__info">
             <h4 aria-level="4"
@@ -11,10 +11,10 @@
                 data-bs-toggle="tooltip"
                 data-bs-placement="right"
                 data-bs-html="true"
-                {{--                title='<x-data-title :chatroom="$chatroom"/>'>--}}>
+                {{-- title='<x-data-title :chatroom="$chatroom"/>'>--}}>
                 <a href="{{ route('chatroom.show', $chatroom->uuid) }}" class="chatroom__link">
-                    @if($chatroom->name)
-                        {{ $chatroom->name }}
+                    @if($otherAuthor->name)
+                        {{ $otherAuthor->name }}
                     @else
                         {{ $otherAuthor->user->pseudo }}
                     @endif
@@ -78,7 +78,7 @@
                                 <input type="hidden" name="author_id" value="{{ $ownAuthor->id }}">
 
                                 <div class="modal-footer">
-                                    <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.abort') }}</span>
+                                    <span class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.abort') }}</span>
                                     <input type="submit" class="btn btn-danger" value="{{ __('field.conversation.delete.submit') }}"/>
                                 </div>
                             </form>
@@ -94,7 +94,7 @@
             </button>
             <ul class="dropdown-menu menu" data-popper-placement="bottom-end">
                 <li>
-                    <button class="dropdown-item menu__item menu__rename" data-bs-toggle="modal" data-bs-target="#chatroomRename-{{ $chatroom->uuid }}">
+                    <button class="dropdown-item menu__item menu__rename" data-bs-toggle="modal" data-bs-target="#friendRename-{{ $otherAuthor->id }}">
                         {{ __('app.conversations.rename') }}
                     </button>
                 </li>
@@ -118,13 +118,6 @@
                     </li>
                 @endif
                 <li>
-                    <button class="dropdown-item menu__item menu__group" data-bs-toggle="modal" data-bs-target="#chatroomCreateWith-{{ $chatroom->uuid }}">
-                        {{ __('app.conversations.create', [
-                            'user' => $otherAuthor->user->pseudo,
-                        ]) }}
-                    </button>
-                </li>
-                <li>
                     <button class="dropdown-item menu__item menu__danger menu__block" data-bs-toggle="modal" data-bs-target="#friendBlock-{{ $chatroom->authors->first()->user->uuid }}">
                         {{ __('friends.block') }}
                     </button>
@@ -136,33 +129,33 @@
                 </li>
             </ul>
 
-            <div class="modal fade" id="chatroomRename-{{ $chatroom->uuid }}" tabindex="-1" aria-labelledby="chatroomRename-{{ $chatroom->uuid }}">
+            <div class="modal fade" id="friendRename-{{ $otherAuthor->id }}" tabindex="-1" aria-labelledby="friendRename-{{ $otherAuthor->id }}">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('chatroom.rename') }}"
+                            <form action="{{ route('chatroom.author.rename') }}"
                                   method="post"
                                   class="form">
                                 @csrf
                                 @method('put')
 
-                                <input type="hidden" name="chatroom_uuid" value="{{ $chatroom->uuid }}">
+                                <input type="hidden" name="author_id" value="{{ $otherAuthor->id }}">
 
                                 <x-field type="text"
                                          name="name"
-                                         :id="'name-' . $chatroom->id"
+                                         :id="'name-' . $otherAuthor->id"
                                          :notice="__('field.conversation.rename.notice')"
                                          :labeltext="__('field.conversation.rename.label')"
-                                         :placeholder="!empty($chatroom->name) ? $chatroom->name : __('app.placeholder')"
+                                         :placeholder="!empty($otherAuthor->name) ? $otherAuthor->name : $otherAuthor->user->pseudo"
                                          :autocomplete="'name'"
                                          :required="true">
                                 </x-field>
 
                                 <div class="modal-footer">
-                                    <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.abort') }}</span>
+                                    <span class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.abort') }}</span>
                                     <input type="submit" class="btn btn-primary" value="{{ __('field.conversation.rename.submit') }}"/>
                                 </div>
                             </form>
@@ -195,7 +188,7 @@
                                 <input type="hidden" name="uuid" value="{{ $otherAuthor->user->uuid }}">
 
                                 <div class="modal-footer">
-                                    <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.abort') }}</span>
+                                    <span class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.abort') }}</span>
                                     <input type="submit" class="btn btn-primary" value="{{ __('field.conversation.friend.block.submit') }}"/>
                                 </div>
                             </form>
@@ -228,7 +221,7 @@
                                 <input type="hidden" name="author_id" value="{{ $ownAuthor->id }}">
 
                                 <div class="modal-footer">
-                                    <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.abort') }}</span>
+                                    <span class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.abort') }}</span>
                                     <input type="submit" class="btn btn-danger" value="{{ __('field.conversation.delete.submit') }}"/>
                                 </div>
                             </form>

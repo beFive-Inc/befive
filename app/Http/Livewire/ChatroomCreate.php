@@ -37,6 +37,10 @@ class ChatroomCreate extends Component
     public string $name = '';
     public string $error = '';
 
+    public $listeners = [
+        'friendRefresh' => 'refreshFriends'
+    ];
+
     public function mount()
     {
         $this->selectedFriends = collect();
@@ -47,6 +51,12 @@ class ChatroomCreate extends Component
             $this->preSelectedFriends = $this->removeOwnUser();
             $this->getUserFromPreselected();
         }
+    }
+
+    public function refreshFriends()
+    {
+        $this->friendList = auth()->user()
+            ->getFriends();
     }
 
     /**

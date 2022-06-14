@@ -6,7 +6,7 @@
     box-shadow: 0 3px 6px rgba($black, 0.16);
 
     .dropdown-menu {
-        min-width: 15rem;
+        min-width: 27rem;
     }
 
     &:first-child .dropdown-header, &:first-child .dropdown-user {
@@ -98,7 +98,11 @@
     }
 }
 
-.dropstart {
+.btn-group {
+    width: 100%;
+}
+
+.menu__status {
     width: 100%;
 }
 

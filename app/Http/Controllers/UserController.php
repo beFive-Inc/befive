@@ -91,6 +91,12 @@ class UserController extends Controller
     {
         $validatedData = $request->validated();
 
+        if ($request->hasFile('profile')) {
+            auth()->user()
+                ->addMediaFromRequest('profile')
+                ->toMediaCollection('profile');
+        }
+
         auth()->user()->update([
            'pseudo' => $validatedData['pseudo'],
            'name' => $validatedData['name']

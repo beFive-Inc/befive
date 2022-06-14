@@ -20,9 +20,16 @@ class Homepage extends Component
     public ChatroomUser $otherAuthor;
     public bool $isArchived = false;
 
-    public $listeners = [
-        "messageSent" => '$refresh'
-    ];
+    protected function getListeners(): array
+    {
+        $listeners = [];
+
+        foreach ($this->chatrooms as $chatroom) {
+            $listeners["messageSent-$chatroom->uuid"] = '$refresh';
+        }
+
+        return $listeners;
+    }
 
     public function mount()
     {

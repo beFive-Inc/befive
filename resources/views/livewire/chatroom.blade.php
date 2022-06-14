@@ -2,12 +2,12 @@
     <ul class="messages__container">
         @foreach($messages as $msg)
             @php
-                $loop->first ? $previousMessage = $msg : $previousMessage = $messages[$loop->index - 1];
+                $loop->last ? $nextMessage = $msg : $nextMessage = $messages[$loop->iteration];
             @endphp
             <li class="item {{ $msg->author->user->id === auth()->id() ? 'own' : 'other' }}">
                 <x-message :message="$msg"></x-message>
             </li>
-            @if($msg->date != $previousMessage->date || $loop->first)
+            @if($msg->date != $nextMessage->date || $loop->last)
                 <li class="item date">
                     {{ $msg->date }}
                 </li>

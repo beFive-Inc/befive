@@ -60,7 +60,8 @@ class ProfileEdit extends Component
             ]);
 
         $this->photo = null;
-        $this->refreshMedia();
+
+        $this->redirect(request()->session()->previousUrl());
     }
 
     public function render()

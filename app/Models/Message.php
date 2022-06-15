@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Crypt;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -14,6 +15,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Message extends Model implements HasMedia
 {
     use HasFactory;
+    use SoftDeletes;
     use InteractsWithMedia;
 
     protected $fillable = [
@@ -61,5 +63,10 @@ class Message extends Model implements HasMedia
     public function chatroom()
     {
         return $this->author()->with('chatroom');
+    }
+
+    public function relatedMessage()
+    {
+        return $this->hasOne(Message::class, 'id', 'message_id');
     }
 }

@@ -56,4 +56,12 @@ return [
     'status.update.placeholder' => "Message de status",
     'status.update.submit' => "Mettre à jour le status",
 
+    'message.delete.question' => 'Êtes-vous sûr de vouloir supprimer ce message&nbsp?',
+    'message.delete.explain' => 'La suppression de ce message est irréversible.',
+    'message.delete.submit' => 'Supprimer',
+
+
+    'related.title' => 'Répondre à :',
+    'related.submit' => 'Ne plus répondre à ce message',
+
 ];

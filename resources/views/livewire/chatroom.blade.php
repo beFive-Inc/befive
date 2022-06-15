@@ -1,12 +1,34 @@
-<div class="messages" wire:poll.10000ms="setViewAt">
+<div class="messages">
     <ul class="messages__container">
         @foreach($messages as $msg)
             @php
                 $loop->last ? $nextMessage = $msg : $nextMessage = $messages[$loop->iteration];
             @endphp
             <li class="item {{ $msg->author->user->id === auth()->id() ? 'own' : 'other' }}">
-                <x-message :message="$msg"></x-message>
+                <x-message :message="$msg">
+                    <x-slot name="settings">
+                        <li>
+                            <button class="dropdown-item menu__item menu__rename" wire:click="setRelatedMessage({{ $msg->id }})">
+                                {{ __('Répondre') }}
+                            </button>
+                        </li>
+                    </x-slot>
+                </x-message>
             </li>
+
+            @if($msg->author->user->pseudo != $nextMessage->author->user->pseudo || $loop->last)
+                <li class="item messages__name {{ $msg->author->user->id === auth()->id() ? 'own' : 'other' }}
+                {{ $msg->author->user->pseudo != $nextMessage->author->user->pseudo && $msg->author->user->pseudo != auth()->user()->pseudo  ? 'other-other' : '' }}">
+                    <div class="messages__name-container">
+                        <div class="messages__name-img-container">
+                            <img src="{{ $msg->author->user->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" alt="Photo de profil de {{ $msg->author->user->pseudo }}">
+                        </div>
+                        <p>
+                            {{ empty($msg->author->name) ? $msg->author->user->pseudo : $msg->author->name }}
+                        </p>
+                    </div>
+                </li>
+            @endif
             @if($msg->date != $nextMessage->date || $loop->last)
                 <li class="item date">
                     {{ $msg->date }}
@@ -17,15 +39,25 @@
 
     <form action="{{ route('chatroom.message.store') }}"
           method="post"
-          class="form"
+          class="form special-form"
           wire:submit.prevent="save">
         @csrf
-        <div class="form__container">
-            <div wire:loading wire:target="files">Uploading...</div>
+        <div class="special-form__container">
+            <div wire:loading wire:target="files" wire:loading.flex wire:loading.class="uploading">
+                @for($i = 0; $i < 3; $i++)
+                    <div class="uploading__container">
+                        <div class="uploading__content">
+
+                        </div>
+                    </div>
+                @endfor
+            </div>
             @if($files)
-                <div>
+                <div class="uploading">
                     @foreach($files as $file)
-                        <img src="{{ $this->getTemporaryRealUrl($file->temporaryUrl()) }}" width="24" height="24" alt="">
+                        <div class="uploading__container">
+                            <img src="{{ $this->getTemporaryRealUrl($file->temporaryUrl()) }}" alt="Preview des images uploadées">
+                        </div>
                     @endforeach
                 </div>
             @endif
@@ -36,17 +68,31 @@
                 <span class="error">{{ $message }}</span>
             @enderror
 
-            <div class="form__background">
+            @if($relatedMessage->count())
+                <div class="related-container">
+                    <p class="related-title">
+                        {{ __('field.related.title') }}
+                    </p>
+                    <p class="related-text">
+                        {{ $relatedMessage->decryptedMessage }}
+                    </p>
+                    <button type="button" class="related-btn" wire:click="unsetRelatedMessage">
+                        <span class="sr_only">{{ __('field.related.submit') }}</span>
+                    </button>
+                </div>
+            @endif
+
+            <div class="special-form__background">
                 <input type="text"
                        name="message"
                        rows="1"
-                       class="form__input"
+                       class="special-form__input"
                        placeholder="{{ __('app.placeholder') }}"
                        wire:model.debounce.500ms="message"
                        wire:keyup.debounce.300ms="check"/>
 
 
-                <label for="file" class="form__btn file show">
+                <label for="file" class="special-form__btn file show">
                     <span class="sr_only">{{ __('field.chatroom.file.label') }}</span>
                 </label>
                 <input type="file"
@@ -58,7 +104,7 @@
                        wire:model="files"
                        multiple>
 
-                <button type="submit" class="form__btn send show">
+                <button type="submit" class="special-form__btn send show">
                     <span class="sr_only">{{ __('app.send') }}</span>
                 </button>
             </div>

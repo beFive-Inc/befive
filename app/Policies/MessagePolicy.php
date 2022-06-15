@@ -2,13 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Chatroom;
 use App\Models\Message;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ChatroomPolicy
+class MessagePolicy
 {
     use HandlesAuthorization;
 
@@ -27,17 +25,12 @@ class ChatroomPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Chatroom  $chatroom
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Chatroom $chatroom)
+    public function view(User $user, Message $message)
     {
-        return $chatroom->authors
-            ->filter(function($author) use ($user) {
-                return $author->user_id === $user->id;
-            })->count()
-            ? Response::allow()
-            : Response::deny(__('Vous ne faites pas partie de cette conversation'));
+        //
     }
 
     /**
@@ -55,10 +48,10 @@ class ChatroomPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Chatroom  $chatroom
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Chatroom $chatroom)
+    public function update(User $user, Message $message)
     {
         //
     }
@@ -67,22 +60,22 @@ class ChatroomPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Chatroom  $chatroom
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Chatroom $chatroom)
+    public function delete(User $user, Message $message)
     {
-        //
+        return $user->id === $message->author->user_id;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Chatroom  $chatroom
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Chatroom $chatroom)
+    public function restore(User $user, Message $message)
     {
         //
     }
@@ -91,11 +84,11 @@ class ChatroomPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Chatroom  $chatroom
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Chatroom $chatroom)
+    public function forceDelete(User $user, Message $message)
     {
-        //
+        return $user->id === $message->author->user_id;
     }
 }

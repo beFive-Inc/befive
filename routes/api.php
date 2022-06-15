@@ -19,5 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/test', function (){
-    return \App\Models\User::with('type')->get();
+    return \App\Models\Message::with('relatedMessage')->get();
 });

@@ -21,6 +21,8 @@ class Chatroom extends Component
     public ChatroomUser $authIngroup;
     public string $message = '';
 
+    public $relatedMessage;
+
     public bool $isSender = false;
 
     public Collection $messages;
@@ -33,6 +35,7 @@ class Chatroom extends Component
 
     public function mount()
     {
+        $this->relatedMessage = collect([]);
         $this->messages = $this->chatroom->messages;
     }
 
@@ -71,7 +74,7 @@ class Chatroom extends Component
         if (empty($this->message)) {
             $message = Message::create([
                 'chatroom_user_id' => $this->authIngroup->id,
-                'message_id' => null,
+                'message_id' => $this->relatedMessage->count() ? $this->relatedMessage->id : null,
                 'message' => Crypt::encrypt($this->message),
                 'type' => 'message'
             ]);
@@ -95,7 +98,7 @@ class Chatroom extends Component
         } else {
             $message = Message::create([
                 'chatroom_user_id' => $this->authIngroup->id,
-                'message_id' => null,
+                'message_id' => $this->relatedMessage->count() ? $this->relatedMessage->id : null,
                 'message' => Crypt::encrypt($this->message),
                 'type' => 'message'
             ]);
@@ -117,6 +120,20 @@ class Chatroom extends Component
 
             $this->files = [];
         }
+
+        $this->unsetRelatedMessage();
+    }
+
+
+    public function setRelatedMessage(int $id)
+    {
+        $this->relatedMessage = Message::where('id', '=', $id)
+            ->first();
+    }
+
+    public function unsetRelatedMessage()
+    {
+        $this->relatedMessage = collect([]);
     }
 
     public function isSenderToTrue()

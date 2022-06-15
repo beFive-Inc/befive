@@ -91,8 +91,6 @@
                     </li>
                     <li><a class="menu__item dropdown-item menu__edit-profile" href="{{ route('user.edit') }}">Modifier son profil</a></li>
                     <li><h3 aria-level="3" role="heading" class="dropdown-header">Compte</h3></li>
-                    <li><a class="menu__item dropdown-item menu__settings" href="#">Paramètres du compte</a></li>
-                    <li><a class="menu__item dropdown-item menu__rgpd" href="#">Mentions légales et politiques</a></li>
                     <li>
                         <form class="" method="post" action="{{ route('logout') }}">
                             @csrf

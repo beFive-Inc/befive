@@ -111,12 +111,21 @@
     height: 18px;
     mask-image: url("/parts/icons/vertical-dots.svg");
     mask-repeat: no-repeat;
+    mask-position: center;
     background-color: darken($light-grey, 10);
     border: none;
+
+    &.special-icon {
+        transform: rotate(90deg);
+        background-color: darken($light-grey, 20);
+    }
 
     &.show {
         background-color: $primary;
     }
+
 }
+
+
 
 @import "../parts/menu";

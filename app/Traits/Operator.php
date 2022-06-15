@@ -18,18 +18,18 @@ trait Operator
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getRandomHashtag(): int
+    public function getRandomHashtag(): string
     {
-        $hashtag = null;
+        $hashtag = '';
 
         for ($i = 1; $i <= 4; $i++) {
-            $randNumber = rand(0, 9);
+            $randNumber = (string) rand(0, 9);
 
             $hashtag = $hashtag . $randNumber;
         }
 
-        return (int) $hashtag;
+        return $hashtag;
     }
 }

@@ -158,6 +158,10 @@ Route::prefix('chatroom')->middleware('auth')->name('chatroom.')->group(function
     Route::delete('/delete', [\App\Http\Controllers\ChatroomController::class, 'delete'])
         ->withTrashed()
         ->name('delete');
+
+    Route::delete('/message/{message:id}/delete', [\App\Http\Controllers\ChatroomController::class, 'messageDelete'])
+        ->withTrashed()
+        ->name('message.delete');
 });
 
 ////

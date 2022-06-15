@@ -34,7 +34,7 @@
                 <li><a class="menu__item dropdown-item menu__archive" href="{{ route('chatroom.index.archive') }}">Messages archivés</a></li>
                 <li><h3 aria-level="3" role="heading" class="dropdown-header">Discover</h3></li>
                 <li><a class="menu__item dropdown-item menu__discover" href="{{ route('discover') }}">Découvrir de nouveaux canaux</a></li>
-                <li><h6 class="dropdown-header">Profil</h6></li>
+                <li><h3 class="dropdown-header">Profil</h3></li>
                 <li>
                     <div class="btn-group dropstart">
                         <a href="{{ route('user.status') }}"
@@ -45,9 +45,7 @@
                     </div>
                 </li>
                 <li><a class="menu__item dropdown-item menu__edit-profile" href="{{ route('user.edit') }}">Modifier son profil</a></li>
-                <li><h6 class="dropdown-header">Compte</h6></li>
-                <li><a class="menu__item dropdown-item menu__settings" href="#">Paramètres du compte</a></li>
-                <li><a class="menu__item dropdown-item menu__rgpd" href="#">Mentions légales et politiques</a></li>
+                <li><h3 class="dropdown-header">Compte</h3></li>
                 <li>
                     <form class="" method="post" action="{{ route('logout') }}">
                         @csrf

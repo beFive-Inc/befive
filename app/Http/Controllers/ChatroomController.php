@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Chatroom;
@@ -254,5 +255,14 @@ class ChatroomController extends Controller
         $user->forceDelete();
 
         return redirect()->route('homepage');
+    }
+
+    public function messageDelete(Message $message)
+    {
+        $this->authorize('delete', $message);
+
+        $message->delete();
+
+        return redirect(request()->session()->previousUrl());
     }
 }

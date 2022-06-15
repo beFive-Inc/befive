@@ -73,6 +73,8 @@
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="menu__item dropdown-item menu__friends" href="{{ route('friends.index') }}">Amis</a></li>
                     <li><a class="menu__item dropdown-item menu__archive" href="{{ route('chatroom.index.archive') }}">Messages archivés</a></li>
+                    <li><h3 aria-level="3" role="heading" class="dropdown-header">Discover</h3></li>
+                    <li><a class="menu__item dropdown-item menu__discover" href="{{ route('discover') }}">Découvrir de nouveaux canaux</a></li>
                     <li><h3 aria-level="3" role="heading" class="dropdown-header">Profil</h3></li>
                     <li>
                         <div class="btn-group">

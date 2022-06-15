@@ -70,26 +70,8 @@
                class="name__input"
                wire:model="name">
     </div>
-    @if($selectedFriends->count() || $preSelectedFriends->count())
+    @if($selectedFriends->count())
         <div class="friend__selected">
-            @foreach($preSelectedFriends as $friend)
-                <x-friend :friend="$friend" :only-image-and-name="true">
-                    @if(!$preSelectedFriendsAreRequired)
-                    <button data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            class="friend__remove"
-                            title="{{ __('app.chatroom.remove', [
-                                'user' => $friend->pseudo
-                            ])}}"
-                            wire:click="removeFromChatroom({{ $friend->key }})">
-                        <span class="sr_only">
-                            {{ __('field.chatroom.create.friend.remove') }}
-                        </span>
-                        <span class="icon"></span>
-                    </button>
-                    @endif
-                </x-friend>
-            @endforeach
             @foreach($selectedFriends as $friend)
                 <x-friend :friend="$friend" :only-image-and-name="true">
                     <button data-bs-toggle="tooltip"
@@ -109,7 +91,7 @@
         </div>
     @endif
     <div class="modal-scrollable">
-        @if($friends->count() || $preSelectedFriends->count())
+        @if($friends->count())
             <section>
                 <h3 aria-level="3" role="heading" class="sr_only">
                     {{ __('friends.title') }}
@@ -126,27 +108,19 @@
                             </button>
                         </x-friend>
                     @endforeach
-                    @foreach($preSelectedFriends as $key => $friend)
-                        <x-friend :friend="$friend">
-                            <button
-                                @if(!$preSelectedFriendsAreRequired)
-                                    wire:click="toggleToChatroom({{ $key }})"
-                                @endif
-                                class="add_to_chatroom {{ $this->isInTheChatroom($key) ? 'selected' : '' }}"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="left"
-                                {{ !$preSelectedFriendsAreRequired ? '' : 'disabled' }}
-                                title="{{ $this->isInTheChatroom($key) ? __('app.chatroom.add.already', ['user' => $friend->pseudo]) : __('app.chatroom.add', ['user' => $friend->pseudo]) }}">
-                                <span class="sr_only">{{ $this->isInTheChatroom($key) ? __('app.chatroom.add.already', ['user' => $friend->pseudo]) : __('app.chatroom.add', ['user' => $friend->pseudo]) }}</span>
-                            </button>
-                        </x-friend>
-                    @endforeach
                 </div>
             </section>
         @else
-            <p>
-                {{ __('app.chatroom.add.search.nothing', ["search" => $query]) }}
-            </p>
+            @if(!empty($query))
+                <p>
+                    {{ __('app.chatroom.add.search.nothing', ["search" => $query]) }}
+                </p>
+            @else
+                <p>
+                    {{ __('friends.general.no-friends') }}
+                </p>
+            @endif
+
         @endif
     </div>
     <div class="modal-footer">

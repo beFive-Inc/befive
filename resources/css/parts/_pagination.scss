@@ -1,0 +1,59 @@
+.pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 2.5rem;
+    margin-top: 6rem;
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-decoration: none;
+        border-radius: 3px;
+
+        &.btn-secondary {
+
+            &:not(.btn-disabled):hover, &:not(.btn-disabled):focus {
+                color: $primary;
+            }
+        }
+    }
+
+    &__icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    &__action-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 2rem;
+    }
+
+    &__results {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    &__number-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        font-weight: $font-regular;
+    }
+}

@@ -25,7 +25,7 @@ class LastUserActivity
             $expiresAt = Carbon::now()->addMinutes(5);
 
             $lastSession = Session::where('user_id', '=', Auth::id())
-                ->get()->last();
+                ->get()->last() ?? collect();
 
             if ($lastSession->count()) {
                 if (Carbon::parse($lastSession->last_activity)->addMinutes(30) < Carbon::now()) {

@@ -15,7 +15,7 @@ class Status extends Component
 
     public function mount()
     {
-        $this->message = auth()->user()->status->message;
+        $this->message = auth()->user()->status->message ?? '';
         $this->types = StatusType::all();
     }
 

@@ -1,38 +1,44 @@
 <div class="accordion">
-    @if($canals->count() || $groups->count() || $conversations->count())
     <section>
         <h2 aria-level="2"
             role="heading"
             class="sr_only">
             {{ __('app.chatroom.title') }}
         </h2>
-
-        @if($canals->count())
-            <section class="accordion-item">
-                <h3 aria-level="3"
-                    role="heading"
-                    class="accordion-header"
-                    id="panelsStayOpen-headingOne">
-                    <button class="accordion-button"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseOne"
-                            aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseOne">
-                        {{ __('app.canals') }}
-                    </button>
-                </h3>
-                <div id="panelsStayOpen-collapseOne"
-                     class="accordion-collapse collapse show"
-                     aria-labelledby="panelsStayOpen-headingOne">
-                    <div class="accordion-body accordion-canal">
+        <section class="accordion-item">
+            <h3 aria-level="3"
+                role="heading"
+                class="accordion-header"
+                id="panelsStayOpen-headingOne">
+                <button class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseOne"
+                        aria-expanded="true"
+                        aria-controls="panelsStayOpen-collapseOne">
+                    {{ __('app.canals') }}
+                </button>
+            </h3>
+            <div id="panelsStayOpen-collapseOne"
+                 class="accordion-collapse collapse show"
+                 aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body accordion-canal">
+                    @if($canals->count())
                         @foreach($canals as $chatroom)
                             <x-canal :chatroom="$chatroom"/>
                         @endforeach
-                    </div>
+                    @else
+                        <div>
+                            <p class="text_explain">
+                                {{ __('app.chatroom.discover.text') }}, <a href="{{ route('discover') }}" class="link">
+                                    {{ __('app.chatroom.discover') }}
+                                </a>
+                            </p>
+                        </div>
+                    @endif
                 </div>
-            </section>
-        @endif
+            </div>
+        </section>
         @if($groups->count())
             <section class="accordion-item">
                 <h3 aria-level="3"
@@ -92,7 +98,6 @@
             </section>
         @endif
     </section>
-    @endif
 
     <script>
         @foreach($chatrooms as $chatroom)

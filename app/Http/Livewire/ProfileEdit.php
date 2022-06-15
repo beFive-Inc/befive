@@ -20,7 +20,7 @@ class ProfileEdit extends Component
     public function mount()
     {
         $this->pseudo = auth()->user()->pseudo;
-        $this->name = auth()->user()->name;
+        $this->name = auth()->user()->name ?? '';
     }
 
     /**

@@ -77,6 +77,10 @@
         mask-image: url('/parts/icons/bold/archive.svg');
     }
 
+    &__discover::before {
+        mask-image: url('/parts/icons/bold/discover.svg');
+    }
+
     &__friends::before {
         mask-image: url("/parts/icons/bold/profile-2user.svg");
     }

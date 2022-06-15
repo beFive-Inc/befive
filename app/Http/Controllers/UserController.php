@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\StatusType;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -37,6 +38,8 @@ class UserController extends Controller
             ->getFriends()
             ->load('media');
 
+        $types = StatusType::all();
+
         return view(
             'app.user.status',
             compact(
@@ -44,6 +47,7 @@ class UserController extends Controller
                 'requestFriends',
                 'requestCanals',
                 'friends',
+                'types',
                 'medias'
             )
         );
@@ -110,7 +114,8 @@ class UserController extends Controller
         auth()->user()
             ->status()
             ->update([
-                'status_type_id' => \request('status_type_id')
+                'message' => \request('status-name'),
+                'status_type_id' => \request('type')
             ]);
 
         return redirect()->route('homepage');

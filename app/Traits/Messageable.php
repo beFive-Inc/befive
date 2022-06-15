@@ -74,7 +74,11 @@ trait Messageable
             ->with(['authors.user.sessions', 'messages.author.user'])
             ->get()
             ->filter(function ($chatroom) {
-                return $chatroom->messages->count();
+                if ($chatroom->isCanal) {
+                    return true;
+                } else {
+                    return $chatroom->messages->count();
+                }
             });
     }
 

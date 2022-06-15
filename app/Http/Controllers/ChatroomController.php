@@ -68,6 +68,27 @@ class ChatroomController extends Controller
             ));
     }
 
+    public function join()
+    {
+        $chatroom = Chatroom::with('authors')
+            ->where('uuid', '=', request('canal_uuid'))
+            ->first();
+
+        $alreadyInCanal = $chatroom->authors->filter(function ($author) {
+            return $author->user_id === auth()->id();
+        });
+
+        if ($alreadyInCanal->count() === 0) {
+            ChatroomUser::create([
+                'chatroom_id' => $chatroom->id,
+                'user_id' => auth()->id(),
+                'status' => ChatroomUserStatus::ACCEPTED,
+            ]);
+        }
+
+        return redirect()->route('chatroom.show', $chatroom->uuid);
+    }
+
     public function view()
     {
         $author = ChatroomUser::find(request('author_id'));

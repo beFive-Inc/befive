@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\FriendAdded;
+use App\Constant\ChatroomStatus;
+use App\Constant\ChatroomType;
 use App\Models\Chatroom;
-use App\Models\ChatroomUser;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Cookie;
 
 class HomeController extends Controller
 {
@@ -74,6 +70,47 @@ class HomeController extends Controller
             compact(
                 'chatrooms',
                 'requestFriends',
+                'requestCanals',
+                'friends',
+                'medias'
+            )
+        );
+    }
+
+    public function discover()
+    {
+        $medias = auth()->user()
+            ->load('media')
+            ->media;
+
+        $chatrooms = auth()->user()
+            ->getChatrooms();
+
+        $requestCanals = auth()->user()
+            ->getRequestedCanals();
+
+        $requestFriends = auth()->user()
+            ->getFriendRequests()
+            ->map(function ($user) {
+                return User::find($user->sender_id);
+            });
+
+        $canals = Chatroom::withCount('authors')
+            ->where('type', '=', ChatroomType::CANAL)
+            ->where('status', '=', ChatroomStatus::PUBLIC)
+            ->orderBy('authors_count', 'desc')
+            ->paginate(50);
+
+        $friends = auth()->user()
+            ->getFriends()
+            ->load('media');
+
+        return view(
+            'app.home.discover',
+            compact(
+                'chatrooms',
+                'requestFriends',
+                'canals',
                 'requestCanals',
                 'friends',
                 'medias'

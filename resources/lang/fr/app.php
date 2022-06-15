@@ -13,6 +13,7 @@ return [
     */
     'slogan' => 'Be Five Chat, première messagerie adaptée pour les gamers&nbsp!',
     'back' => 'Revenir en arrière',
+    'join' => 'Rejoindre',
     'me' => 'Vous',
     'info' => 'Info',
     'navigation' => 'Navigation principale',
@@ -22,6 +23,8 @@ return [
     'view-all' => 'Voir tout',
     'send' => 'Envoyer',
     'placeholder' => 'Aa',
+    'chatroom.discover' => 'Voir les canaux',
+    'chatroom.discover.text' => "Vous n'avez pas encore de canaux, venez découvrir de nouveaux canaux",
     'chatroom.archive' => 'Archives',
     'chatroom.archive.conversation' => 'Vos conversations archivées',
     'chatroom.accept' => 'Accepter la demande de canal',
@@ -33,7 +36,7 @@ return [
     'chatroom.add.search.nothing' => 'Aucun amis ne correspond à la recherche ":search"',
     'chatroom.add.already' => ':user a déja été ajouté à la chatroom',
     'chatroom.remove' => 'Retirer :user de la chatroom',
-    'notification' => 'Vos Notification',
+    'notification' => 'Vos Notifications',
     'notification.none' => "Vous n'avez pas de notification.",
     'create.conversation' => 'Créer une nouvelle conversation',
     'friend.request' => "Demande d'amis",
@@ -57,5 +60,6 @@ return [
     'abort' => 'Annuler',
     'status.submit' => 'Changer le message de status',
     'status.label' => 'Message de status',
+    'status.update' => 'Mettre à jour le status',
 
 ];

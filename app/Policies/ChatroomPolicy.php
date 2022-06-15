@@ -33,7 +33,7 @@ class ChatroomPolicy
     {
         return $chatroom->authors
             ->filter(function($author) use ($user) {
-                return $author->user->id === $user->id;
+                return $author->user_id === $user->id;
             })->count()
             ? Response::allow()
             : Response::deny(__('Vous ne faites pas partie de cette conversation'));

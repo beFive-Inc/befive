@@ -7,18 +7,22 @@
     @method('put')
 
     <div class="profile-edit__img-input-container">
-        <div class="profile-edit__img-container">
-            @if($photo)
-                <img src="{{ $this->getTemporaryRealUrl($photo->temporaryUrl()) }}" alt="{{ __('auth.profile.img') }}">
-            @else
-                <img src="{{ $medias?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" alt="{{ __('auth.profile.img') }}">
-            @endif
-        </div>
-
-        <input type="file"
-               name="profile"
-               accept="image/*"
-               wire:model="photo">
+            <div class="profile-edit__img-container">
+                @if($photo)
+                    <img src="{{ $this->getTemporaryRealUrl($photo->temporaryUrl()) }}" alt="{{ __('auth.profile.img') }}">
+                @else
+                    <img src="{{ $medias?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" alt="{{ __('auth.profile.img') }}">
+                @endif
+            </div>
+            <label class="cover-img" for="profile">
+                <span class="sr_only">{{ __('field.user.cover-img.label') }}</span>
+            </label>
+            <input type="file"
+                   id="profile"
+                   class="sr_only"
+                   name="profile"
+                   accept="image/*"
+                   wire:model="photo">
         @error('profile')
             <span class="error">{{ $message }}</span>
         @enderror
@@ -64,7 +68,7 @@
                name="name"
                class="form__input @error('name'){{ 'error' }}@enderror"
                value="{{ old('name') ?? $name }}"
-               placeholder="{{ auth()->user()->name }}"
+               placeholder="{{ empty(auth()->user()->name) ? __('app.placeholder') : auth()->user()->name }}"
                wire:model="name">
 
         @error('name')

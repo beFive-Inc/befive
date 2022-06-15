@@ -3,15 +3,17 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Traits\Operator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
+    use Operator;
 
     /**
      * Validate and create a newly registered user.
@@ -37,7 +39,7 @@ class CreateNewUser implements CreatesNewUsers
             'pseudo' => $input['pseudo'],
             'slug' => Str::slug($input['pseudo']),
             'uuid' => Str::uuid(),
-            'hashtag' => '3333',
+            'hashtag' => $this->getRandomHashtag(),
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);

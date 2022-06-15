@@ -22,6 +22,10 @@ Route::get( '/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->withTrashed()
     ->middleware(['auth']);
 
+Route::get( '/discover', [\App\Http\Controllers\HomeController::class, 'discover'])
+    ->name('discover')
+    ->middleware(['auth']);
+
 Route::get( '/menu', [\App\Http\Controllers\HomeController::class, 'menu'])
     ->name('menu')
     ->middleware(['auth']);
@@ -121,6 +125,8 @@ Route::prefix('chatroom')->middleware('auth')->name('chatroom.')->group(function
     Route::post('/message/store', [\App\Http\Controllers\ChatroomController::class, 'messageStore'])
         ->name('message.store');
 
+    Route::post('/join', [\App\Http\Controllers\ChatroomController::class, 'join'])
+        ->name('join');
 
     Route::post('/store', [\App\Http\Controllers\ChatroomController::class, 'store'])
         ->name('store');

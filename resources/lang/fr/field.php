@@ -49,4 +49,11 @@ return [
     'chatroom.create.friend.remove' => 'Retirer cet ami de la liste',
     'chatroom.file.label' => 'Ajouter des images, vidéos ou des audios',
 
+    'user.cover-img.label' => 'Ajouter ou changer votre image de profil',
+
+    'status.update.label' => "Votre message de status",
+    'status.update.notice' => "Veuillez indiquer un message de status",
+    'status.update.placeholder' => "Message de status",
+    'status.update.submit' => "Mettre à jour le status",
+
 ];

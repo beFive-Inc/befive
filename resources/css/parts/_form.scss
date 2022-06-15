@@ -5,6 +5,10 @@
     justify-content: flex-start;
     gap: 2rem;
 
+    &.special-form {
+        width: 100%;
+    }
+
     & .checkbox {
         margin-bottom: 0;
     }
@@ -295,18 +299,41 @@
 
     &__img-input-container {
         position: relative;
+        width: 25rem;
+        height: 25rem;
+        margin: 0 auto 2rem;
+
+        .cover-img {
+            position: absolute;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            bottom: 0;
+            right: 0;
+            width: 75px;
+            height: 75px;
+            border: 3px solid $white;
+            border-radius: $border-radius;
+            background-color: $primary;
+
+            &::before {
+                content: '';
+                width: 30px;
+                height: 30px;
+                mask-size: 100% 100%;
+                mask-repeat: no-repeat;
+                mask-image: url("/parts/icons/outline/gallery-add.svg");
+                background-color: $white;
+            }
+        }
     }
 
     &__img-container {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 25rem;
-        height: 25rem;
-        margin: 0 auto;
         overflow: hidden;
         border-radius: $border-radius;
-        margin-bottom: 2rem;
 
         & img {
             width: 100%;

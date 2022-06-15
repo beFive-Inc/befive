@@ -109,3 +109,34 @@
         }
     }
 }
+
+.discover {
+
+    .btn {
+        padding: .3rem .5rem;
+    }
+}
+
+.special-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3rem;
+    row-gap: 2rem;
+    transition: .5s ease-in;
+
+    .chatroom {
+        flex: 1 0 50%;
+        transition: .5s ease-in;
+
+        @media screen and (min-width: 900px) {
+            flex: 0 0 47%;
+        }
+
+        @media screen and (min-width: 1200px) {
+            flex: 0 0 31%;
+        }
+    }
+}

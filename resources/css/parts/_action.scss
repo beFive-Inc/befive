@@ -87,6 +87,11 @@
         mask-image: url("/parts/icons/outline/message-minus.svg");
         background-color: $dark-grey;
     }
+
+    &__talk {
+        mask-image: url("/parts/icons/outline/messages-2.svg");
+        background-color: $dark-grey;
+    }
 }
 
 .settings {

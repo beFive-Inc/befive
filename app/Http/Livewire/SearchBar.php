@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Constant\ChatroomStatus;
+use App\Constant\ChatroomType;
 use App\Models\Message;
 use App\Models\User;
 use App\Traits\Operator;
@@ -15,7 +17,8 @@ class SearchBar extends Component
     const LIMIT = 5;
     const SUGGEST_LIMIT = 15;
 
-    public Collection $suggests;
+    public Collection $suggestsFriends;
+    public Collection $suggestsCanals;
     public Collection $friends;
     public Collection $others;
     public Collection $canals;
@@ -50,13 +53,24 @@ class SearchBar extends Component
     /**
      * @return Collection
      */
-    public function showSuggests(): Collection
+    public function showSuggestsFriends(): Collection
     {
         return auth()->user()
             ->getFriendsOfFriends()
             ->load('media')
             ->diffKeys($this->ownFriends)
-            ->take(self::SUGGEST_LIMIT);
+            ->take(self::SUGGEST_LIMIT / 2);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function showSuggestsCanals(): Collection
+    {
+        return Chatroom::where('type', '=', ChatroomType::CANAL)
+            ->where('status', '=', ChatroomStatus::PUBLIC)
+            ->get()
+            ->take(self::SUGGEST_LIMIT / 2);
     }
 
     /**
@@ -78,6 +92,7 @@ class SearchBar extends Component
             ->whereNotIn('id', $this->ownFriends->map(function ($friend) {
                 return $friend->id;
             }))
+            ->whereNotIn('id', [auth()->id()])
             ->limit(self::LIMIT)
             ->get();
     }
@@ -85,6 +100,8 @@ class SearchBar extends Component
     public function getCanals()
     {
         return Chatroom::with('authors')
+            ->where('type', '=', ChatroomType::CANAL)
+            ->where('status', '=', ChatroomStatus::PUBLIC)
             ->where('name', 'LIKE', "%$this->query%")
             ->limit(self::LIMIT)
             ->get();
@@ -93,7 +110,8 @@ class SearchBar extends Component
     public function render()
     {
         if (empty($this->query)) {
-            $this->suggests = $this->showSuggests();
+            $this->suggestsFriends = $this->showSuggestsFriends();
+            $this->suggestsCanals = $this->showSuggestsCanals();
         } else {
             $this->friends = $this->getSearchingFriends();
             $this->others = $this->getOtherPeople();

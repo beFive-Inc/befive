@@ -7,7 +7,7 @@
         <div class="chatroom__info">
             <h4 aria-level="4"
                 role="heading"
-                class="chatroom__name {{ $ownAuthor->isViewed() ? 'new' : ''  }}"
+                class="chatroom__name {{ $ownAuthor->isViewed() ? '' : 'new'  }}"
                 data-bs-toggle="tooltip"
                 data-bs-placement="right"
                 data-bs-html="true"
@@ -21,8 +21,8 @@
                 </a>
             </h4>
             <div class="chatroom__message_container">
-                <p class="chatroom__message {{ $ownAuthor->isViewed() ? 'new' : ''  }}">
-                    {{ $chatroom->messages->first()->author->user_id === auth()->id() ? __('app.me') : $chatroom->messages->first()->author->user->pseudo }} : {{ $chatroom->messages->first()?->decryptedMessage }}
+                <p class="chatroom__message {{ $ownAuthor->isViewed() ? '' : 'new'  }}">
+                    {{ $chatroom->messages->first()?->author?->user_id === auth()->id() ? __('app.me') . ' : ' : $chatroom->messages->first()?->author?->user->pseudo . ' : ' }}{{ $chatroom->messages->first()?->decryptedMessage }}
                 </p>
                 <p class="chatroom__date">
                     {{ $chatroom->messages->first()?->date }}
@@ -108,7 +108,7 @@
                         <button type="submit" class="dropdown-item menu__item menu__message-archive">{{ __('app.conversations.archive') }}</button>
                     </form>
                 </li>
-                @if($ownAuthor->isViewed())
+                @if(!$ownAuthor->isViewed())
                     <li>
                         <form action="{{ route('chatroom.view') }}" method="post">
                             @csrf

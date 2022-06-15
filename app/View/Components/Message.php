@@ -7,15 +7,17 @@ use Illuminate\View\Component;
 class Message extends Component
 {
     public $message;
+    public bool $isSettings;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($message, bool $isSettings = false)
     {
         $this->message = $message;
+        $this->isSettings = $isSettings;
     }
 
     /**

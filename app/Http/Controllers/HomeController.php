@@ -99,7 +99,7 @@ class HomeController extends Controller
             ->where('type', '=', ChatroomType::CANAL)
             ->where('status', '=', ChatroomStatus::PUBLIC)
             ->orderBy('authors_count', 'desc')
-            ->paginate(50);
+            ->paginate(10);
 
         $friends = auth()->user()
             ->getFriends()

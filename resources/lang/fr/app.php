@@ -61,5 +61,6 @@ return [
     'status.submit' => 'Changer le message de status',
     'status.label' => 'Message de status',
     'status.update' => 'Mettre à jour le status',
+    'message.file.delete' => 'Supprimer cette image des fichiers uploadés',
 
 ];

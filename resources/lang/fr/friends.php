@@ -12,6 +12,8 @@ return [
     |
     */
     'title' => 'Vos amis',
+    'add' => 'Ajouter à vos amis',
+    'talk' => 'Parler à votre ami',
     'field.search' => 'Rechercher vos amis',
     'field.search.placeholder' => 'Rechercher vos amis',
     'general.no-friends' => "Vous n'avez pas d'amis pour le moment.",

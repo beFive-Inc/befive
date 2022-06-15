@@ -30,6 +30,10 @@ class ChatroomController extends Controller
             return $author->user->id != auth()->id();
         });
 
+        $authIngroup->update([
+            'view_at' => Carbon::now()
+        ]);
+
         return view('app.message.show', compact('chatroom', 'authIngroup', 'otherInGroup'));
     }
 

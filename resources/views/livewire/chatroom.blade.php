@@ -5,7 +5,7 @@
                 $loop->last ? $nextMessage = $msg : $nextMessage = $messages[$loop->iteration];
             @endphp
             <li class="item {{ $msg->author->user->id === auth()->id() ? 'own' : 'other' }}">
-                <x-message :message="$msg">
+                <x-message :message="$msg" :is-settings="true">
                     <x-slot name="settings">
                         <li>
                             <button class="dropdown-item menu__item menu__rename" wire:click="setRelatedMessage({{ $msg->id }})">
@@ -54,9 +54,12 @@
             </div>
             @if($files)
                 <div class="uploading">
-                    @foreach($files as $file)
+                    @foreach($files as $key => $file)
                         <div class="uploading__container">
                             <img src="{{ $this->getTemporaryRealUrl($file->temporaryUrl()) }}" alt="Preview des images uploadées">
+                            <button wire:click.prevent="deleteFileFromArray({{ $key }})" class="uploading__remove-btn">
+                                <span class="sr_only">{{ __('app.message.file.delete') }}</span>
+                            </button>
                         </div>
                     @endforeach
                 </div>

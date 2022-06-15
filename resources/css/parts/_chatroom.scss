@@ -152,15 +152,49 @@
     gap: 1rem;
 
     &__container {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 75px;
         height: 75px;
+        border-radius: 5px;
         overflow: hidden;
 
         img {
             width: 100%;
+        }
+    }
+
+    &__remove-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $white;
+        color: $white;
+        padding: 0;
+        border-radius: $border-radius;
+        border: none;
+
+        &:hover {
+
+            &::after {
+                background-color: $black;
+            }
+        }
+
+        &::after {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 24px;
+            mask-position: center;
+            mask-image: url("/parts/icons/bold/close-circle.svg");
+            background-color: $dark-grey;
+            transition: .3s ease-in;
         }
     }
 

@@ -18,6 +18,7 @@ class ChatroomUser extends Model
     protected $table = 'chatroom_users';
 
     protected $dates = [
+        'view_at',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -40,7 +41,7 @@ class ChatroomUser extends Model
      */
     public function isViewed(): bool
     {
-        return $this->chatroom->lastMessage->first()->created_at >= $this->view_at;
+        return $this->chatroom->lastMessage->first()?->created_at <= $this->view_at;
     }
 
     /**

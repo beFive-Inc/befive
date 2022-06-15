@@ -14,6 +14,6 @@ return [
     'suggestion' => 'Suggestion',
     'friends' => 'Vos amis',
     'others' => 'Autres utilisateurs',
-    'messages' => 'Vos messages',
+    'canals' => 'Canaux',
 
 ];

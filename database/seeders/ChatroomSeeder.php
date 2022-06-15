@@ -62,10 +62,21 @@ class ChatroomSeeder extends Seeder
 
         $canalNames = collect([
             'Rocket league',
-            'league of legends',
+            'League of legends',
             'Counter Strike : Global Offensive',
             'Battlefield',
             'Call of Duty',
+            'Rampage',
+            'EA',
+            'Steam',
+            'Promo jeux vidéo',
+            'Riot Games',
+            'Discord',
+            'Fortnite',
+            'Ubisoft',
+            'Gotaga fan club',
+            'Squeezie fan club',
+            'Locklear fan club',
         ]);
 
         $users = User::all();

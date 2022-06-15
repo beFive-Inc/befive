@@ -5,12 +5,16 @@
                 return $author->user->sessions->last()->last_activity >= \Carbon\Carbon::now() && $author->user_id != auth()->id();
 })->count()) online @else offline @endif">
 
-            @foreach($chatroom->messages->take(2) as $message)
+            @foreach($chatroom->authors->shuffle()->take(2) as $author)
                 @if($loop->first)
-                    <img src="{{ $message->author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="chatroom__img second" alt>
+                    <img src="{{ $author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}"
+                         class="chatroom__img second"
+                         alt="Photo de profil de {{ $author->user->pseudo }}">
                 @endif
                 @if($loop->last)
-                    <img src="{{ $message->author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="chatroom__img first" alt>
+                    <img src="{{ $author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}"
+                         class="chatroom__img first"
+                         alt="Photo de profil de {{ $author->user->pseudo }}">
                 @endif
             @endforeach
         </div>

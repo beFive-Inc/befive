@@ -56,6 +56,11 @@ class Chatroom extends Component
         return Str::replace('livewire/preview-file', 'livewire-tmp', $url);
     }
 
+    public function deleteFileFromArray(int $key)
+    {
+        unset($this->files[$key]);
+    }
+
     public function setViewAt()
     {
         $this->authIngroup->view_at = Carbon::now();
@@ -92,6 +97,10 @@ class Chatroom extends Component
                 }
             }
 
+            $this->authIngroup->update([
+                'view_at' => Carbon::now(),
+            ]);
+
             broadcast(new MessageSent($message, $this->chatroom->uuid));
 
             $this->files = [];
@@ -115,6 +124,10 @@ class Chatroom extends Component
                         ->toMediaCollection('message');
                 }
             }
+
+            $this->authIngroup->update([
+                'view_at' => Carbon::now(),
+            ]);
 
             broadcast(new MessageSent($message, $this->chatroom->uuid));
 

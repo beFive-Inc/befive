@@ -505,6 +505,10 @@ hr {
   overflow-y: scroll;
 }
 
+#searchBar .modal-scrollable {
+  max-height: 40rem;
+}
+
 .main {
   grid-gap: 1.2rem;
   padding: 0 1.5rem 6rem;
@@ -600,6 +604,11 @@ hr {
           mask-image: url("/parts/icons/outline/message-minus.svg");
   background-color: #3A3A3A;
 }
+.action__talk {
+  -webkit-mask-image: url("/parts/icons/outline/messages-2.svg");
+          mask-image: url("/parts/icons/outline/messages-2.svg");
+  background-color: #3A3A3A;
+}
 
 .settings {
   display: block;
@@ -661,6 +670,10 @@ hr {
 .btn-danger:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+.btn-special-padding {
+  padding: 0.5rem 1rem;
 }
 
 .btn-disabled {
@@ -1605,15 +1618,45 @@ hr {
   gap: 1rem;
 }
 .uploading__container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 75px;
   height: 75px;
+  border-radius: 5px;
   overflow: hidden;
 }
 .uploading__container img {
   width: 100%;
+}
+.uploading__remove-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #fff;
+  padding: 0;
+  border-radius: 9999px;
+  border: none;
+}
+.uploading__remove-btn:hover::after {
+  background-color: #000;
+}
+.uploading__remove-btn::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-image: url("/parts/icons/bold/close-circle.svg");
+          mask-image: url("/parts/icons/bold/close-circle.svg");
+  background-color: #3A3A3A;
+  transition: 0.3s ease-in;
 }
 .uploading__content {
   width: 100%;
@@ -1868,23 +1911,19 @@ hr {
   text-align: center;
   margin: 1rem 0;
 }
-.messages__container .item .related_message {
-  position: relative;
-  top: 0.1rem;
-  opacity: 0.5;
-  margin-top: 0.5rem;
-}
-.messages__container .item .related_message + p {
-  position: relative;
-  z-index: 10;
-  margin-top: -0.5rem !important;
-}
 .messages__container .item .message {
   position: relative;
   font-size: 1.4rem;
   font-weight: 400;
   max-width: 28rem;
   word-break: break-word;
+}
+.messages__container .item .message .item__container {
+  opacity: 0.3;
+  margin-bottom: -0.5rem;
+}
+.messages__container .item .message .item__container .message__img-container {
+  margin: 0;
 }
 .messages__container .item .message p {
   font-size: 1.4rem;
@@ -2071,6 +2110,7 @@ hr {
   pointer-events: none;
 }
 .messages .special-form__input {
+  font-size: 1.3rem;
   flex: 1;
   padding: 8px 10px;
   min-height: 3.4rem;

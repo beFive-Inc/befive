@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Constant\ChatroomUserStatus;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 trait Messageable
@@ -197,8 +198,16 @@ trait Messageable
     public function orderByCreatedAt(Collection $collection): Collection
     {
         return $collection->sort(function ($a, $b) {
-            $al = $a->messages->first()->created_at;
-            $bl = $b->messages->first()->created_at;
+            if (!$a->isCanal) {
+                $al = $a->messages->first()->created_at;
+            } else {
+                $al = Carbon::now();
+            }
+            if (!$b->isCanal) {
+                $bl = $b->messages->first()->created_at;
+            } else {
+                $bl = Carbon::now();
+            }
 
             if ($al == $bl) {
                 return 0;

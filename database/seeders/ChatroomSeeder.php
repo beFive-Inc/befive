@@ -22,31 +22,6 @@ class ChatroomSeeder extends Seeder
      */
     public function run()
     {
-        $canalNames = collect([
-            'Rocket league',
-            'league of legends',
-            'Counter Strike : Global Offensive',
-            'Battlefield',
-            'Call of Duty',
-        ]);
-
-        $users = User::all();
-
-        foreach ($canalNames as $canalName) {
-            $canal = Chatroom::create([
-                'uuid' => Str::uuid(),
-                'name' => $canalName,
-                'type' => ChatroomType::CANAL,
-            ]);
-
-            ChatroomUser::create([
-                'chatroom_id' => $canal->id,
-                'user_id' => $users->shuffle()->first()->id,
-                'status' => ChatroomUserStatus::ACCEPTED,
-                'view_at' => Carbon::now()->addSeconds(10),
-            ]);
-        }
-
         $authors = User::where('email', 'LIKE', '%befive-chat.com')
             ->get();
 
@@ -83,5 +58,31 @@ class ChatroomSeeder extends Seeder
             'message' => Crypt::encrypt('Bonjour et bienvenue dans la découverte de cette nouvelle messagerie instantanée, profitez bien de cette expérience.'),
             'created_at' => Carbon::now()->addSeconds(5)
         ]);
+
+
+        $canalNames = collect([
+            'Rocket league',
+            'league of legends',
+            'Counter Strike : Global Offensive',
+            'Battlefield',
+            'Call of Duty',
+        ]);
+
+        $users = User::all();
+
+        foreach ($canalNames as $canalName) {
+            $canal = Chatroom::create([
+                'uuid' => Str::uuid(),
+                'name' => $canalName,
+                'type' => ChatroomType::CANAL,
+            ]);
+
+            ChatroomUser::create([
+                'chatroom_id' => $canal->id,
+                'user_id' => $users->shuffle()->first()->id,
+                'status' => ChatroomUserStatus::ACCEPTED,
+                'view_at' => Carbon::now()->addSeconds(10),
+            ]);
+        }
     }
 }

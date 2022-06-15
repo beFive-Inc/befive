@@ -19,12 +19,11 @@ class ChatroomUsersSeeder extends Seeder
      */
     public function run()
     {
-        $chatrooms = Chatroom::all();
+        $chatrooms = Chatroom::all()->except(1);
 
         foreach ($chatrooms as $chatroom) {
             $rand = rand(0, 100);
             $otherRand = rand(0, 100);
-            $manyUser = rand(20, 100);
 
             $user = User::all()
                 ->except(1)
@@ -34,18 +33,9 @@ class ChatroomUsersSeeder extends Seeder
             $otherUser = User::all()
                 ->except([1, $user->id]);
 
-            if ($otherRand >= 50) {
-                ChatroomUser::create([
-                    'chatroom_id' => $chatroom->id,
-                    'user_id' => $user->id,
-                    'view_at' => Carbon::now(),
-                    'status' => ChatroomUserStatus::ACCEPTED
-                ]);
-            }
-
             ChatroomUser::create([
                 'chatroom_id' => $chatroom->id,
-                'user_id' => 1,
+                'user_id' => $rand >= 50 ? 1 : $user->id,
                 'view_at' => Carbon::now(),
                 'status' => ChatroomUserStatus::ACCEPTED
             ]);
@@ -58,7 +48,7 @@ class ChatroomUsersSeeder extends Seeder
             ]);
 
             if ($rand >= 75) {
-                for ($i = 0; $i < $manyUser; $i++) {
+                for ($i = 0; $i < 15; $i++) {
                     ChatroomUser::create([
                         'chatroom_id' => $chatroom->id,
                         'user_id' => $otherUser->shuffle()->first()->id,

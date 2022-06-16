@@ -469,10 +469,18 @@ hr {
     background-color: #3A3A3A;
   }
   .accordion .discussion .chatroom__select {
+    position: relative;
     cursor: pointer;
     border-radius: 5px;
     padding: 0.2rem 0.5rem;
     transition: 0.5s ease-in;
+  }
+  .accordion .discussion .chatroom__select-link {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 20px;
   }
   .accordion .discussion .chatroom__select:not(.selected):hover, .accordion .discussion .chatroom__select:not(.selected):focus {
     background-color: rgba(255, 148, 0, 0.1);
@@ -1552,6 +1560,8 @@ hr {
 }
 
 .chatroom {
+  position: relative;
+  z-index: 10;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

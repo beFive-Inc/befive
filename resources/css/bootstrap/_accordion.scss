@@ -35,10 +35,19 @@
             }
 
             .chatroom__select {
+                position: relative;
                 cursor: pointer;
                 border-radius: 5px;
                 padding: .2rem .5rem;
                 transition: .5s ease-in;
+
+                &-link {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 20px;
+                }
 
                 &:not(.selected):hover, &:not(.selected):focus {
                     background-color: rgba($primary, 0.1);

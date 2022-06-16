@@ -1,4 +1,9 @@
 <article class="chatroom">
+    @php
+        $ownAuthor = $chatroom->authors->filter(function ($author) {
+            return $author->user_id === auth()->id();
+        })->first()
+    @endphp
     <div class="chatroom__container">
         <div class="chatroom__img_container status
             @if($chatroom->authors->filter(function ($author) {
@@ -21,7 +26,7 @@
         <div class="chatroom__info">
             <h4 aria-level="4"
                 role="heading"
-                class="chatroom__name">
+                class="chatroom__name {{ $ownAuthor->isViewed() ? '' : 'new'  }}">
                 <a href="{{ route('chatroom.show', $chatroom->uuid) }}" class="chatroom__link">
                     @if($chatroom->name)
                         {{ $chatroom->name }}
@@ -37,7 +42,7 @@
                 </a>
             </h4>
             <div class="chatroom__message_container">
-                <p class="chatroom__message">
+                <p class="chatroom__message {{ $ownAuthor->isViewed() ? '' : 'new'  }}">
                     {{ $chatroom->messages->first()->author->user_id === auth()->id() ? __('app.me') : $chatroom->messages->first()->author->user->pseudo }} : {{ $chatroom->messages->first()?->decryptedMessage }}
                 </p>
                 <p class="chatroom__date">

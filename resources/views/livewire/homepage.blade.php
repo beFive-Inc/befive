@@ -25,8 +25,11 @@
                 <div class="accordion-body accordion-canal">
                     @if($canals->count())
                         @foreach($canals as $chatroom)
-                            <div wire:click="changeSelectedChatroom('{{ $chatroom->uuid }}')" class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
+                            <div class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
                                 <x-canal :chatroom="$chatroom"/>
+                                <a href="{{ route('chatroom.show', $chatroom->uuid) }}" class="chatroom__select-link" wire:click.prevent="changeSelectedChatroom('{{ $chatroom->uuid }}')" >
+                                    <span class="sr_only">{{ __('Voir la chatroom') }}</span>
+                                </a>
                             </div>
                         @endforeach
                     @else
@@ -61,9 +64,11 @@
                      aria-labelledby="panelsStayOpen-headingTwo">
                     <div class="accordion-body">
                         @foreach($groups as $chatroom)
-                            <div wire:click="changeSelectedChatroom('{{ $chatroom->uuid }}')"
-                                class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
+                            <div class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
                                 <x-group-message :chatroom="$chatroom"/>
+                                <a href="{{ route('chatroom.show', $chatroom->uuid) }}" class="chatroom__select-link" wire:click.prevent="changeSelectedChatroom('{{ $chatroom->uuid }}')" >
+                                    <span class="sr_only">{{ __('Voir la chatroom') }}</span>
+                                </a>
                             </div>
                         @endforeach
                     </div>
@@ -90,7 +95,7 @@
                      aria-labelledby="panelsStayOpen-headingThree">
                     <div class="accordion-body">
                         @foreach($conversations as $chatroom)
-                            <div wire:click="changeSelectedChatroom('{{ $chatroom->uuid }}')" class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
+                            <div class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
                                 <x-conversation-message :chatroom="$chatroom"
                                                         :own-author="$chatroom->authors->filter(
                                                     function ($author) {return $author->user->id === auth()->id();})
@@ -98,6 +103,9 @@
                                                         :other-author="$chatroom->authors->filter(
                                                     function ($author) {return $author->user->id != auth()->id();})
                                                     ->first()"/>
+                                <a href="{{ route('chatroom.show', $chatroom->uuid) }}" class="chatroom__select-link" wire:click.prevent="changeSelectedChatroom('{{ $chatroom->uuid }}')" >
+                                    <span class="sr_only">{{ __('Voir la chatroom') }}</span>
+                                </a>
                             </div>
                         @endforeach
                     </div>

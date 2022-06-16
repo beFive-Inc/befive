@@ -114,7 +114,7 @@ class Chatroom extends Component
 
     public function save()
     {
-        if (empty($this->message)) {
+        if (empty($this->message) && !empty($this->files)) {
             $message = Message::create([
                 'chatroom_user_id' => $this->authIngroup->id,
                 'message_id' => $this->relatedMessage->count() ? $this->relatedMessage->id : null,
@@ -148,7 +148,7 @@ class Chatroom extends Component
             }
 
             $this->files = [];
-        } else {
+        } elseif(!empty($this->message)) {
             $message = Message::create([
                 'chatroom_user_id' => $this->authIngroup->id,
                 'message_id' => $this->relatedMessage->count() ? $this->relatedMessage->id : null,

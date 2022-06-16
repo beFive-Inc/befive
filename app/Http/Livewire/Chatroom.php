@@ -39,7 +39,6 @@ class Chatroom extends Component
     public function mount()
     {
         $this->relatedMessage = collect([]);
-        $this->chatroom = $this->chatroom ?? auth()->user()->getChatrooms()->first();
         $this->authIngroup = $this->chatroom->authors->filter(function ($author) {
             return $author->user_id === auth()->id();
         })->first();

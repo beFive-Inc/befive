@@ -11,7 +11,7 @@ class Homepage extends Component
 {
     public Collection $friends;
     public Collection $chatrooms;
-    public Chatroom $selectedChatroom;
+    public Collection $selectedChatroom;
 
     public Collection $canals;
     public Collection $groups;
@@ -69,7 +69,7 @@ class Homepage extends Component
         $this->conversations = $this->chatrooms->filter(function ($chatroom) {
             return $chatroom->isConversation;
         });
-        $this->selectedChatroom = $this->chatrooms->first();
+        $this->selectedChatroom = $this->chatrooms->first() ?? collect([]);
     }
 
     /**

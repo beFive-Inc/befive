@@ -105,7 +105,9 @@
             </section>
         @endif
     </section>
-    <livewire:chatroom />
+    @if($chatrooms->count())
+        <livewire:chatroom />
+    @endif
 
     <script>
         @foreach($chatrooms as $chatroom)

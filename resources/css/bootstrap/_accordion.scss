@@ -9,6 +9,18 @@
 
     .discussion {
         flex: 1;
+
+        .chatroom__select {
+
+
+            &-link {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 0;
+            }
+        }
     }
 
     .messages {
@@ -42,16 +54,8 @@
                 transition: .5s ease-in;
 
                 &-link {
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    left: 0;
-                    z-index: 0;
-
-                    @media screen and (min-width: 900px) {
-                        z-index: 10;
-                        right: 20px;
-                    }
+                    right: 20px;
+                    z-index: 10;
                 }
 
                 &:not(.selected):hover, &:not(.selected):focus {

@@ -115,7 +115,7 @@ hr {
   font-size: 1.3rem;
   font-weight: 400;
   color: #FF1200;
-  margin-top: 0.4rem;
+  margin: 0.4rem 0;
 }
 
 .success {

@@ -71,6 +71,10 @@
                 <span class="error">{{ $message }}</span>
             @enderror
 
+            @if($error)
+                <span class="error">{{ $error }}</span>
+            @endif
+
             @if($relatedMessage->count())
                 <div class="related-container">
                     <p class="related-title">

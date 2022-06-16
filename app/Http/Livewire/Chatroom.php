@@ -21,6 +21,7 @@ class Chatroom extends Component
     public ChatroomUser $authIngroup;
     public Collection $otherIngroup;
     public string $message = '';
+    public string $error = '';
 
     public $relatedMessage;
 
@@ -114,77 +115,85 @@ class Chatroom extends Component
 
     public function save()
     {
-        if (empty($this->message) && !empty($this->files)) {
-            $message = Message::create([
-                'chatroom_user_id' => $this->authIngroup->id,
-                'message_id' => $this->relatedMessage->count() ? $this->relatedMessage->id : null,
-                'message' => Crypt::encrypt($this->message),
-                'type' => 'message'
-            ]);
-
-            $this->message = '';
-
-            $this->messages->prepend($message);
-
-            $this->isSenderToTrue();
-
-            if ($this->files) {
-                foreach ($this->files as $file) {
-                    $message->addMedia($file)
-                        ->toMediaCollection('message');
-                }
+        if ($this->chatroom->isConversation) {
+            if (auth()->user()->isBlockedBy($this->otherIngroup->first()->user)) {
+                $this->error = 'Tu as été bloqué par cet utilisateur, tu ne peux donc plus lui envoyer de messages.';
             }
-
-            $this->authIngroup->update([
-                'view_at' => Carbon::now(),
-            ]);
-
-            broadcast(new MessageSent($message, $this->chatroom->uuid));
-
-            if ($this->messages->count() === 1) {
-                foreach ($this->otherIngroup as $author) {
-                    broadcast(new \App\Events\ChatroomCreated($this->chatroom, $author->user->uuid));
-                }
-            }
-
-            $this->files = [];
-        } elseif(!empty($this->message)) {
-            $message = Message::create([
-                'chatroom_user_id' => $this->authIngroup->id,
-                'message_id' => $this->relatedMessage->count() ? $this->relatedMessage->id : null,
-                'message' => Crypt::encrypt($this->message),
-                'type' => 'message'
-            ]);
-
-            $this->message = '';
-
-            $this->messages->prepend($message);
-
-            $this->isSenderToTrue();
-
-            if ($this->files) {
-                foreach ($this->files as $file) {
-                    $message->addMedia($file)
-                        ->toMediaCollection('message');
-                }
-            }
-
-            $this->authIngroup->update([
-                'view_at' => Carbon::now(),
-            ]);
-
-            broadcast(new MessageSent($message, $this->chatroom->uuid));
-
-            if ($this->messages->count() === 1) {
-                foreach ($this->otherIngroup as $author) {
-                    broadcast(new \App\Events\ChatroomCreated($this->chatroom, $author->user->uuid));
-                }
-            }
-
-            $this->files = [];
         }
 
-        $this->unsetRelatedMessage();
+        if (empty($this->error)) {
+            if (empty($this->message) && !empty($this->files)) {
+                $message = Message::create([
+                    'chatroom_user_id' => $this->authIngroup->id,
+                    'message_id' => $this->relatedMessage->count() ? $this->relatedMessage->id : null,
+                    'message' => Crypt::encrypt($this->message),
+                    'type' => 'message'
+                ]);
+
+                $this->message = '';
+
+                $this->messages->prepend($message);
+
+                $this->isSenderToTrue();
+
+                if ($this->files) {
+                    foreach ($this->files as $file) {
+                        $message->addMedia($file)
+                            ->toMediaCollection('message');
+                    }
+                }
+
+                $this->authIngroup->update([
+                    'view_at' => Carbon::now(),
+                ]);
+
+                broadcast(new MessageSent($message, $this->chatroom->uuid));
+
+                if ($this->messages->count() === 1) {
+                    foreach ($this->otherIngroup as $author) {
+                        broadcast(new \App\Events\ChatroomCreated($this->chatroom, $author->user->uuid));
+                    }
+                }
+
+                $this->files = [];
+            } elseif(!empty($this->message)) {
+                $message = Message::create([
+                    'chatroom_user_id' => $this->authIngroup->id,
+                    'message_id' => $this->relatedMessage->count() ? $this->relatedMessage->id : null,
+                    'message' => Crypt::encrypt($this->message),
+                    'type' => 'message'
+                ]);
+
+                $this->message = '';
+
+                $this->messages->prepend($message);
+
+                $this->isSenderToTrue();
+
+                if ($this->files) {
+                    foreach ($this->files as $file) {
+                        $message->addMedia($file)
+                            ->toMediaCollection('message');
+                    }
+                }
+
+                $this->authIngroup->update([
+                    'view_at' => Carbon::now(),
+                ]);
+
+                broadcast(new MessageSent($message, $this->chatroom->uuid));
+
+                if ($this->messages->count() === 1) {
+                    foreach ($this->otherIngroup as $author) {
+                        broadcast(new \App\Events\ChatroomCreated($this->chatroom, $author->user->uuid));
+                    }
+                }
+
+                $this->files = [];
+            }
+
+            $this->unsetRelatedMessage();
+        }
     }
 
 

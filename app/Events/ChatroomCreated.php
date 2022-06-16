@@ -36,6 +36,6 @@ class ChatroomCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('chatroom.' . $this->uuid);
+        return new Channel('chatroom.user.' . $this->uuid);
     }
 }

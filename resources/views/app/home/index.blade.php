@@ -18,9 +18,9 @@
                     window.livewire.emit('friendAdded');
                 });
 
-            Echo.channel('chatroom.{{ auth()->user()->uuid }}')
+            Echo.channel('chatroom.user.{{ auth()->user()->uuid }}')
                 .listen('ChatroomCreated', (e) => {
-                    window.livewire.emit('refreshChatrooms');
+                    window.livewire.emit('chatroomsRefresh');
                 });
         </script>
     </x-slot>

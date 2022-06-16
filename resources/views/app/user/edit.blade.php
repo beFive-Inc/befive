@@ -22,6 +22,11 @@
 
 
     <x-slot name="script">
-
+        <script>
+            Echo.channel("user.{{ auth()->id() }}")
+                .listen('FriendAdded', (e) => {
+                    window.livewire.emit('friendAdded');
+                });
+        </script>
     </x-slot>
 </x-layout>

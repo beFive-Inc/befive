@@ -21,6 +21,6 @@ Broadcast::channel('user.{id}', function ($user, $id) {
     return $user;
 });
 
-Broadcast::channel('chatroom.{uuid}', function ($user, $uuid) {
+Broadcast::channel('chatroom.user.{uuid}', function ($user, $uuid) {
     return $user;
 });

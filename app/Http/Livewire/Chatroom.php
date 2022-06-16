@@ -32,7 +32,8 @@ class Chatroom extends Component
 
     protected $listeners = [
         'messageSent' => 'EchoGetMessage',
-        'changeChatroom' => 'changeChatroom'
+        'changeChatroom' => 'changeChatroom',
+        'resfreshMessage' => 'resfreshMessage',
     ];
 
     public function mount()
@@ -56,6 +57,11 @@ class Chatroom extends Component
         $this->resetIsSender();
     }
 
+    public function resfreshMessage()
+    {
+        $this->messages = $this->chatroom->messages;
+    }
+
     /**
      * @param string $uuid
      * @return void
@@ -72,6 +78,10 @@ class Chatroom extends Component
         $this->otherIngroup = $this->chatroom->authors->filter(function ($author) {
             return $author->user_id != auth()->id();
         });
+
+        $this->authIngroup->update([
+            'view_at' => Carbon::now(),
+        ]);
 
         $this->messages = $this->chatroom->messages;
     }

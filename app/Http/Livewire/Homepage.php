@@ -17,25 +17,43 @@ class Homepage extends Component
     public Collection $groups;
     public Collection $conversations;
 
-    protected $listeners = [
-        'refreshChatrooms' => 'refreshChatrooms',
-    ];
-
     protected function getListeners(): array
     {
         $listeners = [];
 
         foreach ($this->chatrooms as $chatroom) {
-            $listeners["messageSent-$chatroom->uuid"] = '$refresh';
+            $listeners["messageSent-$chatroom->uuid"] = 'refresh';
         }
+
+        $listeners["chatroomsRefresh"] = "EchoRefreshChatrooms";
 
         return $listeners;
     }
 
-    public function refreshChatrooms()
+    public function refresh()
+    {
+        $this->emit('resfreshMessage');
+    }
+
+    /**
+     * @return void
+     */
+    public function EchoRefreshChatrooms()
     {
         $this->chatrooms = auth()->user()
             ->getChatrooms();
+
+        $this->canals = $this->chatrooms->filter(function ($chatroom) {
+            return $chatroom->isCanal;
+        });
+
+        $this->groups = $this->chatrooms->filter(function ($chatroom) {
+            return $chatroom->isGroup;
+        });
+
+        $this->conversations = $this->chatrooms->filter(function ($chatroom) {
+            return $chatroom->isConversation;
+        });
     }
 
     public function mount()

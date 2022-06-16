@@ -109,19 +109,19 @@
 
     <script>
         @foreach($chatrooms as $chatroom)
-        Echo.join(`chatroom.{{ $chatroom->uuid }}`)
-            .here(users => {
-                console.log(users.length + ' utilisateurs')
-            })
-            .joining(user => {
-                console.log(user.name + ' a rejoint')
-            })
-            .leaving(user => {
-                console.log(user.name + ' est parti')
-            })
-            .listen('MessageSent', (e) => {
-                window.livewire.emit('messageSent-{{ $chatroom->uuid }}')
-            });
+            Echo.join(`chatroom.{{ $chatroom->uuid }}`)
+                .here(users => {
+
+                })
+                .joining(user => {
+
+                })
+                .leaving(user => {
+
+                })
+                .listen('MessageSent', (e) => {
+                    window.livewire.emit('messageSent-{{ $chatroom->uuid }}')
+                });
         @endforeach
     </script>
 </div>

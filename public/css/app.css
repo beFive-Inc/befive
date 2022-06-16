@@ -1682,7 +1682,6 @@ hr {
 
 .chatroom {
   position: relative;
-  z-index: 10;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

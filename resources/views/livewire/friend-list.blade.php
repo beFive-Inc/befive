@@ -49,8 +49,8 @@
         </div>
 
         <div class="friends__container">
-            @if($friends->count())
-                @if(!$navItems['add']['isActive'])
+            @if(!$navItems['add']['isActive'])
+                @if($friends->count())
                     @foreach($friends as $friend)
                         <x-friend
                             :friend="$friend"
@@ -90,59 +90,59 @@
                         </x-friend>
                     @endforeach
                 @else
-                    <section class="auth special-auth">
-                        <h3 aria-level="3" role="heading" class="page__title block">
-                            {{ __('friends.send-request.title') }}
-                        </h3>
-                        <form action="{{ route('friends.add.hashtag') }}" class="form special-form" method="post" wire:submit.prevent="submit">
-                            @csrf
-
-                            <div class="form__field">
-                                <label for="pseudo"
-                                       data-bs-toggle="tooltip"
-                                       data-bs-placement="top"
-                                       title="{{ __('friends.send-request.notice') }}"
-                                       class="form__label">
-                                    {{  __('friends.send-request.label') }}
-                                </label>
-
-                                <input type="text"
-                                       id="pseudo"
-                                       name="pseudo"
-                                       class="form__input @error('pseudo'){{ 'error' }}@enderror"
-                                       placeholder="{{ __('friends.send-request.placeholder')}}"
-                                       autocomplete="pseudo"
-                                       wire:model="pseudo"
-                                       required>
-
-                                @error('pseudo')
-                                    <span class="error">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                                @if($success)
-                                    <span class="success">
-                                        {{ $success }}
-                                    </span>
-                                @endif
-                            </div>
-
-                            <button class="btn btn-primary">
-                                {{ __('friends.send-request.submit') }}
-                            </button>
-                        </form>
-                    </section>
+                    @if($searchQuery)
+                        <p>
+                            {{ __('friends.searching.no-friends', ['keyword' => $searchQuery]) }}
+                        </p>
+                    @else
+                        <p>
+                            {{ __('friends.general.no-friends') }}
+                        </p>
+                    @endif
                 @endif
             @else
-                @if($searchQuery)
-                    <p>
-                        {{ __('friends.searching.no-friends', ['keyword' => $searchQuery]) }}
-                    </p>
-                @else
-                    <p>
-                        {{ __('friends.general.no-friends') }}
-                    </p>
-                @endif
+                <section class="auth special-auth">
+                    <h3 aria-level="3" role="heading" class="page__title block">
+                        {{ __('friends.send-request.title') }}
+                    </h3>
+                    <form action="{{ route('friends.add.hashtag') }}" class="form special-form" method="post" wire:submit.prevent="submit">
+                        @csrf
+
+                        <div class="form__field">
+                            <label for="pseudo"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-placement="top"
+                                   title="{{ __('friends.send-request.notice') }}"
+                                   class="form__label">
+                                {{  __('friends.send-request.label') }}
+                            </label>
+
+                            <input type="text"
+                                   id="pseudo"
+                                   name="pseudo"
+                                   class="form__input @error('pseudo'){{ 'error' }}@enderror"
+                                   placeholder="{{ __('friends.send-request.placeholder')}}"
+                                   autocomplete="pseudo"
+                                   wire:model="pseudo"
+                                   required>
+
+                            @error('pseudo')
+                                <span class="error">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                            @if($success)
+                                <span class="success">
+                                    {{ $success }}
+                                </span>
+                            @endif
+                        </div>
+
+                        <button class="btn btn-primary">
+                            {{ __('friends.send-request.submit') }}
+                        </button>
+                    </form>
+                </section>
             @endif
         </div>
     </section>

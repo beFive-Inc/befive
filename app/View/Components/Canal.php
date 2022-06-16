@@ -8,15 +8,17 @@ use Illuminate\View\Component;
 class Canal extends Component
 {
     public Chatroom $chatroom;
+    public bool $settings;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(Chatroom $chatroom)
+    public function __construct(Chatroom $chatroom, bool $settings = false)
     {
         $this->chatroom = $chatroom;
+        $this->settings = $settings;
     }
 
     /**

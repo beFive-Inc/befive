@@ -26,7 +26,7 @@
                     @if($canals->count())
                         @foreach($canals as $chatroom)
                             <div class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
-                                <x-canal :chatroom="$chatroom"/>
+                                <x-canal :chatroom="$chatroom" :settings="true"/>
                                 <a href="{{ route('chatroom.show', $chatroom->uuid) }}" class="chatroom__select-link" wire:click.prevent="changeSelectedChatroom('{{ $chatroom->uuid }}')" >
                                     <span class="sr_only">{{ __('Voir la chatroom') }}</span>
                                 </a>

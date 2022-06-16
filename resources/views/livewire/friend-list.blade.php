@@ -102,7 +102,7 @@
                 @endif
             @else
                 <section class="auth special-auth">
-                    <h3 aria-level="3" role="heading" class="page__title block">
+                    <h3 aria-level="3" role="heading" class="page__title block nomargin">
                         {{ __('friends.send-request.title') }}
                     </h3>
                     <form action="{{ route('friends.add.hashtag') }}" class="form special-form" method="post" wire:submit.prevent="submit">

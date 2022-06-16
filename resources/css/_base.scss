@@ -47,6 +47,10 @@ hr {
     transition: .3s ease-in;
 }
 
+.nomargin {
+    margin: 0 !important;
+}
+
 .error {
     display: block;
     font-size: 1.3rem;

@@ -1,6 +1,6 @@
 <x-layout :friends="$friends" :request-friends="$requestFriends" :medias="$medias" :chatrooms="$chatrooms" :requested-canals="$requestCanals">
     <x-slot name="title">
-        {{ __('Be Five | Homepage') }}
+        {{ __('Be Five Chat | Création d\'une nouvelle salle de discussion') }}
     </x-slot>
 
     <x-slot name="metaData">

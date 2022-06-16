@@ -1,6 +1,6 @@
 <x-auth-layout>
     <x-slot name="title">
-        {{ __('Connexion à Be Five') }}
+        {{ __('Oubli de mot de passe') }}
     </x-slot>
 
     <x-slot name="metaData"></x-slot>

@@ -11,14 +11,11 @@ class Homepage extends Component
 {
     public Collection $friends;
     public Collection $chatrooms;
+    public Chatroom $selectedChatroom;
 
     public Collection $canals;
     public Collection $groups;
     public Collection $conversations;
-
-    public ChatroomUser $ownAuthor;
-    public ChatroomUser $otherAuthor;
-    public bool $isArchived = false;
 
     protected function getListeners(): array
     {
@@ -44,6 +41,20 @@ class Homepage extends Component
         $this->conversations = $this->chatrooms->filter(function ($chatroom) {
             return $chatroom->isConversation;
         });
+        $this->selectedChatroom = $this->chatrooms->first();
+    }
+
+    /**
+     * @param string $uuid
+     * @return void
+     */
+    public function changeSelectedChatroom(string $uuid)
+    {
+        $this->selectedChatroom = $this->chatrooms->filter(function ($chatroom) use ($uuid) {
+            return $chatroom->uuid === $uuid;
+        })->first();
+
+        $this->emit('changeChatroom', $uuid);
     }
 
     public function render()

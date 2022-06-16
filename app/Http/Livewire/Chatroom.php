@@ -31,11 +31,16 @@ class Chatroom extends Component
 
     protected $listeners = [
         'messageSent' => 'EchoGetMessage',
+        'changeChatroom' => 'changeChatroom'
     ];
 
     public function mount()
     {
         $this->relatedMessage = collect([]);
+        $this->chatroom = auth()->user()->getChatrooms()->first();
+        $this->authIngroup = $this->chatroom->authors->filter(function ($author) {
+            return $author->user_id === auth()->id();
+        })->first();
         $this->messages = $this->chatroom->messages;
     }
 
@@ -45,6 +50,22 @@ class Chatroom extends Component
             $this->messages->prepend(Message::find($message['id']));
         }
         $this->resetIsSender();
+    }
+
+    /**
+     * @param string $uuid
+     * @return void
+     */
+    public function changeChatroom(string $uuid)
+    {
+        $this->chatroom = ChatroomModel::where('uuid', '=', $uuid)
+            ->first();
+
+        $this->authIngroup = $this->chatroom->authors->filter(function ($author) {
+            return $author->user_id === auth()->id();
+        })->first();
+
+        $this->messages = $this->chatroom->messages;
     }
 
     /**

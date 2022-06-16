@@ -13,6 +13,7 @@
                        id="message"
                        name="message"
                        value="{{ auth()->user()->status->message }}"
+                       placeholder="{{ !empty(auth()->user()->status->message) ? auth()->user()->status->message :  __('field.status.update.placeholder') }}"
                        wire:focus.stop="setIsShowToFalse"
                        wire:focus="setIsShowToTrue"
                        wire:keyup.debounce.1000ms="submit"

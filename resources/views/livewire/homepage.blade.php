@@ -1,5 +1,5 @@
 <div class="accordion">
-    <section>
+    <section class="discussion">
         <h2 aria-level="2"
             role="heading"
             class="sr_only">
@@ -25,7 +25,9 @@
                 <div class="accordion-body accordion-canal">
                     @if($canals->count())
                         @foreach($canals as $chatroom)
-                            <x-canal :chatroom="$chatroom"/>
+                            <div wire:click="changeSelectedChatroom('{{ $chatroom->uuid }}')" class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
+                                <x-canal :chatroom="$chatroom"/>
+                            </div>
                         @endforeach
                     @else
                         <div>
@@ -59,7 +61,9 @@
                      aria-labelledby="panelsStayOpen-headingTwo">
                     <div class="accordion-body">
                         @foreach($groups as $chatroom)
-                            <x-group-message :chatroom="$chatroom"/>
+                            <div wire:click="changeSelectedChatroom('{{ $chatroom->uuid }}')" class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
+                                <x-group-message :chatroom="$chatroom"/>
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -85,19 +89,22 @@
                      aria-labelledby="panelsStayOpen-headingThree">
                     <div class="accordion-body">
                         @foreach($conversations as $chatroom)
-                            <x-conversation-message :chatroom="$chatroom"
-                                                    :own-author="$chatroom->authors->filter(
+                            <div wire:click="changeSelectedChatroom('{{ $chatroom->uuid }}')" class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
+                                <x-conversation-message :chatroom="$chatroom"
+                                                        :own-author="$chatroom->authors->filter(
                                                     function ($author) {return $author->user->id === auth()->id();})
                                                     ->first()"
-                                                    :other-author="$chatroom->authors->filter(
+                                                        :other-author="$chatroom->authors->filter(
                                                     function ($author) {return $author->user->id != auth()->id();})
                                                     ->first()"/>
+                            </div>
                         @endforeach
                     </div>
                 </div>
             </section>
         @endif
     </section>
+    <livewire:chatroom />
 
     <script>
         @foreach($chatrooms as $chatroom)

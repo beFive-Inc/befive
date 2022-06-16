@@ -106,7 +106,7 @@
         @endif
     </section>
     @if($chatrooms->count())
-        <livewire:chatroom />
+        <livewire:chatroom :chatroom="$selectedChatroom" />
     @endif
 
     <script>

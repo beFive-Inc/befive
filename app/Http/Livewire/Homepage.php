@@ -11,7 +11,7 @@ class Homepage extends Component
 {
     public Collection $friends;
     public Collection $chatrooms;
-    public Collection $selectedChatroom;
+    public $selectedChatroom;
 
     public Collection $canals;
     public Collection $groups;

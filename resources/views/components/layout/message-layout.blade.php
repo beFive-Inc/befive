@@ -10,6 +10,10 @@
     <!-- Titre de la page -->
     <title>{{ $title }}</title>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('parts/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('parts/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('parts/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('parts/favicon/site.webmanifest') }}">
 
     <!-- Métadonnées, css et javascript -->
     @livewireStyles

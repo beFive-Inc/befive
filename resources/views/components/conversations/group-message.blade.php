@@ -31,7 +31,7 @@
                     @if($chatroom->name)
                         {{ $chatroom->name }}
                     @else
-                        @foreach($chatroom->authors as $author)
+                        @foreach($chatroom->authors->take(3) as $author)
                             @if($loop->last)
                                 {{ $author->user->pseudo }}
                             @else

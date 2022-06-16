@@ -15,13 +15,14 @@ class Field extends Component
     public $autocomplete;
     public $required;
     public $value;
+    public bool $additionnal;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($type, $id, $name, $notice, $labeltext, $placeholder, $autocomplete, $required, $value = null)
+    public function __construct($type, $id, $name, $notice, $labeltext, $placeholder, $autocomplete, $required, $value = null, bool $additionnal = false)
     {
         $this->type = $type;
         $this->id = $id;
@@ -32,6 +33,7 @@ class Field extends Component
         $this->autocomplete = $autocomplete;
         $this->required = $required;
         $this->value = $value;
+        $this->additionnal = $additionnal;
     }
 
     /**

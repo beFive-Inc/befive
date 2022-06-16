@@ -583,6 +583,13 @@ hr {
   max-height: 40rem;
 }
 
+.offcanvas-header {
+  padding: 2.4rem 1.5rem;
+}
+.offcanvas-body {
+  padding: 0 1.5rem;
+}
+
 .main {
   grid-gap: 1.2rem;
   padding: 0 1.5rem 6rem;
@@ -744,6 +751,21 @@ hr {
 .btn-danger:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+.btn-back {
+  width: 24px;
+  height: 24px;
+  background-color: #FF9400;
+  border: none;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+  -webkit-mask-image: url("/parts/icons/outline/arrow-left.svg");
+          mask-image: url("/parts/icons/outline/arrow-left.svg");
 }
 
 .btn-special-padding {
@@ -1069,6 +1091,34 @@ hr {
 .form__field {
   display: block;
   width: 100%;
+}
+.form__field-container {
+  position: relative;
+}
+.form__field-container .btn-see {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  bottom: 10px;
+  right: 10px;
+  background-color: #3A3A3A;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-image: url("/parts/icons/outline/eye.svg");
+          mask-image: url("/parts/icons/outline/eye.svg");
+  transition: 0.3s ease-in;
+}
+.form__field-container .btn-see.show {
+  -webkit-mask-image: url("/parts/icons/outline/eye-slash.svg");
+          mask-image: url("/parts/icons/outline/eye-slash.svg");
+}
+.form__field-container .btn-see:hover, .form__field-container .btn-see:focus {
+  background-color: #FF9400;
 }
 .form__label {
   display: inline-block;
@@ -1442,6 +1492,56 @@ hr {
   transition: 0.5s ease-in;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
 }
+.header-m__title {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.header-m__img-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 65px;
+  margin-bottom: 1rem;
+}
+.header-m__img-container .chatroom__img {
+  position: relative;
+  height: 100%;
+}
+.header-m__img-container .chatroom__img.first {
+  position: relative;
+  height: 100%;
+  width: auto;
+  z-index: 3;
+  border: 2px solid #fff;
+}
+.header-m__img-container .chatroom__img.second {
+  position: relative;
+  height: 100%;
+  width: auto;
+  z-index: 2;
+  left: -1rem;
+  border: 2px solid #fff;
+}
+.header-m__img-container .box {
+  width: 65px;
+}
+.header-m__img-container .box.third {
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9999px;
+  position: relative;
+  height: 100%;
+  z-index: 1;
+  left: -2rem;
+  border: 2px solid #fff;
+  background-color: #f7f7f7;
+}
 .header-m .profile-container {
   display: flex;
   flex-direction: row;
@@ -1472,12 +1572,24 @@ hr {
   gap: 1rem;
 }
 .header-m .profile-container .profile__img_container {
-  width: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   height: 32px;
 }
 .header-m .profile-container .profile__img {
-  width: 100%;
+  height: 100%;
+  border: 2px solid #fff;
   border-radius: 9999px;
+}
+.header-m .profile-container .profile__img.first {
+  position: relative;
+  z-index: 2;
+}
+.header-m .profile-container .profile__img.second {
+  position: relative;
+  left: -0.7rem;
 }
 .header-m .profile-container .profile__name {
   font-size: 1.6rem;
@@ -2271,6 +2383,10 @@ hr {
   color: #3A3A3A;
   margin-bottom: 1rem;
   text-transform: uppercase;
+}
+
+.special-title {
+  margin: 0;
 }
 
 .number {

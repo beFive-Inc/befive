@@ -48,7 +48,8 @@
                              :labeltext="__('auth.password.label')"
                              :placeholder="__('auth.password.placeholder')"
                              :autocomplete="false"
-                             :required="true">
+                             :required="true"
+                             :additionnal="true">
 
                         <div class="forgot_container">
                             <x-default-link :href="route('password.request')">

@@ -45,7 +45,8 @@
                              :labeltext="__('auth.password.label')"
                              :placeholder="__('auth.password.placeholder')"
                              :autocomplete="'new-password'"
-                             :required="true">
+                             :required="true"
+                             :additionnal="true">
                     </x-field>
 
                     <x-field type="password"
@@ -55,7 +56,8 @@
                              :labeltext="__('auth.new.password.label')"
                              :placeholder="__('auth.new.password.placeholder')"
                              :autocomplete="'new-password'"
-                             :required="true">
+                             :required="true"
+                             :additionnal="true">
                     </x-field>
 
                     <div class="actions">

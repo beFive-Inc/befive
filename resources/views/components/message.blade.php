@@ -4,10 +4,12 @@
     @endphp
 
     <div class="message">
-        @if($message->relatedMessage)
-            <x-message :message="$message->relatedMessage" :is-settings="false">
-                <x-slot name="settings"></x-slot>
-            </x-message>
+        @if($isRelatedMessage)
+            @if($message->relatedMessage)
+                <x-message :message="$message->relatedMessage" :is-settings="false" :is-related-message="false">
+                    <x-slot name="settings"></x-slot>
+                </x-message>
+            @endif
         @endif
         @if($message->decryptedMessage)
             @php

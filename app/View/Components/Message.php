@@ -8,16 +8,18 @@ class Message extends Component
 {
     public $message;
     public bool $isSettings;
+    public bool $isRelatedMessage;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($message, bool $isSettings = false)
+    public function __construct($message, bool $isSettings = false, bool $isRelatedMessage = true)
     {
         $this->message = $message;
         $this->isSettings = $isSettings;
+        $this->isRelatedMessage = $isRelatedMessage;
     }
 
     /**

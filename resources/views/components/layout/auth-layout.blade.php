@@ -34,19 +34,22 @@
 <script>
     const btns = document.querySelectorAll('.btn-see');
 
-    btns.forEach(btn => {
-        let isShowed = false;
-        btn.addEventListener('click', () => {
-            btn.classList.toggle('show');
-            if(isShowed) {
-                isShowed = false;
-                btn.previousElementSibling.type = 'password';
-            } else {
-                isShowed = true;
-                btn.previousElementSibling.type = 'text';
-            }
-        });
-    })
+    if(btns) {
+        btns.forEach(btn => {
+            let isShowed = false;
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('show');
+                if(isShowed) {
+                    isShowed = false;
+                    btn.previousElementSibling.type = 'password';
+                } else {
+                    isShowed = true;
+                    btn.previousElementSibling.type = 'text';
+                }
+            });
+        })
+    }
+
 </script>
 
 </body>

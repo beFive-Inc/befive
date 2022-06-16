@@ -17,6 +17,8 @@ trait Messageable
 
         $collection = $this->getAccepted($collection);
 
+        $collection = $this->getOnlyAcceptedCanal($collection);
+
         if ($onlySoftDelete) {
             $collection = $this->getOnlySoftDelete($collection);
         } else {
@@ -49,6 +51,24 @@ trait Messageable
             return $chatroom->authors->filter(function ($author) {
                 return $author->status === ChatroomUserStatus::PENDING && $author->user_id === auth()->id();
             })->count();
+        });
+    }
+
+    /**
+     * @param Collection $collection
+     * @return Collection
+     */
+    public function getOnlyAcceptedCanal(Collection $collection): Collection
+    {
+        return $collection->filter(function ($chatroom) {
+            if ($chatroom->isCanal) {
+                return $chatroom->authors = $chatroom->authors->filter(function ($author) {
+                    return $author->status === ChatroomUserStatus::ACCEPTED;
+                });
+
+            } else {
+                return true;
+            }
         });
     }
 

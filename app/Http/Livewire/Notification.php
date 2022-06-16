@@ -48,6 +48,8 @@ class Notification extends Component
 
         $this->requestCanals = $this->getRequestedCanals();
         $this->requestedCanals = $this->requestCanals->take($this->limit);
+
+        $this->emit('chatroomsRefresh');
     }
 
     /**

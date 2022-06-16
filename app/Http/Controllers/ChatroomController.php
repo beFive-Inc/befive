@@ -34,6 +34,10 @@ class ChatroomController extends Controller
             'view_at' => Carbon::now()
         ]);
 
+        $chatroom->authors = $chatroom->authors->filter(function ($author) {
+            return $author->status === ChatroomUserStatus::ACCEPTED;
+        });
+
         return view('app.message.show', compact('chatroom', 'authIngroup', 'otherInGroup'));
     }
 

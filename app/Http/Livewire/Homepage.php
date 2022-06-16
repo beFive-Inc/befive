@@ -17,6 +17,10 @@ class Homepage extends Component
     public Collection $groups;
     public Collection $conversations;
 
+    protected $listeners = [
+        'refreshChatrooms' => 'refreshChatrooms',
+    ];
+
     protected function getListeners(): array
     {
         $listeners = [];
@@ -26,6 +30,12 @@ class Homepage extends Component
         }
 
         return $listeners;
+    }
+
+    public function refreshChatrooms()
+    {
+        $this->chatrooms = auth()->user()
+            ->getChatrooms();
     }
 
     public function mount()

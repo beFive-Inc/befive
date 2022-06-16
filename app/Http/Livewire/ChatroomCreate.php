@@ -247,6 +247,8 @@ class ChatroomCreate extends Component
                 ]);
             }
 
+            $this->emit('refreshChatrooms');
+
             $this->redirect(route('chatroom.show', $chatroom->uuid));
         } else {
             $this->error = __('validation.chatroom.create');

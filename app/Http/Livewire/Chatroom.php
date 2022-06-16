@@ -19,6 +19,7 @@ class Chatroom extends Component
 
     public ChatroomModel $chatroom;
     public ChatroomUser $authIngroup;
+    public Collection $otherIngroup;
     public string $message = '';
 
     public $relatedMessage;
@@ -37,10 +38,13 @@ class Chatroom extends Component
     public function mount()
     {
         $this->relatedMessage = collect([]);
-        $this->chatroom = auth()->user()->getChatrooms()->first();
+        $this->chatroom = $this->chatroom ?? auth()->user()->getChatrooms()->first();
         $this->authIngroup = $this->chatroom->authors->filter(function ($author) {
             return $author->user_id === auth()->id();
         })->first();
+        $this->otherIngroup = $this->chatroom->authors->filter(function ($author) {
+            return $author->user_id != auth()->id();
+        });
         $this->messages = $this->chatroom->messages;
     }
 
@@ -64,6 +68,10 @@ class Chatroom extends Component
         $this->authIngroup = $this->chatroom->authors->filter(function ($author) {
             return $author->user_id === auth()->id();
         })->first();
+
+        $this->otherIngroup = $this->chatroom->authors->filter(function ($author) {
+            return $author->user_id != auth()->id();
+        });
 
         $this->messages = $this->chatroom->messages;
     }
@@ -124,6 +132,12 @@ class Chatroom extends Component
 
             broadcast(new MessageSent($message, $this->chatroom->uuid));
 
+            if ($this->messages->count() === 1) {
+                foreach ($this->otherIngroup as $author) {
+                    broadcast(new \App\Events\ChatroomCreated($this->chatroom, $author->user->uuid));
+                }
+            }
+
             $this->files = [];
         } else {
             $message = Message::create([
@@ -151,6 +165,12 @@ class Chatroom extends Component
             ]);
 
             broadcast(new MessageSent($message, $this->chatroom->uuid));
+
+            if ($this->messages->count() === 1) {
+                foreach ($this->otherIngroup as $author) {
+                    broadcast(new \App\Events\ChatroomCreated($this->chatroom, $author->user->uuid));
+                }
+            }
 
             $this->files = [];
         }

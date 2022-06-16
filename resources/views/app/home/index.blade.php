@@ -17,6 +17,11 @@
                 .listen('FriendAdded', (e) => {
                     window.livewire.emit('friendAdded');
                 });
+
+            Echo.channel('chatroom.{{ auth()->user()->uuid }}')
+                .listen('ChatroomCreated', (e) => {
+                    window.livewire.emit('refreshChatrooms');
+                });
         </script>
     </x-slot>
 </x-layout>

@@ -23,7 +23,7 @@
             <ul class="dropdown-menu menu" data-popper-placement="bottom-end">
                 <li>
                     <button class="dropdown-item menu__item menu__danger menu__delete" data-bs-toggle="modal" data-bs-target="#chatroomLeave-{{ $chatroom->uuid }}">
-                        {{ __('app.groups.leave') }}
+                        {{ __('Quitter le canal') }}
                     </button>
                 </li>
             </ul>

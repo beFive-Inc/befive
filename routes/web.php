@@ -181,6 +181,9 @@ Route::prefix('friends')->middleware('auth')->name('friends.')->group(function (
     Route::post('/add', [\App\Http\Controllers\FriendsController::class, 'add'])
         ->name('add');
 
+    Route::post('/add/hashtag', [\App\Http\Controllers\FriendsController::class, 'addHashtag'])
+        ->name('add.hashtag');
+
     // PUT METHOD
 
     Route::put('/accept', [\App\Http\Controllers\FriendsController::class, 'accept'])

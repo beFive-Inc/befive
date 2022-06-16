@@ -21,6 +21,10 @@ hr {
     border-top: 1px solid rgba($black, .1);
 }
 
+.block {
+    width: 100%;
+    display: block;
+}
 
 ::-webkit-scrollbar {
     width: .6rem;
@@ -49,6 +53,14 @@ hr {
     font-weight: $font-regular;
     color: $danger;
     margin-top: .4rem;
+}
+
+.success {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: $font-regular;
+    color: $success;
+    margin: .4rem 0;
 }
 
 .no_item {

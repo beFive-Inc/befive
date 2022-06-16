@@ -61,7 +61,8 @@
                      aria-labelledby="panelsStayOpen-headingTwo">
                     <div class="accordion-body">
                         @foreach($groups as $chatroom)
-                            <div wire:click="changeSelectedChatroom('{{ $chatroom->uuid }}')" class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
+                            <div wire:click="changeSelectedChatroom('{{ $chatroom->uuid }}')"
+                                class="chatroom__select {{ $selectedChatroom->uuid === $chatroom->uuid ? 'selected' : '' }}">
                                 <x-group-message :chatroom="$chatroom"/>
                             </div>
                         @endforeach

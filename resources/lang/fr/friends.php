@@ -27,6 +27,7 @@ return [
     'request.delete' => 'Supprimer la demande envoyée',
     'block' => 'Bloquer cet utilisateur',
     'block.title' => 'Bloqué',
+    'add.title' => 'Ajouter des amis',
     'unblock' => 'Débloquer cet utilisateur',
     'rename' => 'Renommer votre ami',
     'all.title' => 'Tous',
@@ -34,4 +35,9 @@ return [
     'sended.title' => 'Envoyé',
     'request.title' => 'Demande',
     'nav.title' => 'Menu des amis',
+    'send-request.submit' => 'Envoyer une demande d\'ami',
+    'send-request.title' => 'Ajouter un ami',
+    'send-request.label' => 'Entrez le nom d\'un ami et son tag',
+    'send-request.notice' => 'Veuillez entre le nom d\'un utilisateur suivi de son tag',
+    'send-request.placeholder' => "Entre le nom d'un utilisateur#0000",
 ];

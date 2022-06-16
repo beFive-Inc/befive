@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\FriendAdded;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use App\Traits\Operator;
 use Illuminate\Support\Collection;
@@ -19,6 +22,10 @@ class FriendList extends Component
     public EloquentCollection $pendingFriends;
 
     public string $searchQuery = '';
+
+    public string $pseudo = '';
+
+    public string $success = '';
 
     public Collection $navItems;
 
@@ -68,8 +75,48 @@ class FriendList extends Component
                 'isActive' => false,
                 'title' => __('friends.block.title'),
                 'method' => 'getBlockedFriends',
+            ],
+            'add' => [
+                'isActive' => false,
+                'title' => __('friends.add.title'),
+                'method' => 'nothing',
             ]
         ]);
+    }
+
+    /**
+     * @return EloquentCollection
+     */
+    protected function nothing(): EloquentCollection
+    {
+        return $this->friends;
+    }
+
+    public function submit()
+    {
+        $this->validate([
+            'pseudo' => [
+                'required',
+                'regex:/[a-zA-Z0-9-_*!."@]{1,50}.#[0-9]{4,4}/',
+            ]
+        ]);
+
+        $pseudo = Str::before($this->pseudo,'#');
+        $hashtag = Str::after($this->pseudo,'#');
+
+        if ($friendToAdd = User::where('pseudo', '=', $pseudo)
+            ->where('hashtag', '=', $hashtag)
+            ->first()) {
+            $this->success = "Vous ajouté ajouté " . $pseudo . " en ami.";
+
+            auth()->user()->befriend($friendToAdd);
+
+            broadcast(new FriendAdded($friendToAdd));
+
+            $this->pseudo = '';
+        } else {
+            $this->addError('pseudo', "Cet utilisateur n'existe pas");
+        }
     }
 
     /**

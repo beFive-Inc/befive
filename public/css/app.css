@@ -76,6 +76,11 @@ hr {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.block {
+  width: 100%;
+  display: block;
+}
+
 ::-webkit-scrollbar {
   width: 0.6rem;
   height: 0.6rem;
@@ -107,6 +112,14 @@ hr {
   font-weight: 400;
   color: #FF1200;
   margin-top: 0.4rem;
+}
+
+.success {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #20C600;
+  margin: 0.4rem 0;
 }
 
 .no_item {
@@ -452,10 +465,13 @@ hr {
     overflow: auto;
     padding: 0 1rem 2rem 0;
   }
+  .accordion .discussion .dropdown-options {
+    background-color: #3A3A3A;
+  }
   .accordion .discussion .chatroom__select {
     cursor: pointer;
     border-radius: 5px;
-    padding: 0.2rem;
+    padding: 0.2rem 0.5rem;
     transition: 0.5s ease-in;
   }
   .accordion .discussion .chatroom__select:not(.selected):hover, .accordion .discussion .chatroom__select:not(.selected):focus {
@@ -800,8 +816,10 @@ hr {
   gap: 6rem;
 }
 .auth.special-auth {
+  width: 100%;
   padding: 0;
   min-height: auto;
+  gap: 2rem;
 }
 .auth .alert {
   font-size: 1.3rem;

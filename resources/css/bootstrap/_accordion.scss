@@ -30,10 +30,14 @@
             overflow: auto;
             padding: 0 1rem 2rem 0;
 
+            .dropdown-options {
+                background-color: $dark-grey;
+            }
+
             .chatroom__select {
                 cursor: pointer;
                 border-radius: 5px;
-                padding: .2rem;
+                padding: .2rem .5rem;
                 transition: .5s ease-in;
 
                 &:not(.selected):hover, &:not(.selected):focus {

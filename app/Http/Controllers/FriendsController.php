@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Events\FriendAdded;
+use App\Http\Requests\UserAddedRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Multicaret\Acquaintances\Models\Friendship;
 
 class FriendsController extends Controller
@@ -46,6 +48,23 @@ class FriendsController extends Controller
     public function add()
     {
         $friendToAdd = User::where('uuid', '=', \request('uuid'))
+            ->first();
+
+        auth()->user()->befriend($friendToAdd);
+
+        broadcast(new FriendAdded($friendToAdd));
+
+        return redirect()->route('homepage');
+    }
+
+    public function addHashtag(UserAddedRequest $request)
+    {
+        $data = $request->validated();
+        $pseudo = Str::before($data['pseudo'],'#');
+        $hashtag = Str::after($data['pseudo'],'#');
+
+        $friendToAdd = User::where('pseudo', '=', $pseudo)
+            ->where('hashtag', '=', $hashtag)
             ->first();
 
         auth()->user()->befriend($friendToAdd);

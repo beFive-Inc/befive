@@ -148,18 +148,23 @@
 
     &__img_container {
         position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         width: 46px;
         height: 46px;
 
     }
 
     &__img {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
         width: 100%;
         border-radius: $border-radius;
         overflow: hidden;
+
+        img {
+            width: 100%;
+        }
     }
 }
 

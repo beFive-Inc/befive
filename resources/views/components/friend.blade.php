@@ -2,7 +2,9 @@
     <div class="friend__container {{ $onlyImageAndName ? 'special' : '' }}">
         <div class="friend__img_container status
         {{ $friend->sessions->last()->last_activity >= \Carbon\Carbon::now() && $friend->type->name ? Str::slug($friend->type->name) : 'offline' }}">
-            <img src="{{ $friend->media?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" class="friend__img" alt>
+            <div class="friend__img">
+                <img src="{{ $friend->media?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}" alt>
+            </div>
         </div>
 
         <div class="friend__info">

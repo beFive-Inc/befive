@@ -36,9 +36,17 @@
         @if($medias->count())
             <div class="message__img-container">
                 @foreach($medias as $media)
-                    <div class="message__one-img-container">
-                        <img class="message__img" src="{{ $media->getUrl() }}" alt="">
-                    </div>
+                    @if(Str::startsWith($media->mime_type, 'video'))
+                        <div class="message__one-img-container">
+                            <video class="message__img" controls src="{{ $media->getUrl() }}" alt="Vidéo">
+                                {{ __('Votre navigateur ne supporte pas la vidéo') }}
+                            </video>
+                        </div>
+                    @else
+                        <div class="message__one-img-container">
+                            <img class="message__img" src="{{ $media->getUrl() }}" alt="Image">
+                        </div>
+                    @endif
                 @endforeach
             </div>
         @endif

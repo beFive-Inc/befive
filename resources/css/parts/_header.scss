@@ -107,6 +107,9 @@
                 border-radius: $border-radius;
 
                 & .img {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
                     width: 100%;
                     height: 100%;
                     border-radius: $border-radius;

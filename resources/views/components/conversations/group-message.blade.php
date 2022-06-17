@@ -12,14 +12,16 @@
 
             @foreach($chatroom->authors->shuffle()->take(2) as $author)
                 @if($loop->first)
-                    <img src="{{ $author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}"
-                         class="chatroom__img second"
-                         alt="Photo de profil de {{ $author->user->pseudo }}">
+                    <div class="chatroom__img second">
+                        <img src="{{ $author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}"
+                             alt="Photo de profil de {{ $author->user->pseudo }}">
+                    </div>
                 @endif
                 @if($loop->last)
-                    <img src="{{ $author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}"
-                         class="chatroom__img first"
-                         alt="Photo de profil de {{ $author->user->pseudo }}">
+                    <div class="chatroom__img first">
+                        <img src="{{ $author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}"
+                             alt="Photo de profil de {{ $author->user->pseudo }}">
+                    </div>
                 @endif
             @endforeach
         </div>

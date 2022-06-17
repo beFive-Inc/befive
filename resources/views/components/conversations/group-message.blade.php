@@ -9,21 +9,22 @@
             @if($chatroom->authors->filter(function ($author) {
                 return $author->user->sessions->last()->last_activity >= \Carbon\Carbon::now() && $author->user_id != auth()->id();
 })->count()) online @else offline @endif">
-
-            @foreach($chatroom->authors->shuffle()->take(2) as $author)
-                @if($loop->first)
-                    <div class="chatroom__img second">
-                        <img src="{{ $author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}"
-                             alt="Photo de profil de {{ $author->user->pseudo }}">
-                    </div>
-                @endif
-                @if($loop->last)
-                    <div class="chatroom__img first">
-                        <img src="{{ $author->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}"
-                             alt="Photo de profil de {{ $author->user->pseudo }}">
-                    </div>
-                @endif
-            @endforeach
+            @php
+                $firstImg = $chatroom->messages->first()->author;
+            @endphp
+            <div class="chatroom__img second">
+                <img src="{{ $firstImg->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}"
+                     alt="Photo de profil de {{ $firstImg->user->pseudo }}">
+            </div>
+            @php
+                $otherUserImg = $chatroom->authors->filter(function ($author) use ($firstImg) {
+                    return $author->user_id != $firstImg->user_id;
+                })->shuffle()->first();
+            @endphp
+            <div class="chatroom__img first">
+                <img src="{{ $otherUserImg->user?->getMedia('profile')?->last()?->getUrl() ?? asset('parts/user/profile_img.webp') }}"
+                     alt="Photo de profil de {{ $otherUserImg->user->pseudo }}">
+            </div>
         </div>
         <div class="chatroom__info">
             <h4 aria-level="4"
